@@ -2,7 +2,7 @@ package functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable {
     private final double[] xValues;
     private final double[] yValues;
 
@@ -48,7 +48,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     protected int floorIndexOfX(double x) {
         if (x > xValues[count - 1]) return 0;
-        if (x < xValues[0]) return count;
+        if (x < xValues[0]) return count - 1;
         for (int i = 0; i < count - 1; ++i) {
             if (xValues[i] < x) {
                 if (xValues[i + 1] >= x) {
@@ -133,5 +133,52 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public double rightBound() {
         return xValues[count - 1];
+    }
+
+    @Override
+    public void insert(double x, double y) {
+        int i = 0;
+        while(getX(i) <= x && i < count) ++i;
+        if(getX(i) == x) setY(i, y);
+        else if (i < count){
+            double[] xTempFull = new double[count+1];
+            double[] yTempFull = new double[count+1];
+            System.arraycopy(xValues, 0, xTempFull, 0, i);
+            xTempFull[i] = x;
+            System.arraycopy(xValues, i, xTempFull, i + 1, count - i);
+            System.arraycopy(xTempFull, 0, xValues, 0, count + 1);
+
+            System.arraycopy(yValues, 0, yTempFull, 0, i);
+            yTempFull[i] = y;
+            System.arraycopy(yValues, i, yTempFull, i + 1, count - i);
+            System.arraycopy(yTempFull, 0, yValues, 0, count + 1);
+            ++count;
+        }
+        else{
+            double[] xTempFull = new double[count+1];
+            double[] yTempFull = new double[count+1];
+            System.arraycopy(xValues, 0, xTempFull, 0, i);
+            xTempFull[i] = x;
+            System.arraycopy(xTempFull, 0, xValues, 0, count + 1);
+
+            System.arraycopy(yValues, 0, yTempFull, 0, i);
+            yTempFull[i] = y;
+            System.arraycopy(yTempFull, 0, yValues, 0, count + 1);
+            ++count;
+        }
+    }
+
+    @Override
+    public void remove(int index) {
+        if(Double.isNaN(getX(index))){
+            System.out.println("Index doesn't exist");
+            return;
+        }
+        else if (index == count - 1) { --count; return; }
+        double[] xTempFull = new double[count+1];
+        double[] yTempFull = new double[count+1];
+        System.arraycopy(xValues, 0, xTempFull, 0, index);
+        System.arraycopy(xValues, index + 1, xTempFull, index, count - index - 1);
+        System.arraycopy(xTempFull, 0, xValues, 0, --count);
     }
 }

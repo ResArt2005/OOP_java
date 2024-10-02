@@ -1,6 +1,7 @@
 package functions;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable {
+
     private class Node {
         public Node prev;
         public Node next;
@@ -77,7 +78,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     protected int floorIndexOfX(double x) {
         if (x > getNode(count - 1).x) return 0;
-        if (x < getNode(0).x) return count;
+        if (x < getNode(0).x) return count - 1;
         for (int i = 0; i < count - 1; ++i) {
             if (getNode(i).x < x) {
                 if (getNode(i + 1).x >= x) {
@@ -87,7 +88,18 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return count - 1;
     }
-
+    private Node floorNodeOfX(double x) {
+        if (x > getNode(count - 1).x) return getNode(0);
+        if (x < getNode(0).x) return getNode(count - 1);
+        for (int i = 0; i < count - 1; ++i) {
+            if (getNode(i).x < x) {
+                if (getNode(i + 1).x >= x) {
+                    return getNode(i);
+                }
+            }
+        }
+        return getNode(count - 1);
+    }
     @Override
     protected double extrapolateLeft(double x) {
         return 0;
@@ -142,5 +154,52 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public double rightBound() {
         return head.prev.x;
+    }
+
+        @Override
+    public void insert(double x, double y) {
+        if (count==0){
+            addNode(x, y);
+        }
+        else{
+            int i = 0;
+            while(getX(i) <= x && i < count) ++i;
+            if(getX(i) == x){
+                setY(i, y);
+            }
+            else if(i == count){
+                addNode(x, y);
+            }
+            else{
+                Node newEl = new Node();
+                newEl.x = x;
+                newEl.y = y;
+                Node temp = getNode(i);
+                temp.prev.next = newEl;
+                newEl.prev = temp.prev;
+                newEl.next = temp;
+                temp.prev = newEl;
+                ++count;
+            }
+        }
+    }
+
+    @Override
+    public void remove(int index) {
+        Node remEl = getNode(index);
+        if(head == remEl){
+            head = head.next;
+            head.prev.prev.next = head;
+            head.prev = head.prev.prev;
+            remEl.next = null;
+            remEl.prev = null;
+        }
+        else{
+            remEl.prev.next = remEl.next;
+            remEl.next.prev = remEl.prev;
+            remEl.next = null;
+            remEl.prev = null;
+        }
+        --count;
     }
 }
