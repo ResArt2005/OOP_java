@@ -3,8 +3,8 @@ package functions;
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable {
-    private final double[] xValues;
-    private final double[] yValues;
+    private double[] xValues;
+    private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         this.xValues = Arrays.copyOf(xValues, xValues.length);
@@ -47,11 +47,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected int floorIndexOfX(double x) {
-        if (x > xValues[count - 1]) return 0;
-        if (x < xValues[0]) return count - 1;
+        if (x > xValues[count - 1]) return count - 1;
+        if (x < xValues[0]) return 0;
         for (int i = 0; i < count - 1; ++i) {
-            if (xValues[i] < x) {
-                if (xValues[i + 1] >= x) {
+            if (xValues[i] <= x) {
+                if (xValues[i + 1] > x) {
                     return i;
                 }
             }
@@ -138,7 +138,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     @Override
     public void insert(double x, double y) {
         int i = 0;
-        while(getX(i) <= x && i < count) ++i;
+        while(getX(i) < x && i < count) ++i;
         if(getX(i) == x) setY(i, y);
         else if (i < count){
             double[] xTempFull = new double[count+1];
@@ -146,11 +146,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             System.arraycopy(xValues, 0, xTempFull, 0, i);
             xTempFull[i] = x;
             System.arraycopy(xValues, i, xTempFull, i + 1, count - i);
+            xValues = new double[count+1];
             System.arraycopy(xTempFull, 0, xValues, 0, count + 1);
 
             System.arraycopy(yValues, 0, yTempFull, 0, i);
             yTempFull[i] = y;
             System.arraycopy(yValues, i, yTempFull, i + 1, count - i);
+            yValues = new double[count+1];
             System.arraycopy(yTempFull, 0, yValues, 0, count + 1);
             ++count;
         }
@@ -159,10 +161,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             double[] yTempFull = new double[count+1];
             System.arraycopy(xValues, 0, xTempFull, 0, i);
             xTempFull[i] = x;
+            xValues = new double[count+1];
             System.arraycopy(xTempFull, 0, xValues, 0, count + 1);
 
             System.arraycopy(yValues, 0, yTempFull, 0, i);
             yTempFull[i] = y;
+            yValues = new double[count+1];
             System.arraycopy(yTempFull, 0, yValues, 0, count + 1);
             ++count;
         }

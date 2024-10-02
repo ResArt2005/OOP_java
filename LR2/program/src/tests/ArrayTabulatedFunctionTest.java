@@ -1,18 +1,39 @@
 package tests;
 
 import functions.ArrayTabulatedFunction;
+import functions.MathFunction;
 import functions.SqrFunction;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Method;//Для тестирования защищённых и приватных полей
-
 class ArrayTabulatedFunctionTest {
+    public class TestClass extends ArrayTabulatedFunction {
+        public TestClass(MathFunction source, double xFrom, double xTo, int count) {
+            super(source, xFrom, xTo, count);
+        }
+
+        public void testfloorIndexOfX(double x) {
+            System.out.println(floorIndexOfX(x));
+        }
+
+        public void testExtrapolateLeft(double x) {
+            System.out.println(extrapolateLeft(x));
+        }
+
+        public void testExtrapolateRight(double x) {
+            System.out.println(extrapolateRight(x));
+        }
+
+        public void testInterpolate(double x, double leftX, double rightX, double leftY, double rightY) {
+            System.out.println(interpolate(x, leftX, rightX, leftY, rightY));
+        }
+    }
+
     private SqrFunction fun = new SqrFunction();
     private double StartX = 0;
     private double EndX = 10;
     private int count = 5;
-    private ArrayTabulatedFunction obj = new ArrayTabulatedFunction(fun, EndX, StartX, count);
+    //0, 2.5, 5, 7.5, 10
+    private TestClass obj = new TestClass(fun, EndX, StartX, count);
 
     @Test
     void getCount() {
@@ -37,6 +58,7 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void setY() {
+        System.out.println(obj.getY(3));
         obj.setY(3, 3);
         System.out.println(obj.getY(3));
         obj.setY(1000, 2);
@@ -71,6 +93,87 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void apply() {
+        //0, 2.5, 5, 7.5, 10
+        System.out.println(obj.apply(-3));
+        System.out.println(obj.apply(12));
+        System.out.println(obj.apply(5));
+        System.out.println(obj.apply(3));
+    }
 
+    @Test
+    public void testInsert() {
+        obj.insert(0, 999);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i) + "," + obj.getY(i));
+        }
+        System.out.println();
+        obj.insert(3, 999);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i) + "," + obj.getY(i));
+        }
+        System.out.println();
+        obj.insert(10, 999);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i) + "," + obj.getY(i));
+        }
+        obj.insert(15, 999);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i) + "," + obj.getY(i));
+        }
+        obj.insert(12, 111);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i) + "," + obj.getY(i));
+        }
+    }
+
+    @Test
+    public void testRemove() {
+        obj.remove(0);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i));
+        }
+        System.out.println();
+        obj.remove(2);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i));
+        }
+        System.out.println();
+        obj.remove(2);
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i));
+        }
+    }
+
+    @Test
+    void testfloorIndexOfX() {
+        //0, 2.5, 5, 7.5, 10
+        obj.testfloorIndexOfX(3);
+        obj.testfloorIndexOfX(11);
+        obj.testfloorIndexOfX(-4);
+        obj.testfloorIndexOfX(6);
+        obj.testfloorIndexOfX(8);
+        obj.testfloorIndexOfX(7.5);
+    }
+    @Test
+    public void testExtrapolateLeft() {
+        obj.testExtrapolateLeft(2.5);
+        obj.testExtrapolateLeft(5);
+        obj.testExtrapolateLeft(0);
+        obj.testExtrapolateLeft(100);
+    }
+    @Test
+    public void testExtrapolateRight() {
+        obj.testExtrapolateRight(2.5);
+        obj.testExtrapolateRight(5);
+        obj.testExtrapolateRight(0);
+        obj.testExtrapolateRight(100);
+    }
+    @Test
+    public void testInterpolate() {
+        obj.testInterpolate(2.5, 0, 3, 1, -4);
+        obj.testInterpolate(5, 0, 8, 4, 9);
+        obj.testInterpolate(0, -5, 5, 4, 5);
+        obj.testInterpolate(100, 90, 200, 66, 55);
+        obj.testInterpolate(5, 5, 6, 66, 55);
     }
 }

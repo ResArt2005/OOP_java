@@ -163,7 +163,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
         else{
             int i = 0;
-            while(getX(i) <= x && i < count) ++i;
+            while(getX(i) < x && i < count) ++i;
             if(getX(i) == x){
                 setY(i, y);
             }
@@ -187,7 +187,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     @Override
     public void remove(int index) {
         Node remEl = getNode(index);
-        if(head == remEl){
+        if(count == 0){
+            head.prev = null;
+            head.next = null;
+            head = null;
+        }
+        else if(head == remEl){
             head = head.next;
             head.prev.prev.next = head;
             head.prev = head.prev.prev;
