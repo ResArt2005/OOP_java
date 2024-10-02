@@ -39,7 +39,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
     }
 
-    private void addNode(double x, double y) {
+    protected void addNode(double x, double y) {
         if (count == 0) {
             head = new Node();
             head.x = x;
@@ -51,7 +51,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             newEl.x = x;
             newEl.y = y;
             Node temp = head;
-            while (temp.next != null) temp = temp.next;
+            while (temp.next != head) temp = temp.next;
             temp.next = newEl;
             newEl.prev = temp;
             newEl.next = head;
@@ -60,7 +60,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         ++count;
     }
 
-    private Node getNode(int index) {
+    protected Node getNode(int index) {
         Node temp = head;
         if (index >= 0) {
             for (int i = 0; i < index; ++i) {
@@ -77,18 +77,18 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected int floorIndexOfX(double x) {
-        if (x > getNode(count - 1).x) return 0;
-        if (x < getNode(0).x) return count - 1;
+        if (x > getNode(count - 1).x) return  count - 1;
+        if (x < getNode(0).x) return 0;
         for (int i = 0; i < count - 1; ++i) {
-            if (getNode(i).x < x) {
-                if (getNode(i + 1).x >= x) {
+            if (getNode(i).x <= x) {
+                if (getNode(i + 1).x > x) {
                     return i;
                 }
             }
         }
         return count - 1;
     }
-    private Node floorNodeOfX(double x) {
+    protected Node floorNodeOfX(double x) {
         if (x > getNode(count - 1).x) return getNode(0);
         if (x < getNode(0).x) return getNode(count - 1);
         for (int i = 0; i < count - 1; ++i) {
@@ -102,19 +102,65 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
     @Override
     protected double extrapolateLeft(double x) {
-        return 0;
+        if (count == 1) return getY(0);
+        return interpolate(x, getX(0), getX(1), getY(0), getY(1));
     }
 
     @Override
     protected double extrapolateRight(double x) {
-        return 0;
+        if (count == 1) return getY(0);
+        int k = count - 1;
+        return interpolate(x, getX(k - 1), getX(k), getY(k - 1), getY(k));
     }
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        return 0;
-    }
+        if (count == 1) {
+            return getY(0);
+        }
 
+        if (floorIndex < 0 || floorIndex >= count - 1) {
+            return Double.NaN;
+        }
+
+        double leftX = getX(floorIndex);
+        double leftY = getY(floorIndex);
+        double rightX = getX(floorIndex + 1);//Соседняя точка по x
+        double rightY = getY(floorIndex + 1);//Соседняя точка по y
+
+        return interpolate(x, leftX, rightX, leftY, rightY);
+    }
+    protected double interpolate(double x, Node floorNode) {
+        if (count == 1) {
+            return getY(0);
+        }
+
+        double leftX = floorNode.x;
+        double leftY = floorNode.y;
+        double rightX = floorNode.next.x;//Соседняя точка по x
+        double rightY = floorNode.next.y;//Соседняя точка по y
+
+        return interpolate(x, leftX, rightX, leftY, rightY);
+    }
+    @Override
+    public double apply(double x) {
+        //Если x меньше левой границы
+        if (x < getX(0)) {
+            return extrapolateLeft(x);
+        }
+        //Если x больше правой границы
+        if (x > getX(getCount() - 1)) {
+            return extrapolateRight(x);
+        }
+        //Смотрим, есть ли x в таблице
+        int index = indexOfX(x);
+        if (index != -1) {
+            return getY(index);
+        }
+        //Если нет, ищем максимальный x из таблицы, который меньше указанного x
+        Node nodeEl = floorNodeOfX(x);
+        return interpolate(x, nodeEl);
+    }
     @Override
     public double getX(int index) {
         return getNode(index).x;

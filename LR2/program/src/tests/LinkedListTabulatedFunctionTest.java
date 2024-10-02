@@ -1,12 +1,14 @@
 package tests;
 
-import functions.ArrayTabulatedFunction;
+import functions.LinkedListTabulatedFunction;
 import functions.MathFunction;
 import functions.SqrFunction;
 import org.junit.jupiter.api.Test;
 
-class ArrayTabulatedFunctionTest {
-    public class TestClass extends ArrayTabulatedFunction {
+import static org.junit.jupiter.api.Assertions.*;
+
+class LinkedListTabulatedFunctionTest {
+    public class TestClass extends LinkedListTabulatedFunction {
         public TestClass(MathFunction source, double xFrom, double xTo, int count) {
             super(source, xFrom, xTo, count);
         }
@@ -25,6 +27,9 @@ class ArrayTabulatedFunctionTest {
 
         public void testInterpolate(double x, double leftX, double rightX, double leftY, double rightY) {
             System.out.println(interpolate(x, leftX, rightX, leftY, rightY));
+        }
+        public void testInterpolate(double x, int floorindex) {
+            System.out.println(interpolate(x, floorindex));
         }
     }
 
@@ -157,25 +162,34 @@ class ArrayTabulatedFunctionTest {
         obj.testfloorIndexOfX(7.5);
     }
     @Test
-    public void testExtrapolateLeft() {
+    void testExtrapolateLeft() {
         obj.testExtrapolateLeft(2.5);
         obj.testExtrapolateLeft(5);
         obj.testExtrapolateLeft(0);
         obj.testExtrapolateLeft(100);
     }
     @Test
-    public void testExtrapolateRight() {
+    void testExtrapolateRight() {
         obj.testExtrapolateRight(2.5);
         obj.testExtrapolateRight(5);
         obj.testExtrapolateRight(0);
         obj.testExtrapolateRight(100);
     }
     @Test
-    public void testInterpolate() {
+    void testInterpolate() {
         obj.testInterpolate(2.5, 0, 3, 1, -4);
         obj.testInterpolate(5, 0, 8, 4, 9);
         obj.testInterpolate(0, -5, 5, 4, 5);
         obj.testInterpolate(100, 90, 200, 66, 55);
         obj.testInterpolate(5, 5, 6, 66, 55);
+    }
+
+    @Test
+    void testfloorInterpolate(){
+        //0, 2.5, 5, 7.5, 10
+        obj.testInterpolate(2.5, 2);
+        obj.testInterpolate(5, 1);
+        obj.testInterpolate(3, 3);
+        obj.testInterpolate(100, 3);
     }
 }
