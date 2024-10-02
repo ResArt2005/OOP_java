@@ -33,12 +33,13 @@ class LinkedListTabulatedFunctionTest {
         }
     }
 
-    private SqrFunction fun = new SqrFunction();
+    private SqrFunction funSqr = new SqrFunction();
+    private SqrFunction funCube = new SqrFunction();
     private double StartX = 0;
     private double EndX = 10;
     private int count = 5;
     //0, 2.5, 5, 7.5, 10
-    private TestClass obj = new TestClass(fun, EndX, StartX, count);
+    private TestClass obj = new TestClass(funSqr.andThen(funCube), EndX, StartX, count);
 
     @Test
     void getCount() {
