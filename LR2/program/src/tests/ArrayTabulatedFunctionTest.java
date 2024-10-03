@@ -5,10 +5,16 @@ import functions.MathFunction;
 import functions.SqrFunction;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 class ArrayTabulatedFunctionTest {
     public class TestClass extends ArrayTabulatedFunction {
         public TestClass(MathFunction source, double xFrom, double xTo, int count) {
             super(source, xFrom, xTo, count);
+        }
+
+        public TestClass(double[] xValues, double[] yValues) {
+            super(xValues, yValues);
         }
 
         public void testfloorIndexOfX(double x) {
@@ -156,6 +162,7 @@ class ArrayTabulatedFunctionTest {
         obj.testfloorIndexOfX(8);
         obj.testfloorIndexOfX(7.5);
     }
+
     @Test
     public void testExtrapolateLeft() {
         obj.testExtrapolateLeft(2.5);
@@ -163,6 +170,7 @@ class ArrayTabulatedFunctionTest {
         obj.testExtrapolateLeft(0);
         obj.testExtrapolateLeft(100);
     }
+
     @Test
     public void testExtrapolateRight() {
         obj.testExtrapolateRight(2.5);
@@ -170,6 +178,7 @@ class ArrayTabulatedFunctionTest {
         obj.testExtrapolateRight(0);
         obj.testExtrapolateRight(100);
     }
+
     @Test
     public void testInterpolate() {
         obj.testInterpolate(2.5, 0, 3, 1, -4);
@@ -177,5 +186,16 @@ class ArrayTabulatedFunctionTest {
         obj.testInterpolate(0, -5, 5, 4, 5);
         obj.testInterpolate(100, 90, 200, 66, 55);
         obj.testInterpolate(5, 5, 6, 66, 55);
+    }
+
+    @Test
+    void InizialzeArr() {
+        TestClass obj = new TestClass(new double[]{1, 2, 3}, new double[]{-1, -2, 3});
+        System.out.println(obj.apply(2.5));
+        obj.insert(2, 999);
+        System.out.println();
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i)+ ", "+ obj.getY(i));
+        }
     }
 }

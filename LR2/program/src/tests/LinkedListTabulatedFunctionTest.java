@@ -12,7 +12,9 @@ class LinkedListTabulatedFunctionTest {
         public TestClass(MathFunction source, double xFrom, double xTo, int count) {
             super(source, xFrom, xTo, count);
         }
-
+        public TestClass(double[] xValues, double[] yValues) {
+            super(xValues, yValues);
+        }
         public void testfloorIndexOfX(double x) {
             System.out.println(floorIndexOfX(x));
         }
@@ -192,5 +194,16 @@ class LinkedListTabulatedFunctionTest {
         obj.testInterpolate(5, 1);
         obj.testInterpolate(3, 3);
         obj.testInterpolate(100, 3);
+    }
+
+    @Test
+    void InizialzeArr() {
+        TestClass obj = new TestClass(new double[]{1, 2, 3}, new double[]{-1, -2, 3});
+        System.out.println(obj.apply(2.5));
+        obj.insert(2, 999);
+        System.out.println();
+        for (int i = 0; i < obj.getCount(); ++i) {
+            System.out.println(obj.getX(i)+ ", "+ obj.getY(i));
+        }
     }
 }
