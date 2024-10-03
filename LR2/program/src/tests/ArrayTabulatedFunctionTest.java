@@ -5,8 +5,6 @@ import functions.MathFunction;
 import functions.SqrFunction;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 class ArrayTabulatedFunctionTest {
     public class TestClass extends ArrayTabulatedFunction {
         public TestClass(MathFunction source, double xFrom, double xTo, int count) {
