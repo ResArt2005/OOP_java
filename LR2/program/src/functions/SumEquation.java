@@ -11,18 +11,26 @@ public class SumEquation implements StandardFunction{
     public double f(double x) {
         double sum = 0;
         for (int i = 0; i < equation.length; ++i) {
-
+            sum += equation[i].f(x);
         }
-        return 0;
+        return sum;
     }
 
     @Override
     public double derivative(double x) {
-        return 0;
+        double sum = 0;
+        for (int i = 0; i < equation.length; ++i) {
+            sum += equation[i].derivative(x);
+        }
+        return sum;
     }
 
     @Override
     public double integral(double x0, double x) {
-        return 0;
+        double sum = 0;
+        for (int i = 0; i < equation.length; ++i) {
+            sum += equation[i].integral(x0, x);
+        }
+        return sum;
     }
 }
