@@ -179,10 +179,15 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             return;
         }
         else if (index == count - 1) { --count; return; }
-        double[] xTempFull = new double[count+1];
-        double[] yTempFull = new double[count+1];
+        double[] xTempFull = new double[count-1];
+        double[] yTempFull = new double[count-1];
         System.arraycopy(xValues, 0, xTempFull, 0, index);
         System.arraycopy(xValues, index + 1, xTempFull, index, count - index - 1);
-        System.arraycopy(xTempFull, 0, xValues, 0, --count);
+        System.arraycopy(xTempFull, 0, xValues, 0, count - 1);
+
+        System.arraycopy(xValues, 0, yTempFull, 0, index);
+        System.arraycopy(xValues, index + 1, yTempFull, index, count - index - 1);
+        System.arraycopy(yTempFull, 0, xValues, 0, count - 1);
+        --count;
     }
 }
