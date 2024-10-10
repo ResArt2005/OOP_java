@@ -28,6 +28,7 @@ public class DeBoorAlgorithmFunction implements MathFunction {
         }
 
         // Применяем алгоритм де Бура
+        //1, 2, 3
         for (int r = 1; r <= splineDegree; ++r) {
             for (int j = splineDegree; j >= r; --j) {
                 int knotIndex = segmentIndex + j - splineDegree;
