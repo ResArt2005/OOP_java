@@ -15,7 +15,7 @@ public class SumEquation implements StandardFunction{
         }
         return sum;
     }
-
+    //
     @Override
     public double derivative(double x) {
         double sum = 0;
