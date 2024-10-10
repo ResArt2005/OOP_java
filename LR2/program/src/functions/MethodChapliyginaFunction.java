@@ -1,5 +1,5 @@
 package functions;
-
+import java.util.Arrays;
 public class MethodChapliyginaFunction implements MathFunction {
     StandardFunction equation;
     double x0;  // начальная точка
@@ -9,8 +9,8 @@ public class MethodChapliyginaFunction implements MathFunction {
     public MethodChapliyginaFunction(StandardFunction equation, double x0, double[] xValues, double[] yValues) {
         this.equation = equation;
         this.x0 = x0;
-        this.xValues = xValues;
-        this.yValues = yValues;
+        this.xValues = Arrays.copyOf(xValues, xValues.length);
+        this.yValues = Arrays.copyOf(yValues, yValues.length);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MethodChapliyginaFunction implements MathFunction {
     private int findNearestXIndex(double x) {
         int nearestIndex = 0;
         double minDifference = Math.abs(x - xValues[0]);
-        for (int i = 1; i < xValues.length; i++) {
+        for (int i = 1; i < xValues.length; ++i) {
             double difference = Math.abs(x - xValues[i]);
             if (difference < minDifference) {
                 minDifference = difference;
