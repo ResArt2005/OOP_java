@@ -185,9 +185,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         System.arraycopy(xValues, index + 1, xTempFull, index, count - index - 1);
         System.arraycopy(xTempFull, 0, xValues, 0, count - 1);
 
-        System.arraycopy(xValues, 0, yTempFull, 0, index);
-        System.arraycopy(xValues, index + 1, yTempFull, index, count - index - 1);
-        System.arraycopy(yTempFull, 0, xValues, 0, count - 1);
+        System.arraycopy(yValues, 0, yTempFull, 0, index);
+        System.arraycopy(yValues, index + 1, yTempFull, index, count - index - 1);
+        System.arraycopy(yTempFull, 0, yValues, 0, count - 1);
         --count;
     }
 }

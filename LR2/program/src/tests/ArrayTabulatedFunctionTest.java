@@ -3,6 +3,7 @@ package tests;
 import functions.ArrayTabulatedFunction;
 import functions.MathFunction;
 import functions.SqrFunction;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ArrayTabulatedFunctionTest {
@@ -16,19 +17,19 @@ class ArrayTabulatedFunctionTest {
         }
 
         public void testfloorIndexOfX(double x) {
-            System.out.println(floorIndexOfX(x));
+            Assertions.assertEquals(1, floorIndexOfX(x));
         }
 
         public void testExtrapolateLeft(double x) {
-            System.out.println(extrapolateLeft(x));
+            Assertions.assertEquals(1.581, extrapolateLeft(x), 0.001);
         }
 
         public void testExtrapolateRight(double x) {
-            System.out.println(extrapolateRight(x));
+            Assertions.assertEquals(1.891, extrapolateRight(x), 0.001);
         }
 
         public void testInterpolate(double x, double leftX, double rightX, double leftY, double rightY) {
-            System.out.println(interpolate(x, leftX, rightX, leftY, rightY));
+           Assertions.assertEquals(-3.166, interpolate(x, leftX, rightX, leftY, rightY), 0.001);
         }
     }
 
@@ -41,159 +42,106 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void getCount() {
-        System.out.println(obj.getCount());
+         Assertions.assertEquals(5, obj.getCount());
     }
 
     @Test
     void getX() {
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.print(obj.getX(i) + " ");
-        }
-        System.out.println();
+        Assertions.assertEquals(5, obj.getX(2));
     }
 
     @Test
     void getY() {
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.print(obj.getY(i) + " ");
-        }
-        System.out.println();
+        Assertions.assertEquals(2.236, obj.getY(2), 0.001);
     }
 
     @Test
     void setY() {
-        System.out.println(obj.getY(3));
         obj.setY(3, 3);
-        System.out.println(obj.getY(3));
+        Assertions.assertEquals(3, obj.getY(3));
         obj.setY(1000, 2);
-        System.out.println(obj.getY(1000));
+        Assertions.assertEquals(Double.NaN, obj.getY(1000));
     }
 
     @Test
     void indexOfX() {
-        System.out.println(obj.indexOfX(2.5));
-        System.out.println(obj.indexOfX(5));
-        System.out.println(obj.indexOfX(1000));
+        Assertions.assertEquals(1,  obj.indexOfX(2.5));
+        Assertions.assertEquals(2, obj.indexOfX(5));
+        Assertions.assertEquals(-1, obj.indexOfX(1000));
     }
 
     @Test
     void indexOfY() {
-        System.out.println(obj.indexOfY(0));
-        System.out.println(obj.indexOfY(2.23606797749979));
+        Assertions.assertEquals(0, obj.indexOfY(0));
+        Assertions.assertEquals(2, obj.indexOfY(2.23606797749979));
         obj.setY(4, 32);
-        System.out.println(obj.indexOfY(32));
-        System.out.println(obj.indexOfY(1000));
+        Assertions.assertEquals(4, obj.indexOfY(32));
+        Assertions.assertEquals(-1, obj.indexOfY(1000));
     }
 
     @Test
     void leftBound() {
-        System.out.println(obj.leftBound());
+        Assertions.assertEquals(0, obj.leftBound());
     }
 
     @Test
     void rightBound() {
-        System.out.println(obj.rightBound());
+        Assertions.assertEquals(10, obj.rightBound());
     }
 
     @Test
     void apply() {
         //0, 2.5, 5, 7.5, 10
-        System.out.println(obj.apply(-3));
-        System.out.println(obj.apply(12));
-        System.out.println(obj.apply(5));
-        System.out.println(obj.apply(3));
+        Assertions.assertEquals(-1.897, obj.apply(-3), 0.001);
+        Assertions.assertEquals(3.501, obj.apply(12), 0.001);
+        Assertions.assertEquals(2.236, obj.apply(5), 0.001);
+        Assertions.assertEquals(1.712, obj.apply(3), 0.001);
     }
 
     @Test
     public void testInsert() {
         obj.insert(0, 999);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i) + "," + obj.getY(i));
-        }
-        System.out.println();
-        obj.insert(3, 999);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i) + "," + obj.getY(i));
-        }
-        System.out.println();
-        obj.insert(10, 999);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i) + "," + obj.getY(i));
-        }
-        System.out.println();
-        obj.insert(15, 999);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i) + "," + obj.getY(i));
-        }
-        System.out.println();
-        obj.insert(12, 111);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i) + "," + obj.getY(i));
-        }
+        Assertions.assertEquals(0, obj.getX(0));
+        obj.insert(2, 111);
+        Assertions.assertEquals(2, obj.getX(1));
+        obj.insert(11, 222);
+        Assertions.assertEquals(11, obj.getX( obj.getCount() - 1));
     }
 
     @Test
     public void testRemove() {
         obj.remove(0);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i));
-        }
-        System.out.println();
+        Assertions.assertEquals(2.5, obj.leftBound());
         obj.remove(2);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i));
-        }
-        System.out.println();
-        obj.remove(2);
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i));
-        }
+        Assertions.assertEquals(-1, obj.indexOfX(7.5));
     }
 
     @Test
     void testfloorIndexOfX() {
         //0, 2.5, 5, 7.5, 10
         obj.testfloorIndexOfX(3);
-        obj.testfloorIndexOfX(11);
-        obj.testfloorIndexOfX(-4);
-        obj.testfloorIndexOfX(6);
-        obj.testfloorIndexOfX(8);
-        obj.testfloorIndexOfX(7.5);
     }
 
     @Test
     public void testExtrapolateLeft() {
         obj.testExtrapolateLeft(2.5);
-        obj.testExtrapolateLeft(5);
-        obj.testExtrapolateLeft(0);
-        obj.testExtrapolateLeft(100);
     }
 
     @Test
     public void testExtrapolateRight() {
         obj.testExtrapolateRight(2.5);
-        obj.testExtrapolateRight(5);
-        obj.testExtrapolateRight(0);
-        obj.testExtrapolateRight(100);
     }
 
     @Test
     public void testInterpolate() {
         obj.testInterpolate(2.5, 0, 3, 1, -4);
-        obj.testInterpolate(5, 0, 8, 4, 9);
-        obj.testInterpolate(0, -5, 5, 4, 5);
-        obj.testInterpolate(100, 90, 200, 66, 55);
-        obj.testInterpolate(5, 5, 6, 66, 55);
     }
 
     @Test
     void InizialzeArr() {
         TestClass obj = new TestClass(new double[]{1, 2, 3}, new double[]{-1, -2, 3});
-        System.out.println(obj.apply(2.5));
+        Assertions.assertEquals(0.5, obj.apply(2.5));
         obj.insert(2, 999);
-        System.out.println();
-        for (int i = 0; i < obj.getCount(); ++i) {
-            System.out.println(obj.getX(i)+ ", "+ obj.getY(i));
-        }
+        Assertions.assertEquals(2, obj.getX(1));
     }
 }

@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 class andThenTest {
     @Test
     void Test1(){
-        SquareFunction f = new SquareFunction();
-        CubeFunction g = new CubeFunction();
+        DeBoorAlgorithmFunction f = new DeBoorAlgorithmFunction(new double[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new double[]{0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100}, 1);
+        IdentityFunction g = new IdentityFunction();
         SqrFunction h = new SqrFunction();
         double result= f.andThen(g).andThen(h).apply(4);
-        System.out.println(result);
+        Assertions.assertEquals(1, result);
         result = g.andThen(f).andThen(h).apply(9);
-        System.out.println(result);
+        Assertions.assertEquals(4, result);
     }
     @Test
     void Test2(){
@@ -22,8 +22,8 @@ class andThenTest {
         ZeroFunction g = new ZeroFunction();
         UnitFunction h = new UnitFunction();
         double result= f.andThen(g).andThen(h).apply(4);
-        System.out.println(result);
+        Assertions.assertEquals(42, result);
         result = g.andThen(f).andThen(h).apply(9);
-        System.out.println(result);
+        Assertions.assertEquals(0, result);
     }
 }

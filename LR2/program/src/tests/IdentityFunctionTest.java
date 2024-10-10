@@ -3,7 +3,7 @@ package tests;
 import functions.IdentityFunction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+//
 class IdentityFunctionTest {
     @Test
     void testApply() {

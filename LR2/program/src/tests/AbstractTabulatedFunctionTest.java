@@ -101,13 +101,9 @@ class AbstractTabulatedFunctionTest {
     @Test
     void TestObj() {
         MockTabulatedFunction obj = new MockTabulatedFunction();
-        System.out.println(obj.apply(4));
-        System.out.println(obj.apply(9));
-        System.out.println(obj.apply(11));
-        System.out.println(obj.apply(0));
-        System.out.println(obj.apply(8));
-        System.out.println(obj.apply(55));
-        System.out.println(obj.apply(100));
-        System.out.println(obj.apply(88));
+        Assertions.assertEquals(5, obj.apply(4));
+        Assertions.assertEquals(9, obj.apply(11));
+        Assertions.assertEquals(3.5, obj.apply(0));
+        Assertions.assertEquals(5, obj.apply(8));
     }
 }

@@ -3,7 +3,7 @@ package tests;
 import org.junit.jupiter.api.Test;
 import functions.ConstantFunction;
 import org.junit.jupiter.api.Assertions;
-
+//
 class ConstantFunctionTest {
     private final ConstantFunction obj = new ConstantFunction(42);
     @Test

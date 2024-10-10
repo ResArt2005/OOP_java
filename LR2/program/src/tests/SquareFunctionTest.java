@@ -3,7 +3,7 @@ package tests;
 import functions.SquareFunction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+//
 class SquareFunctionTest {
 
     @Test
