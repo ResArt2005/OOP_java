@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class MethodChapliyginaFunctionTest {
 
     @Test
-    void test_1() {
+    void testApplyChap1() {
         SumEquation equation = new SumEquation(new StandardFunction[] { new X(), new X(3, 2), new cos(2), new sin(5), new tg(5), new ctg(9)});
         MethodChapliyginaFunction obj = new MethodChapliyginaFunction(equation, 2, new double[]{-3, -2, -1, 0, 1,2,3}, new double[]{9, 4, 1, 0, 1, 4, 9});
         Assertions.assertEquals(-33.394, obj.apply(1), 0.001);
@@ -19,7 +19,7 @@ class MethodChapliyginaFunctionTest {
         Assertions.assertTrue(Double.isNaN(obj.apply(-1)));
     }
     @Test
-    void test_2() {
+    void testApplyChap2() {
         SumEquation equation = new SumEquation(new StandardFunction[] { new X()});
         MethodChapliyginaFunction obj = new MethodChapliyginaFunction(equation, 2, new double[]{-3, -2, -1, 0, 1,2,3}, new double[]{9, 4, 1, 0, 1, 4, 9});
         Assertions.assertEquals(-0.346, obj.apply(1), 0.001);

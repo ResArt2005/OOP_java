@@ -5,6 +5,7 @@ import functions.MathFunction;
 import functions.SqrFunction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 class ArrayTabulatedFunctionTest {
     public class TestClass extends ArrayTabulatedFunction {
@@ -48,19 +49,35 @@ class ArrayTabulatedFunctionTest {
     @Test
     void getX() {
         Assertions.assertEquals(5, obj.getX(2));
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj.getX(1000);
+            }
+        });
     }
 
     @Test
     void getY() {
         Assertions.assertEquals(2.236, obj.getY(2), 0.001);
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj.getY(1000);
+            }
+        });
     }
 
     @Test
     void setY() {
         obj.setY(3, 3);
         Assertions.assertEquals(3, obj.getY(3));
-        obj.setY(1000, 2);
-        Assertions.assertEquals(Double.NaN, obj.getY(1000));
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj.setY(1000, 8);
+            }
+        });
     }
 
     @Test
@@ -114,12 +131,24 @@ class ArrayTabulatedFunctionTest {
         Assertions.assertEquals(2.5, obj.leftBound());
         obj.remove(2);
         Assertions.assertEquals(-1, obj.indexOfX(7.5));
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj.remove(1000);
+            }
+        });
     }
 
     @Test
     void testfloorIndexOfX() {
         //0, 2.5, 5, 7.5, 10
         obj.testfloorIndexOfX(3);
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj.remove(1000);
+            }
+        });
     }
 
     @Test

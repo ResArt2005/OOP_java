@@ -7,12 +7,14 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length < 2 && yValues.length < 2) throw new IllegalArgumentException();
         this.xValues = Arrays.copyOf(xValues, xValues.length);
         this.yValues = Arrays.copyOf(yValues, yValues.length);
         count = this.xValues.length;
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) throw new IllegalArgumentException();
         double[] xValues = new double[count];
         double[] yValues = new double[count];
         if (xFrom > xTo) {
@@ -47,8 +49,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected int floorIndexOfX(double x) {
-        if (x > xValues[count - 1]) return count - 1;
-        if (x < xValues[0]) return 0;
+        if (x > xValues[count - 1]) throw new IllegalArgumentException();
+        if (x < xValues[0]) throw new IllegalArgumentException();
         for (int i = 0; i < count - 1; ++i) {
             if (xValues[i] <= x) {
                 if (xValues[i + 1] > x) {
@@ -56,7 +58,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
                 }
             }
         }
-        return count - 1;
+        throw new IllegalArgumentException();
     }
 
     @Override
@@ -92,20 +94,31 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public double getX(int index) {
-        return index >= 0 && index < count ? xValues[index] : Double.NaN;
+        if(index >= 0 && index < count){
+            return xValues[index];
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
     public double getY(int index) {
-        return index >= 0 && index < count ? yValues[index] : Double.NaN;
+        if(index >= 0 && index < count){
+            return yValues[index];
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
     public void setY(int index, double value) {
         if (index >= 0 && index < count) {
             yValues[index] = value;
-        } else {
-            System.out.println("Out of range. This index doesn't exist");
+        }
+        else{
+            throw new IllegalArgumentException();
         }
     }
 
@@ -138,8 +151,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     @Override
     public void insert(double x, double y) {
         int i = 0;
-        while(getX(i) < x && i < count) ++i;
-        if(getX(i) == x) setY(i, y);
+        while(i < count && getX(i) < x) ++i;
+        if(i < count && getX(i) == x) setY(i, y);
         else if (i < count){
             double[] xTempFull = new double[count+1];
             double[] yTempFull = new double[count+1];
@@ -174,9 +187,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public void remove(int index) {
-        if(Double.isNaN(getX(index))){
-            System.out.println("Index doesn't exist");
-            return;
+        if(index < 0 || index >= count){
+            throw new IllegalArgumentException();
         }
         else if (index == count - 1) { --count; return; }
         double[] xTempFull = new double[count-1];
