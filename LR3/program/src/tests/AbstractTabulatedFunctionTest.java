@@ -3,9 +3,12 @@ package tests;
 import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 import functions.AbstractTabulatedFunction;
+import functions.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+
+import java.util.Iterator;
 
 class AbstractTabulatedFunctionTest {
     private final MockTabulatedFunction mockTabulatedFunction = new MockTabulatedFunction();
@@ -117,6 +120,11 @@ class AbstractTabulatedFunctionTest {
                 AbstractTabulatedFunction.checkSorted(xValues);
             }
         });
+        }
+
+        @Override
+        public Iterator<Point> iterator() {
+            return null;
         }
     }
 
