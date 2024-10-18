@@ -21,9 +21,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             xTo = temp;
         }
         if (xFrom == xTo) {
+            double x = xFrom;
+            double y = source.apply(xFrom);
             for (int i = 0; i < count; ++i) {
-                xValues[i] = xFrom;
-                yValues[i] = source.apply(xFrom);
+                xValues[i] = x;
+                yValues[i] = y;
             }
         } else {
             xValues[0] = xFrom;
