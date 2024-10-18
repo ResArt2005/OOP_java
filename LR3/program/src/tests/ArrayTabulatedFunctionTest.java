@@ -1,5 +1,8 @@
 package tests;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
 import functions.ArrayTabulatedFunction;
 import functions.MathFunction;
 import functions.SqrFunction;
@@ -31,6 +34,9 @@ class ArrayTabulatedFunctionTest {
 
         public void testInterpolate(double x, double leftX, double rightX, double leftY, double rightY) {
            Assertions.assertEquals(-3.166, interpolate(x, leftX, rightX, leftY, rightY), 0.001);
+        }
+        public void testInterpolate(double x, int floorIndex) {
+            obj.interpolate(x, floorIndex);
         }
     }
 
@@ -172,5 +178,32 @@ class ArrayTabulatedFunctionTest {
         Assertions.assertEquals(0.5, obj.apply(2.5));
         obj.insert(2, 999);
         Assertions.assertEquals(2, obj.getX(1));
+    }
+    @Test
+    void ThrowInterpolationException(){
+        Assertions.assertThrows(InterpolationException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj.testInterpolate(3, 1000);
+            }
+        });
+    }
+    @Test
+    void ThrowDifferentLengthOfArraysException(){
+        Assertions.assertThrows(DifferentLengthOfArraysException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                TestClass obj = new TestClass(new double[]{1,2,3}, new double[]{1,2});
+            }
+        });
+    }
+    @Test
+    void ThrowArrayIsNotSortedException(){
+        Assertions.assertThrows(ArrayIsNotSortedException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                TestClass obj = new TestClass(new double[]{1, 3,2,}, new double[]{1,2,3});
+            }
+        });
     }
 }

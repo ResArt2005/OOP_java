@@ -1,5 +1,7 @@
 package functions;
 
+import exceptions.InterpolationException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable {
     private static class Node {
         public Node prev;
@@ -12,6 +14,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 && yValues.length < 2) throw new IllegalArgumentException();
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         for (int i = 0; i < xValues.length; ++i) {
             addNode(xValues[i], yValues[i]);
         }
@@ -101,27 +105,21 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
         throw new IllegalArgumentException();
     }
-    @Override
+   @Override
     protected double extrapolateLeft(double x) {
-        if (count == 1) return getY(0);
         return interpolate(x, getX(0), getX(1), getY(0), getY(1));
     }
 
     @Override
     protected double extrapolateRight(double x) {
-        if (count == 1) return getY(0);
         int k = count - 1;
         return interpolate(x, getX(k - 1), getX(k), getY(k - 1), getY(k));
     }
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1) {
-            return getY(0);
-        }
-
         if (floorIndex < 0 || floorIndex >= count - 1) {
-            return Double.NaN;
+            throw new InterpolationException();
         }
 
         double leftX = getX(floorIndex);

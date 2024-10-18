@@ -1,10 +1,15 @@
 package tests;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
 import functions.AbstractTabulatedFunction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 class AbstractTabulatedFunctionTest {
+    private final MockTabulatedFunction mockTabulatedFunction = new MockTabulatedFunction();
+
     class MockTabulatedFunction extends AbstractTabulatedFunction {
         private double x0;
         private double x1;
@@ -96,14 +101,48 @@ class AbstractTabulatedFunctionTest {
         index = floorIndexOfX(x);
         return interpolate(x, getX(index), getX(index + 1), getY(index), getY(index + 1));
         }
+
+        public void TestThrowDifferentLengthOfArraysException(double[]xValues, double[] yValues){
+            Assertions.assertThrows(DifferentLengthOfArraysException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                AbstractTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
+            }
+        });
+        }
+        public void TestThrowArrayIsNotSortedException(double[]xValues){
+            Assertions.assertThrows(ArrayIsNotSortedException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                AbstractTabulatedFunction.checkSorted(xValues);
+            }
+        });
+        }
     }
 
+    MockTabulatedFunction obj = mockTabulatedFunction;
     @Test
-    void TestObj() {
-        MockTabulatedFunction obj = new MockTabulatedFunction();
+    void TestMockTabulatedFunction() {
         Assertions.assertEquals(5, obj.apply(4));
         Assertions.assertEquals(9, obj.apply(11));
         Assertions.assertEquals(3.5, obj.apply(0));
         Assertions.assertEquals(5, obj.apply(8));
+    }
+
+    @Test
+    void TestThrowDifferentLengthOfArraysException(){
+        double[] xValues = {1,2,3,4};
+        double[] yValues = {1,2,3};
+        obj.TestThrowDifferentLengthOfArraysException(xValues, yValues);
+    }
+
+    @Test
+    void TestThrowArrayIsNotSortedException(){
+        double[] xValues1 = {1,4,2,3};
+        double[] xValues2 = {4,1,2,3};
+        double[] xValues3 = {1,4,3,2};
+        obj.TestThrowArrayIsNotSortedException(xValues1);
+        obj.TestThrowArrayIsNotSortedException(xValues2);
+        obj.TestThrowArrayIsNotSortedException(xValues3);
     }
 }
