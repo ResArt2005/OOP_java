@@ -10,7 +10,7 @@ public class DeBoorAlgorithmFunction implements MathFunction {
 
     public DeBoorAlgorithmFunction(double[] nodeArray, double[] controlPoints, int splineDegree) {
         if (nodeArray.length < splineDegree + 1 || controlPoints.length < splineDegree + 1) {
-            throw new IllegalArgumentException("Недостаточное количество узлов или контрольных точек.");
+            throw new IllegalArgumentException();
         }
         this.nodeArray = Arrays.copyOf(nodeArray, nodeArray.length);
         this.controlPoints = Arrays.copyOf(controlPoints, controlPoints.length);
@@ -34,7 +34,7 @@ public class DeBoorAlgorithmFunction implements MathFunction {
                 int knotIndex = segmentIndex + j - splineDegree;
                 double denominator = nodeArray[knotIndex + splineDegree - r + 1] - nodeArray[knotIndex];
                 if (denominator == 0) {
-                    throw new ArithmeticException("Деление на ноль: найдены одинаковые узлы.");
+                    throw new ArithmeticException();
                 }
                 double alpha = (x - nodeArray[knotIndex]) / denominator;
                 d[j] = (1 - alpha) * d[j - 1] + alpha * d[j];
@@ -48,7 +48,7 @@ public class DeBoorAlgorithmFunction implements MathFunction {
     private int findSegment(double x) {
         int n = nodeArray.length - 1;
         if (x < nodeArray[splineDegree] || x > nodeArray[n - splineDegree]) {
-            throw new IllegalArgumentException("Значение x выходит за допустимые границы узлов.");
+            throw new IllegalArgumentException();
         }
         for (int i = splineDegree; i < n - splineDegree; ++i) {
             if (x >= nodeArray[i] && x < nodeArray[i + 1]) {
