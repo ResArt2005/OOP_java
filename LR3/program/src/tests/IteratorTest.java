@@ -31,5 +31,22 @@ public class IteratorTest {
             }
         });
     }
-
+    @Test
+    void TestIteratorArray(){
+        ArrayTabulatedFunction obj = new ArrayTabulatedFunction(new SqrFunction(), 0, 10, 5);
+        Iterator<Point> iterator = obj.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            Assertions.assertEquals(obj.getX(i), point.x);
+            Assertions.assertEquals(obj.getY(i), point.y);
+            ++i;
+        }
+        Assertions.assertThrows(NoSuchElementException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                iterator.next();
+            }
+        });
+    }
 }
