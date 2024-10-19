@@ -204,6 +204,24 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
+        return new Iterator<Point>() {
+            private int CurrentIndex = 0;  // Начинаем с головы массива
+
+            @Override
+            public boolean hasNext() {
+                return CurrentIndex != count;  // Если node не null, то есть следующий элемент
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();  // Если элемента нет, выбрасываем исключение
+                }
+                Point point = new Point(xValues[CurrentIndex], yValues[CurrentIndex]);  // Создаем Point из текущего узла
+                ++CurrentIndex; // Перемещаемся на следующий узел
+
+                return point;  // Возвращаем созданный Point
+            }
+        };
     }
 }
