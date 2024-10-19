@@ -1,7 +1,7 @@
 package functions;
 
 import exceptions.InterpolationException;
-
+import java.util.NoSuchElementException;
 import java.util.Arrays;
 import java.util.Iterator;
 
