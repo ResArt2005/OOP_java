@@ -1,4 +1,4 @@
-package functions.standartFunctionsForEquation;
+package functions.myOwnFunctionsForEquation;
 import java.lang.Math;
 public class CosFunction implements MathDerivativeAndIntegral {
     private double constant;

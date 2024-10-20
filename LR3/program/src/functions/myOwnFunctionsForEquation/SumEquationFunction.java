@@ -1,4 +1,4 @@
-package functions.standartFunctionsForEquation;
+package functions.myOwnFunctionsForEquation;
 
 import java.util.Arrays;
 

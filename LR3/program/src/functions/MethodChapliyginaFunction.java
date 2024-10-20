@@ -1,5 +1,5 @@
 package functions;
-import functions.standartFunctionsForEquation.MathDerivativeAndIntegral;
+import functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
 
 import java.util.Arrays;
 public class MethodChapliyginaFunction implements MathFunction {

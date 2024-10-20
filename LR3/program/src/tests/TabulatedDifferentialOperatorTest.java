@@ -5,7 +5,7 @@ import functions.LinkedListTabulatedFunction;
 import functions.SqrFunction;
 import functions.TabulatedFunction;
 import functions.factory.LinkedListTabulatedFunctionFactory;
-import functions.standartFunctionsForEquation.AInDegreeXFunction;
+import functions.myOwnFunctionsForEquation.AInDegreeXFunction;
 import operations.TabulatedDifferentialOperator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

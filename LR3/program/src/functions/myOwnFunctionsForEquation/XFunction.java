@@ -1,4 +1,4 @@
-package functions.standartFunctionsForEquation;
+package functions.myOwnFunctionsForEquation;
 import java.lang.Math;
 public class XFunction implements MathDerivativeAndIntegral {
     private double constant;

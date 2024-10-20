@@ -1,4 +1,4 @@
-package functions.standartFunctionsForEquation;
+package functions.myOwnFunctionsForEquation;
 
 import functions.MathFunction;
 

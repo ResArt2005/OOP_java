@@ -1,11 +1,11 @@
-package functions.standartFunctionsForEquation;
+package functions.myOwnFunctionsForEquation;
 import java.lang.Math;
-public class TgFunction implements MathDerivativeAndIntegral {
+public class CtgFunction implements MathDerivativeAndIntegral {
     private double constant;
-    public TgFunction(double constant){
+    public CtgFunction(double constant){
         this.constant = constant;
     }
-    public TgFunction(){
+    public CtgFunction(){
         this.constant = 1;
     }
     @Override
@@ -15,11 +15,11 @@ public class TgFunction implements MathDerivativeAndIntegral {
 
     @Override
     public double derivative(double x) {
-        return constant/Math.pow(Math.cos(x), 2);
+        return -constant/Math.pow(Math.sin(x), 2);
     }
 
     @Override
     public double integral(double x0, double x) {
-        return -constant*(Math.log(Math.abs(Math.cos(x))) - Math.log(Math.abs(Math.cos(x0))));
+        return constant*(Math.log(Math.abs(Math.sin(x))) - Math.log(Math.abs(Math.sin(x0))));
     }
 }
