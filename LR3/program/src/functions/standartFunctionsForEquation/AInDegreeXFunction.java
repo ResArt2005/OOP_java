@@ -1,13 +1,14 @@
 package functions.standartFunctionsForEquation;
 
 import java.lang.Math;
-public class ax implements StandardFunction {
-    private double constant;
-    private double a;
-    public ax(double constant, double a){
+public class AInDegreeXFunction implements MathDerivativeAndIntegral {
+    private final double constant;
+    private final double a;
+    public AInDegreeXFunction(double constant, double a){
         this.constant = constant;
+        this.a = a;
     }
-    public ax(double a){
+    public AInDegreeXFunction(double a){
         this.constant = 1;
         this.a = a;
     }

@@ -1,14 +1,14 @@
 package functions;
-import functions.standartFunctionsForEquation.StandardFunction;
+import functions.standartFunctionsForEquation.MathDerivativeAndIntegral;
 
 import java.util.Arrays;
 public class MethodChapliyginaFunction implements MathFunction {
-    StandardFunction equation;
+    MathDerivativeAndIntegral equation;
     double x0;  // начальная точка
     double[] xValues;  // массив упорядоченных значений x
     double[] yValues;  // массив соответствующих значений y для каждого x
 
-    public MethodChapliyginaFunction(StandardFunction equation, double x0, double[] xValues, double[] yValues) {
+    public MethodChapliyginaFunction(MathDerivativeAndIntegral equation, double x0, double[] xValues, double[] yValues) {
         this.equation = equation;
         this.x0 = x0;
         this.xValues = Arrays.copyOf(xValues, xValues.length);

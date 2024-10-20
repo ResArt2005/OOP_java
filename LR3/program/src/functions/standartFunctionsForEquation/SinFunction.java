@@ -1,25 +1,25 @@
 package functions.standartFunctionsForEquation;
 import java.lang.Math;
-public class cos implements StandardFunction{
+public class SinFunction implements MathDerivativeAndIntegral {
     private double constant;
-    public cos(double constant){
+    public SinFunction(double constant){
         this.constant = constant;
     }
-    public cos(){
+    public SinFunction(){
         this.constant = 1;
     }
     @Override
     public double apply(double x) {
-        return constant*Math.cos(x);
+        return constant*Math.sin(x);
     }
 
     @Override
     public double derivative(double x) {
-        return -constant*Math.sin(x);
+        return constant*Math.cos(x);
     }
 
     @Override
     public double integral(double x0, double x) {
-        return constant*(Math.sin(x) - Math.sin(x0));
+        return -constant*(Math.cos(x) - Math.cos(x0));
     }
 }

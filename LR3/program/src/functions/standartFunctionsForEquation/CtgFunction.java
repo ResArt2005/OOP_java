@@ -1,11 +1,11 @@
 package functions.standartFunctionsForEquation;
 import java.lang.Math;
-public class ctg implements StandardFunction{
+public class CtgFunction implements MathDerivativeAndIntegral {
     private double constant;
-    public ctg(double constant){
+    public CtgFunction(double constant){
         this.constant = constant;
     }
-    public ctg(){
+    public CtgFunction(){
         this.constant = 1;
     }
     @Override

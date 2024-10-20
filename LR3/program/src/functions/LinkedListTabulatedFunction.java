@@ -33,10 +33,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             xTo = temp;
         }
         if (xFrom == xTo) {
-            double x = xFrom;
             double y = source.apply(xFrom);
             for (int i = 0; i < count; ++i) {
-                addNode(x, y);
+                addNode(xFrom, y);
             }
         } else {
             addNode(xFrom, source.apply(xFrom));

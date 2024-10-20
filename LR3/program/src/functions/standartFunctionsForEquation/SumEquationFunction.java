@@ -2,9 +2,9 @@ package functions.standartFunctionsForEquation;
 
 import java.util.Arrays;
 
-public class SumEquation implements StandardFunction{
-    StandardFunction[] equation;
-    public SumEquation(StandardFunction[] funcs){
+public class SumEquationFunction implements MathDerivativeAndIntegral {
+    MathDerivativeAndIntegral[] equation;
+    public SumEquationFunction(MathDerivativeAndIntegral[] funcs){
         equation = Arrays.copyOf(funcs, funcs.length);
     }
     @Override
