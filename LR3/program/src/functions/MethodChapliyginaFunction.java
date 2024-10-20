@@ -3,10 +3,10 @@ import functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
 
 import java.util.Arrays;
 public class MethodChapliyginaFunction implements MathFunction {
-    MathDerivativeAndIntegral equation;
-    double x0;  // начальная точка
-    double[] xValues;  // массив упорядоченных значений x
-    double[] yValues;  // массив соответствующих значений y для каждого x
+    private MathDerivativeAndIntegral equation;
+    private double x0;  // начальная точка
+    private double[] xValues;  // массив упорядоченных значений x
+    private double[] yValues;  // массив соответствующих значений y для каждого x
 
     public MethodChapliyginaFunction(MathDerivativeAndIntegral equation, double x0, double[] xValues, double[] yValues) {
         this.equation = equation;

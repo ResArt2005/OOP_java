@@ -1,7 +1,7 @@
 package functions.myOwnFunctionsForEquation;
 import java.lang.Math;
 public class ExpFunction implements MathDerivativeAndIntegral {
-    private double constant;
+    private final double constant;
     private double degree;
     public ExpFunction(double constant){
         this.constant = constant;

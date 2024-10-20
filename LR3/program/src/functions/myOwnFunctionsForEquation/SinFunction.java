@@ -1,7 +1,7 @@
 package functions.myOwnFunctionsForEquation;
 import java.lang.Math;
 public class SinFunction implements MathDerivativeAndIntegral {
-    private double constant;
+    private final double constant;
     public SinFunction(double constant){
         this.constant = constant;
     }

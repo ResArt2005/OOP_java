@@ -6,7 +6,7 @@ import functions.factory.ArrayTabulatedFunctionFactory;
 import functions.factory.TabulatedFunctionFactory;
 
 public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction>{
-    TabulatedFunctionFactory factory;
+    private TabulatedFunctionFactory factory;
     public TabulatedDifferentialOperator(TabulatedFunctionFactory factory){
         this.factory = factory;
     }

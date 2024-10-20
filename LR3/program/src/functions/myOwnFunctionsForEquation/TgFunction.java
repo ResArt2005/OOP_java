@@ -1,7 +1,7 @@
 package functions.myOwnFunctionsForEquation;
 import java.lang.Math;
 public class TgFunction implements MathDerivativeAndIntegral {
-    private double constant;
+    private final double constant;
     public TgFunction(double constant){
         this.constant = constant;
     }
