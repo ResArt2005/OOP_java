@@ -4,7 +4,7 @@ public class InterpolationException extends RuntimeException {
     public InterpolationException(){
         super();
     }
-    public InterpolationException(String massage){
-        super(massage);
+    public InterpolationException(String message){
+        super(message);
     }
 }
