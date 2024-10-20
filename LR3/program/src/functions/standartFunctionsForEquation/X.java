@@ -1,4 +1,4 @@
-package functions;
+package functions.standartFunctionsForEquation;
 import java.lang.Math;
 public class X implements StandardFunction{
     private double constant;
@@ -15,7 +15,7 @@ public class X implements StandardFunction{
         this.degree = 1;
     }
     @Override
-    public double f(double x) {
+    public double apply(double x) {
         return constant*Math.pow(x, degree);
     }
 

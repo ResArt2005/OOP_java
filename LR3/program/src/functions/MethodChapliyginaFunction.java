@@ -1,4 +1,6 @@
 package functions;
+import functions.standartFunctionsForEquation.StandardFunction;
+
 import java.util.Arrays;
 public class MethodChapliyginaFunction implements MathFunction {
     StandardFunction equation;

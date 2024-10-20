@@ -20,7 +20,7 @@ class TabulatedFunctionOperationServiceTest {
             Assertions.assertEquals(points[i].y, obj.getY(i));
         }
     }
-        @Test
+    @Test
     void asPointsLinkedTest() {
         LinkedListTabulatedFunction obj = new LinkedListTabulatedFunction(new SqrFunction(), 0, 10, 5);
         Point[] points = TabulatedFunctionOperationService.asPoints(obj);

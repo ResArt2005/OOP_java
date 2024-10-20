@@ -1,6 +1,7 @@
-package functions;
+package functions.standartFunctionsForEquation;
+
 import java.lang.Math;
-public class ax implements StandardFunction{
+public class ax implements StandardFunction {
     private double constant;
     private double a;
     public ax(double constant, double a){
@@ -11,7 +12,7 @@ public class ax implements StandardFunction{
         this.a = a;
     }
     @Override
-    public double f(double x) {
+    public double apply(double x) {
         return constant*Math.pow(a, x);
     }
 

@@ -2,6 +2,7 @@ package tests;
 
 import functions.*;
 
+import functions.standartFunctionsForEquation.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 //

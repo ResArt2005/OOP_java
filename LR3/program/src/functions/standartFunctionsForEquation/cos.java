@@ -1,4 +1,4 @@
-package functions;
+package functions.standartFunctionsForEquation;
 import java.lang.Math;
 public class cos implements StandardFunction{
     private double constant;
@@ -9,7 +9,7 @@ public class cos implements StandardFunction{
         this.constant = 1;
     }
     @Override
-    public double f(double x) {
+    public double apply(double x) {
         return constant*Math.cos(x);
     }
 

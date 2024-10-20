@@ -1,4 +1,4 @@
-package functions;
+package functions.standartFunctionsForEquation;
 
 import java.util.Arrays;
 
@@ -8,10 +8,10 @@ public class SumEquation implements StandardFunction{
         equation = Arrays.copyOf(funcs, funcs.length);
     }
     @Override
-    public double f(double x) {
+    public double apply(double x) {
         double sum = 0;
         for (int i = 0; i < equation.length; ++i) {
-            sum += equation[i].f(x);
+            sum += equation[i].apply(x);
         }
         return sum;
     }
