@@ -1,4 +1,5 @@
 package operations;
+import exceptions.InconsistentFunctionsException;
 import functions.factory.ArrayTabulatedFunctionFactory;
 import functions.factory.TabulatedFunctionFactory;
 import functions.Point;
@@ -30,8 +31,33 @@ public class TabulatedFunctionOperationService {
         }
         return points;
     }
-     TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation){
+     private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation){
+     if (a.getCount() != b.getCount()) {
+            throw new InconsistentFunctionsException();
+        }
+        int length = a.getCount();
+        Point[] pointsA = asPoints(a);
+        Point[] pointsB = asPoints(b);
 
-        return null;
+        double[] xValues = new double[length];
+        double[] yValues = new double[length];
+
+        for (int i = 0; i < length; i++) {
+            xValues[i] = pointsA[i].x; // Получаем x из первой функции
+            if (xValues[i] != pointsB[i].x) {
+                throw new InconsistentFunctionsException();
+            }
+            yValues[i] = operation.apply(pointsA[i].y, pointsB[i].y); // Применяем операцию к y
+        }
+
+        return factory.create(xValues, yValues);
+    }
+
+    public TabulatedFunction sum(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (u, v) -> u + v); // Сложение
+    }
+
+    public TabulatedFunction subtract(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (u, v) -> u - v); // Вычитание
      }
 }
