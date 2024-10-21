@@ -32,6 +32,22 @@ public class BinOperationsOverTabulatedFunctionsTest {
         }
     }
     @Test
+    void OperationMul(){
+        TabulatedFunction resultOpMul = service.multiplication(arrayTabFunc, linkedListTabFunc);
+        double[]yValuesSum = {0, 190.9551, 24309.2517};
+        for (int i = 0; i < resultOpMul.getCount(); ++i) {
+           Assertions.assertEquals(yValuesSum[i], resultOpMul.getY(i), 0.0001);
+        }
+    }
+    @Test
+    void OperationDev(){
+        TabulatedFunction resultOpDev = service.division(arrayTabFunc, linkedListTabFunc);
+        double[]yValuesSub = {0, 0.0235, 3.7022941226003863E-4};
+         for (int i = 0; i < resultOpDev.getCount(); ++i) {
+           Assertions.assertEquals(yValuesSub[i], resultOpDev.getY(i), 0.0001);
+         }
+    }
+    @Test
     void OperationExceptionLengthAreNotTheSame(){
         ArrayTabulatedFunction arrayTabFunc =new ArrayTabulatedFunction(new SqrFunction(), 0, 9, 5);
         LinkedListTabulatedFunction linkedListTabFunc=new LinkedListTabulatedFunction(new ExpFunction(), 0, 9, 3);
