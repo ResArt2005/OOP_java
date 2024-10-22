@@ -27,7 +27,6 @@ public class TabulatedFunctionFileWriter {
             // Шаг 4: Записываем функции в соответствующие файлы
             FunctionsIO.writeTabulatedFunction(arrayFunctionWriter, arrayFunction);
             FunctionsIO.writeTabulatedFunction(linkedListFunctionWriter, linkedListFunction);
-
         } catch (IOException e) {
             // Шаг 5: Обработка исключения
             e.printStackTrace(); // Выводим стек-трейс в стандартный поток ошибок
