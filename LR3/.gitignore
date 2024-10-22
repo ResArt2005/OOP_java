@@ -1,4 +1,6 @@
 target/
+output/
+input/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
