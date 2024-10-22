@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 // Вычисление сплайна S(x) по алгоритму де Бура.
 public class DeBoorAlgorithmFunction implements MathFunction {
-    private double[] nodeArray; // Массив узлов
-    private double[] controlPoints; // Массив контрольных точек
-    private int splineDegree; // Степень сплайна
+    private final double[] nodeArray; // Массив узлов
+    private final double[] controlPoints; // Массив контрольных точек
+    private final int splineDegree; // Степень сплайна
 
     public DeBoorAlgorithmFunction(double[] nodeArray, double[] controlPoints, int splineDegree) {
         if (nodeArray.length < splineDegree + 1 || controlPoints.length < splineDegree + 1) {
@@ -23,9 +23,7 @@ public class DeBoorAlgorithmFunction implements MathFunction {
         double[] d = new double[splineDegree + 1]; // Массив значений d
 
         // Инициализируем значения d на основе контрольных точек
-        for (int i = 0; i <= splineDegree; ++i) {
-            d[i] = controlPoints[segmentIndex - splineDegree + i];
-        }
+        System.arraycopy(controlPoints, segmentIndex - splineDegree, d, 0, splineDegree + 1);
 
         // Применяем алгоритм де Бура
         //1, 2, 3
