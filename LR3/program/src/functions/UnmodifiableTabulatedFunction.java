@@ -3,7 +3,7 @@ package functions;
 import java.util.Iterator;
 
 public class UnmodifiableTabulatedFunction implements TabulatedFunction{
-    TabulatedFunction tabulatedFunction;
+    private final TabulatedFunction tabulatedFunction;
     public UnmodifiableTabulatedFunction(TabulatedFunction tabulatedFunction){
         this.tabulatedFunction = tabulatedFunction;
     }

@@ -3,7 +3,7 @@ package functions;
 import java.util.Iterator;
 
 public class StrictTabulatedFunction implements TabulatedFunction{
-    private TabulatedFunction tabulatedFunction;
+    private final TabulatedFunction tabulatedFunction;
     public StrictTabulatedFunction(TabulatedFunction tabulatedFunction){
         this.tabulatedFunction = tabulatedFunction;
     }

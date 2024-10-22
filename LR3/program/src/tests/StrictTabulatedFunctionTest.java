@@ -65,6 +65,8 @@ class StrictTabulatedFunctionTest {
     void apply() {
         Assertions.assertEquals(2.7386127875258306, obj_LinkedList.apply(7.5));
         Assertions.assertEquals(44.66666666666666, obj_Array.apply(7.6666666666666665));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj_LinkedList.apply(15));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj_Array.apply(-1));
     }
 
     @Test
