@@ -1,8 +1,5 @@
 package tests;
 
-import functions.LinkedListTabulatedFunction;
-import functions.SqrFunction;
-import functions.StrictTabulatedFunction;
 import functions.TabulatedFunction;
 import functions.factory.LinkedListTabulatedFunctionFactory;
 import org.junit.jupiter.api.Assertions;
@@ -21,6 +18,10 @@ class FactoryStrictAndUnmodifiableTest {
 
     @Test
     void createUnmodifiable() {
+        TabulatedFunction obj_LinkedList = factory.createUnmodifiable(new double[]{1, 2, 3}, new double[]{1, 4, 9});
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj_LinkedList.setY(0, 111));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj_LinkedList.setY(0, 222));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj_LinkedList.setY(0, 333));
     }
 
     @Test
