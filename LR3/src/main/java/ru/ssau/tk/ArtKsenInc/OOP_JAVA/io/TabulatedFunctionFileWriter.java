@@ -12,8 +12,8 @@ import java.io.IOException;
 public class TabulatedFunctionFileWriter {
     public static void main(String[] args){
         // Шаг 1: Определяем пути к файлам
-        String arrayFunctionFilePath = "output/array_function.txt";
-        String linkedListFunctionFilePath = "output/linked_list_function.txt";
+        String arrayFunctionFilePath = "output/array function.txt";
+        String linkedListFunctionFilePath = "output/linked list function.txt";
         // Шаг 2: Используем try-with-resources для создания потоков
         try (
                 BufferedWriter arrayFunctionWriter = new BufferedWriter(new FileWriter(arrayFunctionFilePath));

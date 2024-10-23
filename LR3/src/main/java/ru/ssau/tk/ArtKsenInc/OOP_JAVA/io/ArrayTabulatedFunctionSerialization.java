@@ -9,7 +9,7 @@ import java.io.*;
 
 public class ArrayTabulatedFunctionSerialization {
     public static void main(String[] args) {
-        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("output/serialized_array_functions.bin"));
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("output/serialized array functions.bin"));
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
 
             ArrayTabulatedFunction originalFunction = new ArrayTabulatedFunction(new SqrFunction(), 0, 10, 5);
@@ -26,7 +26,7 @@ public class ArrayTabulatedFunctionSerialization {
             e.printStackTrace();
         }
 
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("output/serialized_array_functions.bin"));
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("output/serialized array functions.bin"));
              ObjectInputStream ois = new ObjectInputStream(bis)) {
 
             TabulatedFunction deserializedOriginal = (TabulatedFunction) ois.readObject();
