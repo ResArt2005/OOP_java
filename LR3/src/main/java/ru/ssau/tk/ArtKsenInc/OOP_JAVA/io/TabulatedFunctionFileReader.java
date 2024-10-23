@@ -1,8 +1,5 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.io;
 
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.ArrayTabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.SqrFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFactory;
 

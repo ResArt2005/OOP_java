@@ -19,7 +19,7 @@ public class TabulatedFunctionFileOutputStream {
                 BufferedOutputStream linkedListFunctionWriter = new BufferedOutputStream(new FileOutputStream(linkedListFunctionFilePath))
         ) {
             TabulatedFunction arrayFunction = new ArrayTabulatedFunction(new SqrFunction(), 0, 10, 5);
-            TabulatedFunction linkedListFunction = new LinkedListTabulatedFunction(new double[]{1,2,3}, new double[]{1, 4, 9});
+            TabulatedFunction linkedListFunction = new LinkedListTabulatedFunction(new double[]{1.123,2.1221,3.99999}, new double[]{1.23, 44, 90});
             FunctionsIO.writeTabulatedFunction(arrayFunctionWriter, arrayFunction);
             FunctionsIO.writeTabulatedFunction(linkedListFunctionWriter, linkedListFunction);
         } catch (IOException e) {
