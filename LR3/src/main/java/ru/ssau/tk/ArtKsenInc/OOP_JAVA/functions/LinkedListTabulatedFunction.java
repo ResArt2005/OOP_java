@@ -2,10 +2,15 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.InterpolationException;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 9151467156358795584L;
 
     private static class Node {
         public Node prev;

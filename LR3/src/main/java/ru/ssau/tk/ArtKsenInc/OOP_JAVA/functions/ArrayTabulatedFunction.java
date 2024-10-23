@@ -1,11 +1,16 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.InterpolationException;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable, Serializable {
+    @Serial
+    private static final long serialVersionUID = 3154741463685093949L;
     private double[] xValues;
     private double[] yValues;
 
