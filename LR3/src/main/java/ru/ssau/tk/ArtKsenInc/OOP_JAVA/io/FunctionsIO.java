@@ -2,8 +2,8 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.io;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.Point;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
+
+import java.io.*;
 
 final public class FunctionsIO {
     private FunctionsIO(){
@@ -24,5 +24,14 @@ final public class FunctionsIO {
         }
         // Пробрасываем данные из буфера
         printWriter.flush();
+    }
+    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+        dataOutputStream.writeInt(function.getCount());
+        for(Point point: function){
+            dataOutputStream.writeDouble(point.x);
+            dataOutputStream.writeDouble(point.y);
+        }
+        dataOutputStream.flush();
     }
 }
