@@ -2,17 +2,18 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.concurrent;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 
-public class ReadTask implements Runnable {
+public class WriteTask implements Runnable{
     private final TabulatedFunction tabulatedFunction;
-    public ReadTask(TabulatedFunction tabulatedFunction){
+    private final double value;
+    public WriteTask(TabulatedFunction tabulatedFunction, double value){
         this.tabulatedFunction = tabulatedFunction;
+        this.value = value;
     }
     @Override
     public void run() {
         for (int i = 0; i < tabulatedFunction.getCount(); ++i) {
-            double x = tabulatedFunction.getX(i);
-            double y = tabulatedFunction.getY(i);
-            System.out.printf("After read: i = %d, x = %f, y = %f%n", i, x, y);
+            tabulatedFunction.setY(i, value);
+            System.out.printf("Writing for index %d complete", i);
         }
     }
 }
