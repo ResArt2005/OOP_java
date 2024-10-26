@@ -10,9 +10,11 @@ public class ReadTask implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < tabulatedFunction.getCount(); ++i) {
-            double x = tabulatedFunction.getX(i);
-            double y = tabulatedFunction.getY(i);
-            System.out.printf("After read: i = %d, x = %f, y = %f%n", i, x, y);
+            synchronized (tabulatedFunction) {
+                double x = tabulatedFunction.getX(i);
+                double y = tabulatedFunction.getY(i);
+                System.out.printf("After read: i = %d, x = %f, y = %f%n", i, x, y);
+            }
         }
     }
 }
