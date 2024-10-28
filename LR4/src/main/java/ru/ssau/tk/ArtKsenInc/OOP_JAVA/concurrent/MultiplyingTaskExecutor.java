@@ -9,10 +9,18 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MultiplyingTaskExecutor {
     public static void main(String[] args) {
+        // Создание массивов x и y для табулированной функции
+        int count = 1000; // Количество точек
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+
+        for (int i = 0; i < count; i++) {
+            xValues[i] = i + 1; // Пример: x = 1, 2, ..., 1000
+            yValues[i] = 1.0; // Значения y всегда равны 1
+        }
+
         // Создание табулированной функции
-        UnitFunction unitFunction = new UnitFunction();
-        double[] UnitFunction = new double[0];
-        LinkedListTabulatedFunction tabulatedFunction = new LinkedListTabulatedFunction(UnitFunction, 1, 1000);
+        LinkedListTabulatedFunction tabulatedFunction = new LinkedListTabulatedFunction(xValues, yValues);
 
         // Список потоков
         List<Thread> threads = new ArrayList<>();
