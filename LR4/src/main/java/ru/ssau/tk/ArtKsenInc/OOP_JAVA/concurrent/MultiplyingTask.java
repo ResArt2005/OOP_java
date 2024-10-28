@@ -12,17 +12,16 @@ public class MultiplyingTask implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < tabulatedFunction.getCount(); ++i) {
-            synchronized (tabulatedFunction) {
-                double currentY = tabulatedFunction.getY(i);
-                tabulatedFunction.setY(i, currentY * 2); // Увеличиваем значение y в 2 раза
-            }
+        // Логика выполнения задачи
+        for (int i = 0; i < tabulatedFunction.getCount(); i++) {
+            // Пример: умножение значения на 2
+            double newValue = tabulatedFunction.getY(i) * 2;
+            tabulatedFunction.setY(i, newValue);
         }
-        completed = true; // Устанавливаем флаг завершения
-        System.out.printf("Поток %s закончил выполнение задачи.%n", Thread.currentThread().getName());
+        completed = true; // Задача завершена
     }
 
-    public boolean isCompleted() { // Метод для проверки завершенности
+    public boolean isCompleted() {
         return completed;
     }
 }
