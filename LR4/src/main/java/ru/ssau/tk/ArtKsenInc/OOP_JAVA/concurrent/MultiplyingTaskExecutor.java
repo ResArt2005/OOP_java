@@ -1,11 +1,9 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.concurrent;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MultiplyingTaskExecutor {
     public static void main(String[] args) {
@@ -22,25 +20,24 @@ public class MultiplyingTaskExecutor {
         // Создание табулированной функции
         LinkedListTabulatedFunction tabulatedFunction = new LinkedListTabulatedFunction(xValues, yValues);
 
-        // Список потоков и задач
+        // Список потоков
         List<Thread> threads = new ArrayList<>();
-        ConcurrentLinkedQueue<MultiplyingTask> tasks = new ConcurrentLinkedQueue<>();
 
         // Создание задач и потоков
         for (int i = 0; i < 10; i++) {
             MultiplyingTask task = new MultiplyingTask(tabulatedFunction);
-            tasks.add(task);
             Thread thread = new Thread(task);
             threads.add(thread);
             thread.start(); // Запускаем поток сразу после его создания
         }
 
-        // Проверка выполнения задач
-        while (!tasks.isEmpty()) {
-            tasks.removeIf(MultiplyingTask::isCompleted); // Удаляем завершенные задачи
-
-            // Вместо sleep используем yield для уменьшения загрузки CPU
-            Thread.yield(); // Позволяем другим потокам выполняться
+        // Ожидание завершения всех потоков
+        for (Thread thread : threads) {
+            try {
+                thread.join(); // Дождаться завершения потока
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Восстановить статус прерывания
+            }
         }
 
         // Вывод результата
