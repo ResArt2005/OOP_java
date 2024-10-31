@@ -178,11 +178,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     @Override
-    public double getY(double x) {
-        return 0;
-    }
-
-    @Override
     public double getX(int index) {
         if (index >= 0 && index < count) {
             return getNode(index).x;
