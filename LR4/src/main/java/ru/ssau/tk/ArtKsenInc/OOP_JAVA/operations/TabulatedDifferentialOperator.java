@@ -1,5 +1,6 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.concurrent.SynchronizedTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.Point;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFactory;
@@ -34,5 +35,15 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         xValues[length - 1] = points[length - 1].x;
         yValues[length - 1] = (points[length - 1].y - points[length - 2].y) / (points[length - 1].x - points[length - 2].x);
         return factory.create(xValues, yValues);
+    }
+    public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
+        SynchronizedTabulatedFunction syncFunction;
+        if (function instanceof SynchronizedTabulatedFunction) {
+            syncFunction = (SynchronizedTabulatedFunction) function;
+        } else {
+            syncFunction = new SynchronizedTabulatedFunction(function);
+        }
+        return syncFunction.doSynchronously(_ ->
+            derive(syncFunction));
     }
 }
