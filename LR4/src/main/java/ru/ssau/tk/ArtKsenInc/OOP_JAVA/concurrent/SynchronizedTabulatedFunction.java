@@ -10,6 +10,10 @@ import java.util.NoSuchElementException;
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
     private final TabulatedFunction function;
 
+    public interface Operation<T> {
+        T apply(SynchronizedTabulatedFunction function);
+    }
+
     public SynchronizedTabulatedFunction(TabulatedFunction function) {
         this.function = function;
     }
@@ -79,5 +83,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
             }
         };
     }
-
+    public synchronized <T> T doSynchronously(Operation<T> operation) {
+        return operation.apply(this);
+    }
 }

@@ -114,4 +114,32 @@ class SynchronizedTabulatedFunctionTest {
         Assertions.assertEquals(2.236, syncObj.apply(5), 0.001);
         Assertions.assertEquals(1.712, syncObj.apply(3), 0.001);
     }
+
+    @Test
+    void testGetCount() {
+        Integer count = syncObj.doSynchronously(SynchronizedTabulatedFunction::getCount);
+        Assertions.assertEquals(5, count);
+    }
+
+    @Test
+    void testSetY() {
+        syncObj.doSynchronously(func -> {
+            func.setY(0, 50);
+            return null;
+        });
+
+        double newY = syncObj.doSynchronously(func -> func.getY(0));
+        Assertions.assertEquals(50, newY);
+    }
+
+    @Test
+    void testGetYAfterUpdate() {
+        syncObj.doSynchronously(func -> {
+            func.setY(1, 100);
+            return null;
+        });
+
+        double result = syncObj.doSynchronously(func -> func.getY(1));
+        Assertions.assertEquals(100, result);
+    }
 }
