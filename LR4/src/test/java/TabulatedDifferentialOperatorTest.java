@@ -36,7 +36,7 @@ class TabulatedDifferentialOperatorTest {
     @Test
     void deriveSynchronouslyTestArrayFactory() {
         TabulatedDifferentialOperator SetOperator = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
-        TabulatedFunction NewArrayTabFunc = SetOperator.deriveSynchronously(linkedListTabFunc);
+        TabulatedFunction NewArrayTabFunc = SetOperator.deriveSynchronously(new LinkedListTabulatedFunction(new SqrFunction(), 0, 10, 5));
         double[] xValues = {0, 2.5, 5, 7.5, 10};
         double[] yValues = {0.6324, 0.2619, 0.2010,  0.1694, 0.1694};
         for (int i = 0; i < NewArrayTabFunc.getCount(); ++i) {
