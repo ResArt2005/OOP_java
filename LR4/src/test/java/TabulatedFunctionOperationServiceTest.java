@@ -2,6 +2,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.ArrayTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.Point;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.SqrFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

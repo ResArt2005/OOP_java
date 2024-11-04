@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.function.Executable;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.concurrent.SynchronizedTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.Point;
@@ -82,12 +81,7 @@ class SynchronizedTabulatedFunctionTest {
             Assertions.assertEquals(syncObj.getY(i), point.y);
             ++i;
         }
-        Assertions.assertThrows(NoSuchElementException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                iterator.next();
-            }
-        });
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
     @Test
     void allMethodsInAROW() {

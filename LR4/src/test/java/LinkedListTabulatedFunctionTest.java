@@ -8,8 +8,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.io.Serial;
+
 class LinkedListTabulatedFunctionTest {
     public class TestClass extends LinkedListTabulatedFunction {
+        @Serial
+        private static final long serialVersionUID = 1L;
+
         public TestClass(MathFunction source, double xFrom, double xTo, int count) {
             super(source, xFrom, xTo, count);
         }
@@ -38,12 +43,12 @@ class LinkedListTabulatedFunctionTest {
         }
     }
 
-    private SqrFunction fun = new SqrFunction();
-    private double StartX = 0;
-    private double EndX = 10;
-    private int count = 5;
+    private final SqrFunction fun = new SqrFunction();
+    private final double StartX = 0;
+    private final double EndX = 10;
+    private final int count = 5;
     //0, 2.5, 5, 7.5, 10
-    private TestClass obj = new TestClass(fun, EndX, StartX, count);
+    private final TestClass obj = new TestClass(fun, EndX, StartX, count);
 
     @Test
     void getCount() {
@@ -53,35 +58,20 @@ class LinkedListTabulatedFunctionTest {
     @Test
     void getX() {
         Assertions.assertEquals(5, obj.getX(2));
-        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.getX(1000);
-            }
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> obj.getX(1000));
     }
 
     @Test
     void getY() {
         Assertions.assertEquals(2.236, obj.getY(2), 0.001);
-        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.getY(1000);
-            }
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> obj.getY(1000));
     }
 
     @Test
     void setY() {
         obj.setY(3, 3);
         Assertions.assertEquals(3, obj.getY(3));
-        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.setY(1000, 8);
-            }
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> obj.setY(1000, 8));
     }
 
     @Test
@@ -135,24 +125,14 @@ class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(2.5, obj.leftBound());
         obj.remove(2);
         Assertions.assertEquals(-1, obj.indexOfX(7.5));
-        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.remove(1000);
-            }
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> obj.remove(1000));
     }
 
     @Test
     void testfloorIndexOfX() {
         //0, 2.5, 5, 7.5, 10
         obj.testfloorIndexOfX(3);
-        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.remove(1000);
-            }
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> obj.remove(1000));
     }
 
     @Test
@@ -177,31 +157,28 @@ class LinkedListTabulatedFunctionTest {
         obj.insert(2, 999);
         Assertions.assertEquals(2, obj.getX(1));
     }
-        @Test
+    @Test
     void ThrowInterpolationException(){
-        Assertions.assertThrows(InterpolationException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.testInterpolate(3, 1000);
-            }
+        Assertions.assertThrows(InterpolationException.class, () -> obj.testInterpolate(3, 1000));
+                InterpolationException exception = Assertions.assertThrows(InterpolationException.class, () -> {
+            throw new InterpolationException("WAIT YOU CANNOT INTERPOLATE");
         });
+        Assertions.assertEquals("WAIT YOU CANNOT INTERPOLATE", exception.getMessage());
     }
     @Test
     void ThrowDifferentLengthOfArraysException(){
-        Assertions.assertThrows(DifferentLengthOfArraysException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                TestClass obj = new TestClass(new double[]{1,2,3}, new double[]{1,2});
-            }
+        Assertions.assertThrows(DifferentLengthOfArraysException.class, () -> new TestClass(new double[]{1, 2, 3}, new double[]{1, 2}));
+        DifferentLengthOfArraysException exception = Assertions.assertThrows(DifferentLengthOfArraysException.class, () -> {
+            throw new DifferentLengthOfArraysException("WAIT THEY HAVE DIFFERENT LENGTH");
         });
+        Assertions.assertEquals("WAIT THEY HAVE DIFFERENT LENGTH", exception.getMessage());
     }
     @Test
     void ThrowArrayIsNotSortedException(){
-        Assertions.assertThrows(ArrayIsNotSortedException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                TestClass obj = new TestClass(new double[]{1, 3,2,}, new double[]{1,2, 3});
-            }
+        Assertions.assertThrows(ArrayIsNotSortedException.class, () -> new TestClass(new double[]{1, 3, 2,}, new double[]{1, 2, 3}));
+        ArrayIsNotSortedException exception = Assertions.assertThrows(ArrayIsNotSortedException.class, () -> {
+            throw new ArrayIsNotSortedException("WAIT IT DOESN'T SORTED");
         });
+        Assertions.assertEquals("WAIT IT DOESN'T SORTED", exception.getMessage());
     }
 }

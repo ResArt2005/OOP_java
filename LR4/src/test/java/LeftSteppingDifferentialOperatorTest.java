@@ -18,4 +18,11 @@ class LeftSteppingDifferentialOperatorTest {
         Assertions.assertEquals(0.14285714285714235, newFunc.apply(130));
         Assertions.assertEquals(0.1428571428571388, newFunc.apply(999));
     }
+
+    @Test
+    void TestStep(){
+        Assertions.assertEquals(2, op.getStep());
+        op.setStep(3);
+        Assertions.assertEquals(3, op.getStep());
+    }
 }

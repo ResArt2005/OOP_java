@@ -1,4 +1,5 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations;
+
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.InconsistentFunctionsException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
@@ -7,32 +8,39 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 
 public class TabulatedFunctionOperationService {
     private TabulatedFunctionFactory factory;
-    public TabulatedFunctionOperationService(TabulatedFunctionFactory factory){
+
+    public TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
         this.factory = factory;
     }
-    public TabulatedFunctionOperationService(){
+
+    public TabulatedFunctionOperationService() {
         this.factory = new ArrayTabulatedFunctionFactory();
     }
-    private interface BiOperation{
+
+    private interface BiOperation {
         double apply(double u, double v);
     }
-    public TabulatedFunctionFactory getFactory(){
+
+    public TabulatedFunctionFactory getFactory() {
         return factory;
     }
-    public void setFactory(TabulatedFunctionFactory factory){
+
+    public void setFactory(TabulatedFunctionFactory factory) {
         this.factory = factory;
     }
-    public static Point[] asPoints(TabulatedFunction tabulatedFunction){
+
+    public static Point[] asPoints(TabulatedFunction tabulatedFunction) {
         Point[] points = new Point[tabulatedFunction.getCount()];
         int i = 0;
-        for(Point point : tabulatedFunction){
+        for (Point point : tabulatedFunction) {
             points[i] = point;
             ++i;
         }
         return points;
     }
-     private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation){
-     if (a.getCount() != b.getCount()) {
+
+    private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
+        if (a.getCount() != b.getCount()) {
             throw new InconsistentFunctionsException();
         }
         int length = a.getCount();
@@ -54,7 +62,7 @@ public class TabulatedFunctionOperationService {
     }
 
     public TabulatedFunction sum(TabulatedFunction a, TabulatedFunction b) {
-        return doOperation(a, b, (u, v) -> u + v); // Сложение
+        return doOperation(a, b, Double::sum); // Сложение
     }
 
     public TabulatedFunction subtract(TabulatedFunction a, TabulatedFunction b) {

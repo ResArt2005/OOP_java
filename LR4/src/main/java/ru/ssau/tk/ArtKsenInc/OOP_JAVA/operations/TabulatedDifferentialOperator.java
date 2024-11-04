@@ -6,20 +6,25 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 
-public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction>{
+public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction> {
     private TabulatedFunctionFactory factory;
-    public TabulatedDifferentialOperator(TabulatedFunctionFactory factory){
+
+    public TabulatedDifferentialOperator(TabulatedFunctionFactory factory) {
         this.factory = factory;
     }
-    public TabulatedDifferentialOperator(){
+
+    public TabulatedDifferentialOperator() {
         this.factory = new ArrayTabulatedFunctionFactory();
     }
-    public TabulatedFunctionFactory getFactory(){
+
+    public TabulatedFunctionFactory getFactory() {
         return factory;
     }
-    public void setFactory(TabulatedFunctionFactory factory){
+
+    public void setFactory(TabulatedFunctionFactory factory) {
         this.factory = factory;
     }
+
     @Override
     public TabulatedFunction derive(TabulatedFunction function) {
         Point[] points = TabulatedFunctionOperationService.asPoints(function);
@@ -36,6 +41,7 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         yValues[length - 1] = (points[length - 1].y - points[length - 2].y) / (points[length - 1].x - points[length - 2].x);
         return factory.create(xValues, yValues);
     }
+
     public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
         SynchronizedTabulatedFunction syncFunction;
         if (function instanceof SynchronizedTabulatedFunction) {
@@ -44,6 +50,6 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
             syncFunction = new SynchronizedTabulatedFunction(function);
         }
         return syncFunction.doSynchronously(_ ->
-            derive(syncFunction));
+                derive(syncFunction));
     }
 }

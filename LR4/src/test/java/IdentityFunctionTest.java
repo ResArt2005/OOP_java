@@ -1,7 +1,7 @@
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.IdentityFunction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-//
+
 class IdentityFunctionTest {
     @Test
     void testApply() {

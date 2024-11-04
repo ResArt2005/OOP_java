@@ -6,16 +6,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.io.Serial;
 import java.util.Iterator;
 
 class AbstractTabulatedFunctionTest {
     private final MockTabulatedFunction mockTabulatedFunction = new MockTabulatedFunction();
 
-    class MockTabulatedFunction extends AbstractTabulatedFunction {
-        private double x0;
-        private double x1;
-        private double y0;
-        private double y1;
+    static class MockTabulatedFunction extends AbstractTabulatedFunction {
+        @Serial
+        private static final long serialVersionUID = 1L;
+        private final double x0;
+        private final double x1;
+        private final double y0;
+        private final double y1;
 
         MockTabulatedFunction() {
             x0 = 3;

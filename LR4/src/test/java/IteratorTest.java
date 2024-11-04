@@ -7,7 +7,6 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.ArrayTabulatedFunction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 
 public class IteratorTest {
@@ -22,12 +21,7 @@ public class IteratorTest {
             Assertions.assertEquals(obj.getY(i), point.y);
             ++i;
         }
-        Assertions.assertThrows(NoSuchElementException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                iterator.next();
-            }
-        });
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
     @Test
     void TestIteratorArray(){
@@ -40,11 +34,6 @@ public class IteratorTest {
             Assertions.assertEquals(obj.getY(i), point.y);
             ++i;
         }
-        Assertions.assertThrows(NoSuchElementException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                iterator.next();
-            }
-        });
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
 }

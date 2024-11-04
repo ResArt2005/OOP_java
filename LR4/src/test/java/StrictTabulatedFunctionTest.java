@@ -77,12 +77,7 @@ class StrictTabulatedFunctionTest {
             Assertions.assertEquals(obj_LinkedList.getY(i), point.y);
             ++i;
         }
-        Assertions.assertThrows(NoSuchElementException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                iterator.next();
-            }
-        });
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
     @Test
     void iteratorArray() {
@@ -94,11 +89,6 @@ class StrictTabulatedFunctionTest {
             Assertions.assertEquals(obj_Array.getY(i), point.y);
             ++i;
         }
-        Assertions.assertThrows(NoSuchElementException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                iterator.next();
-            }
-        });
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
 }

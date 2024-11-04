@@ -1,18 +1,19 @@
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.InconsistentFunctionsException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.ArrayTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.ExpFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.SqrFunction;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.function.Executable;
 
 public class BinOperationsOverTabulatedFunctionsTest {
     ArrayTabulatedFunction arrayTabFunc=new ArrayTabulatedFunction(new SqrFunction(), 0, 9, 3);
     LinkedListTabulatedFunction linkedListTabFunc=new LinkedListTabulatedFunction(new ExpFunction(), 0, 9, 3);
-    TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+    TabulatedFunctionOperationService service = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
     @Test
     void OperationSum(){
         TabulatedFunction resultOpSum = service.sum(arrayTabFunc, linkedListTabFunc);
@@ -50,23 +51,17 @@ public class BinOperationsOverTabulatedFunctionsTest {
         ArrayTabulatedFunction arrayTabFunc =new ArrayTabulatedFunction(new SqrFunction(), 0, 9, 5);
         LinkedListTabulatedFunction linkedListTabFunc=new LinkedListTabulatedFunction(new ExpFunction(), 0, 9, 3);
         TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
-        Assertions.assertThrows(InconsistentFunctionsException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                TabulatedFunction resultOpSub = service.subtract(arrayTabFunc, linkedListTabFunc);
-            }
-        });
+        Assertions.assertThrows(InconsistentFunctionsException.class, () -> service.subtract(arrayTabFunc, linkedListTabFunc));
     }
     @Test
     void OperationExceptionXsAreNotTheSame(){
         ArrayTabulatedFunction arrayTabFunc =new ArrayTabulatedFunction(new SqrFunction(), 0, 90, 3);
         LinkedListTabulatedFunction linkedListTabFunc=new LinkedListTabulatedFunction(new ExpFunction(), 0, 9, 3);
         TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
-        Assertions.assertThrows(InconsistentFunctionsException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                TabulatedFunction resultOpSub = service.subtract(arrayTabFunc, linkedListTabFunc);
-            }
+        Assertions.assertThrows(InconsistentFunctionsException.class, () -> service.subtract(arrayTabFunc, linkedListTabFunc));
+        InconsistentFunctionsException exception = Assertions.assertThrows(InconsistentFunctionsException.class, () -> {
+            throw new InconsistentFunctionsException("WAIT IT InconsistentFunctionsException");
         });
+        Assertions.assertEquals("WAIT IT InconsistentFunctionsException", exception.getMessage());
     }
 }

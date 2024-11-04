@@ -9,7 +9,7 @@ class TabulatedIntegrationTest {
     @Test
     void call() {
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(new AInDegreeXFunction(2, 2),0,10,5);
-        TabulatedIntegration tabulatedintegration = new TabulatedIntegration(function,0,10);
+        TabulatedIntegration tabulatedintegration = new TabulatedIntegration(function,10,0);
         Assertions.assertEquals(3655.88, tabulatedintegration.call(), 0.001);
     }
     @Test

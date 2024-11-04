@@ -83,6 +83,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
             }
         };
     }
+
     public synchronized <T> T doSynchronously(Operation<T> operation) {
         return operation.apply(this);
     }

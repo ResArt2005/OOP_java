@@ -10,20 +10,10 @@ public class UnmodifiablePlusStrictTabulatedTest {
     StrictTabulatedFunction obj = new StrictTabulatedFunction(new UnmodifiableTabulatedFunction(new LinkedListTabulatedFunction(new SqrFunction(), 0, 10, 5)));
     @Test
     void testApplyChanges(){
-        Assertions.assertThrows(UnsupportedOperationException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.setY(3, 999);
-            }
-        });
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj.setY(3, 999));
     }
     @Test
     void testTryInterpolate(){
-        Assertions.assertThrows(UnsupportedOperationException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                obj.apply(15);
-            }
-        });
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj.apply(15));
     }
 }
