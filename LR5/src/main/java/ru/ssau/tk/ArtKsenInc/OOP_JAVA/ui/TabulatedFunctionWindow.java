@@ -14,13 +14,16 @@ public class TabulatedFunctionWindow extends JFrame {
     private JTable table;
     private DefaultTableModel tableModel;
     private JPanel tablePanel;
+    final int FIELD_COLUMNS = 5;  // Количество видимых символов
+    final int WIDTH_WINDOW = 600; //Ширина окна
+    final int HEIGHT_WINDOW = 400; //Высота окна
     private LinkedListTabulatedFunctionFactory factory;
     private TabulatedFunction tabulatedFunction;
 
     public TabulatedFunctionWindow() {
         factory = new LinkedListTabulatedFunctionFactory();
         setTitle("Создание табулированной функции");
-        setSize(600, 400);
+        setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -29,7 +32,7 @@ public class TabulatedFunctionWindow extends JFrame {
         inputPanel.setLayout(new FlowLayout());
 
         JLabel pointCountLabel = new JLabel("Количество точек:");
-        pointCountField = new JTextField(5);
+        pointCountField = new JTextField(FIELD_COLUMNS);
         JButton createTableButton = new JButton("Создать таблицу");
 
         inputPanel.add(pointCountLabel);
