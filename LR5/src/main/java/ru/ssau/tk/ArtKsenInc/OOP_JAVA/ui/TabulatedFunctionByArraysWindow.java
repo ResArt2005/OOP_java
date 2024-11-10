@@ -1,31 +1,33 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class TabulatedFunctionWindow extends JFrame {
-    private JTextField pointCountField;
-    private JTable table;
-    private DefaultTableModel tableModel;
-    private JPanel tablePanel;
+public class TabulatedFunctionByArraysWindow extends JFrame {
+    private final JTextField pointCountField;
+    private final JTable table;
+    private final DefaultTableModel tableModel;
     final int FIELD_COLUMNS = 5;  // Количество видимых символов
     final int WIDTH_WINDOW = 600; //Ширина окна
     final int HEIGHT_WINDOW = 400; //Высота окна
-    private LinkedListTabulatedFunctionFactory factory;
+    private final LinkedListTabulatedFunctionFactory factory;
     private TabulatedFunction tabulatedFunction;
+    JFrame frame = new JFrame();
 
-    public TabulatedFunctionWindow() {
+    public TabulatedFunctionByArraysWindow() {
         factory = new LinkedListTabulatedFunctionFactory();
-        setTitle("Создание табулированной функции");
-        setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        frame.setTitle("Создание табулированной функции");
+        frame.setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
 
         // Панель ввода количества точек
         JPanel inputPanel = new JPanel();
@@ -33,46 +35,37 @@ public class TabulatedFunctionWindow extends JFrame {
 
         JLabel pointCountLabel = new JLabel("Количество точек:");
         pointCountField = new JTextField(FIELD_COLUMNS);
+        ((AbstractDocument) pointCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
         JButton createTableButton = new JButton("Создать таблицу");
 
         inputPanel.add(pointCountLabel);
         inputPanel.add(pointCountField);
         inputPanel.add(createTableButton);
-
         // Панель для таблицы
-        tablePanel = new JPanel();
+        JPanel tablePanel = new JPanel();
         tableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
         table = new JTable(tableModel);
-
+        // Добавляем редактор для ввода только чисел
+        table.setDefaultEditor(Object.class, new NumericCellEditor());
         JScrollPane scrollPane = new JScrollPane(table);
         tablePanel.setLayout(new BorderLayout());
         tablePanel.add(scrollPane, BorderLayout.CENTER);
-
         // Кнопка для создания табулированной функции
         JButton createFunctionButton = new JButton("Создать функцию");
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(createFunctionButton);
 
         // Добавление компонентов на главное окно
-        add(inputPanel, BorderLayout.NORTH);
-        add(tablePanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        frame.add(inputPanel, BorderLayout.NORTH);
+        frame.add(tablePanel, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
 
         // Действие на кнопку создания таблицы
-        createTableButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                createTable();
-            }
-        });
+        createTableButton.addActionListener(_ -> createTable());
 
         // Действие на кнопку создания функции
-        createFunctionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                createTabulatedFunction();
-            }
-        });
+        createFunctionButton.addActionListener(_ -> createTabulatedFunction());
+        frame.setVisible(true);
     }
 
     // Метод для создания таблицы на основе количества точек
@@ -80,6 +73,10 @@ public class TabulatedFunctionWindow extends JFrame {
         int pointCount;
         try {
             pointCount = Integer.parseInt(pointCountField.getText());
+            if (pointCount < 2) {
+                JOptionPane.showMessageDialog(this, "Введите корректное количество точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Введите корректное количество точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
@@ -107,16 +104,15 @@ public class TabulatedFunctionWindow extends JFrame {
             }
             tabulatedFunction = factory.create(xValues, yValues);
             JOptionPane.showMessageDialog(this, "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
-            dispose(); // Закрываем окно после успешного создания функции
+            frame.dispose(); // Закрываем окно после успешного создания функции
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Введите корректные значения для всех точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+        } catch (ArrayIsNotSortedException e) {
+            JOptionPane.showMessageDialog(this, "Введите точки x в порядке возрастания! Точки должны быть отсортированы!", "Ошибка", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            TabulatedFunctionWindow window = new TabulatedFunctionWindow();
-            window.setVisible(true);
-        });
+        SwingUtilities.invokeLater(TabulatedFunctionByArraysWindow::new);
     }
 }
