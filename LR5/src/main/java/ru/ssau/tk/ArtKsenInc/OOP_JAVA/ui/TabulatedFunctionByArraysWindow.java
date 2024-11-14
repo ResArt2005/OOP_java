@@ -31,9 +31,13 @@ public class TabulatedFunctionByArraysWindow extends JFrame {
 
         // Панель ввода количества точек
         JPanel inputPanel = new JPanel();
+        inputPanel.setOpaque(true);
+        inputPanel.setBackground(Color.BLUE);
         inputPanel.setLayout(new FlowLayout());
-
         JLabel pointCountLabel = new JLabel("Количество точек:");
+        pointCountLabel.setOpaque(true);
+        pointCountLabel.setForeground(new Color(119, 85, 199));
+        pointCountLabel.setBackground(Color.ORANGE);
         pointCountField = new JTextField(FIELD_COLUMNS);
         ((AbstractDocument) pointCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
         JButton createTableButton = new JButton("Создать таблицу");
