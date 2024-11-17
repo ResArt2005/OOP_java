@@ -1,6 +1,7 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.*;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.*;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
@@ -15,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class TabulatedFunctionByMathFunctionWindow extends JFrame {
+public class TabulatedFunctionByMathFunctionWindow extends JDialog {
     private final JComboBox<String> functionComboBox;
     private final JTextField leftBoundField;
     private final JTextField rightBoundField;
@@ -25,17 +26,17 @@ public class TabulatedFunctionByMathFunctionWindow extends JFrame {
     final int PANEL_COLUMNS = 2;
     final int WIDTH_WINDOW = 600; //Ширина окна
     final int HEIGHT_WINDOW = 400; //Высота окна
-    private final LinkedListTabulatedFunctionFactory factory;
-    private TabulatedFunction tabulatedFunction;
-    JFrame frame = new JFrame();
+    private final TabulatedFunctionFactory factory;
+    protected TabulatedFunction tabulatedFunction;
 
-    public TabulatedFunctionByMathFunctionWindow() {
-        factory = new LinkedListTabulatedFunctionFactory();
+    public TabulatedFunctionByMathFunctionWindow(JFrame frame, TabulatedFunctionFactory factory) {
+        super(frame, "Создание табулированной функции", true);
+        this.factory = factory;
         this.functionMap = createFunctionMap();
-        frame.setTitle("Создание табулированной функции");
-        frame.setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+        setTitle("Создание табулированной функции");
+        setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout());
 
         // Панель для ввода параметров
         JPanel inputPanel = new JPanel(new GridLayout(PANEL_ROWS, PANEL_COLUMNS));
@@ -69,9 +70,9 @@ public class TabulatedFunctionByMathFunctionWindow extends JFrame {
         createButton.addActionListener(new CreateFunctionListener());
 
         // Добавляем панели на окно
-        frame.add(inputPanel, BorderLayout.CENTER);
-        frame.add(createButton, BorderLayout.SOUTH);
-        frame.setVisible(true);
+        add(inputPanel, BorderLayout.CENTER);
+        add(createButton, BorderLayout.SOUTH);
+        setVisible(true);
     }
 
     // Метод для создания отображения функций
@@ -122,7 +123,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JFrame {
                 tabulatedFunction = factory.create(xValues, yValues);
                 JOptionPane.showMessageDialog(TabulatedFunctionByMathFunctionWindow.this, "Функция успешно создана!");
                 // Закрываем окно
-                frame.dispose();
+                dispose();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(TabulatedFunctionByMathFunctionWindow.this, "Некорректный ввод чисел.", "Ошибка", JOptionPane.ERROR_MESSAGE);
             } catch (IllegalArgumentException ex) {
@@ -131,7 +132,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(TabulatedFunctionByMathFunctionWindow::new);
+    public TabulatedFunction getTabulatedFunction(){
+        return tabulatedFunction;
     }
 }

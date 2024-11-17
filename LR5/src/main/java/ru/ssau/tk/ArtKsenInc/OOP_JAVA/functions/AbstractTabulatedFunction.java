@@ -25,13 +25,13 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction, Se
 
     protected static void checkLengthIsTheSame(double[] xValues, double[] yValues){
         if(xValues.length != yValues.length)
-            throw new DifferentLengthOfArraysException();
+            throw new DifferentLengthOfArraysException("Количество x и y должны совпадать!");
     }
 
     protected static void checkSorted(double[] xValues) {
         for (int i = 0; i < xValues.length - 1; ++i) {
             if(xValues[i] > xValues[i+1])
-                throw new ArrayIsNotSortedException();
+                throw new ArrayIsNotSortedException("Значения x идут не по возрастанию!");
         }
     }
 

@@ -53,7 +53,7 @@ public class TabulatedFunctionOperationService {
         for (int i = 0; i < length; i++) {
             xValues[i] = pointsA[i].x; // Получаем x из первой функции
             if (xValues[i] != pointsB[i].x) {
-                throw new InconsistentFunctionsException();
+                throw new InconsistentFunctionsException("Значения x должны совпадать!");
             }
             yValues[i] = operation.apply(pointsA[i].y, pointsB[i].y); // Применяем операцию к y
         }

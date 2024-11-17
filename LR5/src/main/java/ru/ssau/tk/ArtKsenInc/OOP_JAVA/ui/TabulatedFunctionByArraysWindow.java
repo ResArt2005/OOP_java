@@ -2,7 +2,7 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
 
@@ -11,23 +11,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
 
-public class TabulatedFunctionByArraysWindow extends JFrame {
+public class TabulatedFunctionByArraysWindow extends JDialog {
     private final JTextField pointCountField;
     private final JTable table;
     private final DefaultTableModel tableModel;
-    final int FIELD_COLUMNS = 5;  // Количество видимых символов
-    final int WIDTH_WINDOW = 600; //Ширина окна
-    final int HEIGHT_WINDOW = 400; //Высота окна
-    private final LinkedListTabulatedFunctionFactory factory;
-    private TabulatedFunction tabulatedFunction;
-    JFrame frame = new JFrame();
+    private final int FIELD_COLUMNS = 5;  // Количество видимых символов
+    private final int WIDTH_WINDOW = 600; //Ширина окна
+    private final int HEIGHT_WINDOW = 400; //Высота окна
+    private final TabulatedFunctionFactory factory;
+    protected TabulatedFunction tabulatedFunction;
 
-    public TabulatedFunctionByArraysWindow() {
-        factory = new LinkedListTabulatedFunctionFactory();
-        frame.setTitle("Создание табулированной функции");
-        frame.setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+    public TabulatedFunctionByArraysWindow(JFrame frame, TabulatedFunctionFactory factory) {
+        super(frame, "Создание табулированной функции", true);
+        this.factory = factory;
+        setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout());
 
         // Панель ввода количества точек
         JPanel inputPanel = new JPanel();
@@ -56,16 +55,16 @@ public class TabulatedFunctionByArraysWindow extends JFrame {
         buttonPanel.add(createFunctionButton);
 
         // Добавление компонентов на главное окно
-        frame.add(inputPanel, BorderLayout.NORTH);
-        frame.add(tablePanel, BorderLayout.CENTER);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
+        add(inputPanel, BorderLayout.NORTH);
+        add(tablePanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         // Действие на кнопку создания таблицы
         createTableButton.addActionListener(_ -> createTable());
 
         // Действие на кнопку создания функции
         createFunctionButton.addActionListener(_ -> createTabulatedFunction());
-        frame.setVisible(true);
+        setVisible(true);
     }
 
     // Метод для создания таблицы на основе количества точек
@@ -103,16 +102,16 @@ public class TabulatedFunctionByArraysWindow extends JFrame {
                 yValues[i] = Double.parseDouble(tableModel.getValueAt(i, 1).toString());
             }
             tabulatedFunction = factory.create(xValues, yValues);
-            JOptionPane.showMessageDialog(this, "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
-            frame.dispose(); // Закрываем окно после успешного создания функции
+            JOptionPane.showMessageDialog(TabulatedFunctionByArraysWindow.this, "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
+            dispose(); // Закрываем окно после успешного создания функции
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Введите корректные значения для всех точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(TabulatedFunctionByArraysWindow.this, "Введите корректные значения для всех точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
         } catch (ArrayIsNotSortedException e) {
-            JOptionPane.showMessageDialog(this, "Введите точки x в порядке возрастания! Точки должны быть отсортированы!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(TabulatedFunctionByArraysWindow.this, "Введите точки x в порядке возрастания! Точки должны быть отсортированы!", "Ошибка", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(TabulatedFunctionByArraysWindow::new);
+    public TabulatedFunction getTabulatedFunction() {
+        return tabulatedFunction;
     }
 }

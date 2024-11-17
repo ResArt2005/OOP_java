@@ -15,7 +15,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length < 2 && yValues.length < 2) throw new IllegalArgumentException();
+        if (xValues.length < 2 && yValues.length < 2) throw new IllegalArgumentException("Таблица должна не меньше 2 строк!");
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
         this.xValues = Arrays.copyOf(xValues, xValues.length);
