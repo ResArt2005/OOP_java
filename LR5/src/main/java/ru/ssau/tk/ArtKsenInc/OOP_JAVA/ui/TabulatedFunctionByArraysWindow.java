@@ -28,10 +28,6 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
-
-    public TabulatedFunctionByArraysWindow() {
-        factory = new LinkedListTabulatedFunctionFactory();
-        frame.setTitle("Создание табулированной функции");
         frame.setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
