@@ -6,7 +6,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.RoundedLabel;
-
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ColorfulTableCellRenderer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
@@ -59,6 +59,8 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         table = new JTable(tableModel);
         // Добавляем редактор для ввода только чисел
         table.setDefaultEditor(Object.class, new NumericCellEditor());
+        // Применение кастомного рендерера к таблице
+        table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer());
         JScrollPane scrollPane = new JScrollPane(table);
         tablePanel.setLayout(new BorderLayout());
         tablePanel.add(scrollPane, BorderLayout.CENTER);
