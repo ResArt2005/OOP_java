@@ -5,6 +5,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.RoundedLabel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,11 +29,23 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
+    public TabulatedFunctionByArraysWindow() {
+        factory = new LinkedListTabulatedFunctionFactory();
+        frame.setTitle("Создание табулированной функции");
+        frame.setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        Font customFont = new Font("Times New Roman", Font.PLAIN, 24);
         // Панель ввода количества точек
         JPanel inputPanel = new JPanel();
+        inputPanel.setOpaque(true);
+        inputPanel.setBackground(Color.BLUE);
         inputPanel.setLayout(new FlowLayout());
-
-        JLabel pointCountLabel = new JLabel("Количество точек:");
+        RoundedLabel pointCountLabel = new RoundedLabel("Количество точек:", 10);
+        pointCountLabel.setBounds(50, 50, 300, 100);
+        pointCountLabel.setForeground(new Color(119, 85, 199));
+        pointCountLabel.setBackground(Color.ORANGE);
+        pointCountLabel.setFont(customFont);
         pointCountField = new JTextField(FIELD_COLUMNS);
         ((AbstractDocument) pointCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
         JButton createTableButton = new JButton("Создать таблицу");
