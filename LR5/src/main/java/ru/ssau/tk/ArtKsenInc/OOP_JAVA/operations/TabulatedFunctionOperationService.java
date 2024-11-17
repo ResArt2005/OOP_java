@@ -41,7 +41,7 @@ public class TabulatedFunctionOperationService {
 
     private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
         if (a.getCount() != b.getCount()) {
-            throw new InconsistentFunctionsException();
+            throw new InconsistentFunctionsException("Количество x и y должны совпадать!");
         }
         int length = a.getCount();
         Point[] pointsA = asPoints(a);

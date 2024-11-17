@@ -1,5 +1,6 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedDifferentialOperator;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseFactory;
 
@@ -32,9 +33,14 @@ public class MainWindow extends JFrame{
         JPanel buttonPanel = new JPanel();
         JButton operationsButton = new JButton("Операции с функциями");
         // Добавляем кнопку для открытия окна операций
-        operationsButton.addActionListener(e -> openTabulatedFunctionOperationsWindow());
+        operationsButton.addActionListener(_ -> openTabulatedFunctionOperationsWindow());
 
         buttonPanel.add(operationsButton);
+        JButton differentialOperation = new JButton("Операция дифференцирования с функцией");
+        // Добавляем кнопку для открытия окна операций
+        differentialOperation.addActionListener(_ -> TabulatedFunctionDifferentialOperationsWindow());
+
+        buttonPanel.add(differentialOperation);
         add(buttonPanel, BorderLayout.CENTER);
         // Добавляем кнопки в главное окно
         add(settingsButton);
@@ -61,6 +67,9 @@ public class MainWindow extends JFrame{
     // Метод для открытия окна операций с табулированными функциями
     private void openTabulatedFunctionOperationsWindow() {
         new TabulatedFunctionOperationsWindow(this, factoryService);
+    }
+    private void TabulatedFunctionDifferentialOperationsWindow() {
+        new TabulatedFunctionDifferentialOperationsWindow(this, new TabulatedDifferentialOperator(factoryService.getFactory()));
     }
     public static void main(String[] args) {
         // Создание и отображение главного окна
