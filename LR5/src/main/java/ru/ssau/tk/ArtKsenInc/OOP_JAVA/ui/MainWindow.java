@@ -46,7 +46,7 @@ public class MainWindow extends JFrame{
         settingsButton.addActionListener(_ -> openSettingsWindow());
 
         // Кнопка для операций с функциями
-        JButton operationsButton = ButtonsDesign.createStyledButton("Операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        JButton operationsButton = ButtonsDesign.createStyledButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
         operationsButton.addActionListener(_ -> openTabulatedFunctionOperationsWindow());
 
         // Кнопка для операции дифференцирования
