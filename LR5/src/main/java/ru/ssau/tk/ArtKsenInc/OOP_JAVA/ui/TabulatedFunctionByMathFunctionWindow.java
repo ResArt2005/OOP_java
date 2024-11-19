@@ -2,11 +2,9 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.*;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.*;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionScanner;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -14,7 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class TabulatedFunctionByMathFunctionWindow extends JDialog {
     private final JComboBox<String> functionComboBox;
@@ -22,24 +19,20 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
     private final JTextField rightBoundField;
     private final JTextField pointsCountField;
     private final Map<String, MathFunction> functionMap;
-    final int PANEL_ROWS = 5;
-    final int PANEL_COLUMNS = 2;
-    final int WIDTH_WINDOW = 600; //Ширина окна
-    final int HEIGHT_WINDOW = 400; //Высота окна
     private final TabulatedFunctionFactory factory;
     protected TabulatedFunction tabulatedFunction;
 
     public TabulatedFunctionByMathFunctionWindow(JFrame frame, TabulatedFunctionFactory factory) {
         super(frame, "Создание табулированной функции", true);
         this.factory = factory;
-        this.functionMap = createFunctionMap();
+        this.functionMap = MathFunctionScanner.getAnnotatedFunctions(); // Используем динамическое сканирование
         setTitle("Создание табулированной функции");
-        setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
         // Панель для ввода параметров
-        JPanel inputPanel = new JPanel(new GridLayout(PANEL_ROWS, PANEL_COLUMNS));
+        JPanel inputPanel = new JPanel(new GridLayout(5, 2));
 
         // Выпадающий список функций
         JLabel functionLabel = new JLabel("Выберите функцию:");
@@ -55,6 +48,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         JLabel pointsCountLabel = new JLabel("Количество точек:");
         pointsCountField = new JTextField();
         ((AbstractDocument) pointsCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
+
         // Добавляем компоненты на панель
         inputPanel.add(functionLabel);
         inputPanel.add(functionComboBox);
@@ -73,22 +67,6 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         add(inputPanel, BorderLayout.CENTER);
         add(createButton, BorderLayout.SOUTH);
         setVisible(true);
-    }
-
-    // Метод для создания отображения функций
-    private Map<String, MathFunction> createFunctionMap() {
-        Map<String, MathFunction> map = new TreeMap<>(); // TreeMap для сортировки по ключу
-        map.put("Квадратичная функция", new SqrFunction());
-        map.put("Тождественная функция", new IdentityFunction());
-        map.put("Функция возведения в квадрат", new SquareFunction());
-        map.put("Функция константы 0", new ZeroFunction());
-        map.put("Функция константы 1", new UnitFunction());
-        map.put("Синус", new SinFunction());
-        map.put("Косинус", new CosFunction());
-        map.put("Тангенс", new TgFunction());
-        map.put("Котангенс", new CtgFunction());
-        map.put("Экспонента", new ExpFunction());
-        return map;
     }
 
     // Обработчик для кнопки создания функции
@@ -132,7 +110,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         }
     }
 
-    public TabulatedFunction getTabulatedFunction(){
+    public TabulatedFunction getTabulatedFunction() {
         return tabulatedFunction;
     }
 }

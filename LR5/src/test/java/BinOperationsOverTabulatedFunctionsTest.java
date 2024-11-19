@@ -1,10 +1,9 @@
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.InconsistentFunctionsException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.ArrayTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.ExpFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.ExpFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.SqrFunction;
 import org.junit.jupiter.api.Test;

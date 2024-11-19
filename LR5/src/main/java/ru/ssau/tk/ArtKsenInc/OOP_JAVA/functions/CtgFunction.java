@@ -1,5 +1,9 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
+
 import java.lang.Math;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionInfo;
+@MathFunctionInfo(name = "Котангенс", priority = 3)
 public class CtgFunction implements MathDerivativeAndIntegral {
     private final double constant;
     public CtgFunction(double constant){

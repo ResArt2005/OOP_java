@@ -1,5 +1,10 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
+
 import java.lang.Math;
+
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionInfo;
+@MathFunctionInfo(name = "X", priority = 1)
 public class XFunction implements MathDerivativeAndIntegral {
     private final double constant;
     private double degree;

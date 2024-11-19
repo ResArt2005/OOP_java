@@ -1,5 +1,8 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation;
-import java.lang.Math;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
+
+import java.lang.Math;import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionInfo;
+@MathFunctionInfo(name = "Синус", priority = 3)
 public class SinFunction implements MathDerivativeAndIntegral {
     private final double constant;
     public SinFunction(double constant){

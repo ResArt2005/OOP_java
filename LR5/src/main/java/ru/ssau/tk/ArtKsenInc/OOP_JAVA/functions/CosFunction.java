@@ -1,5 +1,9 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
+
 import java.lang.Math;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionInfo;
+@MathFunctionInfo(name = "Косинус", priority = 3)
 public class CosFunction implements MathDerivativeAndIntegral {
     private final double constant;
     public CosFunction(double constant){

@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.concurrent.TabulatedIntegrationExecutor;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.AInDegreeXFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.AInDegreeXFunction;
 
 class TabulatedIntegrationExecutorTest {
     LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(new AInDegreeXFunction(2, 2),0,10,5);

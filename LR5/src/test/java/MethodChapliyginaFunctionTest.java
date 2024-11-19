@@ -1,8 +1,10 @@
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.*;
 
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.SumEquationFunction;
+
 //
 class MethodChapliyginaFunctionTest {
 
