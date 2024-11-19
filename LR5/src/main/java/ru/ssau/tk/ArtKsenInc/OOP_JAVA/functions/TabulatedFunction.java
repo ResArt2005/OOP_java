@@ -1,6 +1,6 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
 
-public interface TabulatedFunction extends MathFunction, Iterable<Point> {
+public interface TabulatedFunction extends MathFunction, Iterable<Point>, Insertable, Removeable {
     int getCount();
     double getX(int index);
     double getY(int index);

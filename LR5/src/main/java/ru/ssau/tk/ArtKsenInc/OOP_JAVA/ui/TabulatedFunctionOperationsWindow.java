@@ -2,6 +2,7 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ColorfulTableCellRenderer;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
@@ -13,6 +14,7 @@ import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -64,9 +66,9 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
         // Панели для таблиц и кнопок
         JPanel firstFunctionPanel = createFunctionPanel("Первая функция", firstFunctionTable,
-                _ -> createFunction(operand_1), _ -> loadFunction(operand_1), _ -> saveFunction(operand_1));
+                _ -> createFunction(operand_1), _ -> loadFunction(operand_1), _ -> saveFunction(operand_1), _-> DeleteValueInTB(firstTableModel, firstFunction), _-> InsertValueInTB(firstTableModel, firstFunction));
         JPanel secondFunctionPanel = createFunctionPanel("Вторая функция", secondFunctionTable,
-                _ -> createFunction(operand_2), _ -> loadFunction(operand_2), _ -> saveFunction(operand_2));
+                _ -> createFunction(operand_2), _ -> loadFunction(operand_2), _ -> saveFunction(operand_2), _-> DeleteValueInTB(secondTableModel, secondFunction), _-> InsertValueInTB(secondTableModel, secondFunction));
         JPanel resultFunctionPanel = createResultPanel();
 
         // Панель с операциями
@@ -102,7 +104,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
     }
 
     // Метод для создания панели с функциями (создать, загрузить, сохранить)
-    private JPanel createFunctionPanel(String title, JTable table, ActionListener createListener, ActionListener loadListener, ActionListener saveListener) {
+    private JPanel createFunctionPanel(String title, JTable table, ActionListener createListener, ActionListener loadListener, ActionListener saveListener, ActionListener deleteListener, ActionListener insertListener) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createTitledBorder(null, title, 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.CYAN));
@@ -115,6 +117,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setBackground(ConstantColors.INDIGO); // Фон панели кнопок
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Добавляем отступы между кнопками
 
         // Кнопка Создать
         gbc.gridx = 0; // первая колонка
@@ -125,9 +128,18 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         gbc.gridx = 1; // вторая колонка
         buttonPanel.add(createStyledButton("Загрузить", loadListener), gbc);
 
+        // Кнопка Удалить
+        gbc.gridx = 0; // первая колонка
+        gbc.gridy = 1; // вторая строка
+        buttonPanel.add(createStyledButton("Удалить", deleteListener), gbc);
+
+        // Кнопка Вставка
+        gbc.gridx = 1; // вторая колонка
+        buttonPanel.add(createStyledButton("Вставка", insertListener), gbc);
+
         // Кнопка Сохранить
         gbc.gridx = 0; // возвращаемся в первую колонку
-        gbc.gridy = 1; // теперь на вторую строку
+        gbc.gridy = 2; // теперь на третью строку
         gbc.gridwidth = 2; // этот компонент занимает две колонки
         gbc.anchor = GridBagConstraints.CENTER; // центруем по горизонтали
         buttonPanel.add(createStyledButton("Сохранить", saveListener), gbc);
@@ -135,6 +147,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         panel.add(buttonPanel, BorderLayout.SOUTH);
         return panel;
     }
+
 
     // Метод для создания панели результата
     private JPanel createResultPanel() {
@@ -153,30 +166,29 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
     }
 
     private JTable createTable(DefaultTableModel tableModel, boolean editable) {
-    JTable table = new JTable(tableModel) {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return editable && column != 0; // Колонка x не редактируется
-        }
-    };
+        JTable table = new JTable(tableModel) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable && column != 0; // Колонка x не редактируется
+            }
+        };
 
-    // Установка кастомного рендера для ячеек таблицы
-    table.getColumnModel().getColumn(0).setCellRenderer(
-        new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
-    table.getColumnModel().getColumn(1).setCellRenderer(
-        new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+        // Установка кастомного рендера для ячеек таблицы
+        table.getColumnModel().getColumn(0).setCellRenderer(
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+        table.getColumnModel().getColumn(1).setCellRenderer(
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
 
-    table.setRowHeight(25);  // Высота строки
+        table.setRowHeight(25);  // Высота строки
 
-    // Установка кастомного заголовка для таблицы
-    JTableHeader header = table.getTableHeader();
-    header.setBackground(ConstantColors.DARK_BLUE);  // Тёмно-синий фон заголовков
-    header.setForeground(ConstantColors.CYAN);       // Циановый цвет текста заголовков
-    header.setFont(new Font("Open Sans", Font.BOLD, 15));  // Шрифт заголовков
-    table.setDefaultEditor(Object.class, new NumericCellEditor());
-    return table;
-}
-
+        // Установка кастомного заголовка для таблицы
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(ConstantColors.DARK_BLUE);  // Тёмно-синий фон заголовков
+        header.setForeground(ConstantColors.CYAN);       // Циановый цвет текста заголовков
+        header.setFont(new Font("Open Sans", Font.BOLD, 15));  // Шрифт заголовков
+        table.setDefaultEditor(Object.class, new NumericCellEditor());
+        return table;
+    }
 
 
     // Метод для создания стилизованной кнопки
@@ -282,6 +294,46 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         }
     }
 
+    private void InsertValueInTB(DefaultTableModel tableModel, TabulatedFunction function) {
+        if (function == null) {
+            JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Создаем текстовое поле
+        JTextField XField = new JTextField(10);
+        JTextField YField = new JTextField(10);
+
+        // Применяем фильтр к документу текстового поля
+        ((AbstractDocument) XField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
+        ((AbstractDocument) YField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
+
+        // Создаем панель для размещения текстового поля
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Введите значение X:"));
+        panel.add(XField);
+        panel.add(new JLabel("Введите значение Y:"));
+        panel.add(YField);
+        // Показываем диалоговое окно
+        int res = JOptionPane.showConfirmDialog(null, panel, "Введите значение функции X и Y:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        String X = XField.getText();
+        String Y = YField.getText();
+        if (res == JOptionPane.OK_OPTION) {
+            try {
+                double x = Double.parseDouble(X);
+                double y = Double.parseDouble(Y);
+                function.insert(x, y);
+                updateTableWithFunction(tableModel, function);
+                JOptionPane.showMessageDialog(this, "Добавлена точка (" + x + ", " + y + ")");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Некорректный ввод", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    private void DeleteValueInTB(DefaultTableModel tableModel, TabulatedFunction function) {
+
+        updateTableWithFunction(tableModel, function);
+    }
     // Обновление таблицы значениями из табулированной функции
     private void updateTableWithFunction(DefaultTableModel tableModel, TabulatedFunction function) {
         tableModel.setRowCount(0); // Очищаем таблицу
