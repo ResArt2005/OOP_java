@@ -1,3 +1,4 @@
+
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.ArrayIsNotSortedException;
@@ -5,9 +6,8 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.RoundedLabel;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ColorfulTableCellRenderer;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.*;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
@@ -17,69 +17,71 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
     private final JTextField pointCountField;
     private final JTable table;
     private final DefaultTableModel tableModel;
-    private final int FIELD_COLUMNS = 5;  // Количество видимых символов
-    private final int WIDTH_WINDOW = 600; //Ширина окна
-    private final int HEIGHT_WINDOW = 400; //Высота окна
+    private final int FIELD_COLUMNS = 5;
+    private final int WIDTH_WINDOW = 600;
+    private final int HEIGHT_WINDOW = 400;
     private final TabulatedFunctionFactory factory;
     protected TabulatedFunction tabulatedFunction;
 
     public TabulatedFunctionByArraysWindow(JFrame frame, TabulatedFunctionFactory factory) {
         super(frame, "Создание табулированной функции", true);
         this.factory = factory;
+
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
-        frame.setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        Font customFont = ConstantFonts.Times_New_Roman;
+        getContentPane().setBackground(ConstantColors.DARK_BLUE);
+
         // Панель ввода количества точек
-        JPanel inputPanel = new JPanel();
+        JPanel inputPanel = new JPanel(new FlowLayout());
         inputPanel.setOpaque(true);
-        inputPanel.setBackground(Color.BLUE);
-        inputPanel.setLayout(new FlowLayout());
+        inputPanel.setBackground(ConstantColors.FRENCH_VIOLET);
+
         RoundedLabel pointCountLabel = new RoundedLabel("Количество точек:", 10);
-        pointCountLabel.setBounds(50, 50, 300, 100);
-        pointCountLabel.setForeground(new Color(119, 85, 199));
-        pointCountLabel.setBackground(Color.ORANGE);
-        pointCountLabel.setFont(customFont);
+        pointCountLabel.setFont(ConstantFonts.Times_New_Roman);
+        pointCountLabel.setForeground(ConstantColors.CYAN);
         pointCountField = new JTextField(FIELD_COLUMNS);
+
         ((AbstractDocument) pointCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
-        JButton createTableButton = new JButton("Создать таблицу");
+        JButton createTableButton = createStyledButton("Создать таблицу");
 
         inputPanel.add(pointCountLabel);
         inputPanel.add(pointCountField);
         inputPanel.add(createTableButton);
+
         // Панель для таблицы
-        JPanel tablePanel = new JPanel();
+        JPanel tablePanel = new JPanel(new BorderLayout());
         tableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
         table = new JTable(tableModel);
-        // Добавляем редактор для ввода только чисел
         table.setDefaultEditor(Object.class, new NumericCellEditor());
-        // Применение кастомного рендерера к таблице
         table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer());
+        table.setRowHeight(30);
+
         JScrollPane scrollPane = new JScrollPane(table);
-        tablePanel.setLayout(new BorderLayout());
+
+        tablePanel.setBackground(ConstantColors.INDIGO);
         tablePanel.add(scrollPane, BorderLayout.CENTER);
-        // Кнопка для создания табулированной функции
-        JButton createFunctionButton = new JButton("Создать функцию");
+
+        // Панель кнопок
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(ConstantColors.FRENCH_VIOLET);
+        JButton createFunctionButton = createStyledButton("Создать функцию");
         buttonPanel.add(createFunctionButton);
 
-        // Добавление компонентов на главное окно
+        // Добавление панелей на главное окно
         add(inputPanel, BorderLayout.NORTH);
         add(tablePanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Действие на кнопку создания таблицы
-        createTableButton.addActionListener(_ -> createTable());
+        // Слушатели для кнопок
+        createTableButton.addActionListener(e -> createTable());
+        createFunctionButton.addActionListener(e
 
-        // Действие на кнопку создания функции
-        createFunctionButton.addActionListener(_ -> createTabulatedFunction());
+                -> createTabulatedFunction());
+
         setVisible(true);
     }
 
-    // Метод для создания таблицы на основе количества точек
     private void createTable() {
         int pointCount;
         try {
@@ -93,15 +95,14 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
             return;
         }
 
-        tableModel.setRowCount(0); // Очищаем старые строки
+        tableModel.setRowCount(0);
+
         for (int i = 0; i < pointCount; i++) {
             tableModel.addRow(new Object[]{"", ""});
         }
     }
 
-    // Метод для создания табулированной функции из таблицы
     private void createTabulatedFunction() {
-        //Завершает редактирование ячейки пользователем
         if (table.isEditing()) {
             table.getCellEditor().stopCellEditing();
         }
@@ -114,16 +115,30 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
                 yValues[i] = Double.parseDouble(tableModel.getValueAt(i, 1).toString());
             }
             tabulatedFunction = factory.create(xValues, yValues);
-            JOptionPane.showMessageDialog(TabulatedFunctionByArraysWindow.this, "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
-            dispose(); // Закрываем окно после успешного создания функции
+            JOptionPane.showMessageDialog(this,
+
+                    "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(TabulatedFunctionByArraysWindow.this, "Введите корректные значения для всех точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Введите корректные значения для всех точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
         } catch (ArrayIsNotSortedException e) {
-            JOptionPane.showMessageDialog(TabulatedFunctionByArraysWindow.this, "Введите точки x в порядке возрастания! Точки должны быть отсортированы!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Введите точки x в порядке возрастания!", "Ошибка", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(ConstantFonts.Open_Sans_Bold);
+        button.setBackground(ConstantColors.FRENCH_VIOLET);
+
+
+        button.setForeground(ConstantColors.CYAN);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        return button;
+    }
+
     public TabulatedFunction getTabulatedFunction() {
-        return tabulatedFunction;
+        return null;
     }
 }
