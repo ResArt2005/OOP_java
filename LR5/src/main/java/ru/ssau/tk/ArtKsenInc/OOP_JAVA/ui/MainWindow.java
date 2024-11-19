@@ -38,7 +38,7 @@ public class MainWindow extends JFrame{
 
         // Панель для кнопок с центральным размещением
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));  // Сетка 3 на 1 с отступами
+        buttonPanel.setLayout(new GridLayout(4, 1, 10, 10));  // Сетка 3 на 1 с отступами
         buttonPanel.setBackground(ConstantColors.INDIGO);
 
         // Кнопка для открытия окна настроек
@@ -53,10 +53,14 @@ public class MainWindow extends JFrame{
         JButton differentialOperation = ButtonsDesign.createStyledButton("Операция дифференцирования с функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
         differentialOperation.addActionListener(_ -> TabulatedFunctionDifferentialOperationsWindow());
 
+        JButton TBEditor = ButtonsDesign.createStyledButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        TBEditor.addActionListener(_ -> FunctionEditorWindow());
+
         // Добавляем кнопки в панель
         buttonPanel.add(operationsButton);
         buttonPanel.add(differentialOperation);
         buttonPanel.add(settingsButton);
+        buttonPanel.add(TBEditor);
 
         // Добавляем панель кнопок в главное окно
         add(buttonPanel, BorderLayout.CENTER);
@@ -98,6 +102,11 @@ public class MainWindow extends JFrame{
     // Метод для открытия окна операций дифференцирования
     private void TabulatedFunctionDifferentialOperationsWindow() {
         new TabulatedFunctionDifferentialOperationsWindow(this, new TabulatedDifferentialOperator(factoryService.getFactory()));
+    }
+
+    // Метод для открытия окна операций дифференцирования
+    private void FunctionEditorWindow() {
+        new FunctionEditorWindow(this, factoryService);
     }
 
     public static void main(String[] args) {
