@@ -39,7 +39,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
 
         RoundedLabel pointCountLabel = new RoundedLabel("Количество точек:", 10);
         pointCountLabel.setFont(ConstantFonts.Times_New_Roman);
-        pointCountLabel.setForeground(ConstantColors.CYAN);
+        pointCountLabel.setForeground(ConstantColors.DARK_BLUE);
         pointCountField = new JTextField(FIELD_COLUMNS);
 
         ((AbstractDocument) pointCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
