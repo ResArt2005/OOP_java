@@ -3,6 +3,7 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ColorfulTableCellRenderer;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
@@ -332,7 +333,34 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
     }
     private void DeleteValueInTB(DefaultTableModel tableModel, TabulatedFunction function) {
 
-        updateTableWithFunction(tableModel, function);
+        if (function == null) {
+            JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Создаем текстовое поле
+        JTextField indexField = new JTextField(10);
+
+        // Применяем фильтр к документу текстового поля
+        ((AbstractDocument) indexField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
+
+        // Создаем панель для размещения текстового поля
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Введите номер строки (индексация с 1 до n строки) для удаления:"));
+        panel.add(indexField);
+        // Показываем диалоговое окно
+        int res = JOptionPane.showConfirmDialog(null, panel, "Удаление точки", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        String index = indexField.getText();
+        if (res == JOptionPane.OK_OPTION) {
+            try {
+                int i = Integer.parseInt(index);
+                function.remove(i - 1);
+                updateTableWithFunction(tableModel, function);
+                JOptionPane.showMessageDialog(this, "Точка удалена");
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, "Строка не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
     // Обновление таблицы значениями из табулированной функции
     private void updateTableWithFunction(DefaultTableModel tableModel, TabulatedFunction function) {
