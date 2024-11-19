@@ -50,16 +50,16 @@ public class MainWindow extends JFrame{
         operationsButton.addActionListener(_ -> openTabulatedFunctionOperationsWindow());
 
         // Кнопка для операции дифференцирования
-        JButton differentialOperation = ButtonsDesign.createStyledButton("Операция дифференцирования с функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        JButton differentialOperation = ButtonsDesign.createStyledButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
         differentialOperation.addActionListener(_ -> TabulatedFunctionDifferentialOperationsWindow());
 
         JButton TBEditor = ButtonsDesign.createStyledButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
         TBEditor.addActionListener(_ -> FunctionEditorWindow());
 
         // Добавляем кнопки в панель
+        buttonPanel.add(settingsButton);
         buttonPanel.add(operationsButton);
         buttonPanel.add(differentialOperation);
-        buttonPanel.add(settingsButton);
         buttonPanel.add(TBEditor);
 
         // Добавляем панель кнопок в главное окно

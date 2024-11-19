@@ -27,6 +27,7 @@ public class FunctionEditorWindow extends JDialog {
     private XYSeriesCollection dataset = new XYSeriesCollection(); // Данные для графика
     private ChartPanel chartPanel;
     private final JFrame owner;
+
     public FunctionEditorWindow(JFrame frame, TabulatedFunctionOperationService factoryService) {
         super(frame, "Редактор табулированной функции", true);
         owner = frame;
@@ -37,7 +38,7 @@ public class FunctionEditorWindow extends JDialog {
         setLayout(new BorderLayout());
 
         // Панель с кнопками
-        JPanel buttonsPanel = new JPanel(new FlowLayout());
+        JPanel buttonsPanel = new JPanel(new GridLayout(2, 0)); // 1 ряд, 0 колонок
 
         // Кнопка для создания функции
         JButton createButton = new JButton("Создать функцию");
@@ -59,6 +60,14 @@ public class FunctionEditorWindow extends JDialog {
         calculateButton.addActionListener(this::calculateValueAtPoint);
         buttonsPanel.add(calculateButton);
 
+        JButton insertButton = new JButton("Вставка");
+        insertButton.addActionListener(_ -> InsertValueInTB());
+        buttonsPanel.add(insertButton);
+
+        JButton removeButton = new JButton("Удалить");
+        removeButton.addActionListener(_ -> DeleteValueInTB());
+        buttonsPanel.add(removeButton);
+
         add(buttonsPanel, BorderLayout.NORTH);
 
         // Создание графика
@@ -74,6 +83,7 @@ public class FunctionEditorWindow extends JDialog {
         );
         chartPanel = new ChartPanel(chart);
         add(chartPanel, BorderLayout.CENTER);
+
         setVisible(true);
     }
 
@@ -142,7 +152,7 @@ public class FunctionEditorWindow extends JDialog {
         panel.add(textField);
 
         // Показываем диалоговое окно
-        int res =  JOptionPane.showConfirmDialog(null, panel, "Введите значение X:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int res = JOptionPane.showConfirmDialog(null, panel, "Введите значение X:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         String input = textField.getText();
         if (res == JOptionPane.OK_OPTION) {
             try {
@@ -151,6 +161,75 @@ public class FunctionEditorWindow extends JDialog {
                 JOptionPane.showMessageDialog(this, "Значение функции в точке " + x + " равно " + result);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Некорректный ввод", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void InsertValueInTB() {
+        if (function == null) {
+            JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Создаем текстовое поле
+        JTextField XField = new JTextField(10);
+        JTextField YField = new JTextField(10);
+
+        // Применяем фильтр к документу текстового поля
+        ((AbstractDocument) XField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
+        ((AbstractDocument) YField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
+
+        // Создаем панель для размещения текстового поля
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Введите значение X:"));
+        panel.add(XField);
+        panel.add(new JLabel("Введите значение Y:"));
+        panel.add(YField);
+        // Показываем диалоговое окно
+        int res = JOptionPane.showConfirmDialog(null, panel, "Введите значение функции X и Y:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        String X = XField.getText();
+        String Y = YField.getText();
+        if (res == JOptionPane.OK_OPTION) {
+            try {
+                double x = Double.parseDouble(X);
+                double y = Double.parseDouble(Y);
+                function.insert(x, y);
+                updateChart();
+                JOptionPane.showMessageDialog(this, "Добавлена точка (" + x + ", " + y + ")");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Некорректный ввод", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void DeleteValueInTB() {
+
+        if (function == null) {
+            JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Создаем текстовое поле
+        JTextField indexField = new JTextField(10);
+
+        // Применяем фильтр к документу текстового поля
+        ((AbstractDocument) indexField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
+
+        // Создаем панель для размещения текстового поля
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Введите номер строки (индексация с 1 до n строки) для удаления:"));
+        panel.add(indexField);
+        // Показываем диалоговое окно
+        int res = JOptionPane.showConfirmDialog(null, panel, "Удаление точки", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        String index = indexField.getText();
+        if (res == JOptionPane.OK_OPTION) {
+            try {
+                int i = Integer.parseInt(index);
+                function.remove(i - 1);
+                updateChart();
+                JOptionPane.showMessageDialog(this, "Точка удалена");
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, "Строка не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

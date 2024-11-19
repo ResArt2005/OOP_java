@@ -3,12 +3,17 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedDifferentialOperator;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.io.FunctionsIO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -45,11 +50,11 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
 
         // Панели для таблиц и кнопок
         JPanel firstFunctionPanel = createFunctionPanel("Функция", functionTable,
-                _ -> createFunction(), _ -> loadFunction(), _ -> saveFunction(1));
+                _ -> createFunction(), _ -> loadFunction(), _ -> saveFunction(1),  _ -> DeleteValueInTB(), _ -> InsertValueInTB());
         JPanel resultFunctionPanel = createResultPanel();
         // Панель с операциями
         JPanel operationPanel = new JPanel();
-        operationPanel.setLayout(new GridLayout(4, 1));
+        operationPanel.setLayout(new BorderLayout());
         JButton sumButton = new JButton("Дифференцировать");
 
         sumButton.addActionListener(_ -> performOperation());
@@ -67,43 +72,82 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
     }
 
     // Метод для создания панели с функциями (создать, загрузить, сохранить)
-    private JPanel createFunctionPanel(String title, JTable table, ActionListener createListener, ActionListener loadListener, ActionListener saveListener) {
+    private JPanel createFunctionPanel(String title, JTable table, ActionListener createListener, ActionListener loadListener, ActionListener saveListener, ActionListener deleteListener, ActionListener insertListener) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder(title));
+        panel.setBorder(BorderFactory.createTitledBorder(null, title, 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.CYAN));
+        panel.setBackground(ConstantColors.INDIGO); // Фон панели
 
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel();
-        JButton createButton = new JButton("Создать");
-        JButton loadButton = new JButton("Загрузить");
-        JButton saveButton = new JButton("Сохранить");
+        // Новый JPanel для кнопок
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setBackground(ConstantColors.INDIGO); // Фон панели кнопок
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Добавляем отступы между кнопками
 
-        createButton.addActionListener(createListener);
-        loadButton.addActionListener(loadListener);
-        saveButton.addActionListener(saveListener);
+        // Кнопка Создать
+        gbc.gridx = 0; // первая колонка
+        gbc.gridy = 0; // первая строка
+        buttonPanel.add(createStyledButton("Создать", createListener), gbc);
 
-        buttonPanel.add(createButton);
-        buttonPanel.add(loadButton);
-        buttonPanel.add(saveButton);
+        // Кнопка Загрузить
+        gbc.gridx = 1; // вторая колонка
+        buttonPanel.add(createStyledButton("Загрузить", loadListener), gbc);
+
+        // Кнопка Удалить
+        gbc.gridx = 0; // первая колонка
+        gbc.gridy = 1; // вторая строка
+        buttonPanel.add(createStyledButton("Удалить", deleteListener), gbc);
+
+        // Кнопка Вставка
+        gbc.gridx = 1; // вторая колонка
+        buttonPanel.add(createStyledButton("Вставка", insertListener), gbc);
+
+        // Кнопка Сохранить
+        gbc.gridx = 0; // возвращаемся в первую колонку
+        gbc.gridy = 2; // теперь на третью строку
+        gbc.gridwidth = 2; // этот компонент занимает две колонки
+        gbc.anchor = GridBagConstraints.CENTER; // центруем по горизонтали
+        buttonPanel.add(createStyledButton("Сохранить", saveListener), gbc);
 
         panel.add(buttonPanel, BorderLayout.SOUTH);
         return panel;
+    }
+        private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(ConstantFonts.Open_Sans_Bold);
+        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setForeground(ConstantColors.CYAN);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
+        return button;
+    }
+    private JButton createStyledButton(String text, ActionListener listener) {
+        JButton button = createStyledButton(text);
+        button.addActionListener(listener);
+        return button;
     }
 
     // Метод для создания панели результата
     private JPanel createResultPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        panel.setLayout(new GridBagLayout());
         panel.setBorder(BorderFactory.createTitledBorder("Результат"));
 
         JScrollPane scrollPane = new JScrollPane(resultFunctionTable);
-        panel.add(scrollPane, BorderLayout.CENTER);
+        resultFunctionTable.setPreferredScrollableViewportSize(new Dimension(400, 200)); // Задайте нужный размер
+        panel.add(scrollPane, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
+                GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH,
+                new Insets(5, 5, 5, 5), 0, 0));
 
         JButton saveButton = new JButton("Сохранить");
         saveButton.addActionListener(_ -> saveFunction(2));
-        panel.add(saveButton, BorderLayout.SOUTH);
+
+        panel.add(saveButton, new GridBagConstraints(0, 1, 1, 0, 1.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                new Insets(5, 5, 5, 5), 0, 0));
 
         return panel;
     }
@@ -176,6 +220,75 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
                 FunctionsIO.serialize(bufferedOutputStream, function);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Ошибка сохранения функции: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void InsertValueInTB() {
+        if (function == null) {
+            JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Создаем текстовое поле
+        JTextField XField = new JTextField(10);
+        JTextField YField = new JTextField(10);
+
+        // Применяем фильтр к документу текстового поля
+        ((AbstractDocument) XField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
+        ((AbstractDocument) YField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
+
+        // Создаем панель для размещения текстового поля
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Введите значение X:"));
+        panel.add(XField);
+        panel.add(new JLabel("Введите значение Y:"));
+        panel.add(YField);
+        // Показываем диалоговое окно
+        int res = JOptionPane.showConfirmDialog(null, panel, "Введите значение функции X и Y:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        String X = XField.getText();
+        String Y = YField.getText();
+        if (res == JOptionPane.OK_OPTION) {
+            try {
+                double x = Double.parseDouble(X);
+                double y = Double.parseDouble(Y);
+                function.insert(x, y);
+                updateTableWithFunction(firstTableModel, function);
+                JOptionPane.showMessageDialog(this, "Добавлена точка (" + x + ", " + y + ")");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Некорректный ввод", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void DeleteValueInTB() {
+
+        if (function == null) {
+            JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Создаем текстовое поле
+        JTextField indexField = new JTextField(10);
+
+        // Применяем фильтр к документу текстового поля
+        ((AbstractDocument) indexField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
+
+        // Создаем панель для размещения текстового поля
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Введите номер строки (индексация с 1 до n строки) для удаления:"));
+        panel.add(indexField);
+        // Показываем диалоговое окно
+        int res = JOptionPane.showConfirmDialog(null, panel, "Удаление точки", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        String index = indexField.getText();
+        if (res == JOptionPane.OK_OPTION) {
+            try {
+                int i = Integer.parseInt(index);
+                function.remove(i - 1);
+                updateTableWithFunction(firstTableModel, function);
+                JOptionPane.showMessageDialog(this, "Точка удалена");
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, "Строка не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
