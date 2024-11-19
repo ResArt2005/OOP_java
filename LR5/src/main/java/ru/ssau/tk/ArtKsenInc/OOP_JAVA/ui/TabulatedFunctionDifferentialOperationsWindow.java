@@ -6,6 +6,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationServi
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ColorfulTableCellRenderer;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
@@ -13,6 +14,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.io.FunctionsIO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -41,6 +43,9 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        // Установка фона и шрифта для всего окна
+        getContentPane().setBackground(ConstantColors.INDIGO);
+
         // Таблицы для функций
         firstTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
         resultTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
@@ -50,19 +55,23 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
 
         // Панели для таблиц и кнопок
         JPanel firstFunctionPanel = createFunctionPanel("Функция", functionTable,
-                _ -> createFunction(), _ -> loadFunction(), _ -> saveFunction(1),  _ -> DeleteValueInTB(), _ -> InsertValueInTB());
+                _ -> createFunction(), _ -> loadFunction(), _ -> saveFunction(1), _ -> DeleteValueInTB(firstTableModel, function), _ -> InsertValueInTB(firstTableModel, function));
         JPanel resultFunctionPanel = createResultPanel();
+
         // Панель с операциями
         JPanel operationPanel = new JPanel();
-        operationPanel.setLayout(new BorderLayout());
-        JButton sumButton = new JButton("Дифференцировать");
+        operationPanel.setLayout(new GridLayout(1, 1));
+        operationPanel.setBackground(ConstantColors.INDIGO); // Цвет фона
 
-        sumButton.addActionListener(_ -> performOperation());
+        JButton differentiateButton = createStyledButton("Дифференцировать");
 
-        operationPanel.add(sumButton);
+        differentiateButton.addActionListener(_ -> performOperation());
+
+        operationPanel.add(differentiateButton);
 
         // Размещение элементов в окне
-        JPanel functionsPanel = new JPanel(new GridLayout(1, 3));
+        JPanel functionsPanel = new JPanel(new GridLayout(1, 2));
+        functionsPanel.setBackground(ConstantColors.INDIGO);
         functionsPanel.add(firstFunctionPanel);
         functionsPanel.add(resultFunctionPanel);
 
@@ -115,7 +124,9 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         panel.add(buttonPanel, BorderLayout.SOUTH);
         return panel;
     }
-        private JButton createStyledButton(String text) {
+
+    // Метод для создания стилизованной кнопки
+    private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.FRENCH_VIOLET);
@@ -124,6 +135,8 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;
     }
+
+    // Перегруженный метод для создания кнопок с обработчиками событий
     private JButton createStyledButton(String text, ActionListener listener) {
         JButton button = createStyledButton(text);
         button.addActionListener(listener);
@@ -133,21 +146,15 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
     // Метод для создания панели результата
     private JPanel createResultPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        panel.setBorder(BorderFactory.createTitledBorder("Результат"));
+        panel.setLayout(new BorderLayout());
+        panel.setBorder(BorderFactory.createTitledBorder(null, "Результат", 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.CYAN));
+        panel.setBackground(ConstantColors.INDIGO); // Фон панели
 
         JScrollPane scrollPane = new JScrollPane(resultFunctionTable);
-        resultFunctionTable.setPreferredScrollableViewportSize(new Dimension(400, 200)); // Задайте нужный размер
-        panel.add(scrollPane, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
-                GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH,
-                new Insets(5, 5, 5, 5), 0, 0));
+        panel.add(scrollPane, BorderLayout.CENTER);
 
-        JButton saveButton = new JButton("Сохранить");
-        saveButton.addActionListener(_ -> saveFunction(2));
-
-        panel.add(saveButton, new GridBagConstraints(0, 1, 1, 0, 1.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                new Insets(5, 5, 5, 5), 0, 0));
+        JButton saveButton = createStyledButton("Сохранить", _ -> saveFunction(2));
+        panel.add(saveButton, BorderLayout.SOUTH);
 
         return panel;
     }
@@ -160,6 +167,20 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
                 return editable && column != 0; // Колонка x не редактируется
             }
         };
+
+        // Установка кастомного рендера для ячеек таблицы
+        table.getColumnModel().getColumn(0).setCellRenderer(
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+        table.getColumnModel().getColumn(1).setCellRenderer(
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+
+        table.setRowHeight(25);  // Высота строки
+
+        // Установка кастомного заголовка для таблицы
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(ConstantColors.DARK_BLUE);  // Тёмно-синий фон заголовков
+        header.setForeground(ConstantColors.CYAN);       // Циановый цвет текста заголовков
+        header.setFont(new Font("Open Sans", Font.BOLD, 15));  // Шрифт заголовков
         table.setDefaultEditor(Object.class, new NumericCellEditor());
         return table;
     }
@@ -224,7 +245,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         }
     }
 
-    private void InsertValueInTB() {
+    private void InsertValueInTB(DefaultTableModel tableModel, TabulatedFunction function) {
         if (function == null) {
             JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
@@ -253,7 +274,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
                 double x = Double.parseDouble(X);
                 double y = Double.parseDouble(Y);
                 function.insert(x, y);
-                updateTableWithFunction(firstTableModel, function);
+                updateTableWithFunction(tableModel, function);
                 JOptionPane.showMessageDialog(this, "Добавлена точка (" + x + ", " + y + ")");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Некорректный ввод", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -261,8 +282,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         }
     }
 
-    private void DeleteValueInTB() {
-
+    private void DeleteValueInTB(DefaultTableModel tableModel, TabulatedFunction function) {
         if (function == null) {
             JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
@@ -285,7 +305,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
             try {
                 int i = Integer.parseInt(index);
                 function.remove(i - 1);
-                updateTableWithFunction(firstTableModel, function);
+                updateTableWithFunction(tableModel, function);
                 JOptionPane.showMessageDialog(this, "Точка удалена");
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(this, "Строка не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
