@@ -3,8 +3,12 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ButtonsDesign;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -13,12 +17,21 @@ public class SettingsWindowChooseFactory extends JDialog {
     public SettingsWindowChooseFactory(JFrame owner, TabulatedFunctionOperationService factoryService) {
         super(owner, "Настройки", true); // Модальное окно
 
-        setSize(300, 200);
+        setSize(500, 200);
         setLocationRelativeTo(owner);
 
+        // Устанавливаем фон диалогового окна
+        getContentPane().setBackground(ConstantColors.INDIGO);
+
         // Радио-кнопки для выбора фабрики
-        JRadioButton arrayFactoryButton = new JRadioButton("Фабрика на основе массива", factoryService.getFactory() instanceof ArrayTabulatedFunctionFactory);
-        JRadioButton listFactoryButton = new JRadioButton("Фабрика на основе связного списка", factoryService.getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        JRadioButton arrayFactoryButton = createStyledRadioButton(
+                "Фабрика на основе массива",
+                factoryService.getFactory() instanceof ArrayTabulatedFunctionFactory
+        );
+        JRadioButton listFactoryButton = createStyledRadioButton(
+                "Фабрика на основе связного списка",
+                factoryService.getFactory() instanceof LinkedListTabulatedFunctionFactory
+        );
 
         // Группируем радио-кнопки
         ButtonGroup group = new ButtonGroup();
@@ -26,7 +39,7 @@ public class SettingsWindowChooseFactory extends JDialog {
         group.add(listFactoryButton);
 
         // Кнопка для сохранения выбора
-        JButton saveButton = new JButton("Сохранить");
+        JButton saveButton = ButtonsDesign.createStyledButton("Сохранить", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
         saveButton.addActionListener(_ -> {
             if (arrayFactoryButton.isSelected()) {
                 factoryService.setFactory(new ArrayTabulatedFunctionFactory());
@@ -37,8 +50,11 @@ public class SettingsWindowChooseFactory extends JDialog {
             dispose();
         });
 
-        // Добавляем элементы на форму
+        // Панель для элементов
         JPanel panel = new JPanel();
+        panel.setBackground(ConstantColors.INDIGO);
+        panel.setLayout(new GridLayout(3, 1, 10, 10)); // Сетка 3 на 1 с отступами
+
         panel.add(arrayFactoryButton);
         panel.add(listFactoryButton);
         panel.add(saveButton);
@@ -49,9 +65,18 @@ public class SettingsWindowChooseFactory extends JDialog {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Закрыть окно
                 dispose();
             }
         });
+    }
+
+    // Метод для создания стилизованных радио-кнопок
+    private JRadioButton createStyledRadioButton(String text, boolean isSelected) {
+        JRadioButton radioButton = new JRadioButton(text, isSelected);
+        radioButton.setFont(ConstantFonts.Open_Sans_Bold); // Шрифт Open Sans Bold
+        radioButton.setForeground(ConstantColors.CYAN); // Голубой цвет текста
+        radioButton.setBackground(ConstantColors.INDIGO); // Фон как у окна
+        radioButton.setFocusPainted(false); // Убираем обводку при фокусе
+        return radioButton;
     }
 }

@@ -44,8 +44,8 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         resultFunctionTable = createTable(resultTableModel, false);
 
         // Панели для таблиц и кнопок
-        JPanel firstFunctionPanel = createFunctionPanel("Первая функция", functionTable,
-                _ -> createFunction(), _ -> loadFunction(), _ -> saveFunction());
+        JPanel firstFunctionPanel = createFunctionPanel("Функция", functionTable,
+                _ -> createFunction(), _ -> loadFunction(), _ -> saveFunction(1));
         JPanel resultFunctionPanel = createResultPanel();
         // Панель с операциями
         JPanel operationPanel = new JPanel();
@@ -102,7 +102,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JButton saveButton = new JButton("Сохранить");
-        saveButton.addActionListener(_ -> saveFunction());
+        saveButton.addActionListener(_ -> saveFunction(2));
         panel.add(saveButton, BorderLayout.SOUTH);
 
         return panel;
@@ -157,22 +157,22 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
             File file = fileChooser.getSelectedFile();
             try (FileInputStream fileInputStream = new FileInputStream(file);
                  BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
-                TabulatedFunction function = FunctionsIO.deserialize(bufferedInputStream);
-                updateTableWithFunction(firstTableModel, this.function);
+                this.function = FunctionsIO.deserialize(bufferedInputStream);
+                updateTableWithFunction(firstTableModel, function);
             } catch (IOException | ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "Ошибка загрузки функции: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    private void saveFunction() {
+    private void saveFunction(int operand) {
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = fileChooser.showSaveDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             try (FileOutputStream fileOutputStream = new FileOutputStream(file);
                  BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream)) {
-                TabulatedFunction function = this.function;
+                TabulatedFunction function = (operand == 1) ? this.function : resultFunction;
                 FunctionsIO.serialize(bufferedOutputStream, function);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Ошибка сохранения функции: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);

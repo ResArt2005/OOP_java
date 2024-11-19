@@ -3,11 +3,16 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ColorfulTableCellRenderer;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.io.FunctionsIO;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -28,7 +33,15 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
     SettingsWindowChooseTheWayCreateTF settingsWindowChooseTheWayCreateTF;
 
-    JFrame owner = new JFrame();
+    private final int operand_1 = 1;
+    private final int operand_2 = 2;
+    private final int result = 3;
+    private final int SUM = 1;
+    private final int SUBTRACT = 2;
+    private final int MULTIPLY = 3;
+    private final int DIVIDE = 4;
+    JFrame owner;
+
     public TabulatedFunctionOperationsWindow(JFrame frame, TabulatedFunctionOperationService operationService) {
         super(frame, "Операции с табулированными функциями", true);
         owner = frame;
@@ -36,6 +49,9 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
+
+        // Установка фона и шрифта для всего окна
+        getContentPane().setBackground(ConstantColors.INDIGO);
 
         // Таблицы для функций
         firstTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
@@ -48,22 +64,25 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
         // Панели для таблиц и кнопок
         JPanel firstFunctionPanel = createFunctionPanel("Первая функция", firstFunctionTable,
-                _ -> createFunction(1), _ -> loadFunction(1), _ -> saveFunction(1));
+                _ -> createFunction(operand_1), _ -> loadFunction(operand_1), _ -> saveFunction(operand_1));
         JPanel secondFunctionPanel = createFunctionPanel("Вторая функция", secondFunctionTable,
-                _ -> createFunction(2), _ -> loadFunction(2), _ -> saveFunction(2));
+                _ -> createFunction(operand_2), _ -> loadFunction(operand_2), _ -> saveFunction(operand_2));
         JPanel resultFunctionPanel = createResultPanel();
+
         // Панель с операциями
         JPanel operationPanel = new JPanel();
-        operationPanel.setLayout(new GridLayout(4, 1));
-        JButton sumButton = new JButton("Сложение");
-        JButton subtractButton = new JButton("Вычитание");
-        JButton multiplyButton = new JButton("Умножение");
-        JButton divideButton = new JButton("Деление");
+        operationPanel.setLayout(new GridLayout(1, 4));
+        operationPanel.setBackground(ConstantColors.INDIGO); // Цвет фона
 
-        sumButton.addActionListener(_ -> performOperation(1));
-        subtractButton.addActionListener(_ -> performOperation(2));
-        multiplyButton.addActionListener(_ -> performOperation(3));
-        divideButton.addActionListener(_ -> performOperation(4));
+        JButton sumButton = createStyledButton("Сложение");
+        JButton subtractButton = createStyledButton("Вычитание");
+        JButton multiplyButton = createStyledButton("Умножение");
+        JButton divideButton = createStyledButton("Деление");
+
+        sumButton.addActionListener(_ -> performOperation(SUM));
+        subtractButton.addActionListener(_ -> performOperation(SUBTRACT));
+        multiplyButton.addActionListener(_ -> performOperation(MULTIPLY));
+        divideButton.addActionListener(_ -> performOperation(DIVIDE));
 
         operationPanel.add(sumButton);
         operationPanel.add(subtractButton);
@@ -72,6 +91,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
         // Размещение элементов в окне
         JPanel functionsPanel = new JPanel(new GridLayout(1, 3));
+        functionsPanel.setBackground(ConstantColors.INDIGO);
         functionsPanel.add(firstFunctionPanel);
         functionsPanel.add(secondFunctionPanel);
         functionsPanel.add(resultFunctionPanel);
@@ -85,23 +105,32 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
     private JPanel createFunctionPanel(String title, JTable table, ActionListener createListener, ActionListener loadListener, ActionListener saveListener) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder(title));
+        panel.setBorder(BorderFactory.createTitledBorder(null, title, 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.CYAN));
+        panel.setBackground(ConstantColors.INDIGO); // Фон панели
 
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel();
-        JButton createButton = new JButton("Создать");
-        JButton loadButton = new JButton("Загрузить");
-        JButton saveButton = new JButton("Сохранить");
+        // Новый JPanel для кнопок
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setBackground(ConstantColors.INDIGO); // Фон панели кнопок
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        createButton.addActionListener(createListener);
-        loadButton.addActionListener(loadListener);
-        saveButton.addActionListener(saveListener);
+        // Кнопка Создать
+        gbc.gridx = 0; // первая колонка
+        gbc.gridy = 0; // первая строка
+        buttonPanel.add(createStyledButton("Создать", createListener), gbc);
 
-        buttonPanel.add(createButton);
-        buttonPanel.add(loadButton);
-        buttonPanel.add(saveButton);
+        // Кнопка Загрузить
+        gbc.gridx = 1; // вторая колонка
+        buttonPanel.add(createStyledButton("Загрузить", loadListener), gbc);
+
+        // Кнопка Сохранить
+        gbc.gridx = 0; // возвращаемся в первую колонку
+        gbc.gridy = 1; // теперь на вторую строку
+        gbc.gridwidth = 2; // этот компонент занимает две колонки
+        gbc.anchor = GridBagConstraints.CENTER; // центруем по горизонтали
+        buttonPanel.add(createStyledButton("Сохранить", saveListener), gbc);
 
         panel.add(buttonPanel, BorderLayout.SOUTH);
         return panel;
@@ -111,28 +140,61 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
     private JPanel createResultPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder("Результат"));
+        panel.setBorder(BorderFactory.createTitledBorder(null, "Результат", 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.CYAN));
+        panel.setBackground(ConstantColors.INDIGO); // Фон панели
 
         JScrollPane scrollPane = new JScrollPane(resultFunctionTable);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        JButton saveButton = new JButton("Сохранить");
-        saveButton.addActionListener(_ -> saveFunction(3));
+        JButton saveButton = createStyledButton("Сохранить", _ -> saveFunction(result));
         panel.add(saveButton, BorderLayout.SOUTH);
 
         return panel;
     }
 
-    // Метод для создания таблицы с возможностью редактирования
     private JTable createTable(DefaultTableModel tableModel, boolean editable) {
-        JTable table = new JTable(tableModel) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return editable && column != 0; // Колонка x не редактируется
-            }
-        };
-        table.setDefaultEditor(Object.class, new NumericCellEditor());
-        return table;
+    JTable table = new JTable(tableModel) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return editable && column != 0; // Колонка x не редактируется
+        }
+    };
+
+    // Установка кастомного рендера для ячеек таблицы
+    table.getColumnModel().getColumn(0).setCellRenderer(
+        new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+    table.getColumnModel().getColumn(1).setCellRenderer(
+        new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+
+    table.setRowHeight(25);  // Высота строки
+
+    // Установка кастомного заголовка для таблицы
+    JTableHeader header = table.getTableHeader();
+    header.setBackground(ConstantColors.DARK_BLUE);  // Тёмно-синий фон заголовков
+    header.setForeground(ConstantColors.CYAN);       // Циановый цвет текста заголовков
+    header.setFont(new Font("Open Sans", Font.BOLD, 15));  // Шрифт заголовков
+    table.setDefaultEditor(Object.class, new NumericCellEditor());
+    return table;
+}
+
+
+
+    // Метод для создания стилизованной кнопки
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(ConstantFonts.Open_Sans_Bold);
+        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setForeground(ConstantColors.CYAN);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
+        return button;
+    }
+
+    // Перегруженный метод для создания кнопок с обработчиками событий
+    private JButton createStyledButton(String text, ActionListener listener) {
+        JButton button = createStyledButton(text);
+        button.addActionListener(listener);
+        return button;
     }
 
     // Метод для выполнения операций над функциями
@@ -144,16 +206,16 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
         try {
             switch (operation) {
-                case 1:
+                case SUM:
                     resultFunction = operationService.sum(firstFunction, secondFunction);
                     break;
-                case 2:
+                case SUBTRACT:
                     resultFunction = operationService.subtract(firstFunction, secondFunction);
                     break;
-                case 3:
+                case MULTIPLY:
                     resultFunction = operationService.multiplication(firstFunction, secondFunction);
                     break;
-                case 4:
+                case DIVIDE:
                     resultFunction = operationService.division(firstFunction, secondFunction);
                     break;
             }
@@ -172,10 +234,10 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         TabulatedFunction createdFunction = settingsWindowChooseTheWayCreateTF.getTabulatedFunction();
         // Проверяем, какая функция была выбрана (первая или вторая)
         if (createdFunction != null) {
-            if (operand == 1) {
+            if (operand == operand_1) {
                 firstFunction = createdFunction;
                 updateTableWithFunction(firstTableModel, firstFunction);
-            } else if (operand == 2) {
+            } else if (operand == operand_2) {
                 secondFunction = createdFunction;
                 updateTableWithFunction(secondTableModel, secondFunction);
             }
@@ -189,13 +251,13 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         int returnValue = fileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            try(FileInputStream fileInputStream = new FileInputStream(file);
-             BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
+            try (FileInputStream fileInputStream = new FileInputStream(file);
+                 BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
                 TabulatedFunction function = FunctionsIO.deserialize(bufferedInputStream);
-                if (operand == 1) {
+                if (operand == operand_1) {
                     firstFunction = function;
                     updateTableWithFunction(firstTableModel, firstFunction);
-                } else if (operand == 2) {
+                } else if (operand == operand_2) {
                     secondFunction = function;
                     updateTableWithFunction(secondTableModel, secondFunction);
                 }
@@ -211,8 +273,8 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             try (FileOutputStream fileOutputStream = new FileOutputStream(file);
-             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream)) {
-                TabulatedFunction function = (operand == 1) ? firstFunction : (operand == 2) ? secondFunction : resultFunction;
+                 BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream)) {
+                TabulatedFunction function = (operand == operand_1) ? firstFunction : (operand == operand_2) ? secondFunction : resultFunction;
                 FunctionsIO.serialize(bufferedOutputStream, function);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Ошибка сохранения функции: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);

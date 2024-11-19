@@ -5,6 +5,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.RoundedLabel;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ColorfulTableCellRenderer;
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         frame.setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        Font customFont = new Font("Times New Roman", Font.PLAIN, 24);
+        Font customFont = ConstantFonts.Times_New_Roman;
         // Панель ввода количества точек
         JPanel inputPanel = new JPanel();
         inputPanel.setOpaque(true);
