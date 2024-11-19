@@ -139,6 +139,6 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
     }
 
     public TabulatedFunction getTabulatedFunction() {
-        return null;
+        return tabulatedFunction;
     }
 }
