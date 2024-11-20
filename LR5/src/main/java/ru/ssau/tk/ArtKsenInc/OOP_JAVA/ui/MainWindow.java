@@ -36,7 +36,7 @@ public class MainWindow extends JFrame {
 
         // Панель для кнопок с центральным размещением
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(4, 1, 10, 10));  // Сетка 3 на 1 с отступами
+        buttonPanel.setLayout(new GridLayout(5, 1, 10, 10));  // Сетка 5 на 1 с отступами
         buttonPanel.setBackground(ConstantColors.FRENCH_VIOLET);
 
         // Кнопка для открытия окна настроек
@@ -54,9 +54,8 @@ public class MainWindow extends JFrame {
         JButton TBEditor = createRoundedButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         TBEditor.addActionListener(_ -> FunctionEditorWindow());
 
-
         // Кнопка для перехода в окно вычисления интеграла
-        JButton integralOperationButton = ButtonsDesign.createStyledButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton integralOperationButton = createRoundedButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         integralOperationButton.addActionListener(_ -> openTabulatedFunctionIntegralOperationsWindow());
 
         // Добавляем кнопки в панель
@@ -79,8 +78,7 @@ public class MainWindow extends JFrame {
         headerLabel.setBorder(BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2)); // Добавляем темно-бордовую обводку рамки
         add(headerLabel, BorderLayout.NORTH);
 
-
-// Обработчик закрытия главного окна (завершает программу)
+        // Обработчик закрытия главного окна (завершает программу)
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
