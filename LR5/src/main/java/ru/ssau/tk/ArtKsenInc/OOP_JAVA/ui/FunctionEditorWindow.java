@@ -88,7 +88,9 @@ public class FunctionEditorWindow extends JDialog {
                 false
         );
         chartPanel = new ChartPanel(chart);
-        chartPanel.setBackground(ConstantColors.DARK_PURPLE);
+        chartPanel.setBackground(ConstantColors.FRENCH_VIOLET);
+        chart.getTitle().setPaint(ConstantColors.BLACK);
+        chart.getXYPlot().setBackgroundPaint(ConstantColors.DARK_PURPLE);
         add(chartPanel, BorderLayout.CENTER);
 
         setVisible(true);
@@ -129,7 +131,6 @@ public class FunctionEditorWindow extends JDialog {
             }
         }
     }
-
 
     private void saveFunction(ActionEvent actionEvent) {
         JFileChooser fileChooser = new JFileChooser();
@@ -179,6 +180,7 @@ public class FunctionEditorWindow extends JDialog {
             }
         }
     }
+
     // Метод для вычисления значения в произвольной точке
     private void calculateValueAtPoint(ActionEvent event) {
         if (function == null) {
@@ -296,7 +298,7 @@ public class FunctionEditorWindow extends JDialog {
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
-        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setBackground(ConstantColors.DARK_PURPLE);
         button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении

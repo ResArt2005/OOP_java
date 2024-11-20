@@ -40,18 +40,18 @@ public class MainWindow extends JFrame {
         buttonPanel.setBackground(ConstantColors.FRENCH_VIOLET);
 
         // Кнопка для открытия окна настроек
-        JButton settingsButton = ButtonsDesign.createStyledButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton settingsButton = createRoundedButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         settingsButton.addActionListener(_ -> openSettingsWindow());
 
         // Кнопка для операций с функциями
-        JButton operationsButton = ButtonsDesign.createStyledButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton operationsButton = createRoundedButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         operationsButton.addActionListener(_ -> openTabulatedFunctionOperationsWindow());
 
         // Кнопка для операции дифференцирования
-        JButton differentialOperation = ButtonsDesign.createStyledButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton differentialOperation = createRoundedButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         differentialOperation.addActionListener(_ -> TabulatedFunctionDifferentialOperationsWindow());
 
-        JButton TBEditor = ButtonsDesign.createStyledButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton TBEditor = createRoundedButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         TBEditor.addActionListener(_ -> FunctionEditorWindow());
 
 
@@ -76,9 +76,11 @@ public class MainWindow extends JFrame {
         headerLabel.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(24f)); // Увеличенный шрифт для заголовка
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerLabel.setPreferredSize(new Dimension(WIDTH_WINDOW, 50));
+        headerLabel.setBorder(BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2)); // Добавляем темно-бордовую обводку рамки
         add(headerLabel, BorderLayout.NORTH);
 
-        // Обработчик закрытия главного окна (завершает программу)
+
+// Обработчик закрытия главного окна (завершает программу)
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -88,6 +90,22 @@ public class MainWindow extends JFrame {
 
         // Показываем главное окно
         setVisible(true);
+    }
+
+    // Метод для создания кнопки с краями
+    private JButton createRoundedButton(String text, Font font, Color background, Color foreground, Cursor cursor) {
+        JButton button = new JButton(text);
+        button.setFont(font);
+        button.setBackground(background);
+        button.setForeground(foreground);
+        button.setFocusPainted(false);
+        button.setCursor(cursor);
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
+        button.setContentAreaFilled(false);
+        return button;
     }
 
     // Метод для открытия окна настроек
