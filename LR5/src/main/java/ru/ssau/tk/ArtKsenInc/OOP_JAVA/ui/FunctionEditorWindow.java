@@ -11,6 +11,8 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationServi
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -37,34 +39,38 @@ public class FunctionEditorWindow extends JDialog {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
+        // Установка фона и шрифта для всего окна
+        getContentPane().setBackground(ConstantColors.INDIGO);
+
         // Панель с кнопками
-        JPanel buttonsPanel = new JPanel(new GridLayout(2, 0)); // 1 ряд, 0 колонок
+        JPanel buttonsPanel = new JPanel(new GridLayout(2, 3)); // 2 ряда, 3 колонки
+        buttonsPanel.setBackground(ConstantColors.INDIGO);
 
         // Кнопка для создания функции
-        JButton createButton = new JButton("Создать функцию");
+        JButton createButton = createStyledButton("Создать функцию");
         createButton.addActionListener(this::createFunction);
         buttonsPanel.add(createButton);
 
         // Кнопка для загрузки функции
-        JButton loadButton = new JButton("Загрузить функцию");
+        JButton loadButton = createStyledButton("Загрузить функцию");
         loadButton.addActionListener(this::loadFunction);
         buttonsPanel.add(loadButton);
 
         // Кнопка для сохранения функции
-        JButton saveButton = new JButton("Сохранить функцию");
+        JButton saveButton = createStyledButton("Сохранить функцию");
         saveButton.addActionListener(this::saveFunction);
         buttonsPanel.add(saveButton);
 
         // Кнопка для вычисления значения в произвольной точке
-        JButton calculateButton = new JButton("Вычислить значение в точке");
+        JButton calculateButton = createStyledButton("Вычислить значение в точке");
         calculateButton.addActionListener(this::calculateValueAtPoint);
         buttonsPanel.add(calculateButton);
 
-        JButton insertButton = new JButton("Вставка");
+        JButton insertButton = createStyledButton("Вставка");
         insertButton.addActionListener(_ -> InsertValueInTB());
         buttonsPanel.add(insertButton);
 
-        JButton removeButton = new JButton("Удалить");
+        JButton removeButton = createStyledButton("Удалить");
         removeButton.addActionListener(_ -> DeleteValueInTB());
         buttonsPanel.add(removeButton);
 
@@ -82,6 +88,7 @@ public class FunctionEditorWindow extends JDialog {
                 false
         );
         chartPanel = new ChartPanel(chart);
+        chartPanel.setBackground(ConstantColors.INDIGO);
         add(chartPanel, BorderLayout.CENTER);
 
         setVisible(true);
@@ -126,7 +133,6 @@ public class FunctionEditorWindow extends JDialog {
             File file = fileChooser.getSelectedFile();
             try (FileOutputStream fileOutputStream = new FileOutputStream(file);
                  BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream)) {
-                TabulatedFunction function = this.function;
                 FunctionsIO.serialize(bufferedOutputStream, function);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Ошибка сохранения функции", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -247,4 +253,14 @@ public class FunctionEditorWindow extends JDialog {
         dataset.addSeries(series);
     }
 
+    // Метод для создания стилизованной кнопки
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(ConstantFonts.Open_Sans_Bold);
+        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setForeground(ConstantColors.CYAN);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
+        return button;
+    }
 }
