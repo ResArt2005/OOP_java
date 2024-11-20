@@ -12,7 +12,8 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main</mainClass> <!-- Укажите ваш главный класс -->
+                            <mainClass>ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main
+                            </mainClass> <!-- Укажите ваш главный класс -->
                         </manifest>
                     </archive>
                 </configuration>
@@ -55,11 +56,6 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.20.0</version> <!-- Используйте последнюю версию -->
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.36</version> <!-- Версия SLF4J должна соответствовать вашему проекту -->
         </dependency>
     </dependencies>
 
