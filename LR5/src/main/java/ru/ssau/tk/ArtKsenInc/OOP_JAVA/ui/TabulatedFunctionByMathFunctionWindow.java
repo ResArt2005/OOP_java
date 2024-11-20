@@ -5,6 +5,8 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionScanner;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -31,22 +33,46 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        // Установка фона и шрифта для всего окна
+        getContentPane().setBackground(ConstantColors.INDIGO);
+
         // Панель для ввода параметров
         JPanel inputPanel = new JPanel(new GridLayout(5, 2));
+        inputPanel.setBackground(ConstantColors.INDIGO);
 
         // Выпадающий список функций
         JLabel functionLabel = new JLabel("Выберите функцию:");
+        functionLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        functionLabel.setForeground(ConstantColors.CYAN);
         functionComboBox = new JComboBox<>(functionMap.keySet().toArray(new String[0]));
+        functionComboBox.setFont(ConstantFonts.Open_Sans_Bold);
+        functionComboBox.setBackground(ConstantColors.FRENCH_VIOLET);
+        functionComboBox.setForeground(ConstantColors.CYAN);
 
         // Поля для ввода интервалов и количества точек
         JLabel leftBoundLabel = new JLabel("Левая граница:");
+        leftBoundLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        leftBoundLabel.setForeground(ConstantColors.CYAN);
         leftBoundField = new JTextField();
+        leftBoundField.setFont(ConstantFonts.Open_Sans_Bold);
+        leftBoundField.setBackground(ConstantColors.FRENCH_VIOLET);
+        leftBoundField.setForeground(ConstantColors.CYAN);
         ((AbstractDocument) leftBoundField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
         JLabel rightBoundLabel = new JLabel("Правая граница:");
+        rightBoundLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        rightBoundLabel.setForeground(ConstantColors.CYAN);
         rightBoundField = new JTextField();
+        rightBoundField.setFont(ConstantFonts.Open_Sans_Bold);
+        rightBoundField.setBackground(ConstantColors.FRENCH_VIOLET);
+        rightBoundField.setForeground(ConstantColors.CYAN);
         ((AbstractDocument) rightBoundField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
         JLabel pointsCountLabel = new JLabel("Количество точек:");
+        pointsCountLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        pointsCountLabel.setForeground(ConstantColors.CYAN);
         pointsCountField = new JTextField();
+        pointsCountField.setFont(ConstantFonts.Open_Sans_Bold);
+        pointsCountField.setBackground(ConstantColors.FRENCH_VIOLET);
+        pointsCountField.setForeground(ConstantColors.CYAN);
         ((AbstractDocument) pointsCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
 
         // Добавляем компоненты на панель
@@ -60,7 +86,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         inputPanel.add(pointsCountField);
 
         // Кнопка создания функции
-        JButton createButton = new JButton("Создать");
+        JButton createButton = createStyledButton("Создать");
         createButton.addActionListener(new CreateFunctionListener());
 
         // Добавляем панели на окно
@@ -108,6 +134,17 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
                 JOptionPane.showMessageDialog(TabulatedFunctionByMathFunctionWindow.this, ex.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    // Метод для создания стилизованной кнопки
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(ConstantFonts.Open_Sans_Bold);
+        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setForeground(ConstantColors.CYAN);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
+        return button;
     }
 
     public TabulatedFunction getTabulatedFunction() {
