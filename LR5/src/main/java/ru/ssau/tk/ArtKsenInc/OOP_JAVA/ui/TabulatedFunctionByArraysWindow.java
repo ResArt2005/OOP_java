@@ -1,4 +1,3 @@
-
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.ArrayIsNotSortedException;
@@ -10,6 +9,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
 
@@ -30,7 +30,9 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(ConstantColors.DARK_BLUE);
+
+        // Установка фона и шрифта для всего окна
+        getContentPane().setBackground(ConstantColors.DARK_PURPLE);
 
         // Панель ввода количества точек
         JPanel inputPanel = new JPanel(new FlowLayout());
@@ -52,9 +54,16 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         // Панель для таблицы
         JPanel tablePanel = new JPanel(new BorderLayout());
         tableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
-        table = new JTable(tableModel);
+        table = new JTable(tableModel) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                component.setBackground(ConstantColors.FRENCH_VIOLET);
+                return component;
+            }
+        };
         table.setDefaultEditor(Object.class, new NumericCellEditor());
-        table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer());
+        table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
         table.setRowHeight(30);
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -75,9 +84,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
 
         // Слушатели для кнопок
         createTableButton.addActionListener(e -> createTable());
-        createFunctionButton.addActionListener(e
-
-                -> createTabulatedFunction());
+        createFunctionButton.addActionListener(e -> createTabulatedFunction());
 
         setVisible(true);
     }
@@ -128,11 +135,9 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.FRENCH_VIOLET);
-
-
         button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;
     }
 
