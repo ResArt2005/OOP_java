@@ -3,9 +3,9 @@ import java.awt.*;
 
 public final class ConstantColors {
     public static final Color BLACK = Color.BLACK;
-    public static final Color CYAN = Color.CYAN;
-    public static final Color INDIGO = Color.decode("#51087E");
-    public static final Color FRENCH_VIOLET = Color.decode("#51087E");
+    public static final Color TIFFANY_BLUE = Color.decode("#0ABAB5");
+    public static final Color DARK_PURPLE = Color.decode("#521262");
+    public static final Color FRENCH_VIOLET = Color.decode("#5C008F");
     public static final Color BLUE = Color.BLUE;
     public static final Color DARK_BLUE = Color.decode("#00008b");
     public static final Color GREEN = Color.GREEN;

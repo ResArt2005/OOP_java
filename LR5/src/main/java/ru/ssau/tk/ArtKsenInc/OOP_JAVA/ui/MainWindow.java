@@ -13,8 +13,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import static ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ButtonsDesign.createStyledButton;
-
 public class MainWindow extends JFrame{
     private final int WIDTH_WINDOW = 600; // Ширина окна
     private final int HEIGHT_WINDOW = 400; // Высота окна
@@ -34,26 +32,26 @@ public class MainWindow extends JFrame{
         setLayout(new BorderLayout());
 
         // Устанавливаем цвет фона окна
-        getContentPane().setBackground(ConstantColors.INDIGO);
+        getContentPane().setBackground(ConstantColors.FRENCH_VIOLET);
 
         // Панель для кнопок с центральным размещением
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(4, 1, 10, 10));  // Сетка 3 на 1 с отступами
-        buttonPanel.setBackground(ConstantColors.INDIGO);
+        buttonPanel.setBackground(ConstantColors.FRENCH_VIOLET);
 
         // Кнопка для открытия окна настроек
-        JButton settingsButton = ButtonsDesign.createStyledButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        JButton settingsButton = ButtonsDesign.createStyledButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         settingsButton.addActionListener(_ -> openSettingsWindow());
 
         // Кнопка для операций с функциями
-        JButton operationsButton = ButtonsDesign.createStyledButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        JButton operationsButton = ButtonsDesign.createStyledButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         operationsButton.addActionListener(_ -> openTabulatedFunctionOperationsWindow());
 
         // Кнопка для операции дифференцирования
-        JButton differentialOperation = ButtonsDesign.createStyledButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        JButton differentialOperation = ButtonsDesign.createStyledButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         differentialOperation.addActionListener(_ -> TabulatedFunctionDifferentialOperationsWindow());
 
-        JButton TBEditor = ButtonsDesign.createStyledButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        JButton TBEditor = ButtonsDesign.createStyledButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         TBEditor.addActionListener(_ -> FunctionEditorWindow());
 
         // Добавляем кнопки в панель
@@ -68,7 +66,7 @@ public class MainWindow extends JFrame{
         // Создание и добавление заголовка с закругленными краями
         RoundedLabel headerLabel = new RoundedLabel("Главное меню", 20);
         headerLabel.setBackground(ConstantColors.FRENCH_VIOLET);
-        headerLabel.setForeground(ConstantColors.BLACK);
+        headerLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         headerLabel.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(24f)); // Увеличенный шрифт для заголовка
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerLabel.setPreferredSize(new Dimension(WIDTH_WINDOW, 50));

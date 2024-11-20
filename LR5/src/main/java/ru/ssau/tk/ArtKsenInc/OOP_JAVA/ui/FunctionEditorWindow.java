@@ -40,11 +40,11 @@ public class FunctionEditorWindow extends JDialog {
         setLayout(new BorderLayout());
 
         // Установка фона и шрифта для всего окна
-        getContentPane().setBackground(ConstantColors.INDIGO);
+        getContentPane().setBackground(ConstantColors.DARK_PURPLE);
 
         // Панель с кнопками
         JPanel buttonsPanel = new JPanel(new GridLayout(2, 3)); // 2 ряда, 3 колонки
-        buttonsPanel.setBackground(ConstantColors.INDIGO);
+        buttonsPanel.setBackground(ConstantColors.DARK_PURPLE);
 
         // Кнопка для создания функции
         JButton createButton = createStyledButton("Создать функцию");
@@ -88,7 +88,7 @@ public class FunctionEditorWindow extends JDialog {
                 false
         );
         chartPanel = new ChartPanel(chart);
-        chartPanel.setBackground(ConstantColors.INDIGO);
+        chartPanel.setBackground(ConstantColors.DARK_PURPLE);
         add(chartPanel, BorderLayout.CENTER);
 
         setVisible(true);
@@ -258,7 +258,7 @@ public class FunctionEditorWindow extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.FRENCH_VIOLET);
-        button.setForeground(ConstantColors.CYAN);
+        button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;

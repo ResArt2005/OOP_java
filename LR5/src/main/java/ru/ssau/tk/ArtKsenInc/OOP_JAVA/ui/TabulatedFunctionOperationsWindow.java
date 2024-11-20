@@ -12,7 +12,6 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.text.AbstractDocument;
@@ -54,7 +53,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         setLayout(new BorderLayout());
 
         // Установка фона и шрифта для всего окна
-        getContentPane().setBackground(ConstantColors.INDIGO);
+        getContentPane().setBackground(ConstantColors.DARK_PURPLE);
 
         // Таблицы для функций
         firstTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
@@ -75,7 +74,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         // Панель с операциями
         JPanel operationPanel = new JPanel();
         operationPanel.setLayout(new GridLayout(1, 4));
-        operationPanel.setBackground(ConstantColors.INDIGO); // Цвет фона
+        operationPanel.setBackground(ConstantColors.DARK_PURPLE); // Цвет фона
 
         JButton sumButton = createStyledButton("Сложение");
         JButton subtractButton = createStyledButton("Вычитание");
@@ -94,7 +93,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
         // Размещение элементов в окне
         JPanel functionsPanel = new JPanel(new GridLayout(1, 3));
-        functionsPanel.setBackground(ConstantColors.INDIGO);
+        functionsPanel.setBackground(ConstantColors.DARK_PURPLE);
         functionsPanel.add(firstFunctionPanel);
         functionsPanel.add(secondFunctionPanel);
         functionsPanel.add(resultFunctionPanel);
@@ -108,15 +107,15 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
     private JPanel createFunctionPanel(String title, JTable table, ActionListener createListener, ActionListener loadListener, ActionListener saveListener, ActionListener deleteListener, ActionListener insertListener) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder(null, title, 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.CYAN));
-        panel.setBackground(ConstantColors.INDIGO); // Фон панели
+        panel.setBorder(BorderFactory.createTitledBorder(null, title, 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.TIFFANY_BLUE));
+        panel.setBackground(ConstantColors.DARK_PURPLE); // Фон панели
 
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
 
         // Новый JPanel для кнопок
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setBackground(ConstantColors.INDIGO); // Фон панели кнопок
+        buttonPanel.setBackground(ConstantColors.DARK_PURPLE); // Фон панели кнопок
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // Добавляем отступы между кнопками
 
@@ -154,8 +153,8 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
     private JPanel createResultPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder(null, "Результат", 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.CYAN));
-        panel.setBackground(ConstantColors.INDIGO); // Фон панели
+        panel.setBorder(BorderFactory.createTitledBorder(null, "Результат", 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.TIFFANY_BLUE));
+        panel.setBackground(ConstantColors.DARK_PURPLE); // Фон панели
 
         JScrollPane scrollPane = new JScrollPane(resultFunctionTable);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -176,16 +175,16 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
         // Установка кастомного рендера для ячеек таблицы
         table.getColumnModel().getColumn(0).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
         table.getColumnModel().getColumn(1).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.CYAN, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
 
         table.setRowHeight(25);  // Высота строки
 
         // Установка кастомного заголовка для таблицы
         JTableHeader header = table.getTableHeader();
         header.setBackground(ConstantColors.DARK_BLUE);  // Тёмно-синий фон заголовков
-        header.setForeground(ConstantColors.CYAN);       // Циановый цвет текста заголовков
+        header.setForeground(ConstantColors.TIFFANY_BLUE);       // Циановый цвет текста заголовков
         header.setFont(new Font("Open Sans", Font.BOLD, 15));  // Шрифт заголовков
         table.setDefaultEditor(Object.class, new NumericCellEditor());
         return table;
@@ -197,7 +196,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.FRENCH_VIOLET);
-        button.setForeground(ConstantColors.CYAN);
+        button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;

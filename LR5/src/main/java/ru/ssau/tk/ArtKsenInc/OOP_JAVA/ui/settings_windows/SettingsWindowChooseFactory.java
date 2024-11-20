@@ -21,7 +21,7 @@ public class SettingsWindowChooseFactory extends JDialog {
         setLocationRelativeTo(owner);
 
         // Устанавливаем фон диалогового окна
-        getContentPane().setBackground(ConstantColors.INDIGO);
+        getContentPane().setBackground(ConstantColors.DARK_PURPLE);
 
         // Радио-кнопки для выбора фабрики
         JRadioButton arrayFactoryButton = createStyledRadioButton(
@@ -39,7 +39,7 @@ public class SettingsWindowChooseFactory extends JDialog {
         group.add(listFactoryButton);
 
         // Кнопка для сохранения выбора
-        JButton saveButton = ButtonsDesign.createStyledButton("Сохранить", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.CYAN, new Cursor(Cursor.HAND_CURSOR));
+        JButton saveButton = ButtonsDesign.createStyledButton("Сохранить", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         saveButton.addActionListener(_ -> {
             if (arrayFactoryButton.isSelected()) {
                 factoryService.setFactory(new ArrayTabulatedFunctionFactory());
@@ -52,7 +52,7 @@ public class SettingsWindowChooseFactory extends JDialog {
 
         // Панель для элементов
         JPanel panel = new JPanel();
-        panel.setBackground(ConstantColors.INDIGO);
+        panel.setBackground(ConstantColors.DARK_PURPLE);
         panel.setLayout(new GridLayout(3, 1, 10, 10)); // Сетка 3 на 1 с отступами
 
         panel.add(arrayFactoryButton);
@@ -74,8 +74,8 @@ public class SettingsWindowChooseFactory extends JDialog {
     private JRadioButton createStyledRadioButton(String text, boolean isSelected) {
         JRadioButton radioButton = new JRadioButton(text, isSelected);
         radioButton.setFont(ConstantFonts.Open_Sans_Bold); // Шрифт Open Sans Bold
-        radioButton.setForeground(ConstantColors.CYAN); // Голубой цвет текста
-        radioButton.setBackground(ConstantColors.INDIGO); // Фон как у окна
+        radioButton.setForeground(ConstantColors.TIFFANY_BLUE); // Голубой цвет текста
+        radioButton.setBackground(ConstantColors.DARK_PURPLE); // Фон как у окна
         radioButton.setFocusPainted(false); // Убираем обводку при фокусе
         return radioButton;
     }

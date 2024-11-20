@@ -59,7 +59,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
 
         JScrollPane scrollPane = new JScrollPane(table);
 
-        tablePanel.setBackground(ConstantColors.INDIGO);
+        tablePanel.setBackground(ConstantColors.DARK_PURPLE);
         tablePanel.add(scrollPane, BorderLayout.CENTER);
 
         // Панель кнопок
@@ -130,7 +130,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         button.setBackground(ConstantColors.FRENCH_VIOLET);
 
 
-        button.setForeground(ConstantColors.CYAN);
+        button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         return button;

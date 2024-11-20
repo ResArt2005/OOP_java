@@ -25,7 +25,7 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
         setLayout(new BorderLayout());
 
         // Установка фона и шрифта для всего окна
-        getContentPane().setBackground(ConstantColors.INDIGO);
+        getContentPane().setBackground(ConstantColors.DARK_PURPLE);
 
         // Кнопка для открытия окна TabulatedFunctionByArraysWindow
         JButton arrayFactoryButton = createStyledButton("Создать функцию по массивам");
@@ -36,7 +36,7 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
         listFactoryButton.addActionListener(_ -> openTabulatedFunctionByMathFunctionWindow());
 
         JPanel panel = new JPanel();
-        panel.setBackground(ConstantColors.INDIGO);
+        panel.setBackground(ConstantColors.DARK_PURPLE);
         panel.add(arrayFactoryButton);
         panel.add(listFactoryButton);
 
@@ -68,7 +68,7 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.FRENCH_VIOLET);
-        button.setForeground(ConstantColors.CYAN);
+        button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;
