@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class MainWindow extends JFrame{
+public class MainWindow extends JFrame {
     private final int WIDTH_WINDOW = 600; // Ширина окна
     private final int HEIGHT_WINDOW = 400; // Высота окна
     private TabulatedFunctionOperationService factoryService; // Для хранения текущей фабрики
@@ -54,11 +54,17 @@ public class MainWindow extends JFrame{
         JButton TBEditor = ButtonsDesign.createStyledButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         TBEditor.addActionListener(_ -> FunctionEditorWindow());
 
+
+        // Кнопка для перехода в окно вычисления интеграла
+        JButton integralOperationButton = ButtonsDesign.createStyledButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        integralOperationButton.addActionListener(_ -> openTabulatedFunctionIntegralOperationsWindow());
+
         // Добавляем кнопки в панель
         buttonPanel.add(settingsButton);
         buttonPanel.add(operationsButton);
         buttonPanel.add(differentialOperation);
         buttonPanel.add(TBEditor);
+        buttonPanel.add(integralOperationButton);
 
         // Добавляем панель кнопок в главное окно
         add(buttonPanel, BorderLayout.CENTER);
@@ -105,6 +111,11 @@ public class MainWindow extends JFrame{
     // Метод для открытия окна операций дифференцирования
     private void FunctionEditorWindow() {
         new FunctionEditorWindow(this, factoryService);
+    }
+
+    // Метод для открытия окна вычисления интеграла
+    private void openTabulatedFunctionIntegralOperationsWindow() {
+        new TabulatedFunctionIntegralOperationsWindow(this, new TabulatedFunctionOperationService());
     }
 
     public static void main(String[] args) {

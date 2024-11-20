@@ -34,7 +34,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
 
     SettingsWindowChooseTheWayCreateTF settingsWindowChooseTheWayCreateTF;
 
-    JFrame owner = new JFrame();
+    JFrame owner;
 
     public TabulatedFunctionDifferentialOperationsWindow(JFrame frame, TabulatedDifferentialOperator operationService) {
         super(frame, "Операции с табулированными функциями", true);
@@ -227,7 +227,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
             function = createdFunction;
             updateTableWithFunction(firstTableModel, function);
         } else {
-            JOptionPane.showMessageDialog(this, "Функция не была создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "Функция не была создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -7,12 +7,15 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionScanner;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ButtonsDesign;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.CompositeFunctionStorage;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Map;
 
 public class TabulatedFunctionByMathFunctionWindow extends JDialog {
@@ -23,9 +26,11 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
     private final Map<String, MathFunction> functionMap;
     private final TabulatedFunctionFactory factory;
     protected TabulatedFunction tabulatedFunction;
+    JFrame owner;
 
     public TabulatedFunctionByMathFunctionWindow(JFrame frame, TabulatedFunctionFactory factory) {
         super(frame, "Создание табулированной функции", true);
+        owner = frame;
         this.factory = factory;
         this.functionMap = MathFunctionScanner.getAnnotatedFunctions(); // Используем динамическое сканирование
         setTitle("Создание табулированной функции");
@@ -39,7 +44,8 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         // Панель для ввода параметров
         JPanel inputPanel = new JPanel(new GridLayout(5, 2));
         inputPanel.setBackground(ConstantColors.DARK_PURPLE);
-
+        JButton compositeFunctionButton = ButtonsDesign.createStyledButton("Создать сложную функцию", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        compositeFunctionButton.addActionListener(_ -> openCompositeFunctionCreationWindow());
         // Выпадающий список функций
         JLabel functionLabel = new JLabel("Выберите функцию:");
         functionLabel.setFont(ConstantFonts.Open_Sans_Bold);
@@ -92,7 +98,11 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         // Добавляем панели на окно
         add(inputPanel, BorderLayout.CENTER);
         add(createButton, BorderLayout.SOUTH);
+        add(compositeFunctionButton, BorderLayout.NORTH);
         setVisible(true);
+
+        // Загружаем созданные сложные функции
+        //loadCompositeFunctions();
     }
 
     // Обработчик для кнопки создания функции
@@ -149,5 +159,23 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
 
     public TabulatedFunction getTabulatedFunction() {
         return tabulatedFunction;
+    }
+
+    // Метод для загрузки созданных сложных функций
+    /*private void loadCompositeFunctions() {
+        try {
+            Map<String, CompositeFunction> compositeFunctions = CompositeFunctionStorage.loadCompositeFunctions();
+            for (Map.Entry<String, CompositeFunction> entry : compositeFunctions.entrySet()) {
+                functionMap.put(entry.getKey(), entry.getValue());
+                functionComboBox.addItem(entry.getKey());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Ошибка загрузки сложных функций: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    */
+    // Метод для открытия окна создания сложной функции
+    private void openCompositeFunctionCreationWindow() {
+        new CompositeFunctionCreationWindow(owner);
     }
 }

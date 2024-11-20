@@ -1,7 +1,6 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations;
 
 import org.reflections.Reflections;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionInfo;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
 
 import java.util.*;
