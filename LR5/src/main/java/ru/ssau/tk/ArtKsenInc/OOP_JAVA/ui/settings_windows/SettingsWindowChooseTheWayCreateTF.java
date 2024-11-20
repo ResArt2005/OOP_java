@@ -46,7 +46,7 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
     // Метод для открытия окна TabulatedFunctionByArraysWindow
     private void openTabulatedFunctionByArraysWindow() {
         TabulatedFunctionByArraysWindow arraysWindow = new TabulatedFunctionByArraysWindow(owner, factoryService.getFactory());
-        arraysWindow.setVisible(true);
+        //arraysWindow.setVisible(true);
         function = arraysWindow.getTabulatedFunction(); // Получаем функцию после закрытия окна
         dispose(); // Закрываем текущее окно после выбора
     }
@@ -54,7 +54,7 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
     // Метод для открытия окна TabulatedFunctionByMathFunctionWindow
     private void openTabulatedFunctionByMathFunctionWindow() {
         TabulatedFunctionByMathFunctionWindow mathWindow = new TabulatedFunctionByMathFunctionWindow(owner, factoryService.getFactory());
-        mathWindow.setVisible(true);
+        //mathWindow.setVisible(true);
         function = mathWindow.getTabulatedFunction(); // Получаем функцию после закрытия окна
         dispose(); // Закрываем текущее окно после выбора
     }

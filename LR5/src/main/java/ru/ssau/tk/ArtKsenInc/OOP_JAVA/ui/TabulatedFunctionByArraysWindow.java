@@ -115,9 +115,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
                 yValues[i] = Double.parseDouble(tableModel.getValueAt(i, 1).toString());
             }
             tabulatedFunction = factory.create(xValues, yValues);
-            JOptionPane.showMessageDialog(this,
-
-                    "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Введите корректные значения для всех точек!", "Ошибка", JOptionPane.ERROR_MESSAGE);

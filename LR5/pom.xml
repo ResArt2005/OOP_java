@@ -37,11 +37,6 @@
             <version>0.10.2</version> <!-- или последняя стабильная версия -->
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.4.12</version> <!-- Используйте последнюю стабильную версию -->
-        </dependency>
-        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.20.0</version> <!-- Используйте последнюю версию -->
