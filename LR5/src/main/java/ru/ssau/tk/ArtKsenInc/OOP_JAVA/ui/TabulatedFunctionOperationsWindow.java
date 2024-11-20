@@ -12,6 +12,8 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.text.AbstractDocument;
@@ -60,9 +62,9 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         secondTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
         resultTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
 
-        firstFunctionTable = createTable(firstTableModel, true);
-        secondFunctionTable = createTable(secondTableModel, true);
-        resultFunctionTable = createTable(resultTableModel, false);
+        firstFunctionTable = createTable(firstTableModel, true, firstFunction);
+        secondFunctionTable = createTable(secondTableModel, true, secondFunction);
+        resultFunctionTable = createTable(resultTableModel, false, resultFunction);
 
         // Панели для таблиц и кнопок
         JPanel firstFunctionPanel = createFunctionPanel("Первая функция", firstFunctionTable,
@@ -165,14 +167,29 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         return panel;
     }
 
-    private JTable createTable(DefaultTableModel tableModel, boolean editable) {
+    private JTable createTable(DefaultTableModel tableModel, boolean editable, TabulatedFunction targetFunction) {
         JTable table = new JTable(tableModel) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return editable && column != 0; // Колонка x не редактируется
             }
         };
+        // Добавляем слушатель изменений модели таблицы
+        tableModel.addTableModelListener(e -> {
+            if (targetFunction != null && e.getType() == TableModelEvent.UPDATE) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
 
+                if (column == 1) { // Обновляем только значения Y
+                    try {
+                        double newValue = Double.parseDouble(tableModel.getValueAt(row, column).toString());
+                        targetFunction.setY(row, newValue); // Синхронизация с функцией
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(table, "Введите корректное числовое значение", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
         // Установка кастомного рендера для ячеек таблицы
         table.getColumnModel().getColumn(0).setCellRenderer(
                 new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));

@@ -13,6 +13,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTh
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.io.FunctionsIO;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.text.AbstractDocument;
@@ -167,7 +168,22 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
                 return editable && column != 0; // Колонка x не редактируется
             }
         };
+        // Добавляем слушатель изменений модели таблицы
+        tableModel.addTableModelListener(e -> {
+            if (function != null && e.getType() == TableModelEvent.UPDATE) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
 
+                if (column == 1) { // Обновляем только значения Y
+                    try {
+                        double newValue = Double.parseDouble(tableModel.getValueAt(row, column).toString());
+                        function.setY(row, newValue); // Синхронизация с функцией
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(table, "Введите корректное числовое значение", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
         // Установка кастомного рендера для ячеек таблицы
         table.getColumnModel().getColumn(0).setCellRenderer(
                 new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
