@@ -208,9 +208,9 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         });
         // Установка кастомного рендера для ячеек таблицы
         table.getColumnModel().getColumn(0).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, "Open Sans"));
         table.getColumnModel().getColumn(1).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, "Open Sans"));
 
         table.setRowHeight(25);  // Высота строки
 
