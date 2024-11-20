@@ -104,42 +104,81 @@ public class FunctionEditorWindow extends JDialog {
         }
     }
 
-    // Метод для загрузки функции из файла
-    private void loadFunction(ActionEvent event) {
+    private void loadFunction(ActionEvent actionEvent) {
         JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Все поддерживаемые файлы", "json", "xml", "bin"));
+        fileChooser.setAcceptAllFileFilterUsed(true);
+
+        int returnValue = fileChooser.showOpenDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            try (FileInputStream fileInputStream = new FileInputStream(file);
-                 BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
-                function = FunctionsIO.deserialize(bufferedInputStream);
-                updateChart();  // Обновляем график после загрузки функции
+            String fileName = file.getName().toLowerCase();
+            try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file))) {
+                if (fileName.endsWith(".json") || fileName.endsWith(".xml")) {
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream))) {
+                        this.function = FunctionsIO.readTabulatedFunction(reader, factoryService.getFactory());
+                    }
+                } else if (fileName.endsWith(".bin")) {
+                    this.function = FunctionsIO.deserialize(bufferedInputStream);
+                } else {
+                    throw new IOException("Неподдерживаемый формат файла");
+                }
+                updateChart();
             } catch (IOException | ClassNotFoundException e) {
-                JOptionPane.showMessageDialog(this, "Ошибка загрузки функции", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Ошибка загрузки функции: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    // Метод для сохранения функции в файл
-    private void saveFunction(ActionEvent event) {
-        if (function == null) {
-            JOptionPane.showMessageDialog(this, "Функция не создана", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
+    private void saveFunction(ActionEvent actionEvent) {
         JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showSaveDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
+
+        // Добавляем фильтры файлов
+        javax.swing.filechooser.FileNameExtensionFilter allFormatsFilter =
+                new javax.swing.filechooser.FileNameExtensionFilter("Все поддерживаемые файлы", "json", "xml", "bin");
+        fileChooser.setFileFilter(allFormatsFilter); // Устанавливаем его как начальный
+        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("JSON файлы", "json"));
+        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("XML файлы", "xml"));
+        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Бинарные файлы", "bin"));
+
+        int returnValue = fileChooser.showSaveDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            try (FileOutputStream fileOutputStream = new FileOutputStream(file);
-                 BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream)) {
-                FunctionsIO.serialize(bufferedOutputStream, function);
+            String fileName = file.getName().toLowerCase();
+
+            // Определяем выбранный фильтр
+            String selectedExtension = "";
+            javax.swing.filechooser.FileFilter selectedFilter = fileChooser.getFileFilter();
+            if (selectedFilter.getDescription().contains("JSON")) {
+                selectedExtension = ".json";
+            } else if (selectedFilter.getDescription().contains("XML")) {
+                selectedExtension = ".xml";
+            } else if (selectedFilter.getDescription().contains("Бинарные")) {
+                selectedExtension = ".bin";
+            }
+
+            // Автоматически добавляем расширение, если его нет
+            if (!fileName.endsWith(".json") && !fileName.endsWith(".xml") && !fileName.endsWith(".bin")) {
+                file = new File(file.getAbsolutePath() + selectedExtension);
+            }
+
+            try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file))) {
+                TabulatedFunction function = this.function;
+                if (file.getName().endsWith(".json") || file.getName().endsWith(".xml")) {
+                    try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(bufferedOutputStream))) {
+                        FunctionsIO.writeTabulatedFunction(writer, function);
+                    }
+                } else if (file.getName().endsWith(".bin")) {
+                    FunctionsIO.serialize(bufferedOutputStream, function);
+                } else {
+                    throw new IOException("Неподдерживаемый формат файла");
+                }
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Ошибка сохранения функции", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Ошибка сохранения функции: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-
     // Метод для вычисления значения в произвольной точке
     private void calculateValueAtPoint(ActionEvent event) {
         if (function == null) {

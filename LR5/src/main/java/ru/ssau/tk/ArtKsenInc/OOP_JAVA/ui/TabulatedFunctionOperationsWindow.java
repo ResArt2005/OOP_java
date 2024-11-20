@@ -62,15 +62,15 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         secondTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
         resultTableModel = new DefaultTableModel(new Object[]{"x", "y"}, 0);
 
-        firstFunctionTable = createTable(firstTableModel, true, firstFunction);
-        secondFunctionTable = createTable(secondTableModel, true, secondFunction);
-        resultFunctionTable = createTable(resultTableModel, false, resultFunction);
+        firstFunctionTable = createTable(firstTableModel, true, operand_1);
+        secondFunctionTable = createTable(secondTableModel, true, operand_2);
+        resultFunctionTable = createTable(resultTableModel, false, -1);
 
         // Панели для таблиц и кнопок
         JPanel firstFunctionPanel = createFunctionPanel("Первая функция", firstFunctionTable,
-                _ -> createFunction(operand_1), _ -> loadFunction(operand_1), _ -> saveFunction(operand_1), _-> DeleteValueInTB(firstTableModel, firstFunction), _-> InsertValueInTB(firstTableModel, firstFunction));
+                _ -> createFunction(operand_1), _ -> loadFunction(operand_1), _ -> saveFunction(operand_1), _ -> DeleteValueInTB(firstTableModel, firstFunction), _ -> InsertValueInTB(firstTableModel, firstFunction));
         JPanel secondFunctionPanel = createFunctionPanel("Вторая функция", secondFunctionTable,
-                _ -> createFunction(operand_2), _ -> loadFunction(operand_2), _ -> saveFunction(operand_2), _-> DeleteValueInTB(secondTableModel, secondFunction), _-> InsertValueInTB(secondTableModel, secondFunction));
+                _ -> createFunction(operand_2), _ -> loadFunction(operand_2), _ -> saveFunction(operand_2), _ -> DeleteValueInTB(secondTableModel, secondFunction), _ -> InsertValueInTB(secondTableModel, secondFunction));
         JPanel resultFunctionPanel = createResultPanel();
 
         // Панель с операциями
@@ -167,7 +167,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         return panel;
     }
 
-    private JTable createTable(DefaultTableModel tableModel, boolean editable, TabulatedFunction targetFunction) {
+    private JTable createTable(DefaultTableModel tableModel, boolean editable, int operand) {
         JTable table = new JTable(tableModel) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -176,16 +176,32 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         };
         // Добавляем слушатель изменений модели таблицы
         tableModel.addTableModelListener(e -> {
-            if (targetFunction != null && e.getType() == TableModelEvent.UPDATE) {
-                int row = e.getFirstRow();
-                int column = e.getColumn();
+            if (operand == operand_1) {
+                if (firstFunction != null && e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
 
-                if (column == 1) { // Обновляем только значения Y
-                    try {
-                        double newValue = Double.parseDouble(tableModel.getValueAt(row, column).toString());
-                        targetFunction.setY(row, newValue); // Синхронизация с функцией
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(table, "Введите корректное числовое значение", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    if (column == 1) { // Обновляем только значения Y
+                        try {
+                            double newValue = Double.parseDouble(tableModel.getValueAt(row, column).toString());
+                            firstFunction.setY(row, newValue); // Синхронизация с функцией
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(table, "Введите корректное числовое значение", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            } else if (operand == operand_2) {
+                if (secondFunction != null && e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
+
+                    if (column == 1) { // Обновляем только значения Y
+                        try {
+                            double newValue = Double.parseDouble(tableModel.getValueAt(row, column).toString());
+                            secondFunction.setY(row, newValue); // Синхронизация с функцией
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(table, "Введите корректное числовое значение", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
@@ -277,12 +293,24 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
     private void loadFunction(int operand) {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Все поддерживаемые файлы", "json", "xml", "bin"));
+        fileChooser.setAcceptAllFileFilterUsed(true);
+
         int returnValue = fileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            try (FileInputStream fileInputStream = new FileInputStream(file);
-                 BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
-                TabulatedFunction function = FunctionsIO.deserialize(bufferedInputStream);
+            String fileName = file.getName().toLowerCase();
+            try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file))) {
+                TabulatedFunction function;
+                if (fileName.endsWith(".json") || fileName.endsWith(".xml")) {
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream))) {
+                        function = FunctionsIO.readTabulatedFunction(reader, operationService.getFactory());
+                    }
+                } else if (fileName.endsWith(".bin")) {
+                    function = FunctionsIO.deserialize(bufferedInputStream);
+                } else {
+                    throw new IOException("Неподдерживаемый формат файла");
+                }
                 if (operand == operand_1) {
                     firstFunction = function;
                     updateTableWithFunction(firstTableModel, firstFunction);
@@ -296,15 +324,50 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
         }
     }
 
+
     private void saveFunction(int operand) {
         JFileChooser fileChooser = new JFileChooser();
+
+        // Добавляем фильтры файлов
+        javax.swing.filechooser.FileNameExtensionFilter allFormatsFilter =
+                new javax.swing.filechooser.FileNameExtensionFilter("Все поддерживаемые файлы", "json", "xml", "bin");
+        fileChooser.setFileFilter(allFormatsFilter); // Устанавливаем его как начальный
+        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("JSON файлы", "json"));
+        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("XML файлы", "xml"));
+        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Бинарные файлы", "bin"));
+
         int returnValue = fileChooser.showSaveDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            try (FileOutputStream fileOutputStream = new FileOutputStream(file);
-                 BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream)) {
+            String fileName = file.getName().toLowerCase();
+
+            // Определяем выбранный фильтр
+            String selectedExtension = "";
+            javax.swing.filechooser.FileFilter selectedFilter = fileChooser.getFileFilter();
+            if (selectedFilter.getDescription().contains("JSON")) {
+                selectedExtension = ".json";
+            } else if (selectedFilter.getDescription().contains("XML")) {
+                selectedExtension = ".xml";
+            } else if (selectedFilter.getDescription().contains("Бинарные")) {
+                selectedExtension = ".bin";
+            }
+
+            // Автоматически добавляем расширение, если его нет
+            if (!fileName.endsWith(".json") && !fileName.endsWith(".xml") && !fileName.endsWith(".bin")) {
+                file = new File(file.getAbsolutePath() + selectedExtension);
+            }
+
+            try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file))) {
                 TabulatedFunction function = (operand == operand_1) ? firstFunction : (operand == operand_2) ? secondFunction : resultFunction;
-                FunctionsIO.serialize(bufferedOutputStream, function);
+                if (file.getName().endsWith(".json") || file.getName().endsWith(".xml")) {
+                    try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(bufferedOutputStream))) {
+                        FunctionsIO.writeTabulatedFunction(writer, function);
+                    }
+                } else if (file.getName().endsWith(".bin")) {
+                    FunctionsIO.serialize(bufferedOutputStream, function);
+                } else {
+                    throw new IOException("Неподдерживаемый формат файла");
+                }
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Ошибка сохранения функции: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
@@ -347,6 +410,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
             }
         }
     }
+
     private void DeleteValueInTB(DefaultTableModel tableModel, TabulatedFunction function) {
 
         if (function == null) {
@@ -378,6 +442,7 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
             }
         }
     }
+
     // Обновление таблицы значениями из табулированной функции
     private void updateTableWithFunction(DefaultTableModel tableModel, TabulatedFunction function) {
         tableModel.setRowCount(0); // Очищаем таблицу
