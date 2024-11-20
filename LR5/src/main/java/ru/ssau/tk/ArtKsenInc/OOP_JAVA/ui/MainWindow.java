@@ -2,7 +2,6 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedDifferentialOperator;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ButtonsDesign;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.RoundedLabel;
@@ -32,30 +31,30 @@ public class MainWindow extends JFrame {
         setLayout(new BorderLayout());
 
         // Устанавливаем цвет фона окна
-        getContentPane().setBackground(ConstantColors.FRENCH_VIOLET);
+        getContentPane().setBackground(ConstantColors.RICH_PURPLE);
 
         // Панель для кнопок с центральным размещением
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(5, 1, 10, 10));  // Сетка 5 на 1 с отступами
-        buttonPanel.setBackground(ConstantColors.FRENCH_VIOLET);
+        buttonPanel.setBackground(ConstantColors.RICH_PURPLE);
 
         // Кнопка для открытия окна настроек
-        JButton settingsButton = createRoundedButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton settingsButton = createRoundedButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         settingsButton.addActionListener(_ -> openSettingsWindow());
 
         // Кнопка для операций с функциями
-        JButton operationsButton = createRoundedButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton operationsButton = createRoundedButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         operationsButton.addActionListener(_ -> openTabulatedFunctionOperationsWindow());
 
         // Кнопка для операции дифференцирования
-        JButton differentialOperation = createRoundedButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton differentialOperation = createRoundedButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         differentialOperation.addActionListener(_ -> TabulatedFunctionDifferentialOperationsWindow());
 
-        JButton TBEditor = createRoundedButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton TBEditor = createRoundedButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         TBEditor.addActionListener(_ -> FunctionEditorWindow());
 
         // Кнопка для перехода в окно вычисления интеграла
-        JButton integralOperationButton = createRoundedButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton integralOperationButton = createRoundedButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         integralOperationButton.addActionListener(_ -> openTabulatedFunctionIntegralOperationsWindow());
 
         // Добавляем кнопки в панель

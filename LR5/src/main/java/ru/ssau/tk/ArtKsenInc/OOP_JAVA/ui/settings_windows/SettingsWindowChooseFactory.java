@@ -39,7 +39,7 @@ public class SettingsWindowChooseFactory extends JDialog {
         group.add(listFactoryButton);
 
         // Кнопка для сохранения выбора
-        JButton saveButton = ButtonsDesign.createStyledButton("Сохранить", ConstantFonts.Open_Sans_Bold, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton saveButton = ButtonsDesign.createStyledButton("Сохранить", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         saveButton.addActionListener(_ -> {
             if (arrayFactoryButton.isSelected()) {
                 factoryService.setFactory(new ArrayTabulatedFunctionFactory());

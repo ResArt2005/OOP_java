@@ -37,7 +37,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         // Панель ввода количества точек
         JPanel inputPanel = new JPanel(new FlowLayout());
         inputPanel.setOpaque(true);
-        inputPanel.setBackground(ConstantColors.FRENCH_VIOLET);
+        inputPanel.setBackground(ConstantColors.RICH_PURPLE);
 
         RoundedLabel pointCountLabel = new RoundedLabel("Количество точек:", 10);
         pointCountLabel.setFont(ConstantFonts.Open_Sans_Bold);
@@ -58,12 +58,12 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
             @Override
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component component = super.prepareRenderer(renderer, row, column);
-                component.setBackground(ConstantColors.FRENCH_VIOLET);
+                component.setBackground(ConstantColors.RICH_PURPLE);
                 return component;
             }
         };
         table.setDefaultEditor(Object.class, new NumericCellEditor());
-        table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+        table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
         table.setRowHeight(30);
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -73,7 +73,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
 
         // Панель кнопок
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(ConstantColors.FRENCH_VIOLET);
+        buttonPanel.setBackground(ConstantColors.RICH_PURPLE);
         JButton createFunctionButton = createStyledButton("Создать функцию");
         buttonPanel.add(createFunctionButton);
 
@@ -134,7 +134,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
-        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setBackground(ConstantColors.RICH_PURPLE);
         button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении

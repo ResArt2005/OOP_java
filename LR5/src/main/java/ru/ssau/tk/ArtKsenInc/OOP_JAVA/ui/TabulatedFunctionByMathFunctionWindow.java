@@ -8,14 +8,12 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionScanner;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ButtonsDesign;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.CompositeFunctionStorage;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Map;
 
 public class TabulatedFunctionByMathFunctionWindow extends JDialog {
@@ -44,7 +42,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         // Панель для ввода параметров
         JPanel inputPanel = new JPanel(new GridLayout(5, 2));
         inputPanel.setBackground(ConstantColors.DARK_PURPLE);
-        JButton compositeFunctionButton = ButtonsDesign.createStyledButton("Создать сложную функцию", ConstantFonts.Open_Sans_Bold, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton compositeFunctionButton = ButtonsDesign.createStyledButton("Создать сложную функцию", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
         compositeFunctionButton.addActionListener(_ -> openCompositeFunctionCreationWindow());
         // Выпадающий список функций
         JLabel functionLabel = new JLabel("Выберите функцию:");
@@ -52,7 +50,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         functionLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         functionComboBox = new JComboBox<>(functionMap.keySet().toArray(new String[0]));
         functionComboBox.setFont(ConstantFonts.Open_Sans_Bold);
-        functionComboBox.setBackground(ConstantColors.FRENCH_VIOLET);
+        functionComboBox.setBackground(ConstantColors.RICH_PURPLE);
         functionComboBox.setForeground(ConstantColors.TIFFANY_BLUE);
 
         // Поля для ввода интервалов и количества точек
@@ -61,7 +59,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         leftBoundLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         leftBoundField = new JTextField();
         leftBoundField.setFont(ConstantFonts.Open_Sans_Bold);
-        leftBoundField.setBackground(ConstantColors.FRENCH_VIOLET);
+        leftBoundField.setBackground(ConstantColors.RICH_PURPLE);
         leftBoundField.setForeground(ConstantColors.TIFFANY_BLUE);
         ((AbstractDocument) leftBoundField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
         JLabel rightBoundLabel = new JLabel("Правая граница:");
@@ -69,7 +67,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         rightBoundLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         rightBoundField = new JTextField();
         rightBoundField.setFont(ConstantFonts.Open_Sans_Bold);
-        rightBoundField.setBackground(ConstantColors.FRENCH_VIOLET);
+        rightBoundField.setBackground(ConstantColors.RICH_PURPLE);
         rightBoundField.setForeground(ConstantColors.TIFFANY_BLUE);
         ((AbstractDocument) rightBoundField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
         JLabel pointsCountLabel = new JLabel("Количество точек:");
@@ -77,7 +75,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         pointsCountLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         pointsCountField = new JTextField();
         pointsCountField.setFont(ConstantFonts.Open_Sans_Bold);
-        pointsCountField.setBackground(ConstantColors.FRENCH_VIOLET);
+        pointsCountField.setBackground(ConstantColors.RICH_PURPLE);
         pointsCountField.setForeground(ConstantColors.TIFFANY_BLUE);
         ((AbstractDocument) pointsCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
 
@@ -150,7 +148,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
-        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setBackground(ConstantColors.RICH_PURPLE);
         button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении

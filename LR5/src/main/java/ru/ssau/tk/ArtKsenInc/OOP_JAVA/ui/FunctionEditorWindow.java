@@ -88,7 +88,7 @@ public class FunctionEditorWindow extends JDialog {
                 false
         );
         chartPanel = new ChartPanel(chart);
-        chartPanel.setBackground(ConstantColors.FRENCH_VIOLET);
+        chartPanel.setBackground(ConstantColors.RICH_PURPLE);
         chart.getTitle().setPaint(ConstantColors.BLACK);
         chart.getXYPlot().setBackgroundPaint(ConstantColors.DARK_PURPLE);
         add(chartPanel, BorderLayout.CENTER);

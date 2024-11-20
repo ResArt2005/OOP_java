@@ -40,7 +40,7 @@ public class CompositeFunctionCreationWindow extends JDialog {
         functionsCountLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         functionsCountField = new JTextField(10);
         functionsCountField.setFont(ConstantFonts.Open_Sans_Bold);
-        functionsCountField.setBackground(ConstantColors.FRENCH_VIOLET);
+        functionsCountField.setBackground(ConstantColors.RICH_PURPLE);
         functionsCountField.setForeground(ConstantColors.TIFFANY_BLUE);
 
         // Поле для ввода названия функции
@@ -49,7 +49,7 @@ public class CompositeFunctionCreationWindow extends JDialog {
         functionNameLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         functionNameField = new JTextField(10);
         functionNameField.setFont(ConstantFonts.Open_Sans_Bold);
-        functionNameField.setBackground(ConstantColors.FRENCH_VIOLET);
+        functionNameField.setBackground(ConstantColors.RICH_PURPLE);
         functionNameField.setForeground(ConstantColors.TIFFANY_BLUE);
 
         // Добавляем компоненты на панель
@@ -96,7 +96,7 @@ public class CompositeFunctionCreationWindow extends JDialog {
                     label.setForeground(ConstantColors.TIFFANY_BLUE);
                     JComboBox<String> comboBox = new JComboBox<>(functionMap.keySet().toArray(new String[0]));
                     comboBox.setFont(ConstantFonts.Open_Sans_Bold);
-                    comboBox.setBackground(ConstantColors.FRENCH_VIOLET);
+                    comboBox.setBackground(ConstantColors.RICH_PURPLE);
                     comboBox.setForeground(ConstantColors.TIFFANY_BLUE);
                     functionComboBoxes[i] = comboBox;
                     selectionPanel.add(label);
@@ -137,7 +137,7 @@ public class CompositeFunctionCreationWindow extends JDialog {
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
-        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setBackground(ConstantColors.RICH_PURPLE);
         button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении

@@ -130,7 +130,7 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
-        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setBackground(ConstantColors.RICH_PURPLE);
         button.setForeground(ConstantColors.TIFFANY_BLUE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
@@ -186,9 +186,9 @@ public class TabulatedFunctionDifferentialOperationsWindow extends JDialog {
         });
         // Установка кастомного рендера для ячеек таблицы
         table.getColumnModel().getColumn(0).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
         table.getColumnModel().getColumn(1).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.FRENCH_VIOLET, ConstantColors.FRENCH_VIOLET, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
 
         table.setRowHeight(25);  // Высота строки
 
