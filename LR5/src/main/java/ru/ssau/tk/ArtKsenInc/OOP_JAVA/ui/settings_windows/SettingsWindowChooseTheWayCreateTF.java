@@ -4,6 +4,8 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.TabulatedFunctionByArraysWindow;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.TabulatedFunctionByMathFunctionWindow;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,24 +14,29 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
     private TabulatedFunction function;
     private final TabulatedFunctionOperationService factoryService;
     private JFrame owner;
+
     public SettingsWindowChooseTheWayCreateTF(JFrame owner, TabulatedFunctionOperationService factoryService) {
         super(owner, "Создание табулированной функции", true);  // Модальное окно
         this.owner = owner;
         this.factoryService = factoryService;
-        setSize(500, 100);
+        setSize(500, 150);
         setLocationRelativeTo(owner);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        // Установка фона и шрифта для всего окна
+        getContentPane().setBackground(ConstantColors.INDIGO);
+
         // Кнопка для открытия окна TabulatedFunctionByArraysWindow
-        JButton arrayFactoryButton = new JButton("Создать функцию по массивам");
+        JButton arrayFactoryButton = createStyledButton("Создать функцию по массивам");
         arrayFactoryButton.addActionListener(_ -> openTabulatedFunctionByArraysWindow());
 
         // Кнопка для открытия окна TabulatedFunctionByMathFunctionWindow
-        JButton listFactoryButton = new JButton("Создать функцию по математической функции");
+        JButton listFactoryButton = createStyledButton("Создать функцию по математической функции");
         listFactoryButton.addActionListener(_ -> openTabulatedFunctionByMathFunctionWindow());
 
         JPanel panel = new JPanel();
+        panel.setBackground(ConstantColors.INDIGO);
         panel.add(arrayFactoryButton);
         panel.add(listFactoryButton);
 
@@ -39,6 +46,7 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
     // Метод для открытия окна TabulatedFunctionByArraysWindow
     private void openTabulatedFunctionByArraysWindow() {
         TabulatedFunctionByArraysWindow arraysWindow = new TabulatedFunctionByArraysWindow(owner, factoryService.getFactory());
+        arraysWindow.setVisible(true);
         function = arraysWindow.getTabulatedFunction(); // Получаем функцию после закрытия окна
         dispose(); // Закрываем текущее окно после выбора
     }
@@ -46,11 +54,23 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
     // Метод для открытия окна TabulatedFunctionByMathFunctionWindow
     private void openTabulatedFunctionByMathFunctionWindow() {
         TabulatedFunctionByMathFunctionWindow mathWindow = new TabulatedFunctionByMathFunctionWindow(owner, factoryService.getFactory());
+        mathWindow.setVisible(true);
         function = mathWindow.getTabulatedFunction(); // Получаем функцию после закрытия окна
         dispose(); // Закрываем текущее окно после выбора
     }
 
     public TabulatedFunction getTabulatedFunction() {
         return function;  // Возвращаем выбранную или созданную функцию
+    }
+
+    // Метод для создания стилизованной кнопки
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(ConstantFonts.Open_Sans_Bold);
+        button.setBackground(ConstantColors.FRENCH_VIOLET);
+        button.setForeground(ConstantColors.CYAN);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
+        return button;
     }
 }
