@@ -70,7 +70,7 @@ public class MainWindow extends JFrame {
 
         // Создание и добавление заголовка с закругленными краями
         RoundedLabel headerLabel = new RoundedLabel("Главное меню", 20);
-        headerLabel.setBackground(ConstantColors.FRENCH_VIOLET);
+        headerLabel.setBackground(ConstantColors.DARK_BLUE);
         headerLabel.setForeground(ConstantColors.TIFFANY_BLUE);
         headerLabel.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(24f)); // Увеличенный шрифт для заголовка
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
