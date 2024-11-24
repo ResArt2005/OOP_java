@@ -1,10 +1,7 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
-
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
 
 import java.util.Arrays;
-//import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionInfo;
-//@MathFunctionInfo(name = "Метод Чаплыгина", priority = 2)
 public class MethodChapliyginaFunction implements MathFunction {
     private MathDerivativeAndIntegral equation;
     private double x0;  // начальная точка

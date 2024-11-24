@@ -54,14 +54,7 @@ public class StrictTabulatedFunction implements TabulatedFunction{
             throw new UnsupportedOperationException();
         return getY(index);
     }
-    @Override
-    public void insert(double x, double y){
-        tabulatedFunction.insert(x, y);
-    }
-    @Override
-    public void remove(int index){
-        tabulatedFunction.remove(index);
-    }
+
     @Override
     public Iterator<Point> iterator() {
         return tabulatedFunction.iterator();

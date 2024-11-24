@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class SumEquationFunction implements MathDerivativeAndIntegral {
     MathDerivativeAndIntegral[] equation;
-    public SumEquationFunction(MathDerivativeAndIntegral[] func){
-        equation = Arrays.copyOf(func, func.length);
+    public SumEquationFunction(MathDerivativeAndIntegral[] funcs){
+        equation = Arrays.copyOf(funcs, funcs.length);
     }
     @Override
     public double apply(double x) {

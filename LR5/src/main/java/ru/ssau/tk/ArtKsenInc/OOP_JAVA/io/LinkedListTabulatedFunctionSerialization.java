@@ -1,7 +1,7 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.io;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.AInDegreeXFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.AInDegreeXFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedDifferentialOperator;
 

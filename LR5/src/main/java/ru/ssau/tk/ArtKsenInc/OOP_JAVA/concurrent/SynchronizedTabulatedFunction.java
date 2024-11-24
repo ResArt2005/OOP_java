@@ -83,14 +83,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
             }
         };
     }
-    @Override
-    public synchronized void insert(double x, double y){
-        function.insert(x, y);
-    }
-    @Override
-    public synchronized void remove(int index){
-        function.remove(index);
-    }
+
     public synchronized <T> T doSynchronously(Operation<T> operation) {
         return operation.apply(this);
     }

@@ -8,14 +8,14 @@ import java.util.NoSuchElementException;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable, Serializable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removeable, Serializable {
     @Serial
     private static final long serialVersionUID = 3154741463685093949L;
     private double[] xValues;
     private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length < 2 && yValues.length < 2) throw new IllegalArgumentException("Таблица должна не меньше 2 строк!");
+        if (xValues.length < 2 && yValues.length < 2) throw new IllegalArgumentException();
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
         this.xValues = Arrays.copyOf(xValues, xValues.length);

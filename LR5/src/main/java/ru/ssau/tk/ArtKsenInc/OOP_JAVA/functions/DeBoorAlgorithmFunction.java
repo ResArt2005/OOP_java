@@ -3,9 +3,6 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
 import java.util.Arrays;
 
 // Вычисление сплайна S(x) по алгоритму де Бура.
-//import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionInfo;
-
-//@MathFunctionInfo(name = "Алгоритм Де Бура", priority = 2)
 public class DeBoorAlgorithmFunction implements MathFunction {
     private final double[] nodeArray; // Массив узлов
     private final double[] controlPoints; // Массив контрольных точек

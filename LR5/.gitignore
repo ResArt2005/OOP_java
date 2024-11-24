@@ -38,5 +38,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/locale_functions/
-/src/main/resources/saved_tabulated_functions/composite_functions.dat

@@ -3,7 +3,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.SqrFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.AInDegreeXFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.AInDegreeXFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedDifferentialOperator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

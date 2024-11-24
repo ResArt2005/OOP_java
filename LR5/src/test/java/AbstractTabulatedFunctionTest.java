@@ -127,16 +127,6 @@ class AbstractTabulatedFunctionTest {
         public Iterator<Point> iterator() {
             return null;
         }
-
-        @Override
-        public void insert(double x, double y) {
-
-        }
-
-        @Override
-        public void remove(int index) {
-
-        }
     }
 
     MockTabulatedFunction obj = mockTabulatedFunction;
