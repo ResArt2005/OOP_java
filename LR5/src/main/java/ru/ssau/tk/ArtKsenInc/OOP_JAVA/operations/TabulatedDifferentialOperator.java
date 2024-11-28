@@ -49,7 +49,7 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         } else {
             syncFunction = new SynchronizedTabulatedFunction(function);
         }
-        return syncFunction.doSynchronously(_ ->
+        return syncFunction.doSynchronously(e ->
                 derive(syncFunction));
     }
 }
