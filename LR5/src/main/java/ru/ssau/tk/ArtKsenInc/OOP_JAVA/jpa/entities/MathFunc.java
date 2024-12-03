@@ -1,11 +1,7 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "MathFunc")
 public class MathFunc {
@@ -31,4 +27,36 @@ public class MathFunc {
         this.hash = hash;
     }
 
+    // Геттеры и сеттеры
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Double getX() {
+        return x;
+    }
+
+    public void setX(Double x) {
+        this.x = x;
+    }
+
+    public Double getY() {
+        return y;
+    }
+
+    public void setY(Double y) {
+        this.y = y;
+    }
+
+    public Long getHash() {
+        return hash;
+    }
+
+    public void setHash(Long hash) {
+        this.hash = hash;
+    }
 }
