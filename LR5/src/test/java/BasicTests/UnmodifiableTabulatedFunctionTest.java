@@ -1,3 +1,5 @@
+package BasicTests;
+
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,9 +8,9 @@ import org.junit.jupiter.api.function.Executable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-class StrictTabulatedFunctionTest {
-    StrictTabulatedFunction obj_LinkedList = new StrictTabulatedFunction(new LinkedListTabulatedFunction(new SqrFunction(), 0, 10, 5));
-    StrictTabulatedFunction obj_Array = new StrictTabulatedFunction(new LinkedListTabulatedFunction(new DeBoorAlgorithmFunction(new double[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new double[]{0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100}, 1), 5, 9, 4));
+class UnmodifiableTabulatedFunctionTest {
+    UnmodifiableTabulatedFunction obj_LinkedList = new UnmodifiableTabulatedFunction(new LinkedListTabulatedFunction(new SqrFunction(), 0, 10, 5));
+    UnmodifiableTabulatedFunction obj_Array = new UnmodifiableTabulatedFunction(new LinkedListTabulatedFunction(new DeBoorAlgorithmFunction(new double[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new double[]{0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100}, 1), 5, 9, 4));
     @Test
     void getCount() {
         Assertions.assertEquals(5, obj_LinkedList.getCount());
@@ -29,10 +31,18 @@ class StrictTabulatedFunctionTest {
 
     @Test
     void setY() {
-        obj_LinkedList.setY(3, 999);
-        obj_Array.setY(2, 999);
-        Assertions.assertEquals(999, obj_LinkedList.getY(3));
-        Assertions.assertEquals(999, obj_Array.getY(2));
+        Assertions.assertThrows(UnsupportedOperationException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj_LinkedList.setY(3, 999);
+            }
+        });
+        Assertions.assertThrows(UnsupportedOperationException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                obj_Array.setY(2, 999);
+            }
+        });
     }
 
     @Test
@@ -63,8 +73,6 @@ class StrictTabulatedFunctionTest {
     void apply() {
         Assertions.assertEquals(2.7386127875258306, obj_LinkedList.apply(7.5));
         Assertions.assertEquals(44.66666666666666, obj_Array.apply(7.6666666666666665));
-        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj_LinkedList.apply(15));
-        Assertions.assertThrows(UnsupportedOperationException.class, () -> obj_Array.apply(-1));
     }
 
     @Test

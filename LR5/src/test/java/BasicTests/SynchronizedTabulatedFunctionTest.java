@@ -1,3 +1,5 @@
+package BasicTests;
+
 import org.junit.jupiter.api.Test;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.concurrent.SynchronizedTabulatedFunction;

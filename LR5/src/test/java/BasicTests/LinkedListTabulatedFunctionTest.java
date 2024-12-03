@@ -1,3 +1,5 @@
+package BasicTests;
+
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.exceptions.InterpolationException;

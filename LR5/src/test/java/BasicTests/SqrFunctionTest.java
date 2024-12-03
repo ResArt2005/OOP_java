@@ -1,3 +1,5 @@
+package BasicTests;
+
 import java.lang.Math;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.SqrFunction;
 import org.junit.jupiter.api.Assertions;

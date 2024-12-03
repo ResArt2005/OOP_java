@@ -1,7 +1,10 @@
+package SpringTests;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathFunc;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.MathFuncRepos;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.web.service.MathFuncService;
@@ -10,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = Main.class)
 public class MathFuncServiceTest {
 
     @Autowired

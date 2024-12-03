@@ -1,3 +1,5 @@
+package BasicTests;
+
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.ZeroFunction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
