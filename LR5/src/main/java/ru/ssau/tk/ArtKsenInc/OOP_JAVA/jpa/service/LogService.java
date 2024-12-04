@@ -1,4 +1,4 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.web.service;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,7 +5,4 @@ public interface MathFunction {
     default CompositeFunction andThen(MathFunction afterFunction) {
         return new CompositeFunction(this, afterFunction);
     }
-    default int hash() {
-        return this.getClass().getName().hashCode();
-    }
 }

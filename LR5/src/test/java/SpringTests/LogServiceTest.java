@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.Log;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.LogRepos;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.web.service.LogService;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.service.LogService;
 import java.sql.Timestamp;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;

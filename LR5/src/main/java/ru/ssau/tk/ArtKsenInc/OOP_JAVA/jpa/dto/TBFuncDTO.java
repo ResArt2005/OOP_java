@@ -1,4 +1,4 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.web.dto;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MathFuncDTO {
+public class TBFuncDTO {
     private int id;
-    private double x;
-    private double y;
-    private long hash;
+    private double[] xValues;
+    private double[] yValues;
 }

@@ -4,29 +4,28 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @Entity
-@Table(name = "MathFunc")
-public class MathFunc {
-    // Геттеры и сеттеры
+@Table(name = "TBFunc")
+public class TBFunc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Setter
     @Column(nullable = false)
-    private Double x;
+    private double[] xValues;
 
+    @Setter
     @Column(nullable = false)
-    private Double y;
+    private double[] yValues;
 
+    public TBFunc() {}
 
-    public MathFunc() {
-    }
-
-    public MathFunc(Double x, Double y) {
-        this.x = x;
-        this.y = y;
+    public TBFunc(double[] xValues, double[] yValues) {
+        this.xValues = xValues;
+        this.yValues = yValues;
     }
 
 }

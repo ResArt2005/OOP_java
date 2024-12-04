@@ -1,4 +1,4 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.web.service;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,15 +29,6 @@ public class MathFuncService {
         return (List<MathFunc>) mathFuncRepository.findAll();
     }
 
-    // Метод для получения записей по хешу
-    public List<MathFunc> findByHash(long hash) {
-        return mathFuncRepository.findByHash(hash);
-    }
-
-    // Метод для получения записи по значению x и хешу
-    public MathFunc findByXAndHash(double x, long hash) {
-        return mathFuncRepository.findByXAndHash(x, hash);
-    }
 
     // Метод для обновления записи в базе данных
     @Transactional
@@ -51,17 +42,6 @@ public class MathFuncService {
         mathFuncRepository.deleteById(id);
     }
 
-    // Метод для удаления записей по хешу
-    @Transactional
-    public void deleteByHash(long hash) {
-        mathFuncRepository.deleteByHash(hash);
-    }
-
-    // Метод для удаления записи по значению x и хешу
-    @Transactional
-    public void deleteByXAndHash(double x, long hash) {
-        mathFuncRepository.deleteByXAndHash(x, hash);
-    }
 
     // Метод для удаления всех записей из базы данных
     @Transactional
