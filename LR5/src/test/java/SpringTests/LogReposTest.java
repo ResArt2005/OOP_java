@@ -1,5 +1,7 @@
 package SpringTests;
 
+import org.springframework.boot.test.context.SpringBootTest;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.Log;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.LogRepos;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class)
-@DataJpaTest
+@SpringBootTest(classes = Main.class)
 public class LogReposTest {
 
     @Autowired
@@ -32,6 +33,7 @@ public class LogReposTest {
 
     @Test
     public void testFindByOrderByTimestampDesc() {
+        logRepos.deleteAll();
         Log log1 = new Log("Message 1", new Timestamp(System.currentTimeMillis() - 1000));
         Log log2 = new Log("Message 2", new Timestamp(System.currentTimeMillis()));
         logRepos.save(log1);
