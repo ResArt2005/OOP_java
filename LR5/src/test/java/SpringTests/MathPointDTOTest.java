@@ -4,7 +4,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.MathPointDTO;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MathPointReposDTOTest {
+public class MathPointDTOTest {
 
     @Test
     public void testMathFuncDTOConstructor() {

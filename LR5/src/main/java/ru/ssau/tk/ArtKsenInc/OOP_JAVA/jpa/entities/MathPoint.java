@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "MathFunc")
+@Table(name = "MathPoint")
 public class MathPoint {
     // Геттеры и сеттеры
     @Id

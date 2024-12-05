@@ -13,7 +13,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = Main.class)
-public class MathPointReposServiceTest {
+public class MathPointServiceTest {
 
     @Autowired
     private MathPointService mathPointService;
