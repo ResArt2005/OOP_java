@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MathFuncDTO {
+public class MathPointDTO {
     private int id;
     private double x;
     private double y;

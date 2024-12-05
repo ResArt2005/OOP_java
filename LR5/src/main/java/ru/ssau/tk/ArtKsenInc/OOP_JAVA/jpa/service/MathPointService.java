@@ -3,36 +3,34 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathFunc;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.TBFunc;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.MathFuncRepos;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.MathPointRepos;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class MathFuncService {
+public class MathPointService {
 
-    private final MathFuncRepos mathFuncRepository;
+    private final MathPointRepos mathFuncRepository;
 
     @Autowired
-    public MathFuncService(MathFuncRepos mathFuncRepository) {
+    public MathPointService(MathPointRepos mathFuncRepository) {
         this.mathFuncRepository = mathFuncRepository;
     }
 
     // Метод для создания новой записи в базе данных
     @Transactional
-    public MathFunc create(MathFunc mathFunc) {
-        return mathFuncRepository.save(mathFunc);
+    public ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint create(ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint mathPoint) {
+        return mathFuncRepository.save(mathPoint);
     }
 
     // Метод для получения всех записей из базы данных
-    public Map<Integer, MathFunc> readAll() {
-        List<MathFunc> funcList = (List<MathFunc>)mathFuncRepository.findAll();
-        Map<Integer, MathFunc> funcMap = new HashMap<>();
+    public Map<Integer, ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint> readAll() {
+        List<ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint> funcList = (List<ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint>)mathFuncRepository.findAll();
+        Map<Integer, ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint> funcMap = new HashMap<>();
 
-        for (MathFunc func : funcList) {
+        for (ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint func : funcList) {
             funcMap.put(func.getId(), func);
         }
 
@@ -42,8 +40,8 @@ public class MathFuncService {
 
     // Метод для обновления записи в базе данных
     @Transactional
-    public MathFunc update(MathFunc mathFunc) {
-        return mathFuncRepository.save(mathFunc);
+    public ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint update(ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathPoint mathPoint) {
+        return mathFuncRepository.save(mathPoint);
     }
 
     // Метод для удаления записи из базы данных по идентификатору

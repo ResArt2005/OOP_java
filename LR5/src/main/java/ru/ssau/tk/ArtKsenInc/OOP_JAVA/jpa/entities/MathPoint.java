@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "MathFunc")
-public class MathFunc {
+public class MathPoint {
     // Геттеры и сеттеры
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class MathFunc {
     private Double y;
 
 
-    public MathFunc() {
+    public MathPoint() {
     }
 
-    public MathFunc(Double x, Double y) {
+    public MathPoint(Double x, Double y) {
         this.x = x;
         this.y = y;
     }
