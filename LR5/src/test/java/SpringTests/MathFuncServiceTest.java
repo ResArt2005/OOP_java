@@ -10,6 +10,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.MathFuncRepos;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.service.MathFuncService;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +44,7 @@ public class MathFuncServiceTest {
         mathFuncService.create(mathFunc1);
         mathFuncService.create(mathFunc2);
 
-        List<MathFunc> mathFuncs = mathFuncService.readAll();
+        Map<Integer, MathFunc> mathFuncs = mathFuncService.readAll();
         assertEquals(2, mathFuncs.size());
     }
 
@@ -66,7 +67,7 @@ public class MathFuncServiceTest {
         MathFunc createdMathFunc = mathFuncService.create(mathFunc);
 
         mathFuncService.deleteById(createdMathFunc.getId());
-        List<MathFunc> mathFuncs = mathFuncService.readAll();
+        Map<Integer, MathFunc> mathFuncs = mathFuncService.readAll();
         assertTrue(mathFuncs.isEmpty());
     }
 
@@ -79,7 +80,7 @@ public class MathFuncServiceTest {
         mathFuncService.create(mathFunc2);
 
         mathFuncService.deleteAll();
-        List<MathFunc> mathFuncs = mathFuncService.readAll();
+        Map<Integer, MathFunc> mathFuncs = mathFuncService.readAll();
         assertTrue(mathFuncs.isEmpty());
     }
 }

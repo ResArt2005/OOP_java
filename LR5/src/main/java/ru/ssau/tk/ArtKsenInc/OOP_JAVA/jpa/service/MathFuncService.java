@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathFunc;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.TBFunc;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.MathFuncRepos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MathFuncService {
@@ -25,8 +28,15 @@ public class MathFuncService {
     }
 
     // Метод для получения всех записей из базы данных
-    public List<MathFunc> readAll() {
-        return (List<MathFunc>) mathFuncRepository.findAll();
+    public Map<Integer, MathFunc> readAll() {
+        List<MathFunc> funcList = (List<MathFunc>)mathFuncRepository.findAll();
+        Map<Integer, MathFunc> funcMap = new HashMap<>();
+
+        for (MathFunc func : funcList) {
+            funcMap.put(func.getId(), func);
+        }
+
+        return funcMap;
     }
 
 
