@@ -1,11 +1,13 @@
 package SpringTests;
 
+import org.springframework.boot.test.context.SpringBootTest;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.LogDTO;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
-
+@SpringBootTest(classes = Main.class)
 public class LogDTOTest {
 
     @Test
