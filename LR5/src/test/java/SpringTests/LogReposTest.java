@@ -4,13 +4,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.Log;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.LogRepos;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -18,8 +13,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = Main.class)
-
-
 public class LogReposTest {
 
     @Autowired
