@@ -13,6 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = Main.class)
+
 public class LogServiceTest {
 
     @Autowired

@@ -5,7 +5,9 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.MathPointDTO;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest(classes = Main.class)
+
 public class MathPointDTOTest {
 
     @Test
