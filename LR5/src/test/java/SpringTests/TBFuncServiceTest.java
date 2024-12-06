@@ -1,5 +1,6 @@
 package SpringTests;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ class TBFuncServiceTest {
         TBFuncRepository.deleteAll();
     }
 
+    @AfterEach
+    public void tearDown() {
+        TBFuncRepository.deleteAll();
+    }
     @Test
     void create() {
         TBFunc mathFunc = new TBFunc(new double[]{1, 2, 3}, new double[]{1, 4, 9});

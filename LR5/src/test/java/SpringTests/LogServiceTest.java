@@ -1,5 +1,6 @@
 package SpringTests;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,10 @@ public class LogServiceTest {
     public void setUp() {
         logRepository.deleteAll();
     }
-
+    @AfterEach
+    public void tearDown() {
+        logRepository.deleteAll();
+    }
     @Test
     public void testCreate() {
         Log log = new Log("Test log", new Timestamp(System.currentTimeMillis()));

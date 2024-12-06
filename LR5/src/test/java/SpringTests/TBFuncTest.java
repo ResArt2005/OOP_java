@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = Main.class)
-
 public class TBFuncTest {
 
     @Test
