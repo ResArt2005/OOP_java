@@ -1,4 +1,6 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.myOwnFunctionsForEquation.MathDerivativeAndIntegral;
+
 import java.lang.Math;
 public class ExpFunction implements MathDerivativeAndIntegral {
     private final double constant;

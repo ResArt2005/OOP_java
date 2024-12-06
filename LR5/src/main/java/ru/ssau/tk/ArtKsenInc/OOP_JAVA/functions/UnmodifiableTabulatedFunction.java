@@ -1,8 +1,11 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions;
 
+import java.io.Serial;
 import java.util.Iterator;
 
 public class UnmodifiableTabulatedFunction implements TabulatedFunction{
+    @Serial
+    private static final long serialVersionUID = -305771999041743548L;
     private final TabulatedFunction tabulatedFunction;
     public UnmodifiableTabulatedFunction(TabulatedFunction tabulatedFunction){
         this.tabulatedFunction = tabulatedFunction;
