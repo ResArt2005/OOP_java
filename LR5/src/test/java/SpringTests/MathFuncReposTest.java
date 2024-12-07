@@ -1,5 +1,6 @@
 package SpringTests;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.CosFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathFunc;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.repository.MathFuncRepos;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
@@ -22,15 +23,9 @@ public class MathFuncReposTest {
     @Test
     public void testSaveAndFindMathFunc() {
         String name = "testFunction";
-        MathFunction function = new MathFunction() {
-            @Override
-            public double apply(double x) {
-                return x * x;
-            }
-        };
+        MathFunction function = new CosFunction();
         MathFunc mathFunc = new MathFunc(name, function);
         mathFuncRepos.save(mathFunc);
-
         Optional<MathFunc> foundMathFunc = mathFuncRepos.findById(mathFunc.getId());
         assertTrue(foundMathFunc.isPresent());
         assertEquals(name, foundMathFunc.get().getName());

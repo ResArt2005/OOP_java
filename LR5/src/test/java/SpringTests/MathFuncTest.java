@@ -1,5 +1,7 @@
 package SpringTests;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.CosFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.SinFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathFunc;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.CompositeFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
@@ -10,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = Main.class)
-
 public class MathFuncTest {
 
     @Test
@@ -22,12 +23,7 @@ public class MathFuncTest {
     @Test
     public void testAllArgsConstructor() {
         String name = "testFunction";
-        MathFunction function = new MathFunction() {
-            @Override
-            public double apply(double x) {
-                return x * x;
-            }
-        };
+        MathFunction function  = new CosFunction();
         MathFunc mathFunc = new MathFunc(name, function);
 
         assertEquals(name, mathFunc.getName());
@@ -38,12 +34,7 @@ public class MathFuncTest {
     public void testSettersAndGetters() {
         MathFunc mathFunc = new MathFunc();
         String name = "testFunction";
-        MathFunction function = new MathFunction() {
-            @Override
-            public double apply(double x) {
-                return x * x;
-            }
-        };
+        MathFunction function = new CosFunction();
 
         mathFunc.setName(name);
         mathFunc.setFunction(function);
@@ -54,18 +45,8 @@ public class MathFuncTest {
 
     @Test
     public void testCompositeFunction() {
-        MathFunction firstFunction = new MathFunction() {
-            @Override
-            public double apply(double x) {
-                return x + 1;
-            }
-        };
-        MathFunction secondFunction = new MathFunction() {
-            @Override
-            public double apply(double x) {
-                return x * x;
-            }
-        };
+        MathFunction firstFunction = new CosFunction();
+        MathFunction secondFunction = new SinFunction();
         CompositeFunction compositeFunction = new CompositeFunction(firstFunction, secondFunction);
 
         MathFunc mathFunc = new MathFunc("compositeFunction", compositeFunction);
