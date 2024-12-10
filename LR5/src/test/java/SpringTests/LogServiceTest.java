@@ -27,10 +27,7 @@ public class LogServiceTest {
     public void setUp() {
         logRepository.deleteAll();
     }
-    @AfterEach
-    public void tearDown() {
-        logRepository.deleteAll();
-    }
+
     @Test
     public void testCreate() {
         Log log = new Log("Test log", new Timestamp(System.currentTimeMillis()));

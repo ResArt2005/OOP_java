@@ -1,13 +1,10 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities;
 
-import com.fasterxml.jackson.databind.SerializationFeature;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.CompositeFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Entity
 @Getter
