@@ -51,7 +51,7 @@ public class UserServiceTest {
         User user2 = new User();
         userService.create(user1);
         userService.create(user2);
-        Map<Integer, User> result = userService.readAll();
+        Map<String, User> result = userService.readAll();
 
         assertEquals(2, result.size());
     }
@@ -80,7 +80,7 @@ public class UserServiceTest {
     @Test
     public void testGetById_UserNotFound() {
         userRepository.deleteAll();
-        Map<Integer, User> users = userService.readAll();
+        Map<String, User> users = userService.readAll();
 
         assertEquals(0, users.size());
     }

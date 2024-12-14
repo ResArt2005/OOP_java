@@ -28,12 +28,13 @@ public class UserService {
     }
 
     // Метод для получения всех записей из базы данных
-    public Map<Integer, User> readAll() {
+    @Transactional
+    public Map<String, User> readAll() {
         List<User> UserList = UserRepository.findAll();
-        Map<Integer, User> UserMap = new HashMap<>();
+        Map<String, User> UserMap = new HashMap<>();
 
         for (User func : UserList) {
-            UserMap.put(func.getId(), func);
+            UserMap.put(func.getToken(), func);
         }
 
         return UserMap;

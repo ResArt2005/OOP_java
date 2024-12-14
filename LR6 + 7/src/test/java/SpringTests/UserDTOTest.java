@@ -22,13 +22,11 @@ public class UserDTOTest {
         Integer id = 1;
         String token = "testToken";
         String login = "testLogin";
-        String password = "testPassword";
-        UserDTO userDTO = new UserDTO(id, token, login, password);
+        UserDTO userDTO = new UserDTO(id, token, login);
 
         assertEquals(id, userDTO.getId());
         assertEquals(token, userDTO.getToken());
         assertEquals(login, userDTO.getLogin());
-        assertEquals(password, userDTO.getPassword());
     }
 
     @Test
@@ -42,11 +40,9 @@ public class UserDTOTest {
         userDTO.setId(id);
         userDTO.setToken(token);
         userDTO.setLogin(login);
-        userDTO.setPassword(password);
 
         assertEquals(id, userDTO.getId());
         assertEquals(token, userDTO.getToken());
         assertEquals(login, userDTO.getLogin());
-        assertEquals(password, userDTO.getPassword());
     }
 }

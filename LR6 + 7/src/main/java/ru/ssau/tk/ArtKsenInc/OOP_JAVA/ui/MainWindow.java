@@ -132,9 +132,4 @@ public class MainWindow extends JFrame {
     private void openTabulatedFunctionIntegralOperationsWindow() {
         new TabulatedFunctionIntegralOperationsWindow(this, new TabulatedFunctionOperationService());
     }
-
-    public static void main(String[] args) {
-        // Создание и отображение главного окна
-        SwingUtilities.invokeLater(MainWindow::new);
-    }
 }

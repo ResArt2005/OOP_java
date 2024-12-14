@@ -37,7 +37,6 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
-
         <!-- Expression Parser -->
         <dependency>
             <groupId>net.objecthunter</groupId>
@@ -50,6 +49,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.2</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Lombok (Optional, compile-time only) -->
