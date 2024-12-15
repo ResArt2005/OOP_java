@@ -14,8 +14,8 @@ import java.util.Map;
 public class ChooseUserWindow extends JFrame {
     private final int WIDTH_WINDOW = 400; // Ширина окна
     private final int HEIGHT_WINDOW = 300; // Высота окна
-    private JTextField tokenField;
-    private JPasswordField passwordField;
+    public JTextField tokenField;
+    public JPasswordField passwordField;
 
     public ChooseUserWindow() {
         setTitle("Окно входа");
@@ -49,7 +49,7 @@ public class ChooseUserWindow extends JFrame {
         setVisible(true);
     }
 
-    private void attemptLogin() {
+    public void attemptLogin() {
         String token = tokenField.getText();
         String password = new String(passwordField.getPassword());
 
@@ -78,7 +78,7 @@ public class ChooseUserWindow extends JFrame {
     }
 
 
-    private void createNewUser() {
+    public void createNewUser() {
         // Генерация нового пользователя
         User newUser = new User("Unknown", "password");
 

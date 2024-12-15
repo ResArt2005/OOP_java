@@ -78,6 +78,21 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Mockito Core -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.12.4</version> <!-- Версия 3.4.0 и выше -->
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito Inline for mocking static methods -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>3.12.4</version> <!-- Версия 3.4.0 и выше -->
+            <scope>test</scope>
+        </dependency>
         <!-- Additional Dependencies -->
         <dependency>
             <groupId>org.jfree</groupId>
