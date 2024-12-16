@@ -33,8 +33,7 @@ public class ChooseUserWindow extends JFrame {
 
         // Поле для ввода токена
         tokenField = new JTextField();
-        RoundedLabel tokenLabel = new RoundedLabel("Введите ваш токен", 10, ConstantColors.RED_VIOLET);
-        tokenLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        RoundedLabel tokenLabel = createRoundedLabel("Введите ваш токен", 10, ConstantColors.RED_VIOLET, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.RED_VIOLET);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -49,8 +48,7 @@ public class ChooseUserWindow extends JFrame {
 
         // Поле для ввода пароля
         passwordField = new JPasswordField();
-        RoundedLabel passwordLabel = new RoundedLabel("Введите ваш пароль", 10, ConstantColors.RED_VIOLET);
-        passwordLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        RoundedLabel passwordLabel = createRoundedLabel("Введите ваш пароль", 10, ConstantColors.RED_VIOLET, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.RED_VIOLET);
 
         gbc.gridy = 2;
         gbc.gridwidth = 2;
@@ -83,6 +81,15 @@ public class ChooseUserWindow extends JFrame {
         add(buttonPanel, gbc);
 
         setVisible(true);
+    }
+
+    private RoundedLabel createRoundedLabel(String text, int borderRadius, Color borderColor, Color backgroundColor, Font font, Color foregroundColor) {
+        RoundedLabel label = new RoundedLabel(text, borderRadius, borderColor);
+        label.setBackground(backgroundColor);
+        label.setFont(font);
+        label.setForeground(foregroundColor);
+        label.setOpaque(true); // Устанавливаем непрозрачность в true, чтобы фон был виден
+        return label;
     }
 
     public void attemptLogin() {
@@ -181,11 +188,7 @@ public class ChooseUserWindow extends JFrame {
         panel.setBackground(ConstantColors.DEEP_PURPLE);
 
         // Создаем метку с сообщением об ошибке
-        RoundedLabel messageLabel = new RoundedLabel(message, 20, ConstantColors.RICH_PURPLE); // Устанавливаем пурпурный бордер
-        messageLabel.setForeground(ConstantColors.RED_VIOLET);
-        messageLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        messageLabel.setOpaque(true); // Устанавливаем непрозрачность в true, чтобы фон был виден
-        messageLabel.setBackground(ConstantColors.DEEP_PURPLE); // Устанавливаем фон метки
+        RoundedLabel messageLabel = createRoundedLabel(message, 20, ConstantColors.RICH_PURPLE, ConstantColors.DEEP_PURPLE, ConstantFonts.Open_Sans_Bold, ConstantColors.RED_VIOLET);
 
         // Добавляем метку на панель
         panel.add(messageLabel, BorderLayout.CENTER);
