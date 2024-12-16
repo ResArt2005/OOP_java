@@ -6,7 +6,6 @@ import java.awt.*;
 public class RoundedLabel extends JLabel {
     private int borderRadius;
     private Color borderColor;
-    private int borderThickness; // Толщина бордера
 
     // Конструктор с параметром цвета бордера и толщины бордера
     public RoundedLabel(String text, int borderRadius, Color borderColor) {
