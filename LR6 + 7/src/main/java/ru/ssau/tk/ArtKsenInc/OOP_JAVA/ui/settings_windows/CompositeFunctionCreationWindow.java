@@ -1,17 +1,18 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows;
 
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.CompositeFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionScanner;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.CompositeFunctionStorage;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Map;
 
 public class CompositeFunctionCreationWindow extends JDialog {
@@ -21,8 +22,9 @@ public class CompositeFunctionCreationWindow extends JDialog {
     private CompositeFunction compositeFunction;
 
     public CompositeFunctionCreationWindow(JFrame frame) {
-        super(frame, "Создание сложной функции (бета, не работает)", true);
+        super(frame, "Создание сложной функции", true);
         this.functionMap = MathFunctionScanner.getAnnotatedFunctions(); // Используем динамическое сканирование
+        this.functionMap.putAll(dbTools.getAllMathFunctionsAsNameAndMF());
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -42,7 +44,7 @@ public class CompositeFunctionCreationWindow extends JDialog {
         functionsCountField.setFont(ConstantFonts.Open_Sans_Bold);
         functionsCountField.setBackground(ConstantColors.RICH_PURPLE);
         functionsCountField.setForeground(ConstantColors.THISTLE);
-
+        ((AbstractDocument) functionsCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
         // Поле для ввода названия функции
         JLabel functionNameLabel = new JLabel("Название функции:");
         functionNameLabel.setFont(ConstantFonts.Open_Sans_Bold);
@@ -117,8 +119,9 @@ public class CompositeFunctionCreationWindow extends JDialog {
                     for (int i = 1; i < functionsCount - 1; i++) {
                         composite = composite.andThen(selectedFunctions[i]);
                     }
-                    compositeFunction = new CompositeFunction(selectedFunctions[functionsCount - 2], selectedFunctions[functionsCount - 1]);
-                    CompositeFunctionStorage.saveCompositeFunction(functionName, compositeFunction);
+                    compositeFunction = new CompositeFunction(composite, selectedFunctions[functionsCount - 1]);
+                    dbTools.createMathFunction(functionName, compositeFunction);
+                    dbTools.createLog("Создана математическая функция " + functionName);
                     JOptionPane.showMessageDialog(CompositeFunctionCreationWindow.this, "Функция успешно создана и сохранена!");
                     // Закрываем окно
                     dispose();
@@ -127,8 +130,6 @@ public class CompositeFunctionCreationWindow extends JDialog {
                 JOptionPane.showMessageDialog(CompositeFunctionCreationWindow.this, "Некорректный ввод числа функций", "Ошибка", JOptionPane.ERROR_MESSAGE);
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(CompositeFunctionCreationWindow.this, ex.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
-            } catch (IOException | ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(CompositeFunctionCreationWindow.this, "Ошибка при сохранении функции: " + ex.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

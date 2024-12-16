@@ -6,6 +6,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.NumericCellEditor;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.*;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -122,6 +123,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
                 yValues[i] = Double.parseDouble(tableModel.getValueAt(i, 1).toString());
             }
             tabulatedFunction = factory.create(xValues, yValues);
+            dbTools.createTBFunction(xValues, yValues);
             JOptionPane.showMessageDialog(this, "Функция успешно создана!", "Успех", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (NumberFormatException e) {

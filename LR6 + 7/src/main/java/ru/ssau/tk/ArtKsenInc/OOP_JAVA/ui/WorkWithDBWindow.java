@@ -1,8 +1,13 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.RoundedLabel;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.LogsSettingsWindow;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.MathFuncSettingsWindow;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.TBSettingsWindow;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.UserSettingsWindow;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
 import javax.swing.*;
@@ -12,9 +17,11 @@ public class WorkWithDBWindow extends JDialog {
     private final int WIDTH_WINDOW = 600;
     private final int HEIGHT_WINDOW = 400;
     JFrame owner;
-
-    public WorkWithDBWindow(JFrame frame) {
+TabulatedFunctionOperationService factoryService;
+    public WorkWithDBWindow(JFrame frame,TabulatedFunctionOperationService factoryService) {
         super(frame, "Взаимодействие с базой данных", true);
+        owner = frame;
+        this.factoryService = factoryService;
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -79,19 +86,19 @@ public class WorkWithDBWindow extends JDialog {
     }
 
     private void openUserSettingsWindow() {
-
+        new UserSettingsWindow(owner);
     }
 
     private void openMathFuncSettingsWindow() {
-
+        new MathFuncSettingsWindow(owner);
     }
 
     private void openTBSettingsWindow() {
-
+        new TBSettingsWindow(owner, factoryService);
     }
 
     private void openLogsSettingsWindow() {
-
+        new LogsSettingsWindow(owner);
     }
 
     private void Erase() {

@@ -10,6 +10,7 @@ public final class ConstantColors {
     public static final Color DARK_LILAC = Color.decode("#6229ba");
     public static final Color DEEP_BLUE = Color.decode("#29164c");
     public static final Color DEEP_PURPLE = Color.decode("#673AB7");
+    public static final Color DARK_GREEN = Color.decode("#00B300");
     public ConstantColors(){
         throw new RuntimeException();
     }
