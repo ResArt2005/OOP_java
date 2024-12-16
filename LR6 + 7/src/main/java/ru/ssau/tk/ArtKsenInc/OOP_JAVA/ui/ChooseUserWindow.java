@@ -24,20 +24,46 @@ public class ChooseUserWindow extends JFrame {
         setTitle("Окно входа");
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(4, 1));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         // Установка фона и шрифта для всего окна
         getContentPane().setBackground(ConstantColors.DARK_PURPLE);
 
         // Поле для ввода токена
         tokenField = new JTextField();
-        add(new RoundedLabel("Введите ваш токен:", 10));
-        add(tokenField);
+        RoundedLabel tokenLabel = new RoundedLabel("Введите ваш токен:", 10);
+        tokenLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        tokenLabel.setForeground(ConstantColors.DARK_BLUE);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(tokenLabel, gbc);
+
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(tokenField, gbc);
 
         // Поле для ввода пароля
         passwordField = new JPasswordField();
-        add(new RoundedLabel("Введите ваш пароль:", 10));
-        add(passwordField);
+        RoundedLabel passwordLabel = new RoundedLabel("Введите ваш пароль:", 10);
+        passwordLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        passwordLabel.setForeground(ConstantColors.DARK_BLUE);
+
+        // Центрирование метки пароля
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER; // Выравнивание по центру
+        add(passwordLabel, gbc);
+
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(passwordField, gbc);
 
         // Кнопки
         JPanel buttonPanel = new JPanel();
@@ -52,7 +78,13 @@ public class ChooseUserWindow extends JFrame {
 
         buttonPanel.add(loginButton);
         buttonPanel.add(newUserButton);
-        add(buttonPanel);
+
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(buttonPanel, gbc);
+
         setVisible(true);
     }
 
