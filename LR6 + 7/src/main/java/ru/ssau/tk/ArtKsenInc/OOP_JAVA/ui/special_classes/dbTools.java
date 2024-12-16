@@ -48,7 +48,7 @@ public class dbTools {
 
     // Логи
     public static List<Log> getAllLogs() {
-        return logService.readAll();
+        return logService.findByOrderByTimestampDesc();
     }
 
     public static void createLog(String message) {
