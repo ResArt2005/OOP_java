@@ -15,7 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ChooseUserWindow extends JFrame {
-    private final int WIDTH_WINDOW = 400; // Ширина окна
+    private final int WIDTH_WINDOW = 500; // Ширина окна
     private final int HEIGHT_WINDOW = 300; // Высота окна
     public JTextField tokenField;
     public JPasswordField passwordField;
@@ -80,6 +80,9 @@ public class ChooseUserWindow extends JFrame {
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         add(buttonPanel, gbc);
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
 
         setVisible(true);
     }

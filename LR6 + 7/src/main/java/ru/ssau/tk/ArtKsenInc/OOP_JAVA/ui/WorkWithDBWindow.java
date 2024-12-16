@@ -55,6 +55,10 @@ public class WorkWithDBWindow extends JDialog {
         buttonPanel.add(LogButton);
         buttonPanel.add(overWrite);
         add(buttonPanel, BorderLayout.CENTER);
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         setVisible(true);
     }
 

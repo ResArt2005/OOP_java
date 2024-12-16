@@ -15,8 +15,8 @@ import java.awt.event.WindowEvent;
 import java.util.Objects;
 
 public class MainWindow extends JFrame {
-    private final int WIDTH_WINDOW = 600; // Ширина окна
-    private final int HEIGHT_WINDOW = 400; // Высота окна
+    private final int WIDTH_WINDOW = 800; // Ширина окна
+    private final int HEIGHT_WINDOW = 600; // Высота окна
     private TabulatedFunctionOperationService factoryService; // Для хранения текущей фабрики
     private SettingsWindowChooseFactory settingsWindow; // Окно настроек
 
@@ -37,7 +37,7 @@ public class MainWindow extends JFrame {
 
         // Панель для кнопок с центральным размещением
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5, 1, 10, 10));  // Сетка 5 на 1 с отступами
+        buttonPanel.setLayout(new GridLayout(0, 1, 10, 10));  // Один столбец с отступами
         buttonPanel.setBackground(ConstantColors.RICH_PURPLE);
 
         // Кнопка для открытия окна настроек
@@ -58,6 +58,7 @@ public class MainWindow extends JFrame {
         // Кнопка для перехода в окно вычисления интеграла
         JButton integralOperationButton = createRoundedButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         integralOperationButton.addActionListener(e -> openTabulatedFunctionIntegralOperationsWindow());
+
         // Кнопка для перехода в окно администрирования
         JButton adminButton = createRoundedButton("ТОЛЬКО ДЛЯ ПЕРСОНАЛА", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         adminButton.addActionListener(e -> openWorkWithDBWindow());
@@ -68,9 +69,10 @@ public class MainWindow extends JFrame {
         buttonPanel.add(differentialOperation);
         buttonPanel.add(TBEditor);
         buttonPanel.add(integralOperationButton);
-        if(Objects.equals(userDTO.getToken(), "admin")){
+        if (Objects.equals(userDTO.getToken(), "admin")) {
             buttonPanel.add(adminButton);
         }
+
         // Добавляем панель кнопок в главное окно
         add(buttonPanel, BorderLayout.CENTER);
 
@@ -92,11 +94,14 @@ public class MainWindow extends JFrame {
             }
         });
 
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         // Показываем главное окно
         setVisible(true);
     }
 
-    // Метод для создания кнопки с краями
+    // Метод для создания кнопки с закругленными краями
     private JButton createRoundedButton(String text, Font font, Color background, Color foreground, Cursor cursor) {
         JButton button = new JButton(text);
         button.setFont(font);
@@ -140,7 +145,7 @@ public class MainWindow extends JFrame {
         new TabulatedFunctionIntegralOperationsWindow(this, new TabulatedFunctionOperationService());
     }
 
-    private void openWorkWithDBWindow(){
+    private void openWorkWithDBWindow() {
         new WorkWithDBWindow(this);
     }
 }

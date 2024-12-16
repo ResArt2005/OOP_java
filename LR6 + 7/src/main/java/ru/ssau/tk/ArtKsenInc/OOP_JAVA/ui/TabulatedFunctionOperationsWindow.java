@@ -101,6 +101,10 @@ public class TabulatedFunctionOperationsWindow extends JDialog {
 
         add(functionsPanel, BorderLayout.CENTER);
         add(operationPanel, BorderLayout.SOUTH);
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         setVisible(true);
     }
 
