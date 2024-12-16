@@ -1,6 +1,5 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.User;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
@@ -34,7 +33,7 @@ public class ChooseUserWindow extends JFrame {
 
         // Поле для ввода токена
         tokenField = new JTextField();
-        RoundedLabel tokenLabel = createRoundedLabel("Введите ваш токен", 10, ConstantColors.RED_VIOLET, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.RED_VIOLET);
+        RoundedLabel tokenLabel = createRoundedLabel("Введите ваш токен", 10, ConstantColors.DEEP_BLUE, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -49,7 +48,7 @@ public class ChooseUserWindow extends JFrame {
 
         // Поле для ввода пароля
         passwordField = new JPasswordField();
-        RoundedLabel passwordLabel = createRoundedLabel("Введите ваш пароль", 10, ConstantColors.RED_VIOLET, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.RED_VIOLET);
+        RoundedLabel passwordLabel = createRoundedLabel("Введите ваш пароль", 10, ConstantColors.DEEP_BLUE, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
 
         gbc.gridy = 2;
         gbc.gridwidth = 2;
@@ -137,10 +136,10 @@ public class ChooseUserWindow extends JFrame {
         RoundedLabel tokenLabel = createRoundedLabel(
                 "Ваш токен: " + newUser.getToken(),
                 10,
-                ConstantColors.RED_VIOLET,
                 ConstantColors.RICH_PURPLE,
+                ConstantColors.DARK_PURPLE,
                 ConstantFonts.Open_Sans_Bold,
-                ConstantColors.THISTLE
+                ConstantColors.DEEP_BLUE
         );
         tokenLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -160,10 +159,10 @@ public class ChooseUserWindow extends JFrame {
         RoundedLabel loginLabel = createRoundedLabel(
                 "Введите логин:",
                 10,
-                ConstantColors.RED_VIOLET,
                 ConstantColors.RICH_PURPLE,
+                ConstantColors.DARK_PURPLE,
                 ConstantFonts.Open_Sans_Bold,
-                ConstantColors.THISTLE
+                ConstantColors.DEEP_BLUE
         );
         panel.add(loginLabel);
         panel.add(loginField);
@@ -171,10 +170,10 @@ public class ChooseUserWindow extends JFrame {
         RoundedLabel passwordLabel = createRoundedLabel(
                 "Введите пароль:",
                 10,
-                ConstantColors.RED_VIOLET,
                 ConstantColors.RICH_PURPLE,
+                ConstantColors.DARK_PURPLE,
                 ConstantFonts.Open_Sans_Bold,
-                ConstantColors.THISTLE
+                ConstantColors.DEEP_BLUE
         );
         panel.add(passwordLabel);
         panel.add(passwordField);
@@ -258,7 +257,7 @@ public class ChooseUserWindow extends JFrame {
         panel.setBackground(ConstantColors.DEEP_PURPLE);
 
         // Создаем метку с сообщением об ошибке
-        RoundedLabel messageLabel = createRoundedLabel(message, 20, ConstantColors.RICH_PURPLE, ConstantColors.DEEP_PURPLE, ConstantFonts.Open_Sans_Bold, ConstantColors.RED_VIOLET);
+        RoundedLabel messageLabel = createRoundedLabel(message, 20, ConstantColors.RICH_PURPLE, ConstantColors.DEEP_PURPLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
 
         // Добавляем метку на панель
         panel.add(messageLabel, BorderLayout.CENTER);

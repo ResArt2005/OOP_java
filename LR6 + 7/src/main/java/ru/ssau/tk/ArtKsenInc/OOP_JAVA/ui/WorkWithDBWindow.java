@@ -20,9 +20,9 @@ public class WorkWithDBWindow extends JDialog {
         setLayout(new BorderLayout());
         getContentPane().setBackground(ConstantColors.DARK_PURPLE);
         // Создание и добавление заголовка с закругленными краями
-        RoundedLabel headerLabel = new RoundedLabel("Добро пожаловать в панель администрирования", 20, ConstantColors.RED_VIOLET);
+        RoundedLabel headerLabel = new RoundedLabel("Добро пожаловать в панель администрирования", 20, ConstantColors.DEEP_BLUE);
         headerLabel.setBackground(ConstantColors.DARK_LILAC);
-        headerLabel.setForeground(ConstantColors.RED_VIOLET);
+        headerLabel.setForeground(ConstantColors.DEEP_BLUE);
         headerLabel.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(24f)); // Увеличенный шрифт для заголовка
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerLabel.setPreferredSize(new Dimension(WIDTH_WINDOW, 50));
