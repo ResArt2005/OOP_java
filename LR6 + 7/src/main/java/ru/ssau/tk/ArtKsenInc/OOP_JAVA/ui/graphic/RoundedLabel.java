@@ -12,6 +12,8 @@ public class RoundedLabel extends JLabel {
         super(text, SwingConstants.CENTER); // Центрирование текста
         this.borderRadius = borderRadius;
         this.borderColor = borderColor;
+        setOpaque(true); // Устанавливаем непрозрачность в true, чтобы фон был виден
+        setBackground(ConstantColors.RICH_PURPLE); // Устанавливаем цвет заливки
     }
 
     @Override
@@ -21,7 +23,7 @@ public class RoundedLabel extends JLabel {
 
         // Рисуем закругленный прямоугольник
         g2d.setColor(getBackground());
-        g2d.fillRoundRect(1, 1, getWidth() - 2, getHeight() - 2, borderRadius, borderRadius);
+        g2d.fillRoundRect(1, 1, getWidth() - 10, getHeight() - 10, borderRadius, borderRadius);
 
         // Рисуем бордер
         g2d.setColor(borderColor);

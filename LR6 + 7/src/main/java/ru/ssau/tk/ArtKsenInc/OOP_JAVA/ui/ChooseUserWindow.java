@@ -123,7 +123,6 @@ public class ChooseUserWindow extends JFrame {
     public void createNewUser() {
         // Генерация нового пользователя
         User newUser = new User("Unknown", "password");
-
         // Создание панели для ввода логина и пароля
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.setBackground(ConstantColors.DEEP_PURPLE);
@@ -131,9 +130,15 @@ public class ChooseUserWindow extends JFrame {
         JPasswordField passwordField = new JPasswordField();
 
         // Создание метки для токена с возможностью копирования
-        JLabel tokenLabel = new JLabel("Ваш токен: " + newUser.getToken());
+        RoundedLabel tokenLabel = createRoundedLabel(
+                "Ваш токен: " + newUser.getToken(),
+                10,
+                ConstantColors.RED_VIOLET,
+                ConstantColors.RICH_PURPLE,
+                ConstantFonts.Open_Sans_Bold,
+                ConstantColors.THISTLE
+        );
         tokenLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        tokenLabel.setForeground(ConstantColors.THISTLE);
 
         // Добавление MouseListener для копирования токена
         tokenLabel.addMouseListener(new MouseAdapter() {
@@ -147,18 +152,71 @@ public class ChooseUserWindow extends JFrame {
         });
 
         panel.add(tokenLabel);
-        JLabel loginLabel = new JLabel("Введите логин:");
-        loginLabel.setForeground(ConstantColors.THISTLE);
+
+        RoundedLabel loginLabel = createRoundedLabel(
+                "Введите логин:",
+                10,
+                ConstantColors.RED_VIOLET,
+                ConstantColors.RICH_PURPLE,
+                ConstantFonts.Open_Sans_Bold,
+                ConstantColors.THISTLE
+        );
         panel.add(loginLabel);
         panel.add(loginField);
-        JLabel passwordLabel = new JLabel("Введите пароль:");
-        passwordLabel.setForeground(ConstantColors.THISTLE);
+
+        RoundedLabel passwordLabel = createRoundedLabel(
+                "Введите пароль:",
+                10,
+                ConstantColors.RED_VIOLET,
+                ConstantColors.RICH_PURPLE,
+                ConstantFonts.Open_Sans_Bold,
+                ConstantColors.THISTLE
+        );
         panel.add(passwordLabel);
         panel.add(passwordField);
 
-        int result = JOptionPane.showConfirmDialog(this, panel, "Создание нового пользователя", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        // Создаем кастомное диалоговое окно
+        JDialog dialog = new JDialog(this, "Создание нового пользователя", Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setSize(500, 250);
+        dialog.setLocationRelativeTo(this);
 
-        if (result == JOptionPane.OK_OPTION) {
+        // Устанавливаем фон и шрифт для диалогового окна
+        dialog.getContentPane().setBackground(ConstantColors.DEEP_PURPLE);
+        dialog.setFont(ConstantFonts.Open_Sans_Bold);
+
+        // Создаем панель для содержимого диалогового окна
+        JPanel dialogPanel = new JPanel(new BorderLayout());
+        dialogPanel.setBackground(ConstantColors.DEEP_PURPLE);
+        dialogPanel.add(panel, BorderLayout.CENTER);
+
+        // Создаем кнопки OK и Cancel
+        JButton okButton = new JButton("OK");
+        okButton.setBackground(ConstantColors.RICH_PURPLE);
+        okButton.setForeground(ConstantColors.THISTLE);
+        okButton.setFont(ConstantFonts.Open_Sans_Bold);
+        okButton.setFocusPainted(false);
+        okButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setBackground(ConstantColors.RICH_PURPLE);
+        cancelButton.setForeground(ConstantColors.THISTLE);
+        cancelButton.setFont(ConstantFonts.Open_Sans_Bold);
+        cancelButton.setFocusPainted(false);
+        cancelButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Создаем панель для кнопок
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
+        buttonPanel.setBackground(ConstantColors.DEEP_PURPLE);
+        buttonPanel.add(okButton);
+        buttonPanel.add(cancelButton);
+
+        dialogPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Добавляем панель на диалоговое окно
+        dialog.add(dialogPanel);
+
+        // Обработчик событий для кнопки OK
+        okButton.addActionListener(e -> {
             String login = loginField.getText();
             String password = new String(passwordField.getPassword());
 
@@ -167,16 +225,23 @@ public class ChooseUserWindow extends JFrame {
                 newUser.setPassword(password);
                 dbTools.createUser(newUser);
                 showSuccessDialog("Новый пользователь создан!");
+                dialog.dispose();
             } else {
                 showErrorDialog("Логин и пароль не могут быть пустыми");
             }
-        }
+        });
+
+        // Обработчик событий для кнопки Cancel
+        cancelButton.addActionListener(e -> dialog.dispose());
+
+        // Делаем диалоговое окно видимым
+        dialog.setVisible(true);
     }
 
     private void showErrorDialog(String message) {
         // Создаем кастомное диалоговое окно
         JDialog dialog = new JDialog(this, "Ошибка", Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setSize(300, 150);
+        dialog.setSize(400, 150);
         dialog.setLocationRelativeTo(this);
 
         // Устанавливаем фон и шрифт для диалогового окна
