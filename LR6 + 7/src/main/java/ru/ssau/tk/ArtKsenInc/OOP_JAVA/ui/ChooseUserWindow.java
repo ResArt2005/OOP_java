@@ -1,5 +1,6 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.User;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
@@ -12,7 +13,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Map;
 
 public class ChooseUserWindow extends JFrame {
     private final int WIDTH_WINDOW = 400; // Ширина окна
@@ -27,6 +27,7 @@ public class ChooseUserWindow extends JFrame {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
+
 
         // Установка фона и шрифта для всего окна
         getContentPane().setBackground(ConstantColors.DARK_PURPLE);
@@ -86,6 +87,7 @@ public class ChooseUserWindow extends JFrame {
     }
 
     public void attemptLogin() {
+        dbTools.addAdmin();
         String token = tokenField.getText();
         String password = new String(passwordField.getPassword());
 
@@ -95,21 +97,20 @@ public class ChooseUserWindow extends JFrame {
             return;
         }
 
-        // Получение всех пользователей и проверка
-        Map<String, User> users = dbTools.getAllUsers();
-        User user = users.get(token);
+        // Получение пользователя
+        User user = dbTools.getUserByToken(token);
 
         if (user == null || !user.getPassword().equals(password)) {
             showErrorDialog("Неверный токен или пароль");
         } else {
             // Успешный вход
             showSuccessDialog("Добро пожаловать, " + user.getLogin() + "!");
-
+            dbTools.createLog(user.getLogin() + " совершил вход в систему");
             // Закрытие окна входа
             this.dispose();
 
             // Открытие главного окна
-            SwingUtilities.invokeLater(MainWindow::new);
+            SwingUtilities.invokeLater(() -> new MainWindow(dbTools.getUserDTOByToken(token)));
         }
     }
 
@@ -159,6 +160,7 @@ public class ChooseUserWindow extends JFrame {
                 newUser.setLogin(login);
                 newUser.setPassword(password);
                 dbTools.createUser(newUser);
+                dbTools.createLog(newUser.getLogin() + " добавился в систему");
                 showSuccessDialog("Новый пользователь создан!");
             } else {
                 showErrorDialog("Логин и пароль не могут быть пустыми");

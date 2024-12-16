@@ -1,5 +1,6 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedDifferentialOperator;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
@@ -11,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
 public class MainWindow extends JFrame {
     private final int WIDTH_WINDOW = 600; // Ширина окна
@@ -18,7 +20,7 @@ public class MainWindow extends JFrame {
     private TabulatedFunctionOperationService factoryService; // Для хранения текущей фабрики
     private SettingsWindowChooseFactory settingsWindow; // Окно настроек
 
-    public MainWindow() {
+    public MainWindow(UserDTO userDTO) {
         // Установка заголовка окна
         setTitle("Главное окно программы");
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
@@ -56,6 +58,9 @@ public class MainWindow extends JFrame {
         // Кнопка для перехода в окно вычисления интеграла
         JButton integralOperationButton = createRoundedButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         integralOperationButton.addActionListener(e -> openTabulatedFunctionIntegralOperationsWindow());
+        // Кнопка для перехода в окно администрирования
+        JButton adminButton = createRoundedButton("ТОЛЬКО ДЛЯ ПЕРСОНАЛА", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
+        adminButton.addActionListener(e -> openWorkWithDBWindow());
 
         // Добавляем кнопки в панель
         buttonPanel.add(settingsButton);
@@ -63,7 +68,9 @@ public class MainWindow extends JFrame {
         buttonPanel.add(differentialOperation);
         buttonPanel.add(TBEditor);
         buttonPanel.add(integralOperationButton);
-
+        if(Objects.equals(userDTO.getToken(), "admin")){
+            buttonPanel.add(adminButton);
+        }
         // Добавляем панель кнопок в главное окно
         add(buttonPanel, BorderLayout.CENTER);
 
@@ -131,5 +138,9 @@ public class MainWindow extends JFrame {
     // Метод для открытия окна вычисления интеграла
     private void openTabulatedFunctionIntegralOperationsWindow() {
         new TabulatedFunctionIntegralOperationsWindow(this, new TabulatedFunctionOperationService());
+    }
+
+    private void openWorkWithDBWindow(){
+        new WorkWithDBWindow(this);
     }
 }

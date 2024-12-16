@@ -11,5 +11,5 @@ import java.sql.Timestamp;
 public class LogDTO {
     private int id;
     private String message;
-    private Timestamp timestamp;
+    private String timestamp;
 }

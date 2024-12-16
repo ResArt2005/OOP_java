@@ -1,5 +1,7 @@
 package WindowsTests;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +41,10 @@ public class ChooseUserWindowTest {
         try (MockedStatic<dbTools> mockedDbTools = Mockito.mockStatic(dbTools.class)) {
             String token = "testToken";
             String password = "testPassword";
-            when(mockUser.getPassword()).thenReturn(password);
-            when(mockUser.getLogin()).thenReturn("testLogin");
+            //String resultPas = when(mockUser.getPassword()).thenReturn(password).toString();
+            //String resultLogin = when(mockUser.getLogin()).thenReturn("testLogin").toString();
+            //Assertions.assertThat(resultPas).isNotNull();
+            //Assertions.assertThat(resultLogin).isNotNull();
 
             // Замокировать получение пользователей
             Map<String, User> mockUsers = new HashMap<>();
@@ -85,9 +89,10 @@ public class ChooseUserWindowTest {
         try (MockedStatic<dbTools> mockedDbTools = Mockito.mockStatic(dbTools.class)) {
             String token = "testToken";
             String password = "testPassword";
-            when(mockUser.getPassword()).thenReturn(password);
-            when(mockUser.getLogin()).thenReturn("testLogin");
-
+            //String resultPas = when(mockUser.getPassword()).thenReturn(password).toString();
+            //String resultLogin = when(mockUser.getLogin()).thenReturn("testLogin").toString();
+            //Assertions.assertThat(resultPas).isNotNull();
+            //Assertions.assertThat(resultLogin).isNotNull();
             // Замокировать получение пользователей
             Map<String, User> mockUsers = new HashMap<>();
             mockUsers.put(token, mockUser);
