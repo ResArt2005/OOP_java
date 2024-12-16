@@ -39,7 +39,7 @@ public class SettingsWindowChooseFactory extends JDialog {
         group.add(listFactoryButton);
 
         // Кнопка для сохранения выбора
-        JButton saveButton = ButtonsDesign.createStyledButton("Сохранить", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton saveButton = ButtonsDesign.createStyledButton("Сохранить", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         saveButton.addActionListener(e -> {
             if (arrayFactoryButton.isSelected()) {
                 factoryService.setFactory(new ArrayTabulatedFunctionFactory());
@@ -74,7 +74,7 @@ public class SettingsWindowChooseFactory extends JDialog {
     private JRadioButton createStyledRadioButton(String text, boolean isSelected) {
         JRadioButton radioButton = new JRadioButton(text, isSelected);
         radioButton.setFont(ConstantFonts.Open_Sans_Bold); // Шрифт Open Sans Bold
-        radioButton.setForeground(ConstantColors.TIFFANY_BLUE); // Голубой цвет текста
+        radioButton.setForeground(ConstantColors.THISTLE); // Голубой цвет текста
         radioButton.setBackground(ConstantColors.DARK_PURPLE); // Фон как у окна
         radioButton.setFocusPainted(false); // Убираем обводку при фокусе
         return radioButton;

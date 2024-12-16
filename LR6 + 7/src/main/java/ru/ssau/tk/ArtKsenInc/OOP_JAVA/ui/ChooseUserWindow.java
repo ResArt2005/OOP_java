@@ -35,7 +35,7 @@ public class ChooseUserWindow extends JFrame {
         tokenField = new JTextField();
         RoundedLabel tokenLabel = new RoundedLabel("Введите ваш токен:", 10);
         tokenLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        tokenLabel.setForeground(ConstantColors.DARK_BLUE);
+        tokenLabel.setForeground(ConstantColors.DARK_LILAC);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -52,9 +52,8 @@ public class ChooseUserWindow extends JFrame {
         passwordField = new JPasswordField();
         RoundedLabel passwordLabel = new RoundedLabel("Введите ваш пароль:", 10);
         passwordLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        passwordLabel.setForeground(ConstantColors.DARK_BLUE);
+        passwordLabel.setForeground(ConstantColors.DARK_LILAC);
 
-        // Центрирование метки пароля
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER; // Выравнивание по центру
@@ -94,7 +93,7 @@ public class ChooseUserWindow extends JFrame {
 
         // Проверка на заполнение полей
         if (token.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Пожалуйста, заполните все поля", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            showErrorDialog("Пожалуйста, заполните все поля");
             return;
         }
 
@@ -103,10 +102,10 @@ public class ChooseUserWindow extends JFrame {
         User user = users.get(token);
 
         if (user == null || !user.getPassword().equals(password)) {
-            JOptionPane.showMessageDialog(this, "Неверный токен или пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            showErrorDialog("Неверный токен или пароль");
         } else {
             // Успешный вход
-            JOptionPane.showMessageDialog(this, "Добро пожаловать, " + user.getLogin() + "!", "Успех", JOptionPane.INFORMATION_MESSAGE);
+            showSuccessDialog("Добро пожаловать, " + user.getLogin() + "!");
 
             // Закрытие окна входа
             this.dispose();
@@ -122,12 +121,14 @@ public class ChooseUserWindow extends JFrame {
 
         // Создание панели для ввода логина и пароля
         JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.setBackground(ConstantColors.DEEP_PURPLE);
         JTextField loginField = new JTextField();
         JPasswordField passwordField = new JPasswordField();
 
         // Создание метки для токена с возможностью копирования
         JLabel tokenLabel = new JLabel("Ваш токен: " + newUser.getToken());
         tokenLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        tokenLabel.setForeground(ConstantColors.THISTLE);
 
         // Добавление MouseListener для копирования токена
         tokenLabel.addMouseListener(new MouseAdapter() {
@@ -136,14 +137,18 @@ public class ChooseUserWindow extends JFrame {
                 StringSelection selection = new StringSelection(newUser.getToken());
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(selection, null);
-                JOptionPane.showMessageDialog(panel, "Токен скопирован в буфер обмена!", "Успех", JOptionPane.INFORMATION_MESSAGE);
+                showSuccessDialog("Токен скопирован в буфер обмена!");
             }
         });
 
         panel.add(tokenLabel);
-        panel.add(new JLabel("Введите логин:"));
+        JLabel loginLabel = new JLabel("Введите логин:");
+        loginLabel.setForeground(ConstantColors.THISTLE);
+        panel.add(loginLabel);
         panel.add(loginField);
-        panel.add(new JLabel("Введите пароль:"));
+        JLabel passwordLabel = new JLabel("Введите пароль:");
+        passwordLabel.setForeground(ConstantColors.THISTLE);
+        panel.add(passwordLabel);
         panel.add(passwordField);
 
         int result = JOptionPane.showConfirmDialog(this, panel, "Создание нового пользователя", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -156,18 +161,44 @@ public class ChooseUserWindow extends JFrame {
                 newUser.setLogin(login);
                 newUser.setPassword(password);
                 dbTools.createUser(newUser);
-                JOptionPane.showMessageDialog(this, "Новый пользователь создан!", "Успех", JOptionPane.INFORMATION_MESSAGE);
+                showSuccessDialog("Новый пользователь создан!");
             } else {
-                JOptionPane.showMessageDialog(this, "Логин и пароль не могут быть пустыми", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                showErrorDialog("Логин и пароль не могут быть пустыми");
             }
         }
+    }
+
+    private void showErrorDialog(String message) {
+        JOptionPane optionPane = new JOptionPane(message, JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog(this, "Ошибка");
+        dialog.setBackground(ConstantColors.DEEP_PURPLE);
+        dialog.getContentPane().setBackground(ConstantColors.DEEP_PURPLE);
+        ((JPanel) optionPane.getComponent(0)).setBackground(ConstantColors.DEEP_PURPLE);
+        for (Component comp : ((JPanel) optionPane.getComponent(0)).getComponents()) {
+            comp.setBackground(ConstantColors.DEEP_PURPLE);
+            comp.setForeground(ConstantColors.THISTLE);
+        }
+        dialog.setVisible(true);
+    }
+
+    private void showSuccessDialog(String message) {
+        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog(this, "Успех");
+        dialog.setBackground(ConstantColors.DEEP_PURPLE);
+        dialog.getContentPane().setBackground(ConstantColors.DEEP_PURPLE);
+        ((JPanel) optionPane.getComponent(0)).setBackground(ConstantColors.DEEP_PURPLE);
+        for (Component comp : ((JPanel) optionPane.getComponent(0)).getComponents()) {
+            comp.setBackground(ConstantColors.DEEP_PURPLE);
+            comp.setForeground(ConstantColors.THISTLE);
+        }
+        dialog.setVisible(true);
     }
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.RICH_PURPLE);
-        button.setForeground(ConstantColors.TIFFANY_BLUE);
+        button.setForeground(ConstantColors.THISTLE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;

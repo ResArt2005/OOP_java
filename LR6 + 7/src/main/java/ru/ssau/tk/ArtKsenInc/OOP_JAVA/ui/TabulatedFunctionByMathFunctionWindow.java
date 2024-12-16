@@ -42,41 +42,41 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         // Панель для ввода параметров
         JPanel inputPanel = new JPanel(new GridLayout(5, 2));
         inputPanel.setBackground(ConstantColors.DARK_PURPLE);
-        JButton compositeFunctionButton = ButtonsDesign.createStyledButton("Создать сложную функцию", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton compositeFunctionButton = ButtonsDesign.createStyledButton("Создать сложную функцию", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         compositeFunctionButton.addActionListener(e -> openCompositeFunctionCreationWindow());
         // Выпадающий список функций
         JLabel functionLabel = new JLabel("Выберите функцию:");
         functionLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        functionLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        functionLabel.setForeground(ConstantColors.THISTLE);
         functionComboBox = new JComboBox<>(functionMap.keySet().toArray(new String[0]));
         functionComboBox.setFont(ConstantFonts.Open_Sans_Bold);
         functionComboBox.setBackground(ConstantColors.RICH_PURPLE);
-        functionComboBox.setForeground(ConstantColors.TIFFANY_BLUE);
+        functionComboBox.setForeground(ConstantColors.THISTLE);
 
         // Поля для ввода интервалов и количества точек
         JLabel leftBoundLabel = new JLabel("Левая граница:");
         leftBoundLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        leftBoundLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        leftBoundLabel.setForeground(ConstantColors.THISTLE);
         leftBoundField = new JTextField();
         leftBoundField.setFont(ConstantFonts.Open_Sans_Bold);
         leftBoundField.setBackground(ConstantColors.RICH_PURPLE);
-        leftBoundField.setForeground(ConstantColors.TIFFANY_BLUE);
+        leftBoundField.setForeground(ConstantColors.THISTLE);
         ((AbstractDocument) leftBoundField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
         JLabel rightBoundLabel = new JLabel("Правая граница:");
         rightBoundLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        rightBoundLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        rightBoundLabel.setForeground(ConstantColors.THISTLE);
         rightBoundField = new JTextField();
         rightBoundField.setFont(ConstantFonts.Open_Sans_Bold);
         rightBoundField.setBackground(ConstantColors.RICH_PURPLE);
-        rightBoundField.setForeground(ConstantColors.TIFFANY_BLUE);
+        rightBoundField.setForeground(ConstantColors.THISTLE);
         ((AbstractDocument) rightBoundField.getDocument()).setDocumentFilter(new DoubleNumericDocumentFilter());
         JLabel pointsCountLabel = new JLabel("Количество точек:");
         pointsCountLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        pointsCountLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        pointsCountLabel.setForeground(ConstantColors.THISTLE);
         pointsCountField = new JTextField();
         pointsCountField.setFont(ConstantFonts.Open_Sans_Bold);
         pointsCountField.setBackground(ConstantColors.RICH_PURPLE);
-        pointsCountField.setForeground(ConstantColors.TIFFANY_BLUE);
+        pointsCountField.setForeground(ConstantColors.THISTLE);
         ((AbstractDocument) pointsCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
 
         // Добавляем компоненты на панель
@@ -149,7 +149,7 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.RICH_PURPLE);
-        button.setForeground(ConstantColors.TIFFANY_BLUE);
+        button.setForeground(ConstantColors.THISTLE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;

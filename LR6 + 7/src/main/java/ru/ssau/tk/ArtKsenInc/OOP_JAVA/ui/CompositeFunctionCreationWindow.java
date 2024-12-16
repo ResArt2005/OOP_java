@@ -37,20 +37,20 @@ public class CompositeFunctionCreationWindow extends JDialog {
         // Поле для ввода количества функций
         JLabel functionsCountLabel = new JLabel("Количество функций:");
         functionsCountLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        functionsCountLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        functionsCountLabel.setForeground(ConstantColors.THISTLE);
         functionsCountField = new JTextField(10);
         functionsCountField.setFont(ConstantFonts.Open_Sans_Bold);
         functionsCountField.setBackground(ConstantColors.RICH_PURPLE);
-        functionsCountField.setForeground(ConstantColors.TIFFANY_BLUE);
+        functionsCountField.setForeground(ConstantColors.THISTLE);
 
         // Поле для ввода названия функции
         JLabel functionNameLabel = new JLabel("Название функции:");
         functionNameLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        functionNameLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        functionNameLabel.setForeground(ConstantColors.THISTLE);
         functionNameField = new JTextField(10);
         functionNameField.setFont(ConstantFonts.Open_Sans_Bold);
         functionNameField.setBackground(ConstantColors.RICH_PURPLE);
-        functionNameField.setForeground(ConstantColors.TIFFANY_BLUE);
+        functionNameField.setForeground(ConstantColors.THISTLE);
 
         // Добавляем компоненты на панель
         inputPanel.add(functionsCountLabel);
@@ -93,11 +93,11 @@ public class CompositeFunctionCreationWindow extends JDialog {
                 for (int i = 0; i < functionsCount; i++) {
                     JLabel label = new JLabel("Функция " + (i + 1) + ":");
                     label.setFont(ConstantFonts.Open_Sans_Bold);
-                    label.setForeground(ConstantColors.TIFFANY_BLUE);
+                    label.setForeground(ConstantColors.THISTLE);
                     JComboBox<String> comboBox = new JComboBox<>(functionMap.keySet().toArray(new String[0]));
                     comboBox.setFont(ConstantFonts.Open_Sans_Bold);
                     comboBox.setBackground(ConstantColors.RICH_PURPLE);
-                    comboBox.setForeground(ConstantColors.TIFFANY_BLUE);
+                    comboBox.setForeground(ConstantColors.THISTLE);
                     functionComboBoxes[i] = comboBox;
                     selectionPanel.add(label);
                     selectionPanel.add(comboBox);
@@ -138,7 +138,7 @@ public class CompositeFunctionCreationWindow extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.RICH_PURPLE);
-        button.setForeground(ConstantColors.TIFFANY_BLUE);
+        button.setForeground(ConstantColors.THISTLE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;

@@ -39,22 +39,22 @@ public class MainWindow extends JFrame {
         buttonPanel.setBackground(ConstantColors.RICH_PURPLE);
 
         // Кнопка для открытия окна настроек
-        JButton settingsButton = createRoundedButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton settingsButton = createRoundedButton("Открыть настройки", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         settingsButton.addActionListener(e -> openSettingsWindow());
 
         // Кнопка для операций с функциями
-        JButton operationsButton = createRoundedButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton operationsButton = createRoundedButton("Элементарные операции с функциями", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         operationsButton.addActionListener(e -> openTabulatedFunctionOperationsWindow());
 
         // Кнопка для операции дифференцирования
-        JButton differentialOperation = createRoundedButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton differentialOperation = createRoundedButton("Операция дифференцирования над функцией", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         differentialOperation.addActionListener(e -> TabulatedFunctionDifferentialOperationsWindow());
 
-        JButton TBEditor = createRoundedButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton TBEditor = createRoundedButton("Редактор табулированной функции", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         TBEditor.addActionListener(e -> FunctionEditorWindow());
 
         // Кнопка для перехода в окно вычисления интеграла
-        JButton integralOperationButton = createRoundedButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, new Cursor(Cursor.HAND_CURSOR));
+        JButton integralOperationButton = createRoundedButton("Вычисление интеграла", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         integralOperationButton.addActionListener(e -> openTabulatedFunctionIntegralOperationsWindow());
 
         // Добавляем кнопки в панель
@@ -69,8 +69,8 @@ public class MainWindow extends JFrame {
 
         // Создание и добавление заголовка с закругленными краями
         RoundedLabel headerLabel = new RoundedLabel("Главное меню", 20);
-        headerLabel.setBackground(ConstantColors.DARK_BLUE);
-        headerLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        headerLabel.setBackground(ConstantColors.DARK_LILAC);
+        headerLabel.setForeground(ConstantColors.RED_VIOLET);
         headerLabel.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(24f)); // Увеличенный шрифт для заголовка
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerLabel.setPreferredSize(new Dimension(WIDTH_WINDOW, 50));

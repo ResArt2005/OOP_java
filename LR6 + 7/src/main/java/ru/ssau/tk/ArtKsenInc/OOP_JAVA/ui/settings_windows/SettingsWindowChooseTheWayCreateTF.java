@@ -68,7 +68,7 @@ public class SettingsWindowChooseTheWayCreateTF extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.RICH_PURPLE);
-        button.setForeground(ConstantColors.TIFFANY_BLUE);
+        button.setForeground(ConstantColors.THISTLE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;

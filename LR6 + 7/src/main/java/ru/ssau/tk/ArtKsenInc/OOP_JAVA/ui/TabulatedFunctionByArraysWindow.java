@@ -41,7 +41,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
 
         RoundedLabel pointCountLabel = new RoundedLabel("Количество точек:", 10);
         pointCountLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        pointCountLabel.setForeground(ConstantColors.DARK_BLUE);
+        pointCountLabel.setForeground(ConstantColors.DARK_LILAC);
         pointCountField = new JTextField(FIELD_COLUMNS);
 
         ((AbstractDocument) pointCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
@@ -63,7 +63,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
             }
         };
         table.setDefaultEditor(Object.class, new NumericCellEditor());
-        table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.DARK_BLUE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+        table.setDefaultRenderer(Object.class, new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.DARK_LILAC, ConstantColors.THISTLE, "Open Sans"));
         table.setRowHeight(30);
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -135,7 +135,7 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.RICH_PURPLE);
-        button.setForeground(ConstantColors.TIFFANY_BLUE);
+        button.setForeground(ConstantColors.THISTLE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;

@@ -66,11 +66,11 @@ public class TabulatedFunctionIntegralOperationsWindow extends JDialog {
         // Добавляем заголовок и текстовое поле для количества потоков
         JLabel threadsCountLabel = new JLabel("Количество потоков:");
         threadsCountLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        threadsCountLabel.setForeground(ConstantColors.TIFFANY_BLUE);
+        threadsCountLabel.setForeground(ConstantColors.THISTLE);
         threadsCountField = new JTextField(10);
         threadsCountField.setFont(ConstantFonts.Open_Sans_Bold);
         threadsCountField.setBackground(ConstantColors.RICH_PURPLE);
-        threadsCountField.setForeground(ConstantColors.TIFFANY_BLUE);
+        threadsCountField.setForeground(ConstantColors.THISTLE);
         ((AbstractDocument) threadsCountField.getDocument()).setDocumentFilter(new IntNumericDocumentFilter());
 
         JPanel threadsCountPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -97,7 +97,7 @@ public class TabulatedFunctionIntegralOperationsWindow extends JDialog {
     private JPanel createFunctionPanel(String title, JTable table, ActionListener createListener, ActionListener loadListener, ActionListener saveListener, ActionListener deleteListener, ActionListener insertListener) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder(null, title, 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.TIFFANY_BLUE));
+        panel.setBorder(BorderFactory.createTitledBorder(null, title, 0, 0, ConstantFonts.Open_Sans_Bold, ConstantColors.THISTLE));
         panel.setBackground(ConstantColors.DARK_PURPLE); // Фон панели
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -144,7 +144,7 @@ public class TabulatedFunctionIntegralOperationsWindow extends JDialog {
         JButton button = new JButton(text);
         button.setFont(ConstantFonts.Open_Sans_Bold);
         button.setBackground(ConstantColors.RICH_PURPLE);
-        button.setForeground(ConstantColors.TIFFANY_BLUE);
+        button.setForeground(ConstantColors.THISTLE);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Pointer при наведении
         return button;
@@ -183,16 +183,16 @@ public class TabulatedFunctionIntegralOperationsWindow extends JDialog {
         });
         // Установка кастомного рендера для ячеек таблицы
         table.getColumnModel().getColumn(0).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, "Open Sans"));
         table.getColumnModel().getColumn(1).setCellRenderer(
-                new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.RICH_PURPLE, ConstantColors.TIFFANY_BLUE, "Open Sans"));
+                new ColorfulTableCellRenderer(ConstantColors.RICH_PURPLE, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, "Open Sans"));
 
         table.setRowHeight(25);  // Высота строки
 
         // Установка кастомного заголовка для таблицы
         JTableHeader header = table.getTableHeader();
-        header.setBackground(ConstantColors.DARK_BLUE);  // Тёмно-синий фон заголовков
-        header.setForeground(ConstantColors.TIFFANY_BLUE);       // Циановый цвет текста заголовков
+        header.setBackground(ConstantColors.DARK_LILAC);  // Тёмно-синий фон заголовков
+        header.setForeground(ConstantColors.THISTLE);       // Циановый цвет текста заголовков
         header.setFont(new Font("Open Sans", Font.BOLD, 15));  // Шрифт заголовков
         table.setDefaultEditor(Object.class, new NumericCellEditor());
         return table;
