@@ -8,6 +8,8 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.RoundedLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
@@ -27,13 +29,16 @@ public class ChooseUserWindow extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
-
         // Установка фона и шрифта для всего окна
         getContentPane().setBackground(ConstantColors.DARK_PURPLE);
 
         // Поле для ввода токена
         tokenField = new JTextField();
         RoundedLabel tokenLabel = createRoundedLabel("Введите ваш токен", 10, ConstantColors.DEEP_BLUE, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
+
+        // Добавление границы вокруг метки токена
+        Border tokenBorder = BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2);
+        tokenLabel.setBorder(BorderFactory.createCompoundBorder(tokenBorder, BorderFactory.createEmptyBorder(0, 0, 0, 0)));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -49,6 +54,10 @@ public class ChooseUserWindow extends JFrame {
         // Поле для ввода пароля
         passwordField = new JPasswordField();
         RoundedLabel passwordLabel = createRoundedLabel("Введите ваш пароль", 10, ConstantColors.DEEP_BLUE, ConstantColors.THISTLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
+
+        // Добавление границы вокруг метки пароля
+        Border passwordBorder = BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2);
+        passwordLabel.setBorder(BorderFactory.createCompoundBorder(passwordBorder, BorderFactory.createEmptyBorder(0, 0, 0, 0)));
 
         gbc.gridy = 2;
         gbc.gridwidth = 2;
@@ -154,6 +163,10 @@ public class ChooseUserWindow extends JFrame {
             }
         });
 
+        // Добавление границы вокруг метки токена
+        Border tokenBorder = BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2);
+        tokenLabel.setBorder(BorderFactory.createCompoundBorder(tokenBorder, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         panel.add(tokenLabel);
 
         RoundedLabel loginLabel = createRoundedLabel(
@@ -164,6 +177,11 @@ public class ChooseUserWindow extends JFrame {
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
+
+        // Добавление границы вокруг метки логина
+        Border loginBorder = BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2);
+        loginLabel.setBorder(BorderFactory.createCompoundBorder(loginBorder, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         panel.add(loginLabel);
         panel.add(loginField);
 
@@ -175,6 +193,11 @@ public class ChooseUserWindow extends JFrame {
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
+
+        // Добавление границы вокруг метки пароля
+        Border passwordBorder = BorderFactory.createLineBorder(ConstantColors.DARK_VIOLET, 2);
+        passwordLabel.setBorder(BorderFactory.createCompoundBorder(passwordBorder, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         panel.add(passwordLabel);
         panel.add(passwordField);
 
