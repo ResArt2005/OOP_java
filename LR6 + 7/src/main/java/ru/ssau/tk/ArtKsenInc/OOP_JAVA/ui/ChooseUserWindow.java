@@ -33,9 +33,8 @@ public class ChooseUserWindow extends JFrame {
 
         // Поле для ввода токена
         tokenField = new JTextField();
-        RoundedLabel tokenLabel = new RoundedLabel("Введите ваш токен:", 10);
+        RoundedLabel tokenLabel = new RoundedLabel("Введите ваш токен", 10, ConstantColors.RED_VIOLET);
         tokenLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        tokenLabel.setForeground(ConstantColors.DARK_LILAC);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -50,9 +49,8 @@ public class ChooseUserWindow extends JFrame {
 
         // Поле для ввода пароля
         passwordField = new JPasswordField();
-        RoundedLabel passwordLabel = new RoundedLabel("Введите ваш пароль:", 10);
+        RoundedLabel passwordLabel = new RoundedLabel("Введите ваш пароль", 10, ConstantColors.RED_VIOLET);
         passwordLabel.setFont(ConstantFonts.Open_Sans_Bold);
-        passwordLabel.setForeground(ConstantColors.DARK_LILAC);
 
         gbc.gridy = 2;
         gbc.gridwidth = 2;
@@ -169,28 +167,90 @@ public class ChooseUserWindow extends JFrame {
     }
 
     private void showErrorDialog(String message) {
-        JOptionPane optionPane = new JOptionPane(message, JOptionPane.ERROR_MESSAGE);
-        JDialog dialog = optionPane.createDialog(this, "Ошибка");
-        dialog.setBackground(ConstantColors.DEEP_PURPLE);
+        // Создаем кастомное диалоговое окно
+        JDialog dialog = new JDialog(this, "Ошибка", Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setSize(300, 150);
+        dialog.setLocationRelativeTo(this);
+
+        // Устанавливаем фон и шрифт для диалогового окна
         dialog.getContentPane().setBackground(ConstantColors.DEEP_PURPLE);
-        ((JPanel) optionPane.getComponent(0)).setBackground(ConstantColors.DEEP_PURPLE);
-        for (Component comp : ((JPanel) optionPane.getComponent(0)).getComponents()) {
-            comp.setBackground(ConstantColors.DEEP_PURPLE);
-            comp.setForeground(ConstantColors.THISTLE);
-        }
+        dialog.setFont(ConstantFonts.Open_Sans_Bold);
+
+        // Создаем панель для содержимого диалогового окна
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(ConstantColors.DEEP_PURPLE);
+
+        // Создаем метку с сообщением об ошибке
+        RoundedLabel messageLabel = new RoundedLabel(message, 20, ConstantColors.RICH_PURPLE); // Устанавливаем пурпурный бордер
+        messageLabel.setForeground(ConstantColors.RED_VIOLET);
+        messageLabel.setFont(ConstantFonts.Open_Sans_Bold);
+        messageLabel.setOpaque(true); // Устанавливаем непрозрачность в true, чтобы фон был виден
+        messageLabel.setBackground(ConstantColors.DEEP_PURPLE); // Устанавливаем фон метки
+
+        // Добавляем метку на панель
+        panel.add(messageLabel, BorderLayout.CENTER);
+
+        // Создаем кнопку OK
+        JButton okButton = new JButton("OK");
+        okButton.setBackground(ConstantColors.RICH_PURPLE);
+        okButton.setForeground(ConstantColors.THISTLE);
+        okButton.setFont(ConstantFonts.Open_Sans_Bold);
+        okButton.setFocusPainted(false);
+        okButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Добавляем кнопку на панель
+        panel.add(okButton, BorderLayout.SOUTH);
+
+        // Добавляем панель на диалоговое окно
+        dialog.add(panel);
+
+        // Обработчик событий для кнопки OK
+        okButton.addActionListener(e -> dialog.dispose());
+
+        // Делаем диалоговое окно видимым
         dialog.setVisible(true);
     }
 
     private void showSuccessDialog(String message) {
-        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog = optionPane.createDialog(this, "Успех");
-        dialog.setBackground(ConstantColors.DEEP_PURPLE);
+        // Создаем кастомное диалоговое окно
+        JDialog dialog = new JDialog(this, "Успех", Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setSize(300, 150);
+        dialog.setLocationRelativeTo(this);
+
+        // Устанавливаем фон и шрифт для диалогового окна
         dialog.getContentPane().setBackground(ConstantColors.DEEP_PURPLE);
-        ((JPanel) optionPane.getComponent(0)).setBackground(ConstantColors.DEEP_PURPLE);
-        for (Component comp : ((JPanel) optionPane.getComponent(0)).getComponents()) {
-            comp.setBackground(ConstantColors.DEEP_PURPLE);
-            comp.setForeground(ConstantColors.THISTLE);
-        }
+        dialog.setFont(ConstantFonts.Open_Sans_Bold);
+
+        // Создаем панель для содержимого диалогового окна
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(ConstantColors.DEEP_PURPLE);
+
+        // Создаем метку с сообщением об успехе
+        JLabel messageLabel = new JLabel(message, JLabel.CENTER);
+        messageLabel.setForeground(ConstantColors.THISTLE);
+        messageLabel.setFont(ConstantFonts.Open_Sans_Bold);
+
+        // Добавляем метку на панель
+        panel.add(messageLabel, BorderLayout.CENTER);
+
+        // Создаем кнопку OK
+        JButton okButton = new JButton("OK");
+        okButton.setBackground(ConstantColors.RICH_PURPLE);
+        okButton.setForeground(ConstantColors.THISTLE);
+        okButton.setFont(ConstantFonts.Open_Sans_Bold);
+        okButton.setFocusPainted(false);
+        okButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Добавляем кнопку на панель
+        panel.add(okButton, BorderLayout.SOUTH);
+
+        // Добавляем панель на диалоговое окно
+        dialog.add(panel);
+
+        // Обработчик событий для кнопки OK
+        okButton.addActionListener(e -> dialog.dispose());
+
+        // Делаем диалоговое окно видимым
         dialog.setVisible(true);
     }
 
