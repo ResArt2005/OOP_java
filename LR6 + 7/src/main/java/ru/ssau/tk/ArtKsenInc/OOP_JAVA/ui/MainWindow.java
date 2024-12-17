@@ -146,6 +146,6 @@ public class MainWindow extends JFrame {
     }
 
     private void openWorkWithDBWindow() {
-        new WorkWithDBWindow(this, factoryService);
+        new WorkWithDBWindow(this, factoryService, true);
     }
 }

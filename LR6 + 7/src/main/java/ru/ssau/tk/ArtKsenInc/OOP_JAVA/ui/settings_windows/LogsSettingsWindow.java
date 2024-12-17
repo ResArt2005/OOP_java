@@ -16,8 +16,8 @@ public class LogsSettingsWindow extends JDialog {
     private final JPanel logsPanel = new JPanel(); // Панель для отображения логов
     private JFrame owner;
 
-    public LogsSettingsWindow(JFrame frame) {
-        super(frame, "Логи", true);
+    public LogsSettingsWindow(JFrame frame, boolean modal) {
+        super(frame, "Логи", modal);
         owner = frame;
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,7 +54,7 @@ public class LogsSettingsWindow extends JDialog {
 
         // Добавляем слушатель для кнопки
         eraseButton.addActionListener(e -> {
-            eraseLogs(logsPanel); // Очищаем логи при нажатии
+            eraseLogs(); // Очищаем логи при нажатии
         });
 
         bottomPanel.add(eraseButton);
@@ -66,9 +66,9 @@ public class LogsSettingsWindow extends JDialog {
         setVisible(true);
     }
 
-    private void eraseLogs(JPanel panel) {
+    public void eraseLogs() {
         dbTools.deleteAllLogs(); // Стираем логи в базе данных
-        update(panel);           // Обновляем отображение
+        update(logsPanel);           // Обновляем отображение
     }
 
     private void update(JPanel panel) {

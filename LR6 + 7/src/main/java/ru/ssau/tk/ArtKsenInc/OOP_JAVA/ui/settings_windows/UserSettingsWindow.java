@@ -21,8 +21,8 @@ public class UserSettingsWindow extends JDialog {
     private JFrame owner;
 
 
-    public UserSettingsWindow(JFrame frame) {
-        super(frame, "Пользователи", true);
+    public UserSettingsWindow(JFrame frame, boolean modal) {
+        super(frame, "Пользователи", modal);
         owner = frame;
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

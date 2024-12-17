@@ -1,7 +1,5 @@
 package WindowsTests;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,18 +9,17 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.User;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.ChooseUserWindow;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
-import javax.swing.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.Mockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = Main.class)
 public class ChooseUserWindowTest {
 
     @InjectMocks
@@ -41,11 +38,6 @@ public class ChooseUserWindowTest {
         try (MockedStatic<dbTools> mockedDbTools = Mockito.mockStatic(dbTools.class)) {
             String token = "testToken";
             String password = "testPassword";
-            //String resultPas = when(mockUser.getPassword()).thenReturn(password).toString();
-            //String resultLogin = when(mockUser.getLogin()).thenReturn("testLogin").toString();
-            //Assertions.assertThat(resultPas).isNotNull();
-            //Assertions.assertThat(resultLogin).isNotNull();
-
             // Замокировать получение пользователей
             Map<String, User> mockUsers = new HashMap<>();
             mockUsers.put(token, mockUser);
@@ -57,11 +49,9 @@ public class ChooseUserWindowTest {
 
             // Запустить метод
             chooseUserWindow.attemptLogin();
-
-
-            //JOptionPane.showMessageDialog(any(), eq("Добро пожаловать, testLogin!"), eq("Успех"), eq(JOptionPane.INFORMATION_MESSAGE));
         }
     }
+
 
     @Test
     public void testAttemptLogin_Failed() {
@@ -79,8 +69,6 @@ public class ChooseUserWindowTest {
 
             // Запустить метод
             chooseUserWindow.attemptLogin();
-
-            //JOptionPane.showMessageDialog(any(), eq("Неверный токен или пароль"), eq("Ошибка"), eq(JOptionPane.ERROR_MESSAGE));
         }
     }
 
@@ -89,10 +77,6 @@ public class ChooseUserWindowTest {
         try (MockedStatic<dbTools> mockedDbTools = Mockito.mockStatic(dbTools.class)) {
             String token = "testToken";
             String password = "testPassword";
-            //String resultPas = when(mockUser.getPassword()).thenReturn(password).toString();
-            //String resultLogin = when(mockUser.getLogin()).thenReturn("testLogin").toString();
-            //Assertions.assertThat(resultPas).isNotNull();
-            //Assertions.assertThat(resultLogin).isNotNull();
             // Замокировать получение пользователей
             Map<String, User> mockUsers = new HashMap<>();
             mockUsers.put(token, mockUser);
@@ -104,8 +88,6 @@ public class ChooseUserWindowTest {
 
             // Запустить метод
             chooseUserWindow.attemptLogin();
-
-            //JOptionPane.showMessageDialog(any(), eq("Добро пожаловать, testLogin!"), eq("Успех"), eq(JOptionPane.INFORMATION_MESSAGE));
         }
     }
 }

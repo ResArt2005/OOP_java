@@ -20,8 +20,8 @@ public class TBSettingsWindow extends JDialog {
     private JFrame owner;
     TabulatedFunctionOperationService factoryService;
 
-    public TBSettingsWindow(JFrame frame, TabulatedFunctionOperationService factoryService) {
-        super(frame, "Табулированные функции", true);
+    public TBSettingsWindow(JFrame frame, TabulatedFunctionOperationService factoryService, boolean modal) {
+        super(frame, "Табулированные функции", modal);
         owner = frame;
         this.factoryService = factoryService;
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
@@ -54,9 +54,7 @@ public class TBSettingsWindow extends JDialog {
         createButton.setBackground(ConstantColors.RICH_PURPLE);
         createButton.setForeground(ConstantColors.THISTLE);;
         createButton.setFocusPainted(false);
-        createButton.addActionListener(e -> {
-            createTBFunc(TBPanel); // Очищаем логи при нажатии
-        });
+        createButton.addActionListener(e -> createTBFunc());
         JButton eraseButton = new JButton("Стереть все");
         eraseButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
         eraseButton.setBackground(ConstantColors.RICH_PURPLE);
@@ -65,7 +63,7 @@ public class TBSettingsWindow extends JDialog {
 
         // Добавляем слушатель для кнопки
         eraseButton.addActionListener(e -> {
-            eraseAll(TBPanel); // Очищаем логи при нажатии
+            eraseAll(); // Очищаем логи при нажатии
         });
         bottomPanel.add(eraseButton);
         bottomPanel.add(createButton);
@@ -82,15 +80,15 @@ public class TBSettingsWindow extends JDialog {
         updatePanel(panel);
     }
 
-    private void eraseAll(JPanel panel) {
+    public void eraseAll() {
         dbTools.deleteAllTBFunctions();
-        updatePanel(panel);
+        updatePanel(TBPanel);
     }
 
-    private void createTBFunc(JPanel panel) {
+    public void createTBFunc() {
         SettingsWindowChooseTheWayCreateTF window = new SettingsWindowChooseTheWayCreateTF(owner, factoryService);
         window.setVisible(true);
-        updatePanel(panel);
+        updatePanel(TBPanel);
     }
 
     private void updatePanel(JPanel panel) {

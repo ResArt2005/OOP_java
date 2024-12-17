@@ -16,8 +16,8 @@ public class MathFuncSettingsWindow extends JDialog {
     private final JPanel mathFuncPanel = new JPanel(); // Панель для отображения логов
     private JFrame owner;
 
-    public MathFuncSettingsWindow(JFrame frame) {
-        super(frame, "Математические функции", true);
+    public MathFuncSettingsWindow(JFrame frame, boolean modal) {
+        super(frame, "Математические функции", modal);
         owner = frame;
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,7 +51,7 @@ public class MathFuncSettingsWindow extends JDialog {
         createButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
-        createButton.addActionListener(e -> createMathFunction(mathFuncPanel));
+        createButton.addActionListener(e -> createMathFunction());
 
         bottomPanel.add(createButton);
         JButton eraseButton = new JButton("Стереть все функции");
@@ -61,7 +61,7 @@ public class MathFuncSettingsWindow extends JDialog {
         eraseButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
-        eraseButton.addActionListener(e -> eraseAll(mathFuncPanel));
+        eraseButton.addActionListener(e -> eraseAll());
 
         bottomPanel.add(eraseButton);
         add(bottomPanel, BorderLayout.SOUTH); // Добавляем панель с кнопкой внизу
@@ -71,18 +71,18 @@ public class MathFuncSettingsWindow extends JDialog {
 
         setVisible(true);
     }
-    private void createMathFunction(JPanel panel){
+    public void createMathFunction(){
         new CompositeFunctionCreationWindow(owner);
-        updatePanel(panel);
+        updatePanel(mathFuncPanel);
     }
-    private void eraseMathFunc(JPanel panel, Integer id) {
+    public void eraseMathFunc(JPanel panel, Integer id) {
         dbTools.deleteMathFunctionById(id);
         updatePanel(panel);
     }
 
-    private void eraseAll(JPanel panel) {
+    public void eraseAll() {
         dbTools.deleteAllMathFunctions();
-        updatePanel(panel);
+        updatePanel(mathFuncPanel);
     }
 
     private void updatePanel(JPanel panel) {

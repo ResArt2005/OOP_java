@@ -18,8 +18,8 @@ public class WorkWithDBWindow extends JDialog {
     private final int HEIGHT_WINDOW = 400;
     JFrame owner;
 TabulatedFunctionOperationService factoryService;
-    public WorkWithDBWindow(JFrame frame,TabulatedFunctionOperationService factoryService) {
-        super(frame, "Взаимодействие с базой данных", true);
+    public WorkWithDBWindow(JFrame frame,TabulatedFunctionOperationService factoryService, boolean modal) {
+        super(frame, "Взаимодействие с базой данных", modal);
         owner = frame;
         this.factoryService = factoryService;
         setSize(WIDTH_WINDOW, HEIGHT_WINDOW);
@@ -85,23 +85,23 @@ TabulatedFunctionOperationService factoryService;
         return button;
     }
 
-    private void openUserSettingsWindow() {
-        new UserSettingsWindow(owner);
+    public void openUserSettingsWindow() {
+        new UserSettingsWindow(owner, true);
     }
 
-    private void openMathFuncSettingsWindow() {
-        new MathFuncSettingsWindow(owner);
+    public void openMathFuncSettingsWindow() {
+        new MathFuncSettingsWindow(owner, true);
     }
 
-    private void openTBSettingsWindow() {
-        new TBSettingsWindow(owner, factoryService);
+    public void openTBSettingsWindow() {
+        new TBSettingsWindow(owner, factoryService, true);
     }
 
-    private void openLogsSettingsWindow() {
-        new LogsSettingsWindow(owner);
+    public void openLogsSettingsWindow() {
+        new LogsSettingsWindow(owner, true);
     }
 
-    private void Erase() {
+    public void Erase() {
         dbTools.deleteAllLogs();
         dbTools.deleteAllTBFunctions();
         dbTools.deleteAllMathFunctions();
