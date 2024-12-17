@@ -199,7 +199,7 @@ public class UserSettingsWindow extends JDialog {
                 "Токен пользователя: " + newUser.getToken(),
                 5,
                 ConstantColors.RICH_PURPLE,
-                ConstantColors.DARK_PURPLE,
+                ConstantColors.PURPLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
@@ -222,7 +222,7 @@ public class UserSettingsWindow extends JDialog {
                 "Введите логин:",
                 5,
                 ConstantColors.RICH_PURPLE,
-                ConstantColors.THISTLE,
+                ConstantColors.PURPLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
@@ -234,7 +234,7 @@ public class UserSettingsWindow extends JDialog {
                 "Введите пароль:",
                 5,
                 ConstantColors.RICH_PURPLE,
-                ConstantColors.THISTLE,
+                ConstantColors.PURPLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
@@ -323,7 +323,7 @@ public class UserSettingsWindow extends JDialog {
 
         // Создаем метку с сообщением об успехе
         JLabel messageLabel = new JLabel(message, JLabel.CENTER);
-        messageLabel.setForeground(ConstantColors.DEEP_BLUE);
+        messageLabel.setForeground(ConstantColors.THISTLE);
         messageLabel.setFont(ConstantFonts.Open_Sans_Bold);
 
         // Добавляем метку на панель
