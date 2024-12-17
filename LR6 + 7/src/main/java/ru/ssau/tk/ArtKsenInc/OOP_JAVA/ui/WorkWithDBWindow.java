@@ -9,7 +9,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.MathFuncSettingsWindow
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.TBSettingsWindow;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.UserSettingsWindow;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
-
+//Timelife
 import javax.swing.*;
 import java.awt.*;
 
