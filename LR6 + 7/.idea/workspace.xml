@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b373a91d-2093-497e-a119-469e7a50be5a" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2qDMn5np6LsKsAQFISLMPzs8cM6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "JUnit.ChooseUserWindowTest (1).executor": "Run",
+    "JUnit.ChooseUserWindowTest.executor": "Run",
+    "JUnit.SpringTests in ArtKsenInc-OOP_JAVA (1).executor": "Run",
+    "JUnit.SpringTests in ArtKsenInc-OOP_JAVA.executor": "Run",
+    "JUnit.WindowsTests in ArtKsenInc-OOP_JAVA.executor": "Run",
+    "Maven.ArtKsenInc-OOP_JAVA [clean].executor": "Run",
+    "Maven.ArtKsenInc-OOP_JAVA [install].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "preferences.sourceCode.XML"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.WindowsTests in ArtKsenInc-OOP_JAVA">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.ssau.tk.ArtKsenInc.OOP_JAVA.Main" />
+      <module name="ArtKsenInc-OOP_JAVA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.ssau.tk.ArtKsenInc.OOP_JAVA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChooseUserWindowTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ArtKsenInc-OOP_JAVA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="WindowsTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="WindowsTests" />
+      <option name="MAIN_CLASS_NAME" value="WindowsTests.ChooseUserWindowTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChooseUserWindowTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ArtKsenInc-OOP_JAVA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SpringTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="SpringTests" />
+      <option name="MAIN_CLASS_NAME" value="SpringTests.ChooseUserWindowTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringTests in ArtKsenInc-OOP_JAVA (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ArtKsenInc-OOP_JAVA" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/SpringTests" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WindowsTests in ArtKsenInc-OOP_JAVA" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ArtKsenInc-OOP_JAVA" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/WindowsTests" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.WindowsTests in ArtKsenInc-OOP_JAVA" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.ChooseUserWindowTest (1)" />
+        <item itemvalue="JUnit.SpringTests in ArtKsenInc-OOP_JAVA (1)" />
+        <item itemvalue="JUnit.ChooseUserWindowTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b373a91d-2093-497e-a119-469e7a50be5a" name="Changes" comment="" />
+      <created>1734192858692</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734192858692</updated>
+    </task>
+    <servers />
+  </component>
+</project>
