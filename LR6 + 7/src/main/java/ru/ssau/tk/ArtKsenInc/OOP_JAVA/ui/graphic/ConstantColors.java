@@ -4,6 +4,7 @@ import java.awt.*;
 public final class ConstantColors {
     public static final Color BLACK = Color.BLACK;
     public static final Color THISTLE = Color.decode("#dec2db");
+    public static final Color PURPLE = Color.decode("#8770a5");
     public static final Color DARK_PURPLE = Color.decode("#57399D");
     public static final Color DARK_VIOLET = Color.decode("#360B41"); // обводка кнопок
     public static final Color RICH_PURPLE = Color.decode("#5c2d8e");
