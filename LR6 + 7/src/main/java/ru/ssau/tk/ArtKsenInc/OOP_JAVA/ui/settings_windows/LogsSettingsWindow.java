@@ -48,8 +48,8 @@ public class LogsSettingsWindow extends JDialog {
 
         JButton eraseButton = new JButton("Стереть логи");
         eraseButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
-        eraseButton.setBackground(ConstantColors.DEEP_BLUE);
-        eraseButton.setForeground(Color.WHITE);
+        eraseButton.setBackground(ConstantColors.RICH_PURPLE);
+        eraseButton.setForeground(ConstantColors.THISTLE);
         eraseButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
@@ -59,6 +59,10 @@ public class LogsSettingsWindow extends JDialog {
 
         bottomPanel.add(eraseButton);
         add(bottomPanel, BorderLayout.SOUTH); // Добавляем панель с кнопкой внизу
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         setVisible(true);
     }
 

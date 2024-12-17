@@ -72,6 +72,10 @@ public class UserSettingsWindow extends JDialog {
         });
         bottomPanel.add(createButton);
         add(bottomPanel, BorderLayout.SOUTH); // Добавляем панель с кнопкой внизу
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         setVisible(true);
     }
 

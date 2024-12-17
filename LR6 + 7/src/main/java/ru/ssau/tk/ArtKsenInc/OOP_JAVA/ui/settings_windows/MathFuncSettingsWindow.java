@@ -46,8 +46,8 @@ public class MathFuncSettingsWindow extends JDialog {
 
         JButton createButton = new JButton("Добавить");
         createButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
-        createButton.setBackground(ConstantColors.DEEP_BLUE);
-        createButton.setForeground(Color.WHITE);
+        createButton.setBackground(ConstantColors.RICH_PURPLE);
+        createButton.setForeground(ConstantColors.THISTLE);
         createButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
@@ -56,8 +56,8 @@ public class MathFuncSettingsWindow extends JDialog {
         bottomPanel.add(createButton);
         JButton eraseButton = new JButton("Стереть все функции");
         eraseButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
-        eraseButton.setBackground(ConstantColors.DEEP_BLUE);
-        eraseButton.setForeground(Color.WHITE);
+        eraseButton.setBackground(ConstantColors.RICH_PURPLE);
+        eraseButton.setForeground(ConstantColors.THISTLE);
         eraseButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
@@ -65,6 +65,10 @@ public class MathFuncSettingsWindow extends JDialog {
 
         bottomPanel.add(eraseButton);
         add(bottomPanel, BorderLayout.SOUTH); // Добавляем панель с кнопкой внизу
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         setVisible(true);
     }
     private void createMathFunction(JPanel panel){
@@ -117,7 +121,7 @@ public class MathFuncSettingsWindow extends JDialog {
                 // Кнопка "Delete" для удаления пользователя
                 JButton deleteButton = new JButton("Удалить");
                 deleteButton.setBackground(Color.RED);
-                deleteButton.setForeground(Color.WHITE);
+                deleteButton.setForeground(ConstantColors.THISTLE);
                 deleteButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(12f));
                 deleteButton.setFocusPainted(false);
                 deleteButton.addActionListener(e -> eraseMathFunc(panel, id));

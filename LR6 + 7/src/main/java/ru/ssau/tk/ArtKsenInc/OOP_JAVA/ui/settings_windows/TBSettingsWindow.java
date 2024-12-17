@@ -51,16 +51,16 @@ public class TBSettingsWindow extends JDialog {
 
         JButton createButton = new JButton("Добавить");
         createButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
-        createButton.setBackground(ConstantColors.DEEP_BLUE);
-        createButton.setForeground(Color.WHITE);
+        createButton.setBackground(ConstantColors.RICH_PURPLE);
+        createButton.setForeground(ConstantColors.THISTLE);;
         createButton.setFocusPainted(false);
         createButton.addActionListener(e -> {
             createTBFunc(TBPanel); // Очищаем логи при нажатии
         });
         JButton eraseButton = new JButton("Стереть все");
         eraseButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
-        eraseButton.setBackground(ConstantColors.DEEP_BLUE);
-        eraseButton.setForeground(Color.WHITE);
+        eraseButton.setBackground(ConstantColors.RICH_PURPLE);
+        eraseButton.setForeground(ConstantColors.THISTLE);;
         eraseButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
@@ -70,6 +70,10 @@ public class TBSettingsWindow extends JDialog {
         bottomPanel.add(eraseButton);
         bottomPanel.add(createButton);
         add(bottomPanel, BorderLayout.SOUTH);
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         setVisible(true);
     }
 
@@ -131,7 +135,7 @@ public class TBSettingsWindow extends JDialog {
                 // Кнопка "Delete" для удаления пользователя
                 JButton deleteButton = new JButton("Удалить");
                 deleteButton.setBackground(Color.RED);
-                deleteButton.setForeground(Color.WHITE);
+                deleteButton.setForeground(ConstantColors.THISTLE);
                 deleteButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(12f));
                 deleteButton.setFocusPainted(false);
                 deleteButton.addActionListener(e -> eraseTBFunc(panel, id));

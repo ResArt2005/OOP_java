@@ -100,6 +100,8 @@ public class TabulatedFunctionByMathFunctionWindow extends JDialog {
         add(inputPanel, BorderLayout.CENTER);
         add(createButton, BorderLayout.SOUTH);
         add(compositeFunctionButton, BorderLayout.NORTH);
+        // Центрирование окна
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

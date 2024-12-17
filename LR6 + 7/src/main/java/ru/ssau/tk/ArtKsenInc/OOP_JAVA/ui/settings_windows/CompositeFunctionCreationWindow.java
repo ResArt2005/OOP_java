@@ -67,6 +67,10 @@ public class CompositeFunctionCreationWindow extends JDialog {
         // Добавляем панели на окно
         add(inputPanel, BorderLayout.CENTER);
         add(createButton, BorderLayout.SOUTH);
+
+        // Центрирование окна
+        setLocationRelativeTo(null);
+
         setVisible(true);
     }
 

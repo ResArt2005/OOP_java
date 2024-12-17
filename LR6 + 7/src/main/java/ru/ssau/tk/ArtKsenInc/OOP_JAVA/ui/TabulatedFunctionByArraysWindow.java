@@ -86,6 +86,8 @@ public class TabulatedFunctionByArraysWindow extends JDialog {
         // Слушатели для кнопок
         createTableButton.addActionListener(e -> createTable());
         createFunctionButton.addActionListener(e -> createTabulatedFunction());
+        // Центрирование окна
+        setLocationRelativeTo(null);
 
         setVisible(true);
     }
