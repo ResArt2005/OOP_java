@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration</title>
+    <style>
+        body {
+            background-color: #36245B; /* Deep Purple background */
+            font-family: 'Open Sans', sans-serif;
+            color: #E0BBE4; /* Light pink for text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #3F2A56; /* Dark Purple */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #E0BBE4;
+        }
+        button {
+            background-color: #6A1B9A; /* Rich Purple */
+            color: #E0BBE4;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #9A67EA; /* Lighter shade on hover */
+        }
+        .error {
+            color: #FF6B6B;
+        }
+        .success {
+            color: #81C784;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Регистрация нового пользователя</h1>
+
+    <form th:action="@{/}" method="post">
+        <label for="token">Введите ваш токен:</label>
+        <input type="text" id="token" name="token" required>
+
+        <label for="password">Введите пароль:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Войти</button>
+        <button type="submit">Новый пользователь</button>
+    </form>
+
+    <!-- Вывод сообщений об ошибке или успехе -->
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${success}" class="success" th:text="${success}"></div>
+</div>
+</body>
+</html>

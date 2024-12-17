@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <style>
+        body {
+            background-color: #5D3A9B; /* Equivalent to ConstantColors.RICH_PURPLE */
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .button {
+            background-color: #D8BFD8; /* Equivalent to ConstantColors.THISTLE */
+            color: #5D3A9B;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .header {
+            background-color: #9370DB; /* ConstantColors.DARK_LILAC */
+            color: #003366; /* ConstantColors.DEEP_BLUE */
+            font-size: 24px;
+            padding: 10px;
+            border: 2px solid #9400D3; /* Equivalent to ConstantColors.DARK_VIOLET */
+            border-radius: 20px;
+            width: 50%;
+            margin: auto;
+        }
+        .button:hover {
+            background-color: #9370DB; /* Darker on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    Главное меню
+</div>
+
+<div class="container">
+    <a th:href="@{/settings}">
+        <button class="button">Открыть настройки</button>
+    </a>
+    <a th:href="@{/operations}">
+        <button class="button">Операции над табулированными функциями</button>
+    </a>
+    <a th:href="@{/differential}">
+        <button class="button">Дифференциальные операции</button>
+    </a>
+    <a th:href="@{/editor}">
+        <button class="button">Редактор функции</button>
+    </a>
+    <a th:href="@{/integral}">
+        <button class="button">Нахождение интеграла</button>
+    </a>
+    <a th:if="${isAdmin}" th:href="@{/admin}">
+        <button class="button">Только для персонала</button>
+    </a>
+</div>
+
+</body>
+</html>
