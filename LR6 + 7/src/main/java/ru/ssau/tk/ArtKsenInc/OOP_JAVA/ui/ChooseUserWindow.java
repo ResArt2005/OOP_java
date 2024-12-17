@@ -169,7 +169,7 @@ public class ChooseUserWindow extends JFrame {
                 "Введите логин:",
                 5,
                 ConstantColors.RICH_PURPLE,
-                ConstantColors.DARK_PURPLE,
+                ConstantColors.THISTLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
@@ -181,7 +181,7 @@ public class ChooseUserWindow extends JFrame {
                 "Введите пароль:",
                 5,
                 ConstantColors.RICH_PURPLE,
-                ConstantColors.DARK_PURPLE,
+                ConstantColors.THISTLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
@@ -242,7 +242,7 @@ public class ChooseUserWindow extends JFrame {
                 showSuccessDialog("Новый пользователь создан!");
                 dialog.dispose();
             } else {
-                showErrorDialog("Логин и пароль не могут быть пустыми");
+                showErrorDialog("Логин и пароль не могут быть пустыми!");
             }
         });
 
@@ -297,7 +297,7 @@ public class ChooseUserWindow extends JFrame {
     private void showSuccessDialog(String message) {
         // Создаем кастомное диалоговое окно
         JDialog dialog = new JDialog(this, "Успех", Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setSize(300, 150);
+        dialog.setSize(400, 150);
         dialog.setLocationRelativeTo(this);
 
         // Устанавливаем фон и шрифт для диалогового окна
@@ -310,7 +310,7 @@ public class ChooseUserWindow extends JFrame {
 
         // Создаем метку с сообщением об успехе
         JLabel messageLabel = new JLabel(message, JLabel.CENTER);
-        messageLabel.setForeground(ConstantColors.THISTLE);
+        messageLabel.setForeground(ConstantColors.DEEP_BLUE);
         messageLabel.setFont(ConstantFonts.Open_Sans_Bold);
 
         // Добавляем метку на панель

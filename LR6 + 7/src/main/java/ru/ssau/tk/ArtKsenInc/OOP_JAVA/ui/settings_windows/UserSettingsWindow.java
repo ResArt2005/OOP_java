@@ -51,8 +51,8 @@ public class UserSettingsWindow extends JDialog {
 
         JButton eraseButton = new JButton("Стереть всех и вся");
         eraseButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
-        eraseButton.setBackground(ConstantColors.DEEP_BLUE);
-        eraseButton.setForeground(Color.WHITE);
+        eraseButton.setBackground(ConstantColors.RICH_PURPLE);
+        eraseButton.setForeground(ConstantColors.THISTLE);
         eraseButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
@@ -62,8 +62,8 @@ public class UserSettingsWindow extends JDialog {
         bottomPanel.add(eraseButton);
         JButton createButton = new JButton("Рождение жизни");
         createButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(16f));
-        createButton.setBackground(ConstantColors.DEEP_BLUE);
-        createButton.setForeground(Color.WHITE);
+        createButton.setBackground(ConstantColors.RICH_PURPLE);
+        createButton.setForeground(ConstantColors.THISTLE);
         createButton.setFocusPainted(false);
 
         // Добавляем слушатель для кнопки
@@ -125,8 +125,8 @@ public class UserSettingsWindow extends JDialog {
 
                 // Кнопка "Update" для изменения данных пользователя
                 JButton updateButton = new JButton("Изменить");
-                updateButton.setBackground(ConstantColors.DEEP_BLUE);
-                updateButton.setForeground(Color.WHITE);
+                updateButton.setBackground(ConstantColors.RICH_PURPLE);
+                updateButton.setForeground(ConstantColors.THISTLE);
                 updateButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(12f));
                 updateButton.setFocusPainted(false);
                 updateButton.addActionListener(e -> showUpdateDialog(panel, token, users.get(token).getLogin(), users.get(token).getPassword()));
@@ -135,7 +135,7 @@ public class UserSettingsWindow extends JDialog {
                 // Кнопка "Delete" для удаления пользователя
                 JButton deleteButton = new JButton("Удалить");
                 deleteButton.setBackground(Color.RED);
-                deleteButton.setForeground(Color.WHITE);
+                deleteButton.setForeground(ConstantColors.THISTLE);
                 deleteButton.setFont(ConstantFonts.Open_Sans_Bold.deriveFont(12f));
                 deleteButton.setFocusPainted(false);
                 deleteButton.addActionListener(e -> eraseUser(panel, token));
@@ -195,7 +195,6 @@ public class UserSettingsWindow extends JDialog {
                 "Токен пользователя: " + newUser.getToken(),
                 5,
                 ConstantColors.RICH_PURPLE,
-                3,
                 ConstantColors.DARK_PURPLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
@@ -219,8 +218,7 @@ public class UserSettingsWindow extends JDialog {
                 "Введите логин:",
                 5,
                 ConstantColors.RICH_PURPLE,
-                2,
-                ConstantColors.DARK_PURPLE,
+                ConstantColors.THISTLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
@@ -232,8 +230,7 @@ public class UserSettingsWindow extends JDialog {
                 "Введите пароль:",
                 5,
                 ConstantColors.RICH_PURPLE,
-                3,
-                ConstantColors.DARK_PURPLE,
+                ConstantColors.THISTLE,
                 ConstantFonts.Open_Sans_Bold,
                 ConstantColors.DEEP_BLUE
         );
@@ -309,7 +306,7 @@ public class UserSettingsWindow extends JDialog {
     private void showSuccessDialog(String message) {
         // Создаем кастомное диалоговое окно
         JDialog dialog = new JDialog(this, "Успех", Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setSize(300, 150);
+        dialog.setSize(400, 150);
         dialog.setLocationRelativeTo(this);
 
         // Устанавливаем фон и шрифт для диалогового окна
@@ -322,7 +319,7 @@ public class UserSettingsWindow extends JDialog {
 
         // Создаем метку с сообщением об успехе
         JLabel messageLabel = new JLabel(message, JLabel.CENTER);
-        messageLabel.setForeground(ConstantColors.THISTLE);
+        messageLabel.setForeground(ConstantColors.DEEP_BLUE);
         messageLabel.setFont(ConstantFonts.Open_Sans_Bold);
 
         // Добавляем метку на панель
@@ -364,7 +361,7 @@ public class UserSettingsWindow extends JDialog {
         panel.setBackground(ConstantColors.DEEP_PURPLE);
 
         // Создаем метку с сообщением об ошибке
-        RoundedLabel messageLabel = createRoundedLabel(message, 20, ConstantColors.RICH_PURPLE, 3, ConstantColors.DEEP_PURPLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
+        RoundedLabel messageLabel = createRoundedLabel(message, 20, ConstantColors.RICH_PURPLE, ConstantColors.DEEP_PURPLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
 
         // Добавляем метку на панель
         panel.add(messageLabel, BorderLayout.CENTER);
@@ -390,7 +387,7 @@ public class UserSettingsWindow extends JDialog {
         dialog.setVisible(true);
     }
 
-    private RoundedLabel createRoundedLabel(String text, int borderRadius, Color borderColor, int borderThickness, Color backgroundColor, Font font, Color foregroundColor) {
+    private RoundedLabel createRoundedLabel(String text, int borderRadius, Color borderColor, Color backgroundColor, Font font, Color foregroundColor) {
         RoundedLabel label = new RoundedLabel(text, borderRadius, borderColor);
         label.setBackground(backgroundColor);
         label.setFont(font);
