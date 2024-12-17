@@ -365,7 +365,7 @@ public class UserSettingsWindow extends JDialog {
         panel.setBackground(ConstantColors.DEEP_PURPLE);
 
         // Создаем метку с сообщением об ошибке
-        RoundedLabel messageLabel = createRoundedLabel(message, 20, ConstantColors.RICH_PURPLE, ConstantColors.DEEP_PURPLE, ConstantFonts.Open_Sans_Bold, ConstantColors.DEEP_BLUE);
+        RoundedLabel messageLabel = createRoundedLabel(message, 20, ConstantColors.RICH_PURPLE, ConstantColors.DEEP_PURPLE, ConstantFonts.Open_Sans_Bold, ConstantColors.THISTLE);
 
         // Добавляем метку на панель
         panel.add(messageLabel, BorderLayout.CENTER);
