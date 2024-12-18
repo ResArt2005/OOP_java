@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 
@@ -13,13 +13,13 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 public class MainController {
 
     @GetMapping("/main")
-    public String mainPage(Model model, HttpSession session) {
-        UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
-
-        // Добавляем информацию о пользователе для проверки на права админа
-        model.addAttribute("isAdmin", userDTO != null && "admin".equals(userDTO.getToken()));
-
-        return "main";  // Возвращаем имя шаблона (main.html)
+    public String mainPage(@ModelAttribute("userDTO") UserDTO userDTO, Model model) {
+        // Проверяем, является ли пользователь администратором
+        if (userDTO == null) {
+            return "redirect:/"; // Перенаправляем на страницу авторизации
+        }
+        model.addAttribute("isAdmin", "admin".equals(userDTO.getToken()));
+        return "main";
     }
 
     @GetMapping("/settings")
