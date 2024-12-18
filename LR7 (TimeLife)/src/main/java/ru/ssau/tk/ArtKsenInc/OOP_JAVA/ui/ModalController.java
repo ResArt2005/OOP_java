@@ -12,7 +12,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 @Controller
 @RequestMapping("/modal")  // Базовый путь для модальных окон
 public class ModalController {
-
+/*
     @GetMapping("/settings")
     public String getSettingsPage(Model model, HttpSession session) {
         UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
@@ -54,4 +54,5 @@ public class ModalController {
         model.addAttribute("isAdmin", userDTO != null && "admin".equals(userDTO.getToken()));
         return "fragments/admin :: adminContent";  // Возвращаем фрагмент HTML
     }
+    */
 }

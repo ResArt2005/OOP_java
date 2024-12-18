@@ -46,13 +46,23 @@
 
 <div class="container">
     <button class="button" onclick="openModal('settingsModal', '/main/settings')">Открыть настройки</button>
-    <button class="button" onclick="openModal('operationsModal', '/main/operations')">Операции над табулированными функциями</button>
-    <button class="button" onclick="openModal('differentialModal', '/main/differential')">Дифференциальные операции</button>
+    <button class="button" onclick="openModal('operationsModal', '/main/operations')">Операции над табулированными
+        функциями
+    </button>
+    <button id="buttonDef" class="button" data-modal-id="operationsModal" data-url="/main/differential">
+        Дифференциальные операции
+    </button>
     <button class="button" onclick="openModal('editorModal', '/main/editor')">Редактор функции</button>
     <button class="button" onclick="openModal('integralModal', '/main/integral')">Нахождение интеграла</button>
     <a th:if="${isAdmin}" href="javascript:void(0);" onclick="openModal('adminModal', '/main/admin')">
         <button class="button">Только для персонала</button>
     </a>
+    <div id="operationsModal" class="defModal">
+        <div class="modal-content">
+            <!-- Здесь будет загружен контент модального окна -->
+        </div>
+    </div>
 </div>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>

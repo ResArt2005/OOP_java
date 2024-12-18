@@ -13,3 +13,9 @@ function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
     history.back();
 }
+const button = document.getElementById('buttonDef');
+   button.addEventListener('click', () => {
+       const modalId = button.getAttribute('data-modal-id');
+       const url = button.getAttribute('data-url');
+       openModal(modalId, url);
+   });

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Дифференциальные операции</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/art.css}">
+</head>
+<body>
+<div id="operationsModal" class="defModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('operationsModal')">&times;</span>
+        <h2>Операции с табулированными функциями</h2>
+        <div class="functions-container">
+            <div class="function-table">
+                <h3>Функция</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>X</th>
+                            <th>Y</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${function != null}" th:each="point : ${function.points}">
+                        <td th:text="${point.x}">X</td>
+                        <td>
+                            <input type="text" th:value="${point.y}" name="functionY"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <form method="post" th:action="@{/main/operations/insert}">
+                    <input type="text" name="x" placeholder="Введите X" />
+                    <input type="text" name="y" placeholder="Введите Y" />
+                    <button type="submit">Вставить</button>
+                </form>
+                <form method="post" th:action="@{/main/operations/delete}">
+                    <input type="text" name="index" placeholder="Введите индекс для удаления" />
+                    <button type="submit">Удалить</button>
+                </form>
+            </div>
+            <div class="result-table">
+                <h3>Результат</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>X</th>
+                            <th>Y'</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${resultFunction != null}" th:each="point : ${resultFunction.points}">
+                        <td th:text="${point.x}">X</td>
+                        <td th:text="${point.y}">Y'</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="operations-buttons">
+            <form method="post" th:action="@{/main/operations/differentiate}">
+                <button type="submit">Дифференцировать</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!---->
+</body>
+</html>
