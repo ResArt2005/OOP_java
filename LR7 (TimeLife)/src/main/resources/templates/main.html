@@ -45,25 +45,14 @@
 </div>
 
 <div class="container">
-    <a th:href="@{/settings}">
-        <button class="button">Открыть настройки</button>
-    </a>
-    <a th:href="@{/operations}">
-        <button class="button">Операции над табулированными функциями</button>
-    </a>
-    <a th:href="@{/differential}">
-        <button class="button">Дифференциальные операции</button>
-    </a>
-    <a th:href="@{/editor}">
-        <button class="button">Редактор функции</button>
-    </a>
-    <a th:href="@{/integral}">
-        <button class="button">Нахождение интеграла</button>
-    </a>
-    <a th:if="${isAdmin}" th:href="@{/admin}">
+    <button class="button" onclick="openModal('settingsModal', '/main/settings')">Открыть настройки</button>
+    <button class="button" onclick="openModal('operationsModal', '/main/operations')">Операции над табулированными функциями</button>
+    <button class="button" onclick="openModal('differentialModal', '/main/differential')">Дифференциальные операции</button>
+    <button class="button" onclick="openModal('editorModal', '/main/editor')">Редактор функции</button>
+    <button class="button" onclick="openModal('integralModal', '/main/integral')">Нахождение интеграла</button>
+    <a th:if="${isAdmin}" href="javascript:void(0);" onclick="openModal('adminModal', '/main/admin')">
         <button class="button">Только для персонала</button>
     </a>
 </div>
-
 </body>
 </html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="header" th:text="${header}"></div>
+<div class="header" th:text="${newHeader}"></div>
+<form th:action="@{/}" method="post">
+    <label>
+        <input type="text" name="text">
+    </label>
+    <button type="submit">Жмяк</button>
+</form>
+</body>
+</html>
