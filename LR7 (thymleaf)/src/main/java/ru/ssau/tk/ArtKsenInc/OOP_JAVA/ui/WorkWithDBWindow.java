@@ -48,7 +48,7 @@ TabulatedFunctionOperationService factoryService;
         MathFuncButton.addActionListener(e -> openMathFuncSettingsWindow());
         //----------------------------------------------------
         JButton TBFuncButton = createRoundedButton("Табулированные функции", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
-        TBFuncButton.addActionListener(e -> openTBSettingsWindow());
+        //TBFuncButton.addActionListener(e -> openTBSettingsWindow());
         //----------------------------------------------------
         JButton LogButton = createRoundedButton("Посмотреть логи", ConstantFonts.Open_Sans_Bold, ConstantColors.RICH_PURPLE, ConstantColors.THISTLE, new Cursor(Cursor.HAND_CURSOR));
         LogButton.addActionListener(e -> openLogsSettingsWindow());
@@ -93,9 +93,9 @@ TabulatedFunctionOperationService factoryService;
         new MathFuncSettingsWindow(owner, true);
     }
 
-    public void openTBSettingsWindow() {
-        new TBSettingsWindow(owner, factoryService, true);
-    }
+    //public void openTBSettingsWindow() {
+   //     new TBSettingsWindow(owner, factoryService, true);
+   // }
 
     public void openLogsSettingsWindow() {
         new LogsSettingsWindow(owner, true);

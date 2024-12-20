@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.Map;
 
 public class TBSettingsWindow extends JDialog {
-    private final int WIDTH_WINDOW = 600;
+    /*private final int WIDTH_WINDOW = 600;
     private final int HEIGHT_WINDOW = 400;
     private final JPanel TBPanel = new JPanel(); // Панель для отображения логов
     private JFrame owner;
@@ -152,5 +152,5 @@ public class TBSettingsWindow extends JDialog {
         // Обновляем панель
         panel.revalidate();
         panel.repaint();
-    }
+    }*/
 }

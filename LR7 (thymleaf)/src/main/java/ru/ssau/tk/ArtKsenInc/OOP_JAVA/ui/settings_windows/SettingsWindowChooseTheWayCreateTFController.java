@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.TabulatedFunctionByMathFunctionWindow;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.TabulatedFunctionByArraysWindow;
+//import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.TabulatedFunctionByArraysWindow;
 
 @Controller
 @SessionAttributes("tabulatedFunction")  // Сессия для хранения функции
 public class SettingsWindowChooseTheWayCreateTFController {
 
     private TabulatedFunction function;
-    private final TabulatedFunctionOperationService factoryService;
+    /*private final TabulatedFunctionOperationService factoryService;
 
     public SettingsWindowChooseTheWayCreateTFController(TabulatedFunctionOperationService factoryService) {
         this.factoryService = factoryService;
-    }
+    }*/
 
     @GetMapping("/chooseFunctionCreationMethod")
     public String chooseFunctionCreationMethod(Model model) {
@@ -30,8 +30,8 @@ public class SettingsWindowChooseTheWayCreateTFController {
     @GetMapping("/openTabulatedFunctionByArraysWindow")
     public String openTabulatedFunctionByArraysWindow(Model model) {
         // Создание окна для выбора метода по массивам
-        TabulatedFunctionByArraysWindow arraysWindow = new TabulatedFunctionByArraysWindow(factoryService.getFactory());
-        function = arraysWindow.getTabulatedFunction();  // Получаем функцию
+        //TabulatedFunctionByArraysWindow arraysWindow = new TabulatedFunctionByArraysWindow(factoryService.getFactory());
+        //function = arraysWindow.getTabulatedFunction();  // Получаем функцию
         model.addAttribute("tabulatedFunction", function);
         return "functionCreatedPage";  // Страница с созданной функцией
     }
@@ -39,8 +39,8 @@ public class SettingsWindowChooseTheWayCreateTFController {
     @GetMapping("/openTabulatedFunctionByMathFunctionWindow")
     public String openTabulatedFunctionByMathFunctionWindow(Model model) {
         // Создание окна для выбора метода по математической функции
-        TabulatedFunctionByMathFunctionWindow mathWindow = new TabulatedFunctionByMathFunctionWindow(factoryService.getFactory());
-        function = mathWindow.getTabulatedFunction();  // Получаем функцию
+        //TabulatedFunctionByMathFunctionWindow mathWindow = new TabulatedFunctionByMathFunctionWindow(factoryService.getFactory());
+        //function = mathWindow.getTabulatedFunction();  // Получаем функцию
         model.addAttribute("tabulatedFunction", function);
         return "functionCreatedPage";  // Страница с созданной функцией
     }

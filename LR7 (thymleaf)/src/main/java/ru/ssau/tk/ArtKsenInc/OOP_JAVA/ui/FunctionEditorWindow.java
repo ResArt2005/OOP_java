@@ -10,7 +10,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.DoubleNumericDocumentFilter;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.filters.IntNumericDocumentFilter;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
+//import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows.SettingsWindowChooseTheWayCreateTF;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantColors;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.graphic.ConstantFonts;
 
@@ -98,9 +98,9 @@ public class FunctionEditorWindow extends JDialog {
 
     // Метод для создания функции
     private void createFunction(ActionEvent event) {
-        SettingsWindowChooseTheWayCreateTF createWindow = new SettingsWindowChooseTheWayCreateTF(owner, factoryService);
-        createWindow.setVisible(true);
-        function = createWindow.getTabulatedFunction();  // Получаем функцию
+        //SettingsWindowChooseTheWayCreateTF createWindow = new SettingsWindowChooseTheWayCreateTF(owner, factoryService);
+        //createWindow.setVisible(true);
+        //function = createWindow.getTabulatedFunction();  // Получаем функцию
         if (function != null) {
             updateChart();  // Обновляем график
         }

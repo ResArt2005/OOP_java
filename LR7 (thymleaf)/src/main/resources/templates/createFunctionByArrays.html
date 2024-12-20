@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Создание Табулированной Функции</title>
+    <style>
+        /* Стили для модального окна и контента */
+        .ByArrModal {
+            display: block;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .byArrContent {
+            background-color: #4B0082;
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
+            max-width: 80%;
+            color: white;
+            margin: auto;
+        }
+
+        .miniModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4B0082;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            z-index: 2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 80px;
+            padding: 5px;
+            margin-left: 10px;
+            margin-right: 20px;
+            border: 2px solid #4B0082;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #800080;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #9932CC;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #800080;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #800080;
+            color: white;
+        }
+
+        td input {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .create-function-btn {
+            width: 100%;
+            margin-top: 20px;
+            background-color: #800080;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .miniModal button {
+            background-color: white;
+            color: #4B0082;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .miniModal button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ByArrModal">
+    <div class="byArrContent">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h1>Создание табулированной функции</h1>
+
+        <div class="container">
+            <label for="pointsCount">Количество точек:</label>
+            <input type="number" id="pointsCount" name="pointsCount" min="1" required/>
+            <button id="createTableBtn">Создать таблицу</button>
+        </div>
+
+        <div id="tableContainer"></div>
+
+        <!-- Мини модальное окно -->
+        <div class="miniModal" id="miniModal">
+            <p id="modalMessage"></p>
+            <button onclick="closeMiniModal()">Ок</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // AJAX для динамического создания таблицы
+    $('#createTableBtn').on('click', function () {
+        var pointsCount = $('#pointsCount').val();
+        if (pointsCount < 1) {
+            alert("Количество точек должно быть больше 0");
+            return;
+        }
+
+        $.ajax({
+            url: window.location.pathname + '/createFunctionByArrays',
+            method: 'POST',
+            data: { pointsCount: pointsCount },
+            success: function (data) {
+                $('#tableContainer').html(data); // Вставляем таблицу в контейнер
+            },
+            error: function (error) {
+                alert("Ошибка при создании таблицы.");
+            }
+        });
+    });
+
+    // AJAX для создания функции
+    $(document).on('submit', '#submitFunctionForm', function (e) {
+        e.preventDefault(); // Останавливаем стандартную отправку формы
+
+        $.ajax({
+            url: window.location.pathname + '/submit-function',
+            method: 'POST',
+            data: $(this).serialize(), // Собираем данные формы
+            success: function (response) {
+                var result = JSON.parse(response);
+                if (result.status === 'success') {
+                    $('#modalMessage').text(result.message);
+                    $('#miniModal').show(); // Показать мини модальное окно
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function (error) {
+                alert("Ошибка при создании функции.");
+            }
+        });
+    });
+
+    // Закрытие модального окна
+    function closeModal() {
+        $('.ByArrModal').hide();
+    }
+
+    // Закрытие мини модального окна
+    function closeMiniModal() {
+        $('#miniModal').hide();
+        closeModal(); // Закрыть главное модальное окно после нажатия Ок
+    }
+</script>
+
+</body>
+</html>
