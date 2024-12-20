@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <style>
+        body {
+            background-color: #5D3A9B; /* Эквивалент ConstantColors.RICH_PURPLE */
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .button {
+            background-color: #D8BFD8; /* Эквивалент ConstantColors.THISTLE */
+            color: #5D3A9B;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .header {
+            background-color: #9370DB; /* ConstantColors.DARK_LILAC */
+            color: #003366; /* ConstantColors.DEEP_BLUE */
+            font-size: 24px;
+            padding: 10px;
+            border: 2px solid #9400D3; /* Эквивалент ConstantColors.DARK_VIOLET */
+            border-radius: 20px;
+            width: 50%;
+            margin: auto;
+        }
+        .button:hover {
+            background-color: #9370DB; /* Темнее при наведении */
+        }
+        .modal {
+            display: none; /* Скрываем модальные окна изначально */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4); /* Чёрный с прозрачностью */
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function openModal(modalId, url) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+
+        // Закрытие модальных окон при клике вне их области
+        window.onclick = function(event) {
+            var modals = document.querySelectorAll('.modal');
+            modals.forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+
+<div class="header">
+    Главное меню
+</div>
+
+<div class="container">
+    <button class="button" onclick="openModal('settingsModal', '/main/settings')">Открыть настройки</button>
+    <button class="button" onclick="openModal('operationsModal', '/main/operations')">Операции над табулированными функциями</button>
+    <button class="button" onclick="openModal('differentialModal', '/main/differential')">Дифференциальные операции</button>
+    <button class="button" onclick="openModal('editorModal', '/main/editor')">Редактор функции</button>
+    <button class="button" onclick="openModal('integralModal', '/main/integral')">Нахождение интеграла</button>
+    <a th:if="${isAdmin}" href="javascript:void(0);" onclick="openModal('adminModal', '/main/admin')" aria-label="Открыть административный раздел">
+        <button class="button">Только для персонала</button>
+    </a>
+</div>
+
+<!-- Модальные окна -->
+<div id="settingsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('settingsModal')">&times;</span>
+        <p>Содержимое настроек.</p>
+    </div>
+</div>
+
+<div id="operationsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('operationsModal')">&times;</span>
+        <p>Содержимое операций над табулированными функциями.</p>
+    </div>
+</div>
+
+<div id="differentialModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('differentialModal')">&times;</span>
+        <p>Содержимое дифференциальных операций.</p>
+    </div>
+</div>
+
+<div id="editorModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('editorModal')">&times;</span>
+        <p>Содержимое редактора функции.</p>
+    </div>
+</div>
+
+<div id="integralModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('integralModal')">&times;</span>
+        <p>Содержимое нахождения интеграла.</p>
+    </div>
+</div>
+
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('adminModal')">&times;</span>
+        <p>Содержимое для персонала.</p>
+    </div>
+</div>
+
+</body>
+</html>
