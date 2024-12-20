@@ -5,80 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e3fb661-4a19-4ef0-85c7-66e66d488933" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../LR7 (TimeLife)/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/ModalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../LR7 (TimeLife)/src/main/resources/static/css/art.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../LR7 (TimeLife)/src/main/resources/static/css/ksen.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../LR7 (TimeLife)/src/main/resources/static/js/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../LR7 (TimeLife)/src/main/resources/templates/SettingsChooseFactory.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/exceptions/ArrayIsNotSortedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/exceptions/DifferentLengthOfArraysException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/exceptions/InconsistentFunctionsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/exceptions/InterpolationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/AInDegreeXFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/AbstractTabulatedFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/ArrayTabulatedFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/CompositeFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/ConstantFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/CosFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/CtgFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/DeBoorAlgorithmFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/ExpFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/IdentityFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/Insertable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/LinkedListTabulatedFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/MathFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/MethodChapliyginaFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/Point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/Removable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/SinFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/SqrFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/SquareFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/StrictTabulatedFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/TabulatedFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/TgFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/UnitFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/UnmodifiableTabulatedFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/XFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/ZeroFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/factory/ArrayTabulatedFunctionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/factory/LinkedListTabulatedFunctionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/factory/TabulatedFunctionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/myOwnFunctionsForEquation/MathDerivativeAndIntegral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/functions/myOwnFunctionsForEquation/SumEquationFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/dbConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/dto/LogDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/dto/MathFuncDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/dto/TBFuncDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/dto/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/entities/Log.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/entities/MathFunc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/entities/TBFunc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/entities/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/repository/LogRepos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/repository/MathFuncRepos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/repository/TBFuncRepos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/repository/UserRepos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/service/LogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/service/MathFuncService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/service/TBFuncService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/jpa/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/annotations/MathFunctionInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/annotations/MathFunctionScanner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/special_classes/dbTools.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../LR7 (TimeLife)/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../LR7 (TimeLife)/src/main/resources/templates/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/static/js/ajaxTable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/MyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/Spring_AJAX_Example.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/TabulatedFunctionByArraysController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui/TabulatedFunctionByArraysController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/static/css/art.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/static/css/art.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/static/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/templates/createFunctionByArrays.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/templates/differentialOperations.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/templates/differentialOperations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../LR7 (thymleaf)/src/main/resources/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,25 +33,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2qNbXbBIajEYRCvWYH2jG5UV7vq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Asus/Documents/GitHub/OOP_java/TEST/TEST/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui",
-    "onboarding.tips.debug.path": "C:/Users/Asus/Documents/GitHub/OOP_java/TEST/TEST/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Asus/Documents/GitHub/OOP_java/TEST/TEST/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/ui&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Asus/Documents/GitHub/OOP_java/TEST/TEST/src/main/java/ru/ssau/tk/ArtKsenInc/OOP_JAVA/Main.java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Asus\Documents\GitHub\OOP_java\TEST\TEST\src\main\java\ru\ssau\tk\ArtKsenInc\OOP_JAVA\ui" />

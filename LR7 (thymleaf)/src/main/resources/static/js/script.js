@@ -1,21 +1,21 @@
-function openModal(modalId, endpoint) {
-    fetch(endpoint)
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById(modalId).querySelector('.modal-content').innerHTML = html;
-            document.getElementById(modalId).style.display = 'block';
-            history.pushState(null, '', endpoint);
-        });
+function showModal(modalId, endpoint){
+    document.getElementById(modalId).style.display = "block";
+    history.pushState(null, '', endpoint);
 }
-
 // Закрытие модального окна
 function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+    document.getElementById(modalId).style.display = "none";
     history.back();
 }
-const button = document.getElementById('buttonDef');
-   button.addEventListener('click', () => {
-       const modalId = button.getAttribute('data-modal-id');
-       const url = button.getAttribute('data-url');
-       openModal(modalId, url);
-   });
+function hideModal(modalId){
+    document.getElementById(modalId).style.display = "none";
+}
+document.querySelector('.close').addEventListener('click', function () {
+    const modalId = this.getAttribute('data-modal-id');
+    closeModal(modalId);
+});
+document.getElementById("testButton").addEventListener('click', function (){
+    const modalId = this.getAttribute('data-modal-id');
+    const url = this.getAttribute('data-url');
+    showModal(modalId, url);
+})

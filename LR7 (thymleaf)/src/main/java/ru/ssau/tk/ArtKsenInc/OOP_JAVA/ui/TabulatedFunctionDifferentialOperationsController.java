@@ -28,8 +28,8 @@ public class TabulatedFunctionDifferentialOperationsController {
     public String differentiate(@RequestParam("function") TabulatedFunction function,
                                 Model model) {
         TabulatedFunction resultFunction = operationService.derive(function);
-        model.addAttribute("function", new TBFuncDTO(function));
-        model.addAttribute("resultFunction", new TBFuncDTO(resultFunction));
+        //model.addAttribute("function", new TBFuncDTO(function));
+        //model.addAttribute("resultFunction", new TBFuncDTO(resultFunction));
         return "differentialOperations";
     }
 
@@ -38,7 +38,7 @@ public class TabulatedFunctionDifferentialOperationsController {
                               @ModelAttribute("function") TabulatedFunction function,
                               Model model) {
         function.insert(x, y);
-        model.addAttribute("function", new TBFuncDTO(function));
+        //model.addAttribute("function", new TBFuncDTO(function));
         return "differentialOperations";
     }
 
@@ -47,7 +47,7 @@ public class TabulatedFunctionDifferentialOperationsController {
                               @ModelAttribute("function") TabulatedFunction function,
                               Model model) {
         function.remove(index);
-        model.addAttribute("function", new TBFuncDTO(function));
+        //model.addAttribute("function", new TBFuncDTO(function));
         return "differentialOperations";
     }
 }

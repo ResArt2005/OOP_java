@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring AJAX Example</title>
+</head>
+<body>
+    <h1>Пример AJAX-запроса</h1>
+
+    <!-- Поле ввода -->
+    <input type="text" id="inputField" placeholder="Введите данные">
+
+    <!-- Кнопка отправки -->
+    <button id="sendDataBtn">Отправить данные</button>
+
+    <!-- Контейнер для отображения ответа -->
+    <div id="responseContainer"></div>
+
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>
