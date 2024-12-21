@@ -18,10 +18,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.service.UserService;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class dbTools {
@@ -65,6 +62,9 @@ public class dbTools {
         mathFuncService.deleteAll();
     }
     public static void createMathFunction(String name, MathFunction function) {
+        if(name.equals("Выберите функцию")){
+            throw new IllegalArgumentException("Такое название функции использовать запрещено!");
+        }
         MathFunc mathFunc = new MathFunc(name, function);
         mathFuncService.create(mathFunc);
     }

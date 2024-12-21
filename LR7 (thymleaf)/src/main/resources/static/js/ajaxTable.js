@@ -1,3 +1,4 @@
+//По массивам
 document.getElementById("art_byArr_createTableBtn").addEventListener('click', function () {
     const pointsCount = document.getElementById('art_byArr_pointsCount').value;
     if (!pointsCount) {
@@ -5,66 +6,130 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
     }
     const responseContainer = document.getElementById('art_byArr_tableContainer');
 
-    // Создаем объект XMLHttpRequest
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/main/createFunctionByArrays', true); // Указываем метод и путь к контроллеру
+    fetch('/{contextPath}/createFunctionByArrays', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'art_byArr_pointsCount=' + encodeURIComponent(pointsCount)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        responseContainer.innerHTML = data;
+        document.getElementById('art_submitFunctionForm').addEventListener('click', function (event) {
+            event.preventDefault();
+            const formData = getDataFormWithoutSubmit('submitFunctionForm');
 
-    // Устанавливаем заголовок для отправки данных в формате URL-кодирования
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    // Обработка ответа от сервера
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // Обновляем HTML-разметку динамически
-            responseContainer.innerHTML = xhr.responseText;
-
-            // Добавляем обработчик для отправки формы
-            document.getElementById('art_submitFunctionForm').addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const formData = getDataFormWithoutSubmit("submitFunctionForm");
-                    const xhrSubmit = new XMLHttpRequest();
-                    xhrSubmit.open('POST', '/main/submitFunction', true);
-                    xhrSubmit.setRequestHeader('Content-Type', "application/json");
-                    xhrSubmit.onload = function () {
-                        if (xhrSubmit.status === 200) {
-                            const responseModalContainer = document.getElementById('modalContainer');
-                            responseModalContainer.innerHTML = xhrSubmit.responseText;
-                            document.getElementById("art_submitFunctionForm").addEventListener('click',  function (){
-                                closeModal('TEST');
-                            });
-                            document.getElementById('ok').addEventListener('click',  function (){
-                                const InnerModalId = this.getAttribute('data-modal-id');
-                                hideModal(InnerModalId);
-                            });
-                        } else {
-                            alert('Ошибка создания функции: ' + xhrSubmit.status);
-                        }
-                    };
-                    xhrSubmit.send(JSON.stringify(formData));
+            fetch('/{contextPath}/submitFunctionByArr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                const responseModalContainer = document.getElementById('modalContainer');
+                responseModalContainer.innerHTML = data;
+                document.getElementById("art_submitFunctionForm").addEventListener('click',  function (){
+                    if(document.getElementById("art_stateIdSuccess")){
+                        hideModal('createTableByArrayModal');
+                    }
                 });
-            } else {
-                responseContainer.textContent = 'Ошибка: ' + xhr.status;
-            }
-    };
-
-    // Обработка ошибок сети
-    xhr.onerror = function () {
-        responseContainer.textContent = 'Произошла ошибка при отправке запроса.';
-    };
-
-    // Отправляем данные на сервер
-    xhr.send('art_byArr_pointsCount=' + encodeURIComponent(pointsCount));
+                document.getElementById('ok').addEventListener('click',  function (){
+                    const InnerModalId = this.getAttribute('data-modal-id');
+                    hideModal(InnerModalId);
+                    if(document.getElementById("art_stateIdSuccess")){
+                        hideModal('createTableByArrayModal');
+                    }
+                });
+            })
+        });
+    })
 });
 
 function getDataFormWithoutSubmit(formId){
-    const form = document.getElementById(formId); // Получаем форму
-    const formData = new FormData(form); // Создаем объект FormData
+    const form = document.getElementById(formId);
+    const formData = new FormData(form);
 
-    // Собираем данные из полей с именами xValues и yValues
-    const xValues = formData.getAll('xValues'); // Массив всех значений xValues
-    const yValues = formData.getAll('yValues'); // Массив всех значений yValues
-    const numericXValues = xValues.map(Number);
-    const numericYValues = yValues.map(Number);
-    // Возвращаем данные, если нужно использовать их дальше
-    return { xValues: numericXValues, yValues: numericYValues };
+    const xValues = formData.getAll('xValues').map(Number);
+    const yValues = formData.getAll('yValues').map(Number);
+
+    return { xValues, yValues };
 }
+//По функции
+document.getElementById("createTableByFunctionTableBtn").addEventListener('click', function () {
+    const funcName = document.getElementById('art_choose_one').innerText;
+    const leftBound = document.getElementById('art_byTableByFunction_left_bound').value;
+    const rightBound = document.getElementById('art_byTableByFunction_right_bound').value;
+    const pointCount = document.getElementById('art_byByFunction_pointsCount').value;
+    if(!funcName || !leftBound || !rightBound || !pointCount){
+        Message("error", "Заполните все поля");
+        return;
+    }
+    if(funcName === "Выберите функцию"){
+        Message("error", "Да выберите функцию нормально!");
+        return;
+    }
+    if(parseFloat(leftBound) >= parseFloat(rightBound)){
+        Message("error", "Левая граница должна быть меньше правой!");
+        return;
+    }
+    if(parseInt(pointCount) < 2){
+        Message("error", "Количество точек должно быть не меньше 2!");
+        return;
+    }
+    fetch('/{contextPath}/submitFunctionByFunction', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'funcName=' + encodeURIComponent(funcName) +'&'+'leftBound=' + encodeURIComponent(leftBound)+'&'+'rightBound=' + encodeURIComponent(rightBound)+'&'+'pointCount=' + encodeURIComponent(pointCount)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    });
+    Message("success", "Функция успешно создана!");
+    hideModal(this.getAttribute('data-modal-id'));
+});
+//Выбор фабрики
+document.getElementById("art_radio_accept").addEventListener('click', function (){
+  const arrayRadio = document.getElementById("art_arrayTabulatedFunctionFactory");
+  const linkedListRadio = document.getElementById("art_linkedListTabulatedFunctionFactory");
+
+  let selectedFactory;
+
+  if (arrayRadio.checked) {
+    selectedFactory = "arrayFactory";
+  } else if (linkedListRadio.checked) {
+    selectedFactory = "linkedListFactory";
+  } else {
+    selectedFactory = null; // или какое-то значение по умолчанию
+  }
+  fetch('/{contextPath}/submitFactory', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'TypeFactory=' + encodeURIComponent(selectedFactory)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    });
+});

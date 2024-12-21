@@ -51,13 +51,11 @@ public class ChooseUserController {
 
         model.addAttribute("success", "Успешный вход");
 
-        return "redirect:/main";
+        return "redirect:/initSession";
     }
 
     @GetMapping("/register")
-    public String getRegistrationToken(Model model) {
-        //newUser = new User();
-        //model.addAttribute("token", newUser.getToken()); // Передаем токен в шаблон
+    public String getRegistrationToken() {
         return "registration"; // Возвращаем ту же страницу с модальным окном
     }
 
@@ -79,7 +77,6 @@ public class ChooseUserController {
         newUser.setPassword(password);
         dbTools.createUser(newUser);
         dbTools.createLog(username + " добавился в систему");
-        // Перенаправление на главную страницу после успешной регистрации
         return "redirect:/";
     }
 }

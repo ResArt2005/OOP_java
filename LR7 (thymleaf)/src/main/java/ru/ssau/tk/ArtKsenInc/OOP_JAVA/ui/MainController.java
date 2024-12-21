@@ -1,54 +1,50 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionScanner;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
-@SessionAttributes("userDTO")
+
+import java.util.Map;
+
+@SessionAttributes({"userDTO", "fabricType"})
 @Controller
 public class MainController {
-
-    @GetMapping("/main")
-    public String mainPage(@ModelAttribute("userDTO") UserDTO userDTO, Model model) {
-        // Проверяем, является ли пользователь администратором
-        if (userDTO == null) {
-            return "redirect:/"; // Перенаправляем на страницу авторизации
+    @GetMapping("/initSession")
+    public String init(HttpSession session, Model model){
+        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
+        if(factory == null){
+            model.addAttribute("fabricType", new ArrayTabulatedFunctionFactory());
         }
+        return "redirect:/main";
+    }
+    @GetMapping("/main")
+    public String mainPage(HttpSession session, Model model) {
+        // Проверяем, является ли пользователь администратором
+        UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+        if (userDTO == null) {
+            return "redirect:/";
+        }
+        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
+        if(factory instanceof ArrayTabulatedFunctionFactory){
+            model.addAttribute("FactoryRadio", "arrayFactory");
+        }
+        else{
+            model.addAttribute("FactoryRadio", "linkedListFactory");
+        }
+        Map<String, MathFunction> functionMap = MathFunctionScanner.getAnnotatedFunctions(); // Используем динамическое сканирование
+        functionMap.putAll(dbTools.getAllMathFunctionsAsNameAndMF());
+        model.addAttribute("functions", functionMap.keySet());
         model.addAttribute("isAdmin", "admin".equals(userDTO.getToken()));
         return "main";
-    }
-
-    @GetMapping("/settings")
-    public String openSettingsPage() {
-        return "settings";  // Создайте аналогичный settings.html шаблон
-    }
-
-    @GetMapping("/operations")
-    public String openOperationsPage() {
-        return "operations";  // Аналогично для operations.html
-    }
-
-    @GetMapping("/differential")
-    public String openDifferentialPage() {
-        return "differential";  // Аналогично для differential.html
-    }
-
-    @GetMapping("/editor")
-    public String openEditorPage() {
-        return "editor";  // Аналогично для editor.html
-    }
-
-    @GetMapping("/integral")
-    public String openIntegralPage() {
-        return "integral";  // Аналогично для integral.html
-    }
-
-    @GetMapping("/admin")
-    public String openAdminPage() {
-        return "admin";  // Аналогично для admin.html
     }
 }

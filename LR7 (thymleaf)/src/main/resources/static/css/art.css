@@ -1,7 +1,22 @@
+ol{
+    list-style: none;
+}
 body {
     background-color: #5D3A9B;
     font-family: 'Open Sans', sans-serif;
     text-align: center;
+}
+/*мини костыль*/
+.otstup{
+    width: 10vmin;
+    height: 10vmin;
+}
+/*Вспомогательные стили*/
+.art_displayNone{
+    display: none;
+}
+.art_displayBlock{
+    display: block;
 }
 /*main*/
 .art_mainContainer {
@@ -42,6 +57,7 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
+    overflow: auto;
 }
 .art_modal-content {
     background-color: #fefefe;
@@ -50,6 +66,7 @@ body {
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
+    overflow: auto;
 }
 .art_close {
     color: #aaa;
@@ -70,6 +87,7 @@ body {
 .art_ByArrModal {
     display: block;
     position: fixed;
+    overflow: auto;
     z-index: 1;
     left: 0;
     top: 0;
@@ -78,8 +96,9 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.byArrContent {
+.art_byArrContent {
     background-color: #4B0082;
+    overflow: auto;
     border-radius: 10px;
     padding: 20px;
     width: 500px;
@@ -196,4 +215,207 @@ td input {
 
 .art_success_button:hover {
     background-color: #9932CC;
+}
+/*Выпадающий список*/
+.art_dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.art_dropdown-button {
+  background-color: #8a2be2; /* Фиолетовый цвет фона */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px; /* Скругленные углы */
+}
+
+.art_dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #d8bfd8; /* Светло-фиолетовый цвет фона */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px; /* Скругленные углы */
+}
+
+.art_dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.art_dropdown-content a:hover {
+  background-color: #c792c7; /* Более темный фиолетовый при наведении */
+}
+
+.art_dropdown:hover .art_dropdown-content {
+  display: block;
+}
+.art_byArr_container {
+  display: flex;
+  flex-direction: column; /* Элементы расположены вертикально */
+  width: 300px; /* Ширина контейнера */
+}
+
+.art_byArr_container .art_dropdown {
+  margin-bottom: 10px; /* Расстояние между элементами */
+}
+
+.art_byArr_container .art_dropdown-button {
+  background-color: #8a2be2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.art_byArr_container .art_dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #d8bfd8;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.art_byArr_container .art_dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.art_byArr_container .art_dropdown-content a:hover {
+  background-color: #c792c7;
+}
+
+.art_byArr_container .art_dropdown:hover .art_dropdown-content {
+  display: block;
+}
+
+.art_byArr_container label {
+  display: block; /* Каждое поле на новой строке */
+  margin-bottom: 5px;
+  font-weight: bold; /* Жирный шрифт для меток */
+  color: #8a2be2; /* Фиолетовый цвет для меток */
+}
+
+.art_byArr_container input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #8a2be2; /* Фиолетовая рамка */
+  border-radius: 5px;
+  box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+}
+
+.art_byArr_container button {
+  background-color: #8a2be2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 10px; /* Расстояние сверху */
+}
+
+.art_byArr_container button:hover {
+  background-color: #c792c7; /* Более темный фиолетовый при наведении */
+}
+.art_dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.art_dropdown-button {
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.art_dropdown-content {
+    display: none; /* Скрываем список по умолчанию */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.art_dropdown-list {
+    list-style: none; /* Удаляем маркеры */
+    padding: 0;
+    margin: 0;
+}
+
+.art_dropdown-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block; /* Элементы занимают всю ширину */
+}
+
+.art_dropdown-item:hover {
+    background-color: #ddd; /* Изменение цвета при наведении */
+}
+
+.art_dropdown:hover .art_dropdown-content {
+    display: block; /* Показываем список при наведении на art_dropdown */
+/*По функции*/
+/* Стили для контейнера */
+.art_radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+/* Базовые стили для радио-кнопок */
+.art_radio-group input[type="radio"] {
+    display: none; /* Скрываем стандартные радио-кнопки */
+}
+
+/* Стили для меток */
+.art_radio-group label {
+    position: relative;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff; /* Цвет текста */
+    border-radius: 25px;
+    background-color: #6a0dad; /* Основной фиолетовый цвет */
+    margin: 5px 0;
+    transition: background-color 0.3s;
+}
+
+/* Псевдоэлемент для кастомной кнопки */
+.art_radio-group label::before {
+    content: '';
+    position: absolute;
+    left: -30px; /* Расположение относительно метки */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; /* Ширина кнопки */
+    height: 20px; /* Высота кнопки */
+    border-radius: 50%; /* Круглая форма */
+    border: 2px solid #6a0dad; /* Цвет рамки */
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+/* Стиль для выделенного состояния */
+.art_radio-group input[type="radio"]:checked + label {
+    background-color: #9a4baf; /* Темнее при выборе */
+}
+
+.art_radio-group input[type="radio"]:checked + label::before {
+    background-color: #6a0dad; /* Цвет кнопки при выборе */
 }

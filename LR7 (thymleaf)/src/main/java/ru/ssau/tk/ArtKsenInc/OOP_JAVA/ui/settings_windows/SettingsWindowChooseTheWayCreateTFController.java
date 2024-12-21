@@ -6,20 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.TabulatedFunctionByMathFunctionWindow;
-//import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.TabulatedFunctionByArraysWindow;
 
 @Controller
-@SessionAttributes("tabulatedFunction")  // Сессия для хранения функции
+@SessionAttributes("fabricType")  // Сессия для хранения функции
 public class SettingsWindowChooseTheWayCreateTFController {
 
     private TabulatedFunction function;
-    /*private final TabulatedFunctionOperationService factoryService;
-
-    public SettingsWindowChooseTheWayCreateTFController(TabulatedFunctionOperationService factoryService) {
-        this.factoryService = factoryService;
-    }*/
 
     @GetMapping("/chooseFunctionCreationMethod")
     public String chooseFunctionCreationMethod(Model model) {

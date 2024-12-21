@@ -13,7 +13,7 @@
 </div>
 
 <div class="art_mainContainer">
-    <button class="art_mainButton" data-modal-id="defOperationsModal" data-url="/main/differential">Открыть настройки
+    <button class="openModal art_mainButton" data-modal-id="choose_factory">Открыть настройки
     </button>
     <button class="art_mainButton" data-modal-id="defOperationsModal" data-url="/main/differential">Операции над
         табулированными
@@ -30,35 +30,95 @@
     <a th:if="${isAdmin}" href="javascript:void(0);" onclick="openModal('adminModal', '/main/admin')">
         <button class="art_mainButton">Только для персонала</button>
     </a>
-    <button id="testButton" class="art_mainButton" data-modal-id="TEST" data-url="/main/createFunctionByArrays">TEST
-    </button>
-    <div id="defOperationsModal" class="art_mainModal">
-        <div id="art_modal-content_def">
-
+    <button class="openModal art_mainButton" data-modal-id="createTableByArrayModal">Создание по массивам</button>
+    <button class="openModal art_mainButton" data-modal-id="createByFunctionModal">Создание по функции</button>
+</div>
+<div class="art_mainModal" id="choose_factory">
+    <div class="art_ByArrModal">
+        <div class="art_byArrContent">
+            <span class="close art_close" data-modal-id="choose_factory">&times;</span>
+            <div class="art_radio-group">
+                <input th:checked="${FactoryRadio == 'arrayFactory'}" type="radio" id="art_arrayTabulatedFunctionFactory" name="factory" />
+                <label for="art_arrayTabulatedFunctionFactory">Фабрика по массивам</label>
+                <input th:checked="${FactoryRadio == 'linkedListFactory'}" type="radio" id="art_linkedListTabulatedFunctionFactory" name="factory"/>
+                <label for="art_linkedListTabulatedFunctionFactory">Фабрика по связному списку</label><br>
+                <button id="art_radio_accept" class="close art_mainButton" data-modal-id="choose_factory">Принять изменения</button>
+            </div>
         </div>
     </div>
-    <div id="TEST" class="art_mainModal">
-        <div class="art_modal-content_test">
-            <div class="ByArrModal">
-                <div class="byArrContent">
-                    <span class="close art_close" data-modal-id="TEST">&times;</span>
-                    <h1>Создание табулированной функции</h1>
-                    <div class="art_byArr_container">
-                        <label for="art_byArr_pointsCount">Количество точек:</label>
-                        <input type="number" id="art_byArr_pointsCount" name="art_byArr_pointsCount" min="1" required/>
-                        <button id="art_byArr_createTableBtn">Создать таблицу</button>
-                    </div>
+</div>
+<div id="defOperationsModal" class="art_mainModal">
+    <div id="art_modal-content_def">
 
-                    <div id="art_byArr_tableContainer">
-                        <!--<div th:if="${art_byArr_table != null}" th:text="@{art_byArr_table}"></div>-->
+    </div>
+</div>
+<div id="createTableByArrayModal" class="art_mainModal">
+    <div class="art_ByArrModal">
+        <div class="art_byArrContent">
+            <span class="close art_close" data-modal-id="createTableByArrayModal">&times;</span>
+            <h1>Создание табулированной функции</h1>
+            <div class="art_byArr_container">
+                <label for="art_byArr_pointsCount">Количество точек:</label>
+                <input type="number" id="art_byArr_pointsCount" name="art_byArr_pointsCount" min="1" required/>
+                <button id="art_byArr_createTableBtn">Создать таблицу</button>
+            </div>
+            <div id="art_byArr_tableContainer"></div>
+            <div class="otstup"></div>
+        </div>
+    </div>
+</div>
+<div id="createByFunctionModal" class="art_mainModal">
+    <div class="art_ByArrModal">
+        <div class="art_byArrContent">
+            <span class="close art_close" data-modal-id="createByFunctionModal">&times;</span>
+            <h1>Создание табулированной функции</h1>
+            <div>
+                <div class="art_dropdown">
+                    <button id="art_choose_one" class="art_dropdown-button">Выберите функцию</button>
+                    <div class="art_dropdown-content">
+                        <ul class="art_dropdown-list">
+                            <li th:each="functionName : ${functions}">
+                                <a th:href="'#'" th:text="${functionName}" class="art_dropdown-item"></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+                <br>
+                <label for="art_byTableByFunction_left_bound">Левая граница:</label>
+                <input type="number" id="art_byTableByFunction_left_bound"
+                       name="art_byTableByFunction_left_bound" required/>
+                <br>
+                <label for="art_byTableByFunction_right_bound">Правая граница:</label>
+                <input type="number" id="art_byTableByFunction_right_bound"
+                       name="art_byTableByFunction_right_bound" required/>
+                <br>
+                <label for="art_byByFunction_pointsCount">Количество точек:</label>
+                <input type="number" id="art_byByFunction_pointsCount"
+                       name="art_byByFunction_pointsCount" required/>
+                <br>
+                <button data-modal-id="createByFunctionModal" id="createTableByFunctionTableBtn">Создать функцию
+                </button>
             </div>
         </div>
     </div>
 </div>
 <div id="modalContainer">
-
+    <div class="art_state art_displayNone" id="art_stateId">
+        <div class="art_state_content">
+            <div class="art_error">Ошибка</div>
+            <div class="art_state_h1">Значения X должны быть в порядке возрастания</div>
+            <button id='ok' class="art_state_button close" data-modal-id="art_stateId">Ок</button>
+        </div>
+    </div>
+</div>
+<div id="modalAvengeMessage" class="art_displayNone">
+    <div class="art_state">
+        <div class="art_state_content">
+            <div id="art_modal_status_message"></div>
+            <div class="art_state_h1"></div>
+            <button id="message_ok" class="art_state_button close" data-modal-id="modalAvengeMessage">Ок</button>
+        </div>
+    </div>
 </div>
 <script th:src="@{/js/script.js}"></script>
 <script th:src="@{/js/ajaxTable.js}"></script>
