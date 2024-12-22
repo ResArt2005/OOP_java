@@ -15,7 +15,7 @@
 <div class="art_mainContainer">
     <button class="openModal art_mainButton" data-modal-id="choose_factory">Открыть настройки
     </button>
-    <button class="art_mainButton" data-modal-id="defOperationsModal" data-url="/main/differential">Операции над
+    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над
         табулированными
         функциями
     </button>
@@ -38,20 +38,20 @@
         <div class="art_byArrContent">
             <span class="close art_close" data-modal-id="choose_factory">&times;</span>
             <div class="art_radio-group">
-                <input th:checked="${FactoryRadio == 'arrayFactory'}" type="radio" id="art_arrayTabulatedFunctionFactory" name="factory" />
+                <input th:checked="${FactoryRadio == 'arrayFactory'}" type="radio"
+                       id="art_arrayTabulatedFunctionFactory" name="factory"/>
                 <label for="art_arrayTabulatedFunctionFactory">Фабрика по массивам</label>
-                <input th:checked="${FactoryRadio == 'linkedListFactory'}" type="radio" id="art_linkedListTabulatedFunctionFactory" name="factory"/>
+                <input th:checked="${FactoryRadio == 'linkedListFactory'}" type="radio"
+                       id="art_linkedListTabulatedFunctionFactory" name="factory"/>
                 <label for="art_linkedListTabulatedFunctionFactory">Фабрика по связному списку</label><br>
-                <button id="art_radio_accept" class="close art_mainButton" data-modal-id="choose_factory">Принять изменения</button>
+                <button id="art_radio_accept" class="close art_mainButton" data-modal-id="choose_factory">Принять
+                    изменения
+                </button>
             </div>
         </div>
     </div>
 </div>
-<div id="defOperationsModal" class="art_mainModal">
-    <div id="art_modal-content_def">
-
-    </div>
-</div>
+<!--Модальное окно создания функции по массивам-->
 <div id="createTableByArrayModal" class="art_mainModal">
     <div class="art_ByArrModal">
         <div class="art_byArrContent">
@@ -67,6 +67,7 @@
         </div>
     </div>
 </div>
+<!--Модальное окно создания функции по другим функциям-->
 <div id="createByFunctionModal" class="art_mainModal">
     <div class="art_ByArrModal">
         <div class="art_byArrContent">
@@ -102,15 +103,95 @@
         </div>
     </div>
 </div>
-<div id="modalContainer">
-    <div class="art_state art_displayNone" id="art_stateId">
-        <div class="art_state_content">
-            <div class="art_error">Ошибка</div>
-            <div class="art_state_h1">Значения X должны быть в порядке возрастания</div>
-            <button id='ok' class="art_state_button close" data-modal-id="art_stateId">Ок</button>
+<!--Модальное окно элементарных операций над функциями-->
+<div id="modalElementaryOps" class="art_displayNone">
+    <div class="art_modal_tables">
+    <div class="close art_close" style="text-align:center;" data-modal-id="modalElementaryOps">&times;</div>
+        <div class="art_modal_table_content">
+            <div class="art_table_container">
+                <div class="art_table_block">
+                    <h2 class="art_table_header">Первая функция</h2>
+                    <div class="art_table_wrapper">
+                        <table class="art_elementary_table">
+                            <thead>
+                            <tr>
+                                <th>x</th>
+                                <th>y</th>
+                            </tr>
+                            </thead>
+                            <tbody class="art_table_body" id="art_table_body_1">
+                            <!-- Пример строки таблицы -->
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="art_elementary_buttons">
+                        <button class="art_elementary_button">Создать</button>
+                        <button class="art_elementary_button">Загрузить</button>
+                        <button class="art_elementary_button">Удалить</button>
+                        <button class="art_elementary_button">Вставка</button>
+                        <button class="art_elementary_button">Сохранить</button>
+                    </div>
+                </div>
+                <div class="art_table_block">
+                    <h2 class="art_table_header">Вторая функция</h2>
+                    <div class="art_table_wrapper">
+                        <table class="art_elementary_table">
+                            <thead>
+                            <tr>
+                                <th>x</th>
+                                <th>y</th>
+                            </tr>
+                            </thead>
+                            <tbody class="art_table_body" id="art_table_body_2">
+                            <!-- Пример строки таблицы -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="art_elementary_buttons">
+                        <button class="art_elementary_button">Создать</button>
+                        <button class="art_elementary_button">Загрузить</button>
+                        <button class="art_elementary_button">Удалить</button>
+                        <button class="art_elementary_button">Вставка</button>
+                        <button class="art_elementary_button">Сохранить</button>
+                    </div>
+                </div>
+                <div class="art_table_block">
+                    <h2 class="art_table_header">Результат</h2>
+                    <div class="art_table_wrapper">
+                        <table class="art_elementary_table">
+                            <thead>
+                            <tr>
+                                <th>x</th>
+                                <th>y</th>
+                            </tr>
+                            </thead>
+                            <tbody class="art_table_body" id="art_table_body_3">
+                            <!-- Пример строки таблицы
+                            <tr>
+                                <td><input class="art_input_x" type='number' step='any' name='xValues' value="2"
+                                           readonly></td>
+                                <td><input class="art_input_y" type='number' step='any' name='yValues' value="4"
+                                           required/></td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="art_elementary_buttons">
+                        <button class="art_elementary_button">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="art_operations">
+                <button class="art_operation_button">Сложение</button>
+                <button class="art_operation_button">Вычитание</button>
+                <button class="art_operation_button">Умножение</button>
+                <button class="art_operation_button">Деление</button>
+            </div>
         </div>
     </div>
 </div>
+<!--Универсальное модальное окно передачи сообщений-->
 <div id="modalAvengeMessage" class="art_displayNone">
     <div class="art_state">
         <div class="art_state_content">
@@ -122,7 +203,5 @@
 </div>
 <script th:src="@{/js/script.js}"></script>
 <script th:src="@{/js/ajaxTable.js}"></script>
-<script>
-</script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,3 +1,15 @@
+#createTableByArrayModal{
+    z-index: 100;
+}
+#createByFunctionModal{
+    z-index: 100;
+}
+#chooseTheWayToCreateMF{
+    z-index: 50;
+}
+#modalElementaryOps{
+    z-index: 10;
+}
 ol{
     list-style: none;
 }
@@ -370,6 +382,7 @@ td input {
 
 .art_dropdown:hover .art_dropdown-content {
     display: block; /* Показываем список при наведении на art_dropdown */
+}
 /*По функции*/
 /* Стили для контейнера */
 .art_radio-group {
@@ -418,4 +431,171 @@ td input {
 
 .art_radio-group input[type="radio"]:checked + label::before {
     background-color: #6a0dad; /* Цвет кнопки при выборе */
+}
+/*Стиль окон, где используются таблицы*/
+.art_modal_tables {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.art_modal_table_content {
+    background-color: #fff;
+    padding: 20px;
+    width: 65%;
+    overflow: auto;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.art_table_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.art_table_block {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.art_table_header {
+    text-align: center;
+    color: #4b0082;
+    margin-bottom: 10px;
+}
+
+.art_table_wrapper {
+    overflow-y: auto;
+    max-height: 300px;
+    border: 1px solid #4b0082;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.art_elementary_table {
+    /*overflow-x: hidden;*/
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.art_elementary_table th, .art_elementary_table td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #4b0082;
+}
+
+.art_elementary_table input {
+    width: 90%;
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+
+.art_buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.art_elementary_button {
+    background-color: #4b0082;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.art_elementary_button:hover {
+    background-color: #6a0dad;
+}
+
+.art_operations {
+    display: flex;
+    justify-content: space-around;
+}
+
+.art_operation_button {
+    background-color: #4b0082;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.art_operation_button:hover {
+    background-color: #6a0dad;
+}
+
+.art_elementary_table th, .art_elementary_table td {
+    padding: 5px;
+    border: 1px solid #8e4b8e;
+}
+
+/* Фиксация заголовков таблиц */
+.art_elementary_table thead th {
+    background-color: #a070c4;
+    position: sticky;
+    top: 0;
+}
+
+/* Стиль для инпутов внутри таблиц */
+.art_input_x {
+    width: 80px;
+    background-color: #e0e0e0;
+    border: 1px solid #cccccc;
+    text-align: right;
+}
+
+.art_input_y {
+    width: 80px;
+    border: 1px solid #cccccc;
+    text-align: right;
+}
+
+/* Кнопки управления внизу таблиц */
+.art_elementary_buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.art_elementary_button {
+    padding: 5px 10px;
+    background-color: #5b358e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    flex-grow: 1;
+    margin: 0 2px;
+}
+/*.art_elementary_buttons:last-child{
+    display: block;
+    width: 10vw;
+    text-align:center;
+    margin-top: 10px;
+}*/
+/* Нижние кнопки операций */
+.art_operations {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.art_operations button {
+    padding: 10px 15px;
+    background-color: #a070c4;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
 }
