@@ -7,6 +7,9 @@
 #chooseTheWayToCreateMF{
     z-index: 50;
 }
+#modalAvengeMessage{
+    z-index: 200;
+}
 #modalElementaryOps{
     z-index: 10;
 }

@@ -33,7 +33,7 @@ public class TabulatedFunctionByArraysController {
         double[] yValues = data.get("yValues");
         for (int i = 0; i < xValues.length - 1; ++i) {
             if(xValues[i] >= xValues[i+1])
-                return "<div class=\"art_state\" id=\"art_stateIdError\">\n" +
+                return "<div style='z-index: 200;' class=\"art_state\" id=\"art_stateIdError\">\n" +
                     "    <div class=\"art_state_content\">\n" +
                     "        <div class=\"art_error\">Ошибка</div>\n" +
                     "        <div class=\"art_state_h1\">Значения X должны быть в порядке возрастания, а все поля заполнены!</div>\n" +
@@ -43,7 +43,7 @@ public class TabulatedFunctionByArraysController {
         }
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
         TabulatedFunction function = factory.create(xValues, yValues);
-        return "<div class=\"art_state\" id=\"art_stateIdSuccess\">\n" +
+        return "<div style='z-index: 200;' class=\"art_state\" id=\"art_stateIdSuccess\">\n" +
                     "    <div class=\"art_state_content\">\n" +
                     "        <div class=\"art_success\">Успех</div>\n" +
                     "        <div class=\"art_state_h1\">Табулированная функция успешно создана</div>\n" +
