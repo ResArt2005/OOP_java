@@ -2,6 +2,7 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
@@ -9,7 +10,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory
 import java.util.Map;
 
 @Controller
-@RequestMapping("/{contextPath}")
+//@RequestMapping("/{contextPath}")
 @SessionAttributes("fabricType")
 public class TabulatedFunctionByArraysController {
     TabulatedFunction function;
@@ -32,25 +33,9 @@ public class TabulatedFunctionByArraysController {
     public String submitFunction(@RequestBody Map<String, double[]> data, HttpSession session) {
         double[] xValues = data.get("xValues");
         double[] yValues = data.get("yValues");
-        for (int i = 0; i < xValues.length - 1; ++i) {
-            if(xValues[i] >= xValues[i+1])
-                return "<div style='z-index: 200;' class=\"art_state\" id=\"art_stateIdError\">\n" +
-                    "    <div class=\"art_state_content\">\n" +
-                    "        <div class=\"art_error\">Ошибка</div>\n" +
-                    "        <div class=\"art_state_h1\">Значения X должны быть в порядке возрастания, а все поля заполнены!</div>\n" +
-                    "        <button id='ok' class=\"art_state_button close\" data-modal-id=\"art_stateIdError\" >Ок</button>\n" +
-                    "    </div>\n" +
-                    "</div>";
-        }
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
         function = factory.create(xValues, yValues);
-        return "<div style='z-index: 200;' class=\"art_state\" id=\"art_stateIdSuccess\">\n" +
-                    "    <div class=\"art_state_content\">\n" +
-                    "        <div class=\"art_success\">Успех</div>\n" +
-                    "        <div class=\"art_state_h1\">Табулированная функция успешно создана</div>\n" +
-                    "        <button id='ok' class=\"art_state_button close\" data-modal-id=\"art_stateIdSuccess\" >Ок</button>\n" +
-                    "    </div>\n" +
-                    "</div>";
+        return createTable(function);
     }
 
     private String generateTableHtml(int pointsCount) {
@@ -71,9 +56,7 @@ public class TabulatedFunctionByArraysController {
         sb.append("</form>");
         return sb.toString();
     }
-    @PostMapping("/tableCreationByArrays")
-    @ResponseBody
-    public String createTable(){
+    public String createTable(TabulatedFunction function){
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < function.getCount(); i++) {
             sb.append("<tr><td><input class=\"art_input_x\" type='number' step='any' name='xValues' value=\"").append(function.getX(i)).append("\" readonly></td>");

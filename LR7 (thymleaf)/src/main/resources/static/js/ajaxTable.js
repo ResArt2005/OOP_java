@@ -1,3 +1,11 @@
+//id таблицы
+tableId = "";
+//Создание таблицы (передача id)
+document.querySelectorAll('.createTable').forEach(button => {
+        button.addEventListener('click', function () {
+            tableId = this.getAttribute("data-modal-id");
+    });
+});
 //По массивам
 document.getElementById("art_byArr_createTableBtn").addEventListener('click', function () {
     const pointsCount = document.getElementById('art_byArr_pointsCount').value;
@@ -6,7 +14,7 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
     }
     const responseContainer = document.getElementById('art_byArr_tableContainer');
 
-    fetch('/{contextPath}/createFunctionByArrays', {
+    fetch('/createFunctionByArrays', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -21,51 +29,41 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
     })
     .then(data => {
         responseContainer.innerHTML = data;
-        document.getElementById('art_submitFunctionForm').addEventListener('click', function (event) {
-            event.preventDefault();
-            const formData = getDataFormWithoutSubmit('submitFunctionForm');
-
-            fetch('/{contextPath}/submitFunctionByArr', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                }
-                throw new Error('Network response was not ok.');
-            })
-            .then(data => {
-                const responseModalContainer = document.getElementById('modalContainer');
-                responseModalContainer.innerHTML = data;
-                document.getElementById("art_submitFunctionForm").addEventListener('click',  function (){
-                    if(document.getElementById("art_stateIdSuccess")){
-                        hideModal('createTableByArrayModal');
-                    }
-                });
-                document.getElementById('ok').addEventListener('click',  function (){
-                    const InnerModalId = this.getAttribute('data-modal-id');
-                    hideModal(InnerModalId);
-                    if(document.getElementById("art_stateIdSuccess")){
-                        hideModal('createTableByArrayModal');
-                        fetch('/{contextPath}/tableCreationByArrays', {
-                            method: 'POST'
-                         })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.text();
-                            }
-                            throw new Error('Network response was not ok.');
-                        }).then(data => {
-                            const tableContainer = document.getElementById(tableId);
-                            tableContainer.innerHTML = data;
-                        });
-                    }
-                });
-            })
+        document.getElementById('art_submitFunctionForm').addEventListener('click', function () {
+        const formData = getDataFormWithoutSubmit('submitFunctionForm');
+        for(let i = 0; i < formData.xValues.length; i++){
+            if(!formData.xValues[i] || !formData.yValues[i])
+            {
+                Message("error", "Все поля должны быть заполнены!");
+                return;
+            }
+        }
+        for(let i = 0; i < formData.xValues.length - 1; i++){
+            if(formData.xValues[i] >= formData.xValues[i + 1])
+            {
+                Message("error", "Значения X должны располагаться в порядке возрастания");
+                return;
+            }
+        }
+        hideModal(this.getAttribute('data-modal-id'));
+        hideModal("createTableByArrayModal");
+        fetch('/submitFunctionByArr', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Network response was not ok.');
+        }).then(data => {
+            Message("success", "Функция успешно создана!");
+            const tableContainer = document.getElementById(tableId);
+            tableContainer.innerHTML = data;
+        });
         });
     })
 });
@@ -101,7 +99,7 @@ document.getElementById("createTableByFunctionTableBtn").addEventListener('click
         Message("error", "Количество точек должно быть не меньше 2!");
         return;
     }
-    fetch('/{contextPath}/submitFunctionByFunction', {
+    fetch('/submitFunctionByFunction', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -113,20 +111,10 @@ document.getElementById("createTableByFunctionTableBtn").addEventListener('click
             return response.text();
         }
         throw new Error('Network response was not ok.');
-    });
-    Message("success", "Функция успешно создана!");
-    hideModal(this.getAttribute('data-modal-id'));
-    const tableContainer = document.getElementById(tableId);
-    Message("success", tableId);
-    fetch('/{contextPath}/tableCreationByFunction', {
-        method: 'POST'
-     })
-    .then(response => {
-        if (response.ok) {
-            return response.text();
-        }
-        throw new Error('Network response was not ok.');
     }).then(data => {
+        Message("success", "Функция успешно создана!");
+        hideModal(this.getAttribute('data-modal-id'));
+        const tableContainer = document.getElementById(tableId);
         tableContainer.innerHTML = data;
     });
 });
@@ -144,7 +132,7 @@ document.getElementById("art_radio_accept").addEventListener('click', function (
   } else {
     selectedFactory = null; // или какое-то значение по умолчанию
   }
-  fetch('/{contextPath}/submitFactory', {
+  fetch('/submitFactory', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'

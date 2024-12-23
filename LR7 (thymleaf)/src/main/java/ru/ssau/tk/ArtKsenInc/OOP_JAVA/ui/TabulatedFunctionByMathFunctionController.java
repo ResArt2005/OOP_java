@@ -14,10 +14,9 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/{contextPath}")
+//@RequestMapping("/{contextPath}")
 @SessionAttributes("fabricType")
 public class TabulatedFunctionByMathFunctionController {
-    TabulatedFunction function;
     @GetMapping("/createFunctionByFunction")
     public String returnToMain() {
         return "redirect:/main";
@@ -25,7 +24,7 @@ public class TabulatedFunctionByMathFunctionController {
 
     @PostMapping("/submitFunctionByFunction")
     @ResponseBody
-    public void submitFunction(@RequestParam("funcName") String funcName,
+    public String submitFunction(@RequestParam("funcName") String funcName,
                                @RequestParam("leftBound") double leftBound,
                                @RequestParam("rightBound") double rightBound,
                                @RequestParam("pointCount") int pointCount,
@@ -42,11 +41,10 @@ public class TabulatedFunctionByMathFunctionController {
             yValues[i] = selectedFunction.apply(xValues[i]);
         }
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
-        function = factory.create(xValues, yValues);
+        TabulatedFunction function = factory.create(xValues, yValues);
+        return createTable(function);
     }
-    @PostMapping("/tableCreationByFunction")
-    @ResponseBody
-    public String createTable(){
+    public String createTable(TabulatedFunction function){
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < function.getCount(); i++) {
             sb.append("<tr><td><input class=\"art_input_x\" type='number' step='any' name='xValues' value=\"").append(function.getX(i)).append("\" readonly></td>");

@@ -51,7 +51,7 @@ body {
 .art_mainModal {
     display: none;
     position: fixed;
-    /*z-index: 1;*/
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -595,12 +595,12 @@ td input {
 
 
 
-#createTableByArrayModal{
+/*#createTableByArrayModal{
     z-index: 100;
 }
-/*#createByFunctionModal{
+#createByFunctionModal{
     z-index: 100;
-}*/
+}
 #chooseTheWayToCreateMF{
     z-index: 50;
 }
@@ -609,5 +609,5 @@ td input {
 }
 #modalElementaryOps{
     z-index: 10;
-}
+}*/
 

@@ -1,4 +1,3 @@
-tableId = "";
 //Открытие окна
 function showModal(modalId){document.getElementById(modalId).style.display = "block"; }
 function openModal(modalId, endpoint){
@@ -42,15 +41,10 @@ document.querySelectorAll('.close').forEach(button => {
 });
 document.querySelectorAll('.openModal').forEach(button => {
         button.addEventListener('click', function () {
-        showModal(this.getAttribute('data-modal-id'));
+            showModal(this.getAttribute('data-modal-id'));
     });
 });
-//Создание таблицы (передача id)
-document.querySelectorAll('.createButton').forEach(button => {
-        button.addEventListener('click', function () {
-            tableId = this.getAttribute("data-table-id");
-    });
-});
+
 const dropdown = document.querySelector('.art_dropdown');
 const dropdownButton = dropdown.querySelector('.art_dropdown-button');
 const dropdownItems = dropdown.querySelectorAll('.art_dropdown-item');
