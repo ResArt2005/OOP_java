@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.io.FunctionsIO;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedDifferentialOperator;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 
 import java.io.*;
@@ -91,7 +92,7 @@ public class operationsWindowUltimate {
 
     @PostMapping("/chooseElementaryOperationAndCalculate")
     @ResponseBody
-    public String submitFunction(@RequestBody Map<String, Object> data, HttpSession session) {
+    public String submitElemFunction(@RequestBody Map<String, Object> data, HttpSession session) {
         String operationName = (String) data.get("operationName");
         List<Number> xValues_1_List = (List<Number>) data.get("xValues_1");
         List<Number> yValues_1_List = (List<Number>) data.get("yValues_1");
@@ -125,7 +126,25 @@ public class operationsWindowUltimate {
             default -> "error: Invalid operation name.";
         };
     }
+    @PostMapping("/chooseDefOperationAndCalculate")
+    @ResponseBody
+    public String submitDefFunction(@RequestBody Map<String, double[]> data, HttpSession session) {
+        double[] xValues = data.get("xValues");
+        double[] yValues = data.get("yValues");
+        if (xValues == null || yValues == null) {
+            return "error: Полученные данные пустые.";
+        }
+        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
+        if (factory == null) {
+            //logger.severe("Factory not found in session.");
+            return "error: Factory not found in session.";
+        }
 
+        TabulatedFunction function = factory.create(xValues, yValues);
+        TabulatedDifferentialOperator service = new TabulatedDifferentialOperator(factory);
+
+        return createTable(service.derive(function));
+    }
     public String createTable(TabulatedFunction function) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < function.getCount(); i++) {

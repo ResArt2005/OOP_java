@@ -105,6 +105,38 @@ document.querySelectorAll('.resultOpsFunction').forEach(button => {
         });
     });
 });
+//Событие вывода результата дифференциальных операций
+document.querySelectorAll('.resultDefOpsFunction').forEach(button => {
+    button.addEventListener("click", function(){
+        const operationName = this.getAttribute('name');//Важно при создании других таблиц
+        const url = this.getAttribute('data-url-id');//Важно при создании других таблиц
+        const formData = new FormData(document.getElementById('art_form_body_def_1'));//Важно при создании других таблиц
+        const xValues = formData.getAll('xValues').map(Number);
+        const yValues = formData.getAll('yValues').map(Number);
+        const data = { xValues, yValues };
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+            Message("success", "Успешная операция!");
+            const tableContainer = document.getElementById('art_table_body_def_2');//Важно при создании других таблиц
+            tableContainer.innerHTML = data;
+        })
+        .catch(error => {
+            Message("error", "Произошла ошибка: " + error.message);
+        });
+    });
+});
 // Событие сохранения функции путём сериализации
 document.querySelectorAll('.saveFunction').forEach(button => {
     button.addEventListener('click', function () {
