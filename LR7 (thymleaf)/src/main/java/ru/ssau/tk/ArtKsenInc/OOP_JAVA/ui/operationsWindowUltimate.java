@@ -79,7 +79,15 @@ public class operationsWindowUltimate {
             return createTable(tabulatedFunction);
         } catch (Exception e) {
             e.printStackTrace();
-            return "error: " + e.getMessage();
+            return "<div id=\"modalContainer\">\n" +
+                    "    <div class=\"art_state\" id=\"art_stateUniqueErrorId\">\n" +
+                    "        <div class=\"art_state_content\">\n" +
+                    "            <div class=\"art_error\">Ошибка</div>\n" +
+                    "            <div class=\"art_state_h1\">Вы хотя бы знаете, что ИМЕННО в этом файле????</div>\n" +
+                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateDefErrorId\">Ок</button>\n" +
+                    "        </div>\n" +
+                    "    </div>\n" +
+                    "</div>";
         }
     }
 
@@ -131,19 +139,19 @@ public class operationsWindowUltimate {
     public String submitDefFunction(@RequestBody Map<String, double[]> data, HttpSession session) {
         double[] xValues = data.get("xValues");
         double[] yValues = data.get("yValues");
+        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
         if (xValues == null || yValues == null) {
             return "error: Полученные данные пустые.";
         }
-        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
-        if (factory == null) {
-            //logger.severe("Factory not found in session.");
-            return "error: Factory not found in session.";
+        try{
+            TabulatedFunction function = factory.create(xValues, yValues);
+            TabulatedDifferentialOperator service = new TabulatedDifferentialOperator(factory);
+            return createTable(service.derive(function));
+
         }
-
-        TabulatedFunction function = factory.create(xValues, yValues);
-        TabulatedDifferentialOperator service = new TabulatedDifferentialOperator(factory);
-
-        return createTable(service.derive(function));
+        catch (IllegalArgumentException e){
+            return "error: Полученные данные пустые.";
+        }
     }
     public String createTable(TabulatedFunction function) {
         StringBuilder sb = new StringBuilder();

@@ -77,6 +77,10 @@ document.querySelectorAll('.resultOpsFunction').forEach(button => {
         const formData_2 = new FormData(document.getElementById('art_form_body_2'));
         const xValues_2 = formData_2.getAll('xValues').map(Number);
         const yValues_2 = formData_2.getAll('yValues').map(Number);
+        if(xValues_1.length === 0 || xValues_2.length === 0){
+            Message("error", "Создайте функции!");
+            return;
+        }
         if(xValues_1.length !== xValues_2.length){
             Message("error", "Размеры функций должны совпадать!");
             return;
@@ -113,6 +117,10 @@ document.querySelectorAll('.resultDefOpsFunction').forEach(button => {
         const formData = new FormData(document.getElementById('art_form_body_def_1'));//Важно при создании других таблиц
         const xValues = formData.getAll('xValues').map(Number);
         const yValues = formData.getAll('yValues').map(Number);
+        if(xValues.length === 0 || yValues.length === 0){
+            Message("error", "Создайте функции!");
+            return;
+        }
         const data = { xValues, yValues };
         fetch(url, {
             method: 'POST',
@@ -143,9 +151,13 @@ document.querySelectorAll('.saveFunction').forEach(button => {
         const formId = this.getAttribute('data-form-id');
         const values = getDataFormWithoutSubmit(formId);
 
+        if(values.xValues.length === 0 || values.yValues.length === 0){
+            Message("error", "Создайте функции!");
+            return;
+        }
         // Проверка: заполнены ли xValues и yValues
         if (values.xValues === null || values.yValues === null) {
-            Message("error", "Создайте таблицу!");
+            Message("error", "Создайте функции!");
             return;
         }
 
@@ -260,7 +272,7 @@ document.querySelectorAll('.loadFunction').forEach(button => {
         // Создание диалогового окна для выбора файла загрузки
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
-        fileInput.accept = '.json, .xml, .bin, *.*';
+        fileInput.accept = '.json, .xml, .bin';
 
         fileInput.onchange = () => {
             const file = fileInput.files[0];
@@ -282,9 +294,11 @@ document.querySelectorAll('.loadFunction').forEach(button => {
                 throw new Error('Network response was not ok.');
             })
             .then(data => {
-                Message("success", "Функция успешно воспроизведена из файла!");
                 const tableContainer = document.getElementById(tableId);
                 tableContainer.innerHTML = data;
+                if(!document.getElementById("art_stateUniqueErrorId")){
+                    Message("success", "Функция успешно воспроизведена из файла!");
+                }
             })
             .catch(error => {
                 Message("error", error.message);
