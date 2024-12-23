@@ -3,12 +3,16 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.io.FunctionsIO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.operations.TabulatedFunctionOperationService;
 
+import java.io.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @SessionAttributes("fabricType")
@@ -19,6 +23,70 @@ public class operationsWindowUltimate {
     @GetMapping("/chooseElementaryOperationAndCalculate")
     public String returnToMain() {
         return "redirect:/main";
+    }
+
+    @PostMapping("/serialize")
+    @ResponseBody
+    public byte[] serialize(@RequestBody Map<String, Object> data, HttpSession session) {
+        try {
+            TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
+            if (factory == null) {
+                return null;
+            }
+
+            String fileName = (String) data.get("filePath");
+            double[] xValues = ((List<Number>) data.get("xValues")).stream().mapToDouble(Number::doubleValue).toArray();
+            double[] yValues = ((List<Number>) data.get("yValues")).stream().mapToDouble(Number::doubleValue).toArray();
+
+            TabulatedFunction tabulatedFunction = factory.create(xValues, yValues);
+
+            try (ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+                 BufferedOutputStream stream = new BufferedOutputStream(byteStream)) {
+                switch (getFileExtension(fileName)) {
+                    case "json":
+                        FunctionsIO.serialize(stream, tabulatedFunction);
+                        break;
+                    case "xml":
+                        FunctionsIO.serialize(stream, tabulatedFunction);
+                        break;
+                    case "bin":
+                    default:
+                        FunctionsIO.serialize(stream, tabulatedFunction);
+                        break;
+                }
+                return byteStream.toByteArray();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @PostMapping("/deserialize")
+    @ResponseBody
+    public String deserialize(@RequestParam("file") MultipartFile file, HttpSession session) {
+        try {
+            TabulatedFunction tabulatedFunction;
+            try (BufferedInputStream stream = new BufferedInputStream(file.getInputStream())) {
+                tabulatedFunction = switch (Objects.requireNonNull(getFileExtension(file.getOriginalFilename()))) {
+                    case "json" -> FunctionsIO.deserialize(stream);//serializeJson
+                    case "xml" -> FunctionsIO.deserialize(stream);//serializeXMl
+                    default -> FunctionsIO.deserialize(stream);
+                };
+            }
+
+            return createTable(tabulatedFunction);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error: " + e.getMessage();
+        }
+    }
+
+    private String getFileExtension(String fileName) {
+        if (fileName == null || fileName.lastIndexOf('.') == -1) {
+            return null;
+        }
+        return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
     }
 
     @PostMapping("/chooseElementaryOperationAndCalculate")

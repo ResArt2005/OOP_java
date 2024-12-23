@@ -66,7 +66,7 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
         });
     })
 });
-//Функция результата
+//Событие вывода результата элементарных операций
 document.querySelectorAll('.resultOpsFunction').forEach(button => {
     button.addEventListener("click", function(){
         const operationName = this.getAttribute('name');
@@ -105,7 +105,162 @@ document.querySelectorAll('.resultOpsFunction').forEach(button => {
         });
     });
 });
+// Событие сохранения функции путём сериализации
+document.querySelectorAll('.saveFunction').forEach(button => {
+    button.addEventListener('click', function () {
+        const formId = this.getAttribute('data-form-id');
+        const values = getDataFormWithoutSubmit(formId);
 
+        // Проверка: заполнены ли xValues и yValues
+        if (values.xValues === null || values.yValues === null) {
+            Message("error", "Создайте таблицу!");
+            return;
+        }
+
+        // Проверка: все ли поля заполнены
+        for (let i = 0; i < values.xValues.length; i++) {
+            if (values.xValues[i] === null || values.yValues[i] === null) {
+                Message("error", "Заполните все поля");
+                return;
+            }
+        }
+
+        // Создание диалогового окна для выбора формата и имени файла
+        const dialog = document.createElement('div');
+        dialog.style.position = 'fixed';
+        dialog.style.top = '50%';
+        dialog.style.left = '50%';
+        dialog.style.transform = 'translate(-50%, -50%)';
+        dialog.style.padding = '20px';
+        dialog.style.backgroundColor = '#fff';
+        dialog.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+        dialog.style.zIndex = '9999';
+
+        // Поле для ввода имени файла
+        const fileNameInput = document.createElement('input');
+        fileNameInput.type = 'text';
+        fileNameInput.placeholder = 'Введите имя файла';
+        fileNameInput.style.marginBottom = '10px';
+
+        // Выпадающий список для выбора формата
+        const formatSelect = document.createElement('select');
+        const formats = ['bin', 'json', 'xml'];
+        formats.forEach(format => {
+            const option = document.createElement('option');
+            option.value = format;
+            option.textContent = format.toUpperCase();
+            formatSelect.appendChild(option);
+        });
+
+        // Кнопка для подтверждения сохранения
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Сохранить';
+        saveButton.style.marginRight = '10px';
+
+        // Кнопка для отмены
+        const cancelButton = document.createElement('button');
+        cancelButton.textContent = 'Отмена';
+
+        // Добавляем элементы в диалог
+        dialog.appendChild(fileNameInput);
+        dialog.appendChild(formatSelect);
+        dialog.appendChild(saveButton);
+        dialog.appendChild(cancelButton);
+        document.body.appendChild(dialog);
+
+        // Событие для кнопки "Отмена"
+        cancelButton.addEventListener('click', function () {
+            document.body.removeChild(dialog);
+        });
+
+        // Событие для кнопки "Сохранить"
+        saveButton.addEventListener('click', function () {
+            const fileName = fileNameInput.value;
+            const fileFormat = formatSelect.value;
+
+            if (!fileName) {
+                Message('error', 'Введите имя файла.');
+                return;
+            }
+
+            // Отправка данных на сервер для сериализации
+            fetch('/serialize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ...values, filePath: `${fileName}.${fileFormat}` })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                }
+                throw new Error('Ошибка сети.');
+            })
+            .then(blob => {
+                // Скачиваем файл через Blob
+                const downloadUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = `${fileName}.${fileFormat}`;  // Предложим пользователю имя файла
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(downloadUrl);  // Освобождаем память
+                Message('success', 'Функция успешно сохранена!');
+            })
+            .catch(error => {
+                Message("error", error.message);
+            })
+            .finally(() => {
+                // Удаляем диалог после завершения процесса
+                document.body.removeChild(dialog);
+            });
+        });
+    });
+});
+
+// Событие загрузки функции путём десериализации
+document.querySelectorAll('.loadFunction').forEach(button => {
+    button.addEventListener('click', function() {
+        const tableId = this.getAttribute("data-table-id");
+
+        // Создание диалогового окна для выбора файла загрузки
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.json, .xml, .bin, *.*';
+
+        fileInput.onchange = () => {
+            const file = fileInput.files[0];
+            if (!file) {
+                Message("error", "Файл не выбран.");
+                return;
+            }
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/deserialize', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                Message("success", "Функция успешно воспроизведена из файла!");
+                const tableContainer = document.getElementById(tableId);
+                tableContainer.innerHTML = data;
+            })
+            .catch(error => {
+                Message("error", error.message);
+            });
+        };
+        fileInput.click();
+    });
+});
 function getDataFormWithoutSubmit(formId){
     const form = document.getElementById(formId);
     const formData = new FormData(form);
