@@ -60,7 +60,7 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
                             }
                             throw new Error('Network response was not ok.');
                         }).then(data => {
-                            tableContainer = getElementById(tableId);
+                            const tableContainer = document.getElementById(tableId);
                             tableContainer.innerHTML = data;
                         });
                     }
@@ -116,7 +116,8 @@ document.getElementById("createTableByFunctionTableBtn").addEventListener('click
     });
     Message("success", "Функция успешно создана!");
     hideModal(this.getAttribute('data-modal-id'));
-    tableContainer = document.getElementById(tableId);
+    const tableContainer = document.getElementById(tableId);
+    Message("success", tableId);
     fetch('/{contextPath}/tableCreationByFunction', {
         method: 'POST'
      })

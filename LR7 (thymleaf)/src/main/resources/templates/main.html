@@ -30,9 +30,22 @@
     <a th:if="${isAdmin}" href="javascript:void(0);" onclick="openModal('adminModal', '/main/admin')">
         <button class="art_mainButton">Только для персонала</button>
     </a>
-    <button class="openModal art_mainButton" data-modal-id="createTableByArrayModal">Создание по массивам</button>
-    <button class="openModal art_mainButton" data-modal-id="createByFunctionModal">Создание по функции</button>
+    <!--<button class="openModal art_mainButton" data-modal-id="createTableByArrayModal">Создание по массивам</button>
+    <button class="openModal art_mainButton" data-modal-id="createByFunctionModal">Создание по функции</button>-->
 </div>
+<!---->
+<div class="art_mainModal" id="chooseTheWayToCreateTF">
+    <div class="art_ByArrModal">
+        <div class="art_byArrContent">
+            <span class="close art_close" data-modal-id="chooseTheWayToCreateTF">&times;</span>
+            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
+                                                                               data-modal-id="createTableByArrayModal">Создание по массивам</button></span>
+            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
+                                                                               data-modal-id="createByFunctionModal">Создание по функции</button></span>
+        </div>
+    </div>
+</div>
+<!--Выбор фабрики-->
 <div class="art_mainModal ksen_centered_modal" id="choose_factory">
     <div class="art_ByArrModal">
         <div class="art_byArrContent">
@@ -126,7 +139,8 @@
                         </table>
                     </div>
                     <div class="art_elementary_buttons">
-                        <button data-table-id="art_table_body_1" class="openModal createTable art_elementary_button">
+                        <button data-modal-id="chooseTheWayToCreateTF" data-table-id="art_table_body_1"
+                                class="openModal createTable art_elementary_button">
                             Создать
                         </button>
                         <button class="art_elementary_button">Загрузить</button>
@@ -151,7 +165,8 @@
                         </table>
                     </div>
                     <div class="art_elementary_buttons">
-                        <button data-table-id="art_table_body_2" class="openModal createTable art_elementary_button">
+                        <button data-modal-id="chooseTheWayToCreateTF" data-table-id="art_table_body_2"
+                                class="openModal createTable art_elementary_button">
                             Создать
                         </button>
                         <button class="art_elementary_button">Загрузить</button>
