@@ -51,6 +51,18 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
                     hideModal(InnerModalId);
                     if(document.getElementById("art_stateIdSuccess")){
                         hideModal('createTableByArrayModal');
+                        fetch('/{contextPath}/tableCreationByArrays', {
+                            method: 'POST'
+                         })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.text();
+                            }
+                            throw new Error('Network response was not ok.');
+                        }).then(data => {
+                            tableContainer = getElementById(tableId);
+                            tableContainer.innerHTML = data;
+                        });
                     }
                 });
             })
@@ -104,6 +116,18 @@ document.getElementById("createTableByFunctionTableBtn").addEventListener('click
     });
     Message("success", "Функция успешно создана!");
     hideModal(this.getAttribute('data-modal-id'));
+    tableContainer = document.getElementById(tableId);
+    fetch('/{contextPath}/tableCreationByFunction', {
+        method: 'POST'
+     })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    }).then(data => {
+        tableContainer.innerHTML = data;
+    });
 });
 //Выбор фабрики
 document.getElementById("art_radio_accept").addEventListener('click', function (){

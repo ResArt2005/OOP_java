@@ -1,18 +1,4 @@
-#createTableByArrayModal{
-    z-index: 100;
-}
-#createByFunctionModal{
-    z-index: 100;
-}
-#chooseTheWayToCreateMF{
-    z-index: 50;
-}
-#modalAvengeMessage{
-    z-index: 200;
-}
-#modalElementaryOps{
-    z-index: 10;
-}
+/**/
 ol{
     list-style: none;
 }
@@ -602,3 +588,27 @@ td input {
     cursor: pointer;
     border-radius: 3px;
 }
+
+
+
+
+
+
+
+#createTableByArrayModal{
+    z-index: 100;
+}
+#createByFunctionModal{
+    z-index: 100;
+}
+#chooseTheWayToCreateMF{
+    z-index: 50;
+}
+#modalAvengeMessage{
+    z-index: 200;
+}
+#modalElementaryOps{
+    z-index: 10;
+}
+
+

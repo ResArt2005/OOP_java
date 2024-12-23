@@ -51,7 +51,6 @@
         </div>
     </div>
 </div>
-</div>
 <!--Модальное окно создания функции по массивам-->
 <div id="createTableByArrayModal" class="art_mainModal">
     <div class="art_ByArrModal">
@@ -107,7 +106,7 @@
 <!--Модальное окно элементарных операций над функциями-->
 <div id="modalElementaryOps" class="art_displayNone">
     <div class="art_modal_tables">
-    <div class="close art_close" style="text-align:center;" data-modal-id="modalElementaryOps">&times;</div>
+        <div class="close art_close" style="text-align:center;" data-modal-id="modalElementaryOps">&times;</div>
         <div class="art_modal_table_content">
             <div class="art_table_container">
                 <div class="art_table_block">
@@ -127,7 +126,9 @@
                         </table>
                     </div>
                     <div class="art_elementary_buttons">
-                        <button class="art_elementary_button">Создать</button>
+                        <button data-table-id="art_table_body_1" class="openModal createTable art_elementary_button">
+                            Создать
+                        </button>
                         <button class="art_elementary_button">Загрузить</button>
                         <button class="art_elementary_button">Удалить</button>
                         <button class="art_elementary_button">Вставка</button>
@@ -150,7 +151,9 @@
                         </table>
                     </div>
                     <div class="art_elementary_buttons">
-                        <button class="art_elementary_button">Создать</button>
+                        <button data-table-id="art_table_body_2" class="openModal createTable art_elementary_button">
+                            Создать
+                        </button>
                         <button class="art_elementary_button">Загрузить</button>
                         <button class="art_elementary_button">Удалить</button>
                         <button class="art_elementary_button">Вставка</button>
@@ -169,11 +172,8 @@
                             </thead>
                             <tbody class="art_table_body" id="art_table_body_3">
                             <!-- Пример строки таблицы
-                            <tr>
-                                <td><input class="art_input_x" type='number' step='any' name='xValues' value="2"
-                                           readonly></td>
-                                <td><input class="art_input_y" type='number' step='any' name='yValues' value="4"
-                                           required/></td>
+                            <tr><td><input class="art_input_x" type='number' step='any' name='xValues' value="2" readonly></td>
+                                <td><input class="art_input_y" type='number' step='any' name='yValues' value="4" required/></td>
                             </tr> -->
                             </tbody>
                         </table>

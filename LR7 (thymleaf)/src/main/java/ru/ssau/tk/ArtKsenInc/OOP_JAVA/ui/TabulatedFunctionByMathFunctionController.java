@@ -17,6 +17,7 @@ import java.util.Map;
 @RequestMapping("/{contextPath}")
 @SessionAttributes("fabricType")
 public class TabulatedFunctionByMathFunctionController {
+    TabulatedFunction function;
     @GetMapping("/createFunctionByFunction")
     public String returnToMain() {
         return "redirect:/main";
@@ -41,6 +42,17 @@ public class TabulatedFunctionByMathFunctionController {
             yValues[i] = selectedFunction.apply(xValues[i]);
         }
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
-        TabulatedFunction function = factory.create(xValues, yValues);
+        function = factory.create(xValues, yValues);
     }
+    @PostMapping("/tableCreationByFunction")
+    @ResponseBody
+    public String createTable(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < function.getCount(); i++) {
+            sb.append("<tr><td><input class=\"art_input_x\" type='number' step='any' name='xValues' value=\"").append(function.getX(i)).append("\" readonly></td>");
+            sb.append("<td><input class=\"art_input_x\" type='number' step='any' name='yValues' value=\"").append(function.getY(i)).append("\" required></td></tr>");
+        }
+        return sb.toString();
+    }
+
 }

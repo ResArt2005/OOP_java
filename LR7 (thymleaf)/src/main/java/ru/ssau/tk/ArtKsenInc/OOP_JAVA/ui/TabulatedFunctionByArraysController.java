@@ -12,6 +12,7 @@ import java.util.Map;
 @RequestMapping("/{contextPath}")
 @SessionAttributes("fabricType")
 public class TabulatedFunctionByArraysController {
+    TabulatedFunction function;
     @PostMapping("/createFunctionByArrays")
     @ResponseBody
     public String createTable(@RequestParam("art_byArr_pointsCount") int pointsCount) {
@@ -42,7 +43,7 @@ public class TabulatedFunctionByArraysController {
                     "</div>";
         }
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
-        TabulatedFunction function = factory.create(xValues, yValues);
+        function = factory.create(xValues, yValues);
         return "<div style='z-index: 200;' class=\"art_state\" id=\"art_stateIdSuccess\">\n" +
                     "    <div class=\"art_state_content\">\n" +
                     "        <div class=\"art_success\">Успех</div>\n" +
@@ -68,6 +69,16 @@ public class TabulatedFunctionByArraysController {
         sb.append("</tbody>");
         sb.append("</table>");
         sb.append("</form>");
+        return sb.toString();
+    }
+    @PostMapping("/tableCreationByArrays")
+    @ResponseBody
+    public String createTable(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < function.getCount(); i++) {
+            sb.append("<tr><td><input class=\"art_input_x\" type='number' step='any' name='xValues' value=\"").append(function.getX(i)).append("\" readonly></td>");
+            sb.append("<td><input class=\"art_input_x\" type='number' step='any' name='yValues' value=\"").append(function.getY(i)).append("\" required></td></tr>");
+        }
         return sb.toString();
     }
 }
