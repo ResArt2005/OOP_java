@@ -13,7 +13,6 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
         return;
     }
     const responseContainer = document.getElementById('art_byArr_tableContainer');
-
     fetch('/createFunctionByArrays', {
         method: 'POST',
         headers: {
@@ -66,6 +65,45 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
         });
         });
     })
+});
+//Функция результата
+document.querySelectorAll('.resultOpsFunction').forEach(button => {
+    button.addEventListener("click", function(){
+        const operationName = this.getAttribute('name');
+        const url = this.getAttribute('data-url-id');
+        const formData_1 = new FormData(document.getElementById('art_form_body_1'));
+        const xValues_1 = formData_1.getAll('xValues').map(Number);
+        const yValues_1 = formData_1.getAll('yValues').map(Number);
+        const formData_2 = new FormData(document.getElementById('art_form_body_2'));
+        const xValues_2 = formData_2.getAll('xValues').map(Number);
+        const yValues_2 = formData_2.getAll('yValues').map(Number);
+        if(xValues_1.length !== xValues_2.length){
+            Message("error", "Размеры функций должны совпадать!");
+            return;
+        }
+        const data = { operationName, xValues_1, yValues_1, xValues_2, yValues_2 };
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+            Message("success", "Успешная операция!");
+            const tableContainer = document.getElementById('art_table_body_3');
+            tableContainer.innerHTML = data;
+        })
+        .catch(error => {
+            Message("error", "Произошла ошибка: " + error.message);
+        });
+    });
 });
 
 function getDataFormWithoutSubmit(formId){

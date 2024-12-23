@@ -33,7 +33,7 @@
     <!--<button class="openModal art_mainButton" data-modal-id="createTableByArrayModal">Создание по массивам</button>
     <button class="openModal art_mainButton" data-modal-id="createByFunctionModal">Создание по функции</button>-->
 </div>
-<!---->
+<!--Окно выбора того, как именно создавать функцию-->
 <div class="art_mainModal" id="chooseTheWayToCreateTF">
     <div class="art_ByArrModal">
         <div class="art_byArrContent">
@@ -125,21 +125,24 @@
                 <div class="art_table_block">
                     <h2 class="art_table_header">Первая функция</h2>
                     <div class="art_table_wrapper">
-                        <table class="art_elementary_table">
-                            <thead>
-                            <tr>
-                                <th>x</th>
-                                <th>y</th>
-                            </tr>
-                            </thead>
-                            <tbody class="art_table_body" id="art_table_body_1">
-                            <!-- Пример строки таблицы -->
+                        <form id="art_form_body_1">
+                            <table class="art_elementary_table">
+                                <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>y</th>
+                                </tr>
+                                </thead>
+                                <tbody class="art_table_body" id="art_table_body_1">
+                                <!-- Пример строки таблицы -->
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                     <div class="art_elementary_buttons">
-                        <span class="createTable" data-modal-id="art_table_body_1"><button data-modal-id="chooseTheWayToCreateTF"
+                        <span class="createTable" data-modal-id="art_table_body_1"><button
+                                data-modal-id="chooseTheWayToCreateTF"
                                 class="openModal art_elementary_button">
                             Создать
                         </button></span>
@@ -152,20 +155,23 @@
                 <div class="art_table_block">
                     <h2 class="art_table_header">Вторая функция</h2>
                     <div class="art_table_wrapper">
-                        <table class="art_elementary_table">
-                            <thead>
-                            <tr>
-                                <th>x</th>
-                                <th>y</th>
-                            </tr>
-                            </thead>
-                            <tbody class="art_table_body" id="art_table_body_2">
-                            <!-- Пример строки таблицы -->
-                            </tbody>
-                        </table>
+                        <form id="art_form_body_2">
+                            <table class="art_elementary_table">
+                                <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>y</th>
+                                </tr>
+                                </thead>
+                                <tbody class="art_table_body" id="art_table_body_2">
+                                <!-- Пример строки таблицы -->
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                     <div class="art_elementary_buttons">
-                        <span class="createTable" data-modal-id="art_table_body_2"><button data-modal-id="chooseTheWayToCreateTF"
+                        <span class="createTable" data-modal-id="art_table_body_2"><button
+                                data-modal-id="chooseTheWayToCreateTF"
                                 class="openModal art_elementary_button">
                             Создать
                         </button></span>
@@ -178,20 +184,22 @@
                 <div class="art_table_block">
                     <h2 class="art_table_header">Результат</h2>
                     <div class="art_table_wrapper">
-                        <table class="art_elementary_table">
-                            <thead>
-                            <tr>
-                                <th>x</th>
-                                <th>y</th>
-                            </tr>
-                            </thead>
-                            <tbody class="art_table_body" id="art_table_body_3">
-                            <!-- Пример строки таблицы
-                            <tr><td><input class="art_input_x" type='number' step='any' name='xValues' value="2" readonly></td>
-                                <td><input class="art_input_y" type='number' step='any' name='yValues' value="4" required/></td>
-                            </tr> -->
-                            </tbody>
-                        </table>
+                        <form id="art_form_body_3">
+                            <table class="art_elementary_table">
+                                <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>y</th>
+                                </tr>
+                                </thead>
+                                <tbody class="art_table_body" id="art_table_body_3">
+                                <!-- Пример строки таблицы
+                                <tr><td><input class="art_input_x" type='number' step='any' name='xValues' value="2" readonly></td>
+                                    <td><input class="art_input_y" type='number' step='any' name='yValues' value="4" required/></td>
+                                </tr> -->
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                     <div class="art_elementary_buttons">
                         <button class="art_elementary_button">Сохранить</button>
@@ -199,10 +207,21 @@
                 </div>
             </div>
             <div class="art_operations">
-                <button class="art_operation_button">Сложение</button>
-                <button class="art_operation_button">Вычитание</button>
-                <button class="art_operation_button">Умножение</button>
-                <button class="art_operation_button">Деление</button>
+                <button name="sum" data-url-id="/chooseElementaryOperationAndCalculate" data-modal-id="art_table_body_3"
+                        class="resultOpsFunction art_operation_button">Сложение
+                </button>
+                <button name="subtract" data-url-id="/chooseElementaryOperationAndCalculate"
+                        data-modal-id="art_table_body_3"
+                        class="resultOpsFunction art_operation_button">Вычитание
+                </button>
+                <button name="multiplication" data-url-id="/chooseElementaryOperationAndCalculate"
+                        data-modal-id="art_table_body_3"
+                        class="resultOpsFunction art_operation_button">Умножение
+                </button>
+                <button name="division" data-url-id="/chooseElementaryOperationAndCalculate"
+                        data-modal-id="art_table_body_3"
+                        class="resultOpsFunction art_operation_button">Деление
+                </button>
             </div>
         </div>
     </div>
