@@ -13,7 +13,7 @@
             height: 100vh;
             margin: 0;
         }
-        .container {
+        .container, .modal-content {
             background-color: #3F2A56; /* Dark Purple */
             padding: 20px;
             border-radius: 10px;
@@ -21,12 +21,25 @@
             width: 400px;
             text-align: center;
         }
-        input[type="text"], input[type="password"] {
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align items */
+            width: 100%;
+        }
+        .input-container label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            width: 100%; /* Ensure label takes full width */
+            text-align: center; /* Center align text */
+        }
+        .input-container input {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin-bottom: 15px;
             border-radius: 5px;
             border: 1px solid #E0BBE4;
+            box-sizing: border-box; /* Ensure padding is included in the width */
         }
         button {
             background-color: #6A1B9A; /* Rich Purple */
@@ -35,6 +48,8 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 15px; /* Increase font size */
+            width: 48%; /* Ensure buttons have equal width */
         }
         button:hover {
             background-color: #9A67EA; /* Lighter shade on hover */
@@ -45,28 +60,22 @@
         .success {
             color: #81C784;
         }
+        .hidden {
+            display: none;
+        }
         /* Стили для модального окна */
         .modal {
-            display: none; /* Скрыто по умолчанию */
             position: fixed;
             z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             background-color: rgb(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
-        .modal-content {
-            background-color:  #3F2A56;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%;
-            border-radius: 8px;
-        }
-
         .close {
             color: #E0BBE4;
             float: right;
@@ -74,100 +83,99 @@
             font-weight: bold;
             cursor: pointer;
         }
-
         .close:hover,
         .close:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
         }
-        .copyable-token:hover, .copyable-token:focus{
-        color: black;
+        .copyable-token:hover, .copyable-token:focus {
+            color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+        /* Flexbox for buttons */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            width: 48%; /* Adjust width to make buttons equal */
+        }
+        /* Adjust input field and button alignment */
+        .input-container input {
+            width: calc(100% - 0px); /* Adjust width to account for padding and borders */
         }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="loginContainer">
     <h1>Авторизация</h1>
 
     <form th:action="@{/}" method="post">
-        <label for="token">Введите ваш токен:</label>
-        <input type="text" id="token" name="token" required>
+        <div class="input-container">
+            <label for="token">Введите ваш токен</label>
+            <input type="text" id="token" name="token" required>
 
-        <label for="password">Введите пароль:</label>
-        <input type="password" id="password" name="password" required>
-
-        <button type="submit">Войти</button>
-    </form>
-    <button id="openModal">Новый пользователь</button>
-    <!-- Модальное окно -->
-    <div id="registrationModal" class="modal">
-        <div class="modal-content">
-            <!-- Вывод сообщений об ошибке или успехе -->
-            <div th:if="${error}" class="error" th:text="${error}"></div>
-            <div th:if="${success}" class="success" th:text="${success}"></div>
-
-
-            <span class="close" id="closeModal">&times;</span>
-            <h2>Регистрация</h2>
-
-            <!-- Сообщение об ошибке -->
-            <div th:if="${error}" class="error" th:text="${error}"></div>
-
-            <form action="/register" method="post">
-                <!-- Токен -->
-                <label>Ваш токен:</label>
-                <span id="tokenText" class="copyable-token" th:text="${token}"></span>
-                <span id="copySuccessMessage" class="copy-success" style="display: none;">Токен скопирован!</span>
-
-                <!-- Логин -->
-                <div>
-                    <label for="login">Логин:</label>
-                    <input type="text" id="login" name="login" placeholder="Введите логин" required>
-                </div>
-
-                <!-- Пароль -->
-                <div>
-                    <label for="password_2">Пароль:</label>
-                    <input type="password" id="password_2" name="password_2" placeholder="Введите пароль" required>
-                </div>
-
-                <!-- Кнопки -->
-                <div>
-                    <button type="submit">Зарегистрироваться</button>
-                </div>
-            </form>
+            <label for="password">Введите пароль</label>
+            <input type="password" id="password" name="password" required>
         </div>
-    </div>
-    <script>
-        // Получаем элементы DOM
-        const modal = document.getElementById('registrationModal');
-        const openModalButton = document.getElementById('openModal');
-        const closeModalButton = document.getElementById('closeModal');
 
-        // Открытие модального окна
-        openModalButton.addEventListener('click', () => {
-            modal.style.display = 'block';
-            history.pushState(null, null, '/register'); // Меняем URL без перезагрузки страницы
-        });
+        <div class="button-container">
+            <button type="submit">Войти</button>
+            <button id="openModal" type="button">Новый пользователь</button>
+        </div>
+    </form>
+</div>
 
-        // Закрытие модального окна
-        closeModalButton.addEventListener('click', () => {
-            modal.style.display = 'none';
-            history.pushState(null, null, '/'); // Возвращаем URL обратно
-        });
+<div class="container hidden" id="registrationContainer">
+    <h1>Регистрация</h1>
 
-        // Закрытие модального окна при клике вне его области
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                history.pushState(null, null, '/'); // Возвращаем URL обратно
-            }
-        });
+    <form action="/register" method="post">
+        <div class="input-container">
+            <label>Ваш токен:</label>
+            <span id="tokenText" class="copyable-token" th:text="${token}"></span>
+            <span id="copySuccessMessage" class="copy-success" style="display: none;">Токен скопирован!</span>
 
-        // Копирование токена в буфер обмена
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login" placeholder="Введите логин" required>
+
+            <label for="password_2">Пароль:</label>
+            <input type="password" id="password_2" name="password_2" placeholder="Введите пароль" required>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">Зарегистрироваться</button>
+            <button id="backToLogin" type="button">Назад</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Получаем элементы DOM
+    const openModalButton = document.getElementById('openModal');
+    const backToLoginButton = document.getElementById('backToLogin');
+    const loginContainer = document.getElementById('loginContainer');
+    const registrationContainer = document.getElementById('registrationContainer');
+
+    // Показать окно регистрации и скрыть окно авторизации
+    openModalButton.addEventListener('click', () => {
+        loginContainer.classList.add('hidden');
+        registrationContainer.classList.remove('hidden');
+    });
+
+    // Показать окно авторизации и скрыть окно регистрации
+    backToLoginButton.addEventListener('click', () => {
+        registrationContainer.classList.add('hidden');
+        loginContainer.classList.remove('hidden');
+    });
+
+    // Копирование токена в буфер обмена
+    const tokenText = document.getElementById('tokenText');
+    const copySuccessMessage = document.getElementById('copySuccessMessage');
+    if (tokenText) {
         tokenText.addEventListener('click', () => {
             const token = tokenText.textContent; // Получаем текст токена
 
@@ -184,7 +192,7 @@
                 console.error('Ошибка при копировании текста:', err);
             });
         });
-    </script>
-</div>
+    }
+</script>
 </body>
 </html>
