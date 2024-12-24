@@ -7,7 +7,6 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFa
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.LinkedListTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 @Controller
-@RequestMapping("/{contextPath}")
 @SessionAttributes("fabricType")
 public class ChooseFactoryController {
     @GetMapping("/submitFactory")

@@ -100,6 +100,12 @@ document.querySelectorAll('.resultOpsFunction').forEach(button => {
             Message("error", "Размеры функций должны совпадать!");
             return;
         }
+        for(let i = 0; i < xValues_1.length; i++){
+            if(xValues_1[i] != xValues_2[i]){
+                Message("error", "Значения по X должны совпадать!");
+                return;
+            }
+        }
         const data = { operationName, xValues_1, yValues_1, xValues_2, yValues_2 };
         fetch(url, {
             method: 'POST',
@@ -313,6 +319,11 @@ document.querySelectorAll('.loadFunction').forEach(button => {
                 if(!document.getElementById("art_stateUniqueErrorId")){
                     Message("success", "Функция успешно воспроизведена из файла!");
                 }
+                if (checkGraph) {
+                buildFunction(document.getElementById(graphButtonId));
+                checkGraph = false;
+                graphButtonId="";
+            }
             })
             .catch(error => {
                 Message("error", error.message);
@@ -413,7 +424,6 @@ function buildFunction(obj) {
     const formData = new FormData(document.getElementById('art_form_graph'));
     const xValues = formData.getAll('xValues').map(Number);
     const yValues = formData.getAll('yValues').map(Number);
-
     if (xValues.length === 0 || yValues.length === 0) {
         Message("error", "Создайте функции!");
         return;
@@ -521,7 +531,6 @@ document.getElementById("insertButton").addEventListener("click", function(){
     }
     xValues = tableInsertData.xValues;
     yValues = tableInsertData.yValues;
-    console.log(xValues, yValues, X, Y);
     data = {xValues, yValues, X, Y};
     fetch("/insert", {
         method: 'POST',
@@ -538,6 +547,11 @@ document.getElementById("insertButton").addEventListener("click", function(){
     })
     .then(data => {
         container.innerHTML = data;
+        if (checkGraph) {
+            buildFunction(document.getElementById(graphButtonId));
+            checkGraph = false;
+            graphButtonId="";
+        }
     })
     .catch(error => {
         Message("error", "Произошла ошибка: " + error.message);
@@ -546,6 +560,100 @@ document.getElementById("insertButton").addEventListener("click", function(){
 //Удаление точки
 document.querySelectorAll('.removePoint').forEach(button =>{
     button.addEventListener('click', function(){
-
+    tableInsertId = button.getAttribute("data-table-id");
+    tableInsertData = getDataFormWithoutSubmit(button.getAttribute("data-form-id"));
+    })
+});
+document.getElementById("removeButton").addEventListener("click", function(){
+    index = document.getElementById("index").value;
+    container = document.getElementById(tableInsertId);
+    if(tableInsertData.xValues.length === 0 || tableInsertData.yValues.length === 0){
+        Message("error", "Создайте функции!");
+        return;
+    }
+    // Проверка: заполнены ли xValues и yValues
+    if (tableInsertData.xValues === null || tableInsertData.yValues === null) {
+        Message("error", "Создайте функции!");
+        return;
+    }
+    if(tableInsertData.xValues.length === 2 || tableInsertData.yValues.length === 2){
+        Message("error", "Достигнут предел удаления!");
+        return;
+    }
+    if(index === null || index == ""){
+        Message("error", "Укажите индекс удаляемого значения!");
+        return;
+    }
+    if(index >= tableInsertData.xValues.length){
+        Message("error", "Индекс должен быть меньше максимальной длины функции!");
+        return;
+    }
+    xValues = tableInsertData.xValues;
+    yValues = tableInsertData.yValues;
+    data = {xValues, yValues, index};
+    fetch("/remove", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        container.innerHTML = data;
+        if (checkGraph) {
+            buildFunction(document.getElementById(graphButtonId));
+            checkGraph = false;
+            graphButtonId="";
+        }
+    })
+    .catch(error => {
+        Message("error", "Произошла ошибка: " + error.message);
+    });
+})
+//Вычисление интеграла
+document.querySelectorAll('.resultIntegral').forEach(button => {
+    button.addEventListener("click", function(){
+        const operationName = this.getAttribute('name');//Важно при создании других таблиц
+        const url = this.getAttribute('data-url-id');//Важно при создании других таблиц
+        const formData = new FormData(document.getElementById('art_form_integral'));//Важно при создании других таблиц
+        const xValues = formData.getAll('xValues').map(Number);
+        const yValues = formData.getAll('yValues').map(Number);
+        const countStreams = document.getElementById("countStreams").value;
+        if(xValues.length === 0 || yValues.length === 0){
+            Message("error", "Создайте функции!");
+            return;
+        }
+        if (countStreams < 1){
+            Message("error", "Должен быть указан хотя бы 1 поток!");
+            return;
+        }
+        const data = { countStreams, xValues, yValues };
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+            Message("success", "Успешная операция!");
+            const tableContainer = document.getElementById('integralContainerResult');
+            tableContainer.innerHTML = data;
+        })
+        .catch(error => {
+            Message("error", "Произошла ошибка: " + error.message);
+        });
     });
 });

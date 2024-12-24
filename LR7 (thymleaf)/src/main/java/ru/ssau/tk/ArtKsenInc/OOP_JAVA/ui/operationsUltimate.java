@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.concurrent.TabulatedIntegrationExecutor;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.io.FunctionsIO;
@@ -14,14 +15,11 @@ import java.io.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 @Controller
 @SessionAttributes("fabricType")
 public class operationsUltimate {
-    @GetMapping("/chooseElementaryOperationAndCalculate")
-    public String returnToMain() {
-        return "redirect:/main";
-    }
     @PostMapping("/serialize")
     @ResponseBody
     public byte[] serialize(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -185,15 +183,7 @@ public class operationsUltimate {
         double[] yValues = ((List<Number>) data.get("yValues")).stream().mapToDouble(Number::doubleValue).toArray();
         Object index = data.get("index");
         if (index == null) {
-            return "<div id=\"modalContainer\">\n" +
-                    "    <div class=\"art_state\" id=\"art_stateRemoveErrorId\">\n" +
-                    "        <div class=\"art_state_content\">\n" +
-                    "            <div class=\"art_error\">Ошибка</div>\n" +
-                    "            <div class=\"art_state_h1\">Введите номер существующей удаляемой строки!</div>\n" +
-                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateRemoveErrorId\">Ок</button>\n" +
-                    "        </div>\n" +
-                    "    </div>\n" +
-                    "</div>";
+            return "";
         }
         try {
             int INDEX = Integer.parseInt(index.toString());
@@ -201,15 +191,7 @@ public class operationsUltimate {
             function.remove(INDEX);
             return createTableY(function);
         } catch (NumberFormatException e) {
-            return "<div id=\"modalContainer\">\n" +
-                    "    <div class=\"art_state\" id=\"art_stateRemoveErrorId\">\n" +
-                    "        <div class=\"art_state_content\">\n" +
-                    "            <div class=\"art_error\">Ошибка</div>\n" +
-                    "            <div class=\"art_state_h1\">Введите номер существующей удаляемой строки!</div>\n" +
-                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateRemoveErrorId\">Ок</button>\n" +
-                    "        </div>\n" +
-                    "    </div>\n" +
-                    "</div>";
+            return "";
         }
     }
     private String createTableY(TabulatedFunction function) {
@@ -222,4 +204,29 @@ public class operationsUltimate {
         }
         return sb.toString();
     }
+    @PostMapping("/integrate")
+    @ResponseBody
+    public String integrate(@RequestBody Map<String, Object> data, HttpSession session) {
+        double[] xValues = ((List<Number>) data.get("xValues")).stream().mapToDouble(Number::doubleValue).toArray();
+        double[] yValues = ((List<Number>) data.get("yValues")).stream().mapToDouble(Number::doubleValue).toArray();
+        int countStreams = Integer.parseInt(data.get("countStreams").toString());
+        TabulatedIntegrationExecutor integral = new TabulatedIntegrationExecutor(countStreams);
+        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
+        if (xValues == null || yValues == null) {
+            return "error: Полученные данные пустые.";
+        }
+        try{
+            TabulatedFunction function = factory.create(xValues, yValues);
+            return Objects.toString(integral.Integrate(function));
+
+        }
+        catch (IllegalArgumentException e){
+            return "error: Полученные данные пустые.";
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

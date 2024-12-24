@@ -60,7 +60,7 @@ public class TabulatedFunctionByArraysController {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < function.getCount(); i++) {
             sb.append("<tr><td><input class=\"art_input_x\" type='number' step='any' name='xValues' value=\"").append(function.getX(i)).append("\" readonly></td>");
-            sb.append("<td><input class=\"art_input_x\" type='number' step='any' name='yValues' value=\"").append(function.getY(i)).append("\" required></td></tr>");
+            sb.append("<td><input class=\"art_input_y\" type='number' step='any' name='yValues' value=\"").append(function.getY(i)).append("\" required></td></tr>");
         }
         return sb.toString();
     }

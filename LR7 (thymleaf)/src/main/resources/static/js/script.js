@@ -1,9 +1,5 @@
 //Открытие окна
 function showModal(modalId){document.getElementById(modalId).style.display = "block"; }
-function openModal(modalId, endpoint){
-    document.getElementById(modalId).style.display = "block";
-    history.pushState(null, '', endpoint);
-}
 //Сообщение
 function Message(status, message){
     modalPerent = "modalAvengeMessage"
@@ -22,16 +18,12 @@ function Message(status, message){
     showModal(modalPerent);
     document.getElementById('message_ok').addEventListener('click', function() {
         hideModal(modalPerent);
-        element.classList.remove('success');
+        element.classList.remove('art_success');
         element.classList.remove('art_error');
         element.classList.remove('art_usual');
     });
 }
 // Закрытие модального окна
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
-    history.back();
-}
 function hideModal(modalId){ document.getElementById(modalId).style.display = "none"; }
 //ОткрытиеЗакрытие окон
 document.querySelectorAll('.close').forEach(button => {
@@ -74,3 +66,9 @@ document.getElementById('art_byArr_pointsCount').addEventListener('input', funct
 this.value = this.value.replace(/[^0-9]/g, '')});
 document.getElementById('art_byByFunction_pointsCount').addEventListener('input', function() {
 this.value = this.value.replace(/[^0-9]/g, '')});
+document.getElementById('index').addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+document.getElementById('countStreams').addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});

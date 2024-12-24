@@ -35,28 +35,43 @@
 <div class="art_header">
     Главное меню
 </div>
-
+<!--Контейнер с кнопками-->
 <div class="art_mainContainer">
     <button class="openModal art_mainButton" data-modal-id="choose_factory">Открыть настройки</button>
-    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями</button>
+    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями
+    </button>
     <button class="openModal art_mainButton" data-modal-id="modalDefOps">Дифференциальные операции</button>
     <button class="openModal art_mainButton" data-modal-id="modalGraph">Редактор функции</button>
-    <button class="openModal art_mainButton" data-modal-id="">Нахождение интеграла</button>
+    <button class="openModal art_mainButton" data-modal-id="modalIntegral">Нахождение интеграла</button>
     <span th:if="${isAdmin}" class="art_mainButton" data-modal-id="openModal adminPanel">
         <button class="art_mainButton">Только для персонала</button>
     </span>
 </div>
-
+<!--Окно выбора того, как именно создавать функцию-->
+<div class="art_mainModal" id="chooseTheWayToCreateTF">
+    <div class="art_ByArrModal">
+        <div class="art_byArrContent">
+            <span class="close art_close" data-modal-id="chooseTheWayToCreateTF">&times;</span>
+            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
+                                                                               data-modal-id="createTableByArrayModal">Создание по массивам</button></span>
+            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
+                                                                               data-modal-id="createByFunctionModal">Создание по функции</button></span>
+        </div>
+    </div>
+</div>
 <!-- Окно выбора фабрики -->
 <div class="art_mainModal centered-modal" id="choose_factory">
     <div class="centered-modal-content">
-        <!-- Удаляем крестик закрытия окна -->
         <div class="art_radio-group">
-            <input th:checked="${FactoryRadio == 'arrayFactory'}" type="radio" id="art_arrayTabulatedFunctionFactory" name="factory"/>
+            <input th:checked="${FactoryRadio == 'arrayFactory'}" type="radio" id="art_arrayTabulatedFunctionFactory"
+                   name="factory"/>
             <label for="art_arrayTabulatedFunctionFactory">Фабрика по массивам</label>
-            <input th:checked="${FactoryRadio == 'linkedListFactory'}" type="radio" id="art_linkedListTabulatedFunctionFactory" name="factory"/>
+            <input th:checked="${FactoryRadio == 'linkedListFactory'}" type="radio"
+                   id="art_linkedListTabulatedFunctionFactory" name="factory"/>
             <label for="art_linkedListTabulatedFunctionFactory">Фабрика по связному списку</label><br>
-            <button id="art_radio_accept" class="close art_mainButton" data-modal-id="choose_factory">Принять изменения</button>
+            <button id="art_radio_accept" class="close art_mainButton" data-modal-id="choose_factory">Принять
+                изменения
+            </button>
             <button id="backToMain" type="button" class="art_mainButton">Назад</button>
         </div>
     </div>
@@ -147,7 +162,9 @@
                         </span>
                         <button data-table-id="art_table_body_1" class="loadFunction art_elementary_button">Загрузить
                         </button>
-                        <button class="art_elementary_button">Удалить</button>
+                        <button data-form-id="art_form_body_1" data-table-id="art_table_body_1" data-modal-id="remove"
+                                class="openModal removePoint art_elementary_button">Удалить
+                        </button>
                         <button data-form-id="art_form_body_1" data-table-id="art_table_body_1" data-modal-id="insert"
                                 class="openModal insertPoint art_elementary_button">Вставка
                         </button>
@@ -179,8 +196,12 @@
                         </button></span>
                         <button data-table-id="art_table_body_2" class="loadFunction art_elementary_button">Загрузить
                         </button>
-                        <button class="art_elementary_button">Удалить</button>
-                        <button class="art_elementary_button">Вставка</button>
+                        <button data-form-id="art_form_body_2" data-table-id="art_table_body_2" data-modal-id="remove"
+                                class="openModal removePoint art_elementary_button">Удалить
+                        </button>
+                        <button data-form-id="art_form_body_2" data-table-id="art_table_body_2" data-modal-id="insert"
+                                class="openModal insertPoint art_elementary_button">Вставка
+                        </button>
                         <button data-form-id="art_form_body_2" class="saveFunction art_elementary_button">Сохранить
                         </button>
                     </div>
@@ -242,7 +263,7 @@
             </div>
             <div class="art_table_container">
                 <div class="art_table_block">
-                    <h2 class="art_table_header">Первая функция</h2>
+                    <h2 class="art_table_header">Функция</h2>
                     <div class="art_table_wrapper">
                         <form id="art_form_body_def_1"><!--Важно при создании других таблиц-->
                             <table class="art_elementary_table">
@@ -266,8 +287,14 @@
                         <button data-table-id="art_table_body_def_1" class="loadFunction art_elementary_button">
                             Загрузить
                         </button><!--Важно при создании других таблиц-->
-                        <button class="art_elementary_button">Удалить</button>
-                        <button class="art_elementary_button">Вставка</button>
+                        <button data-form-id="art_form_body_def_1" data-table-id="art_table_body_def_1"
+                                data-modal-id="remove"
+                                class="openModal removePoint art_elementary_button">Удалить
+                        </button>
+                        <button data-form-id="art_form_body_def_1" data-table-id="art_table_body_def_1"
+                                data-modal-id="insert"
+                                class="openModal insertPoint art_elementary_button">Вставка
+                        </button>
                         <button data-form-id="art_form_body_def_1" class="saveFunction art_elementary_button">
                             Сохранить
                         </button><!--Важно при создании других таблиц-->
@@ -342,7 +369,6 @@
                         </form>
                     </div>
                     <!----------------------------------------------->
-                    <!--Тут будет располагаться график функции-->
                     <div id="art_graph" style="width: 100%; height: 400px;"></div>
                     <!----------------------------------------------->
                     <div class="art_elementary_buttons">
@@ -351,15 +377,20 @@
                                     data-modal-id="chooseTheWayToCreateTF"
                                     class="openModal buildFunction art_elementary_button">
                                 Создать </button></span>
-                        <button data-url-id="/Graph" data-graph-id="art_graph" data-table-id="art_table_graph"
+                        <button id="graphLoad" data-url-id="/Graph" data-graph-id="art_graph"
+                                data-table-id="art_table_graph"
                                 class="buildFunction loadFunction art_elementary_button">
                             Загрузить
                         </button>
-                        <button data-url-id="/Graph" data-graph-id="art_graph"
-                                class="buildFunction art_elementary_button">Удалить
+                        <button data-modal-id="remove" data-form-id="art_form_graph" data-table-id="art_table_graph"
+                                id="graphRemove"
+                                data-url-id="/Graph" data-graph-id="art_graph"
+                                class="openModal removePoint buildFunction art_elementary_button">Удалить
                         </button>
-                        <button data-url-id="/Graph" data-graph-id="art_graph"
-                                class="buildFunction art_elementary_button">Вставка
+                        <button data-graph-id="art_graph" id="graphInsert" data-url-id="/Graph"
+                                data-form-id="art_form_graph" data-table-id="art_table_graph"
+                                data-modal-id="insert"
+                                class="openModal insertPoint buildFunction art_elementary_button">Вставка
                         </button>
                         <button data-form-id="art_form_graph" class="saveFunction art_elementary_button">
                             Сохранить
@@ -368,6 +399,65 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Модальное окно для вычисления определённого интеграла-->
+<div id="modalIntegral" class="art_displayNone"><!--Важно при создании других таблиц-->
+    <div class="art_modal_tables">
+        <div class="art_modal_table_content">
+            <!-- Крестик закрытия окна -->
+            <div class="close art_close art_closeAbsolute" style="text-align:center;"
+                 data-modal-id="modalIntegral">&times;<!--Важно при создании других таблиц-->
+            </div>
+            <div class="art_table_container">
+                <div class="art_table_block">
+                    <h2 class="art_table_header">Функция</h2>
+                    <div class="art_table_wrapper">
+                        <form id="art_form_integral">
+                            <table class="art_elementary_table">
+                                <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>y</th>
+                                </tr>
+                                </thead>
+                                <tbody class="art_table_body" id="art_table_integral">
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="art_elementary_buttons">
+                        <span class="createTable" data-modal-id="art_table_integral">
+                            <button data-modal-id="chooseTheWayToCreateTF" class="openModal art_elementary_button">
+                                Создать </button></span>
+                        <button data-table-id="art_table_integral" class="loadFunction art_elementary_button">
+                            Загрузить
+                        </button>
+                        <button data-form-id="art_form_integral" data-table-id="art_table_integral"
+                                data-modal-id="remove"
+                                class="openModal removePoint art_elementary_button">Удалить
+                        </button>
+                        <button data-form-id="art_form_integral" data-table-id="art_table_integral"
+                                data-modal-id="insert"
+                                class="openModal insertPoint art_elementary_button">Вставка
+                        </button>
+                        <button data-form-id="art_form_integral" class="saveFunction art_elementary_button">
+                            Сохранить
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="art_operations">
+                <label for="countStreams">
+                    Количество потоков:
+                    <input placeholder="Количество потоков" id="countStreams" type="number" value="1">
+                </label>
+                <button name="integrate" data-url-id="/integrate" data-modal-id="art_table_integral_result"
+                        class="resultIntegral art_operation_button">Интегрировать
+                </button>
+                <div>Определённый интеграл функции равен: <span id="integralContainerResult"></span></div>
             </div>
         </div>
     </div>
@@ -392,11 +482,13 @@
     <div class="art_state_content">
         <div class="art_success">Удаление точки</div>
         <label for="index">
-            <input placeholder="Введите индекс точки для удаления" id="index" type="number">
+            <input placeholder="Индекс" id="index" type="number">
         </label>
-        <button data-container-id="resultContainerApplyId" id="removeButton">Удалить</button>
+        <button class="art_close close" data-modal-id="remove" data-container-id="resultContainerApplyId"
+                id="removeButton">Удалить
+        </button>
         <br>
-        <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
+        <button class="art_state_button close" data-modal-id="remove">Закрыть</button>
     </div>
 </div>
 <!--Вычисление значения в точке-->
