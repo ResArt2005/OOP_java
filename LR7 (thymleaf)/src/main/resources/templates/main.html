@@ -143,7 +143,9 @@
                         <button data-table-id="art_table_body_1" class="loadFunction art_elementary_button">Загрузить
                         </button>
                         <button class="art_elementary_button">Удалить</button>
-                        <button class="art_elementary_button">Вставка</button>
+                        <button data-form-id="art_form_body_1" data-table-id="art_table_body_1" data-modal-id="insert"
+                                class="openModal insertPoint art_elementary_button">Вставка
+                        </button>
                         <button data-form-id="art_form_body_1" class="saveFunction art_elementary_button">Сохранить
                         </button>
                     </div>
@@ -375,10 +377,9 @@
         <label for="insertY">
             <input placeholder="Y" id="insertY" type="number">
         </label>
-        <div id="resultContainerInsertId" class="resultContainerApply"></div>
-        <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="insertButton">Добавить</button>
+        <button class="art_close close" data-modal-id="insert" id="insertButton">Добавить</button>
         <br>
-        <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
+        <button class="art_state_button close" data-modal-id="insert">Закрыть</button>
     </div>
 </div>
 <!--Удаление значения по индексу-->
@@ -388,7 +389,7 @@
         <label for="index">
             <input placeholder="Введите индекс точки для удаления" id="index" type="number">
         </label>
-        <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="removeButton">Удалить</button>
+        <button data-container-id="resultContainerApplyId" id="removeButton">Удалить</button>
         <br>
         <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
     </div>

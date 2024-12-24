@@ -494,9 +494,53 @@ document.getElementById("applyButton").addEventListener('click', function() {
     });
 });
 //Вставка точки
+tableInsertId = "";
+tableInsertData = "";
 document.querySelectorAll('.insertPoint').forEach(button =>{
-    button.addEventListener('click', function(){
-
+        button.addEventListener('click', function(){
+        tableInsertId = button.getAttribute("data-table-id");
+        tableInsertData = getDataFormWithoutSubmit(button.getAttribute("data-form-id"));
+    })
+});
+document.getElementById("insertButton").addEventListener("click", function(){
+    X = document.getElementById("insertX").value;
+    Y = document.getElementById("insertY").value;
+    container = document.getElementById(tableInsertId);
+    if(tableInsertData.xValues.length === 0 || tableInsertData.yValues.length === 0){
+        Message("error", "Создайте функции!");
+        return;
+    }
+    // Проверка: заполнены ли xValues и yValues
+    if (tableInsertData.xValues === null || tableInsertData.yValues === null) {
+        Message("error", "Создайте функции!");
+        return;
+    }
+    if(X === null || Y === null || X == "" || Y == ""){
+        Message("error", "Заполните X и Y!");
+        return;
+    }
+    xValues = tableInsertData.xValues;
+    yValues = tableInsertData.yValues;
+    console.log(xValues, yValues, X, Y);
+    data = {xValues, yValues, X, Y};
+    fetch("/insert", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        container.innerHTML = data;
+    })
+    .catch(error => {
+        Message("error", "Произошла ошибка: " + error.message);
     });
 });
 //Удаление точки

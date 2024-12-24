@@ -165,32 +165,16 @@ public class operationsUltimate {
         Object xValue = data.get("X");
         Object yValue = data.get("Y");
         if (xValue == null || yValue == null) {
-            return "<div id=\"modalContainer\">\n" +
-                    "    <div class=\"art_state\" id=\"art_stateInsertErrorId\">\n" +
-                    "        <div class=\"art_state_content\">\n" +
-                    "            <div class=\"art_error\">Ошибка</div>\n" +
-                    "            <div class=\"art_state_h1\">Введите значение по X и Y</div>\n" +
-                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateInsertErrorId\">Ок</button>\n" +
-                    "        </div>\n" +
-                    "    </div>\n" +
-                    "</div>";
+            return "";
         }
         try {
             double X = Double.parseDouble(xValue.toString());
-            double Y = Double.parseDouble(xValue.toString());
+            double Y = Double.parseDouble(yValue.toString());
             TabulatedFunction function = factory.create(xValues, yValues);
             function.insert(X, Y);
-            return createTable(function);
+            return createTableY(function);
         } catch (NumberFormatException e) {
-            return "<div id=\"modalContainer\">\n" +
-                    "    <div class=\"art_state\" id=\"art_stateInsertErrorId\">\n" +
-                    "        <div class=\"art_state_content\">\n" +
-                    "            <div class=\"art_error\">Ошибка</div>\n" +
-                    "            <div class=\"art_state_h1\">Введите значение по X и Y</div>\n" +
-                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateInsertErrorId\">Ок</button>\n" +
-                    "        </div>\n" +
-                    "    </div>\n" +
-                    "</div>";
+            return "";
         }
     }
     @PostMapping("/remove")
@@ -215,7 +199,7 @@ public class operationsUltimate {
             int INDEX = Integer.parseInt(index.toString());
             TabulatedFunction function = factory.create(xValues, yValues);
             function.remove(INDEX);
-            return createTable(function);
+            return createTableY(function);
         } catch (NumberFormatException e) {
             return "<div id=\"modalContainer\">\n" +
                     "    <div class=\"art_state\" id=\"art_stateRemoveErrorId\">\n" +
@@ -227,5 +211,15 @@ public class operationsUltimate {
                     "    </div>\n" +
                     "</div>";
         }
+    }
+    private String createTableY(TabulatedFunction function) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < function.getCount(); i++) {
+            sb.append("<tr><td><input class=\"art_input_x\" type='number' step='any' name='xValues' value=\"")
+                    .append(function.getX(i)).append("\" readonly></td>");
+            sb.append("<td><input class=\"art_input_y\" type='number' step='any' name='yValues' value=\"")
+                    .append(function.getY(i)).append("\" required></td></tr>");
+        }
+        return sb.toString();
     }
 }
