@@ -1,9 +1,19 @@
 //id таблицы
 tableId = "";
+//Кнопка ли это для создания графика
+checkGraph = false
+graphButtonId = ""
 //Создание таблицы (передача id)
 document.querySelectorAll('.createTable').forEach(button => {
         button.addEventListener('click', function () {
             tableId = this.getAttribute("data-modal-id");
+    });
+});
+//Создание графика (передача id)
+document.querySelectorAll('.buildFunction').forEach(button => {
+        button.addEventListener('click', function () {
+        checkGraph = true;
+        graphButtonId = button.getAttribute("id");
     });
 });
 //По массивам
@@ -62,6 +72,11 @@ document.getElementById("art_byArr_createTableBtn").addEventListener('click', fu
             Message("success", "Функция успешно создана!");
             const tableContainer = document.getElementById(tableId);
             tableContainer.innerHTML = data;
+            if (checkGraph) {
+                buildFunction(document.getElementById(graphButtonId));
+                checkGraph = false;
+                graphButtonId="";
+            }
         });
         });
     })
@@ -263,7 +278,6 @@ document.querySelectorAll('.saveFunction').forEach(button => {
         });
     });
 });
-
 // Событие загрузки функции путём десериализации
 document.querySelectorAll('.loadFunction').forEach(button => {
     button.addEventListener('click', function() {
@@ -307,6 +321,7 @@ document.querySelectorAll('.loadFunction').forEach(button => {
         fileInput.click();
     });
 });
+//Получение данных формы без перезагрузки страницы
 function getDataFormWithoutSubmit(formId){
     const form = document.getElementById(formId);
     const formData = new FormData(form);
@@ -355,6 +370,11 @@ document.getElementById("createTableByFunctionTableBtn").addEventListener('click
         hideModal(this.getAttribute('data-modal-id'));
         const tableContainer = document.getElementById(tableId);
         tableContainer.innerHTML = data;
+        if (checkGraph) {
+            buildFunction(document.getElementById(graphButtonId));
+            checkGraph = false;
+            graphButtonId="";
+        }
     });
 });
 //Выбор фабрики
@@ -383,5 +403,94 @@ document.getElementById("art_radio_accept").addEventListener('click', function (
             return response.text();
         }
         throw new Error('Network response was not ok.');
+    });
+});
+//Построение графика
+let chartInstance = null;
+
+function buildFunction(obj) {
+    const url = obj.getAttribute('data-url-id');
+    const graphId = obj.getAttribute('data-graph-id');
+    const formData = new FormData(document.getElementById('art_form_graph'));
+    const xValues = formData.getAll('xValues').map(Number);
+    const yValues = formData.getAll('yValues').map(Number);
+
+    if (xValues.length === 0 || yValues.length === 0) {
+        Message("error", "Создайте функции!");
+        return;
+    }
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ xValues, yValues })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const trace = {
+            x: data.xValues,
+            y: data.yValues,
+            mode: 'lines',
+            name: 'Табулированная функция',
+            line: { color: 'rgba(75, 192, 192, 1)', width: 2 }
+        };
+
+        const layout = {
+            title: 'График Табулированной Функции',
+            xaxis: {
+                title: 'X',
+                showgrid: true,
+                zeroline: false
+            },
+            yaxis: {
+                title: 'Y',
+                showgrid: true,
+                zeroline: false
+            }
+        };
+
+        Plotly.newPlot(graphId, [trace], layout);
+    })
+    .catch(error => {
+        Message("error", error.message);
+    });
+}
+//Вычисления значения в точке
+document.getElementById("applyButton").addEventListener('click', function() {
+    const X = document.getElementById("xValue").value;
+    const url = this.getAttribute('data-url-id');
+    const containerId = this.getAttribute('data-container-id');
+    const formData = new FormData(document.getElementById('art_form_graph'));
+    const xValues = formData.getAll('xValues').map(Number);
+    const yValues = formData.getAll('yValues').map(Number);
+    if(xValues.length === 0 || yValues.length === 0){
+        Message("error", "Создайте функции!");
+        return;
+    }
+    // Проверка: заполнены ли xValues и yValues
+    if (xValues === null || yValues === null) {
+        Message("error", "Создайте функции!");
+        return;
+    }
+    if(X === null){
+        Message("error", "Введите значение точки по X!");
+        return;
+    }
+    fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({X, xValues, yValues})
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    }).then(data => {
+        const containerIdContainer = document.getElementById(containerId);
+        containerIdContainer.innerHTML = data;
+    })
+    .catch(error => {
+        Message("error", error.message);
     });
 });

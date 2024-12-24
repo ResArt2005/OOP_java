@@ -17,10 +17,7 @@ import java.util.Objects;
 
 @Controller
 @SessionAttributes("fabricType")
-public class operationsWindowUltimate {
-
-    //private static final Logger logger = Logger.getLogger(operationsWindowUltimate.class.getName());
-
+public class operationsUltimate {
     @GetMapping("/chooseElementaryOperationAndCalculate")
     public String returnToMain() {
         return "redirect:/main";

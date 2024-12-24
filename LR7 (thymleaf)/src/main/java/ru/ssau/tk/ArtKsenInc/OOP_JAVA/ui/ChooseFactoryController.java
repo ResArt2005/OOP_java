@@ -1,6 +1,5 @@
-package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.settings_windows;
+package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

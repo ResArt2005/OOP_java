@@ -19,9 +19,9 @@
         табулированными функциями
     </button>
     <button class="openModal art_mainButton" data-modal-id="modalDefOps">Дифференциальные операции</button>
-    <button class="openModal art_mainButton" data-modal-id="">Редактор функции
+    <button class="openModal art_mainButton" data-modal-id="modalGraph">Редактор функции
     </button>
-    <button class="openModal art_mainButton" data-modal-id="">Нахождение интеграла </button>
+    <button class="openModal art_mainButton" data-modal-id="">Нахождение интеграла</button>
     <span th:if="${isAdmin}" class="art_mainButton" data-modal-id="openModal adminPanel">
         <button class="art_mainButton">Только для персонала</button>
     </span>
@@ -246,7 +246,8 @@
                                     <th>y</th>
                                 </tr>
                                 </thead>
-                                <tbody class="art_table_body" id="art_table_body_def_1"><!--Важно при создании других таблиц-->
+                                <tbody class="art_table_body" id="art_table_body_def_1">
+                                <!--Важно при создании других таблиц-->
                                 <!-- Пример строки таблицы -->
                                 </tbody>
                             </table>
@@ -257,11 +258,13 @@
                             <button data-modal-id="chooseTheWayToCreateTF" class="openModal art_elementary_button">
                                 Создать </button></span><!--Важно при создании других таблиц-->
                         <button data-table-id="art_table_body_def_1" class="loadFunction art_elementary_button">
-                            Загрузить </button><!--Важно при создании других таблиц-->
+                            Загрузить
+                        </button><!--Важно при создании других таблиц-->
                         <button class="art_elementary_button">Удалить</button>
                         <button class="art_elementary_button">Вставка</button>
                         <button data-form-id="art_form_body_def_1" class="saveFunction art_elementary_button">
-                            Сохранить </button><!--Важно при создании других таблиц-->
+                            Сохранить
+                        </button><!--Важно при создании других таблиц-->
                     </div>
                 </div>
                 <div class="art_table_block">
@@ -296,10 +299,91 @@
                 </div>
             </div>
             <div class="art_operations">
-                <!--Важно при создании других таблиц--><button name="sum" data-url-id="/chooseDefOperationAndCalculate" data-modal-id="art_table_body_def_2"
-                        class="resultDefOpsFunction art_operation_button">Дифференцировать<!--Важно при создании других таблиц-->
+                <!--Важно при создании других таблиц-->
+                <button name="sum" data-url-id="/chooseDefOperationAndCalculate" data-modal-id="art_table_body_def_2"
+                        class="resultDefOpsFunction art_operation_button">Дифференцировать
+                    <!--Важно при создании других таблиц-->
                 </button>
             </div>
+        </div>
+    </div>
+</div>
+<!--Модальное окно для построения графики табулированной функции-->
+<div id="modalGraph" class="art_displayNone">
+    <div class="art_modal_tables">
+        <div class="art_modal_table_content">
+            <!-- Крестик закрытия окна -->
+            <div class="close art_close art_closeAbsolute" style="text-align:center;"
+                 data-modal-id="modalGraph">&times;
+            </div>
+            <div class="art_table_container">
+                <div class="art_table_block">
+                    <h2 class="art_table_header">Построение графика</h2>
+                    <!--Таблица работает только скриптов и её не будет видно-->
+                    <div class="art_table_wrapper">
+                        <form id="art_form_graph" class="art_displayNone">
+                            <table class="art_elementary_table">
+                                <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>y</th>
+                                </tr>
+                                </thead>
+                                <tbody class="art_table_body" id="art_table_graph">
+                                <!-- Сюда выгружаются строки таблицы -->
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <!----------------------------------------------->
+                    <!--Тут будет располагаться график функции-->
+                    <div id="art_graph" style="width: 100%; height: 400px;"></div>
+                    <!----------------------------------------------->
+                    <div class="art_elementary_buttons">
+                        <span class="createTable" data-modal-id="art_table_graph">
+                            <button id="createGraph" data-url-id="/Graph" data-graph-id="art_graph"
+                                    data-modal-id="chooseTheWayToCreateTF"
+                                    class="openModal buildFunction art_elementary_button">
+                                Создать </button></span>
+                        <button data-url-id="/Graph" data-graph-id="art_graph" data-table-id="art_table_graph"
+                                class="buildFunction loadFunction art_elementary_button">
+                            Загрузить
+                        </button>
+                        <button data-url-id="/Graph" data-graph-id="art_graph"
+                                class="buildFunction art_elementary_button">Удалить
+                        </button>
+                        <button data-url-id="/Graph" data-graph-id="art_graph"
+                                class="buildFunction art_elementary_button">Вставка
+                        </button>
+                        <button data-form-id="art_form_graph" class="saveFunction art_elementary_button">
+                            Сохранить
+                        </button>
+                        <button data-modal-id="apply" class="openModal art_operation_button">Вычислить значение в точке
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Вычисление значения в точке-->
+<div class="art_state art_displayNone" id="apply">
+    <div class="art_state_content">
+        <div class="art_success">Вычисление значения в точке</div>
+        <label for="xValue">
+            <input placeholder="X" id="xValue" type="number">
+        </label>
+        <div id="resultContainerApplyId" class="resultContainerApply"></div>
+        <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="applyButton">Вычислить</button>
+        <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
+    </div>
+</div>
+<div id="modalContainer">
+    <div class="art_state art_displayNone" id="art_stateId">
+        <div class="art_state_content">
+            <div class="art_error">Ошибка</div>
+            <div class="art_state_h1">Значения X должны быть в порядке возрастания, а все поля заполнены!</div>
+            <button id='ok' class="art_state_button close" data-modal-id="art_stateId">Ок</button>
         </div>
     </div>
 </div>
@@ -313,17 +397,9 @@
         </div>
     </div>
 </div>
-<div id="modalContainer">
-    <div class="art_state art_displayNone" id="art_stateId">
-        <div class="art_state_content">
-            <div class="art_error">Ошибка</div>
-            <div class="art_state_h1">Значения X должны быть в порядке возрастания, а все поля заполнены!</div>
-            <button id='ok' class="art_state_button close" data-modal-id="art_stateId">Ок</button>
-        </div>
-    </div>
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script th:src="@{/js/script.js}"></script>
 <script th:src="@{/js/ajaxTable.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </body>
 </html>
