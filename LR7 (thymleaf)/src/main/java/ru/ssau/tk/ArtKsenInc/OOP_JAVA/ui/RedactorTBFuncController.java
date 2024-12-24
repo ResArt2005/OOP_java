@@ -43,11 +43,4 @@ public class RedactorTBFuncController {
             return "Введите значение по X!";
         }
     }
-
-    public String graphBuilder(TabulatedFunction function) {
-        StringBuilder sb = new StringBuilder();
-        //function.getX(index),function.getY(index)
-        //Построение графика...
-        return sb.toString();
-    }
 }

@@ -366,6 +366,34 @@
         </div>
     </div>
 </div>
+<!--Добавление точки-->
+<div class="art_state art_displayNone" id="insert">
+    <div class="art_state_content">
+        <div class="art_success">Добавление точки</div>
+        <label for="insertX">
+            <input placeholder="X" id="insertX" type="number">
+        </label>
+        <label for="insertY">
+            <input placeholder="Y" id="insertY" type="number">
+        </label>
+        <div id="resultContainerInsertId" class="resultContainerApply"></div>
+        <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="insertButton">Добавить</button>
+        <br>
+        <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
+    </div>
+</div>
+<!--Удаление значения по индексу-->
+<div class="art_state art_displayNone" id="remove">
+    <div class="art_state_content">
+        <div class="art_success">Удаление точки</div>
+        <label for="index">
+            <input placeholder="Введите индекс точки для удаления" id="index" type="number">
+        </label>
+        <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="removeButton">Удалить</button>
+        <br>
+        <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
+    </div>
+</div>
 <!--Вычисление значения в точке-->
 <div class="art_state art_displayNone" id="apply">
     <div class="art_state_content">
@@ -375,9 +403,11 @@
         </label>
         <div id="resultContainerApplyId" class="resultContainerApply"></div>
         <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="applyButton">Вычислить</button>
+        <br>
         <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
     </div>
 </div>
+<!--Костыльное окно-->
 <div id="modalContainer">
     <div class="art_state art_displayNone" id="art_stateId">
         <div class="art_state_content">

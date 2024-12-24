@@ -407,7 +407,6 @@ document.getElementById("art_radio_accept").addEventListener('click', function (
 });
 //Построение графика
 let chartInstance = null;
-
 function buildFunction(obj) {
     const url = obj.getAttribute('data-url-id');
     const graphId = obj.getAttribute('data-graph-id');
@@ -492,5 +491,17 @@ document.getElementById("applyButton").addEventListener('click', function() {
     })
     .catch(error => {
         Message("error", error.message);
+    });
+});
+//Вставка точки
+document.querySelectorAll('.insertPoint').forEach(button =>{
+    button.addEventListener('click', function(){
+
+    });
+});
+//Удаление точки
+document.querySelectorAll('.removePoint').forEach(button =>{
+    button.addEventListener('click', function(){
+
     });
 });

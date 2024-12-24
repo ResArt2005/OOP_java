@@ -22,7 +22,6 @@ public class operationsUltimate {
     public String returnToMain() {
         return "redirect:/main";
     }
-
     @PostMapping("/serialize")
     @ResponseBody
     public byte[] serialize(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -59,7 +58,6 @@ public class operationsUltimate {
             return null;
         }
     }
-
     @PostMapping("/deserialize")
     @ResponseBody
     public String deserialize(@RequestParam("file") MultipartFile file, HttpSession session) {
@@ -81,20 +79,18 @@ public class operationsUltimate {
                     "        <div class=\"art_state_content\">\n" +
                     "            <div class=\"art_error\">Ошибка</div>\n" +
                     "            <div class=\"art_state_h1\">Вы хотя бы знаете, что ИМЕННО в этом файле????</div>\n" +
-                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateDefErrorId\">Ок</button>\n" +
+                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateUniqueErrorId\">Ок</button>\n" +
                     "        </div>\n" +
                     "    </div>\n" +
                     "</div>";
         }
     }
-
     private String getFileExtension(String fileName) {
         if (fileName == null || fileName.lastIndexOf('.') == -1) {
             return null;
         }
         return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
     }
-
     @PostMapping("/chooseElementaryOperationAndCalculate")
     @ResponseBody
     public String submitElemFunction(@RequestBody Map<String, Object> data, HttpSession session) {
@@ -159,5 +155,77 @@ public class operationsUltimate {
                     .append(function.getY(i)).append("\" readonly></td></tr>");
         }
         return sb.toString();
+    }
+    @PostMapping("/insert")
+    @ResponseBody
+    public String insert(@RequestBody Map<String, Object> data, HttpSession session) {
+        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
+        double[] xValues = ((List<Number>) data.get("xValues")).stream().mapToDouble(Number::doubleValue).toArray();
+        double[] yValues = ((List<Number>) data.get("yValues")).stream().mapToDouble(Number::doubleValue).toArray();
+        Object xValue = data.get("X");
+        Object yValue = data.get("Y");
+        if (xValue == null || yValue == null) {
+            return "<div id=\"modalContainer\">\n" +
+                    "    <div class=\"art_state\" id=\"art_stateInsertErrorId\">\n" +
+                    "        <div class=\"art_state_content\">\n" +
+                    "            <div class=\"art_error\">Ошибка</div>\n" +
+                    "            <div class=\"art_state_h1\">Введите значение по X и Y</div>\n" +
+                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateInsertErrorId\">Ок</button>\n" +
+                    "        </div>\n" +
+                    "    </div>\n" +
+                    "</div>";
+        }
+        try {
+            double X = Double.parseDouble(xValue.toString());
+            double Y = Double.parseDouble(xValue.toString());
+            TabulatedFunction function = factory.create(xValues, yValues);
+            function.insert(X, Y);
+            return createTable(function);
+        } catch (NumberFormatException e) {
+            return "<div id=\"modalContainer\">\n" +
+                    "    <div class=\"art_state\" id=\"art_stateInsertErrorId\">\n" +
+                    "        <div class=\"art_state_content\">\n" +
+                    "            <div class=\"art_error\">Ошибка</div>\n" +
+                    "            <div class=\"art_state_h1\">Введите значение по X и Y</div>\n" +
+                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateInsertErrorId\">Ок</button>\n" +
+                    "        </div>\n" +
+                    "    </div>\n" +
+                    "</div>";
+        }
+    }
+    @PostMapping("/remove")
+    @ResponseBody
+    public String remove(@RequestBody Map<String, Object> data, HttpSession session) {
+        TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
+        double[] xValues = ((List<Number>) data.get("xValues")).stream().mapToDouble(Number::doubleValue).toArray();
+        double[] yValues = ((List<Number>) data.get("yValues")).stream().mapToDouble(Number::doubleValue).toArray();
+        Object index = data.get("index");
+        if (index == null) {
+            return "<div id=\"modalContainer\">\n" +
+                    "    <div class=\"art_state\" id=\"art_stateRemoveErrorId\">\n" +
+                    "        <div class=\"art_state_content\">\n" +
+                    "            <div class=\"art_error\">Ошибка</div>\n" +
+                    "            <div class=\"art_state_h1\">Введите номер существующей удаляемой строки!</div>\n" +
+                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateRemoveErrorId\">Ок</button>\n" +
+                    "        </div>\n" +
+                    "    </div>\n" +
+                    "</div>";
+        }
+        try {
+            int INDEX = Integer.parseInt(index.toString());
+            TabulatedFunction function = factory.create(xValues, yValues);
+            function.remove(INDEX);
+            return createTable(function);
+        } catch (NumberFormatException e) {
+            return "<div id=\"modalContainer\">\n" +
+                    "    <div class=\"art_state\" id=\"art_stateRemoveErrorId\">\n" +
+                    "        <div class=\"art_state_content\">\n" +
+                    "            <div class=\"art_error\">Ошибка</div>\n" +
+                    "            <div class=\"art_state_h1\">Введите номер существующей удаляемой строки!</div>\n" +
+                    "            <button class=\"art_state_button close\" data-modal-id=\"art_stateRemoveErrorId\">Ок</button>\n" +
+                    "        </div>\n" +
+                    "    </div>\n" +
+                    "</div>";
+        }
     }
 }
