@@ -12,14 +12,12 @@
 <!--Контейнер с кнопками-->
 <div class="art_mainContainer">
     <button class="openModal art_mainButton" data-modal-id="choose_factory">Открыть настройки</button>
-    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями
-    </button>
+    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями</button>
     <button class="openModal art_mainButton" data-modal-id="modalDefOps">Дифференциальные операции</button>
     <button class="openModal art_mainButton" data-modal-id="modalGraph">Редактор функции</button>
     <button class="openModal art_mainButton" data-modal-id="modalIntegral">Нахождение интеграла</button>
-    <button class="openModal art_mainButton" data-modal-id="modalIntegral">Нахождение интеграла</button>
     <button class="openModal art_mainButton" data-modal-id="modalMathFunc">Создание сложной математической функции</button>
-    <span th:if="${isAdmin}"><a th:href="@{/main/workWithDb}"> <button class="art_mainButton">Только для персонала</button></a></span>
+    <span th:if="${isAdmin}"><a th:href="@{/main/workWithDb}"><button class="art_mainButton">Только для персонала</button></a></span>
 </div>
 <!--Модальное окно создания математической функции-->
 <div class="art_mainModal" id="modalMathFunc">
