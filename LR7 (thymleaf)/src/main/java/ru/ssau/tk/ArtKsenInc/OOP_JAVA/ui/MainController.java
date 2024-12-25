@@ -54,24 +54,17 @@ public class MainController {
         return "main";
     }
 
-    //{ String funcNames, ... }, int countOfFunctions, String newName
     @PostMapping("/hardFunction")
     @ResponseBody
     public String hardFunction(@RequestParam("newName") String newName, @RequestParam("pointCount") int pointCount, Model model) {
         if (newName == null || newName.isEmpty()) {
             return "Введите корректное имя";
         }
-        /*MathFunc mathFunc = new MathFunc(newName, new XFunction());
-        try {
-            dbTools.createMathFunction(mathFunc);
-        } catch (DataIntegrityViolationException e) {
-            dbTools.deleteTBFunctionById(mathFunc.getId());
-            return "Такое имя уже существует, придумайте другое";
-        } catch (IllegalArgumentException e) {
-            dbTools.deleteTBFunctionById(mathFunc.getId());
-            return e.toString();
+        Map<String, MathFunction> functionMap = MathFunctionScanner.getAnnotatedFunctions(); // Используем динамическое сканирование
+        functionMap.putAll(dbTools.getAllMathFunctionsAsNameAndMF());
+        if(functionMap.containsKey(newName)){
+            return "Функция с таким именем существует, присвойте другое";
         }
-        dbTools.deleteTBFunctionById(mathFunc.getId());*/
         model.addAttribute("newName", newName);
         model.addAttribute("pointCount", pointCount);
         return createList(pointCount);
