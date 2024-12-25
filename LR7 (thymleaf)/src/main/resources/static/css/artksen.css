@@ -105,15 +105,16 @@ body {
     overflow: auto;
 }
 .art_ByArrModal {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     position: fixed;
-    overflow: auto;
-    z-index: 1;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: for a semi-transparent background */
 }
 
 .art_byArrContent {
@@ -121,10 +122,19 @@ body {
     overflow: auto;
     border-radius: 10px;
     padding: 20px;
-    width: 500px;
-    max-width: 80%;
+    width: 700px; /* Increased width */
+    height: 700px; /* Increased height to make it square */
+    max-width: 90%; /* Adjusted max-width */
+    max-height: 90%; /* Adjusted max-height */
     color: white;
     margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрирование по вертикали */
 }
 
 h1 {
@@ -277,13 +287,15 @@ td input {
   display: block;
 }
 .art_byArr_container {
-  display: flex;
-  flex-direction: column; /* Элементы расположены вертикально */
-  width: 300px; /* Ширина контейнера */
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+    align-items: center; /* Центрирование по горизонтали */
+    justify-content: center; /* Центрирование по вертикали */
+    margin-top: 20px;
 }
-
 .art_byArr_container .art_dropdown {
-  margin-bottom: 10px; /* Расстояние между элементами */
+    margin-bottom: 10px; /* Расстояние между элементами */
+    margin-top: 10px; /* Добавлено расстояние сверху */
 }
 
 .art_byArr_container .art_dropdown-button {
@@ -322,34 +334,54 @@ td input {
 }
 
 .art_byArr_container label {
-  display: block; /* Каждое поле на новой строке */
-  margin-bottom: 5px;
-  font-weight: bold; /* Жирный шрифт для меток */
-  color: #8a2be2; /* Фиолетовый цвет для меток */
+    color: #E0BBE4; /* Цвет текста */
+    font-family: 'Open Sans', sans-serif; /* Шрифт */
+    font-weight: bold; /* Жирный шрифт */
+    margin: 5px 0; /* Увеличение отступа */
+    font-size: 18px; /* Увеличение размера шрифта */
+    text-align: center;
 }
 
 .art_byArr_container input[type="number"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #8a2be2; /* Фиолетовая рамка */
-  border-radius: 5px;
-  box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+    text-align: center; /* Центрирование текста в поле ввода */
+    width: 150px; /* Увеличение ширины поля */
+    padding: 10px; /* Увеличение внутреннего отступа */
+    margin: 10px 0; /* Увеличение внешнего отступа */
+    border: 2px solid #4B0082;
+    border-radius: 5px;
+    font-size: 16px; /* Увеличение размера шрифта */
 }
 
 .art_byArr_container button {
-  background-color: #8a2be2;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-  margin-top: 10px; /* Расстояние сверху */
+    background-color: #6A1B9A; /* Цвет фона */
+    color: #E0BBE4; /* Цвет текста */
+    font-family: 'Open Sans', sans-serif; /* Шрифт */
+    padding: 15px 30px; /* Увеличение внутреннего отступа */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Увеличение размера шрифта */
+    margin-top: 20px;
+    text-align: center;
+}
+.art_backButton {
+    background-color: #6A1B9A; /* Цвет фона */
+    color: #E0BBE4; /* Цвет текста */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Размер шрифта */
+    text-align: center;
+    margin-top: 20px;
+}
+
+.art_backButton:hover {
+    background-color: #9A67EA; /* Цвет фона при наведении */
 }
 
 .art_byArr_container button:hover {
-  background-color: #c792c7; /* Более темный фиолетовый при наведении */
+    background-color: #9A67EA; /* Цвет фона при наведении */
 }
 .art_dropdown {
     position: relative;
