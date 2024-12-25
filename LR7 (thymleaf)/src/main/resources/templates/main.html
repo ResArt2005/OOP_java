@@ -169,7 +169,7 @@
             <span class="close art_close" data-modal-id="modalMathFunc">&times;</span>
             <h1>Создание Математической функции</h1>
             <div class="art_byArr_container">
-                <label for="MathFuncPointsCount">Количество точек:</label>
+                <label for="MathFuncPointsCount">Количество функций:</label>
                 <input type="number" id="MathFuncPointsCount" name="MathFuncPointsCount" min="1" required/>
                 <label for="MathFuncName">Название функции:</label>
                 <input type="text" id="MathFuncName" name="MathFuncName" required/>
@@ -651,7 +651,7 @@
 </div>
 <!--Универсальное модальное окно передачи сообщений-->
 <div id="modalAvengeMessage" class="art_displayNone">
-    <div class="art_state">
+    <div class="art_state" style="z-index: 9999; position: absolute; overflow: hidden;">
         <div class="art_state_content">
             <div id="art_modal_status_message"></div>
             <div class="art_state_h1"></div>

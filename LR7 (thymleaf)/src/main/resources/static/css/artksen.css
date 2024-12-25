@@ -643,9 +643,10 @@ td input {
     z-index: 50;
 }
 #modalAvengeMessage{
-    z-index: 200;
+    position: absolute;
 }
 #modalElementaryOps{
     z-index: 10;
 }*/
+
 

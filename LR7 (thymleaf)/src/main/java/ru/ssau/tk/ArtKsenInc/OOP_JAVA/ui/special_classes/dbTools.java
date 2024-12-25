@@ -3,7 +3,6 @@ package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
-import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.LogDTO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.Log;
@@ -66,6 +65,12 @@ public class dbTools {
             throw new IllegalArgumentException("Такое название функции использовать запрещено!");
         }
         MathFunc mathFunc = new MathFunc(name, function);
+        mathFuncService.create(mathFunc);
+    }
+    public static void createMathFunction(MathFunc mathFunc) {
+        if(mathFunc.getName().equals("Выберите функцию")){
+            throw new IllegalArgumentException("Такое название функции использовать запрещено!");
+        }
         mathFuncService.create(mathFunc);
     }
     public static void deleteMathFunctionById(int id) {
