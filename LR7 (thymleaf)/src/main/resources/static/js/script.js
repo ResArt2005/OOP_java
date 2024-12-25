@@ -1,30 +1,27 @@
 //Открытие окна
 function showModal(modalId){document.getElementById(modalId).style.display = "block"; }
+// Закрытие модального окна
+function hideModal(modalId){ document.getElementById(modalId).style.display = "none"; }
 //Сообщение
 function Message(status, message){
     modalPerent = "modalAvengeMessage"
     modalId = "art_modal_status_message";
     const element = document.getElementById(modalId)
     if(status === 'success'){
-        element.classList.add("art_success");
+        element.style.color = "#81C784";
     }
     else if(status === 'error'){
-        element.classList.add("art_error");
+        element.style.color = "#FF6B6B";
     }
     else{
-        element.classList.add("art_usual");
+        element.style.color = "#fff";
     }
     element.innerText = message;
     showModal(modalPerent);
     document.getElementById('message_ok').addEventListener('click', function() {
         hideModal(modalPerent);
-        element.classList.remove('art_success');
-        element.classList.remove('art_error');
-        element.classList.remove('art_usual');
     });
 }
-// Закрытие модального окна
-function hideModal(modalId){ document.getElementById(modalId).style.display = "none"; }
 //ОткрытиеЗакрытие окон
 document.querySelectorAll('.close').forEach(button => {
         button.addEventListener('click', function () {

@@ -43,14 +43,15 @@ body {
     background-color: #6A1B9A; /* Rich Purple */
     color: #E0BBE4;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 10px;
-    border: none;
+    padding: 20px 40px; /* Увеличиваем отступы */
+    border-radius: 10px; /* Более закругленные углы */
+    margin: 15px; /* Увеличиваем отступы между кнопками */
     cursor: pointer;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px; /* Увеличиваем размер шрифта */
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень для объемности */
+    transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
 }
 .art_header {
     background-color: #9370DB; /* ConstantColors.DARK_LILAC */
@@ -86,4 +87,53 @@ body {
     width: 80%;
     max-width: 600px;
     overflow: auto;
+}
+.art_close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.art_close:hover,
+.art_close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*createFunctionByArrays.html*/
+.art_byArr_tableContainer{
+    overflow: auto;
+}
+/*Модальное окно успеха или ошибки*/
+.art_state {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+.art_state_content{
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+.art_state_h1 {
+    font-size: 16px;
+}
+
+.art_state_button {
+    background-color: #800080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
 }

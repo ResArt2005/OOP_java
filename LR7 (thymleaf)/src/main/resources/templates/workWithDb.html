@@ -20,7 +20,18 @@
     <button class="openModal art_mainButton" data-modal-id="logs">Посмотреть логи</button>
     <button class="openModal art_mainButton" data-modal-id="eraseBD">Стереть все данные в базе</button>
 </div>
-<script th:src="@{/js/script.js}"></script>
+
+
+<!--Универсальное модальное окно передачи сообщений-->
+<div id="modalAvengeMessage" class="art_displayNone">
+    <div class="art_state" style="z-index: 9999; position: absolute; overflow: hidden;">
+        <div class="art_state_content">
+            <div id="art_modal_status_message"></div>
+            <div class="art_state_h1"></div>
+            <button id="message_ok" class="art_state_button close" data-modal-id="modalAvengeMessage">Ок</button>
+        </div>
+    </div>
+</div>
 <script th:src="@{/js/workWithBDAjax.js}"></script>
 </body>
 </html>
