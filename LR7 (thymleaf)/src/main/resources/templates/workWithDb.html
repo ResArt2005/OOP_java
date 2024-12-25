@@ -1,13 +1,26 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Работа с базой данных</title>
+    <link rel="stylesheet" th:href="@{/css/artksenBD.css}">
 </head>
 <body>
-
+<div class="art_header">
+    Добро пожаловать в панель администрирования
+</div>
+    <!--Контейнер с кнопками-->
+<div class="art_mainContainer">
+    <button class="openModal art_mainButton" data-modal-id="users">Пользователи</button>
+    <button class="openModal art_mainButton" data-modal-id="mathFunctions">Математические функции</button>
+    <button class="openModal art_mainButton" data-modal-id="TBFunctions">Табулированные функции</button>
+    <button class="openModal art_mainButton" data-modal-id="logs">Посмотреть логи</button>
+    <button class="openModal art_mainButton" data-modal-id="eraseBD">Стереть все данные в базе</button>
+</div>
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/workWithBDAjax.js}"></script>
 </body>
 </html>
