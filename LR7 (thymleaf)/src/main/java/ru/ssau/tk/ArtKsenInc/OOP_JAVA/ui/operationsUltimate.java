@@ -39,10 +39,10 @@ public class operationsUltimate {
                  BufferedOutputStream stream = new BufferedOutputStream(byteStream)) {
                 switch (getFileExtension(fileName)) {
                     case "json":
-                        FunctionsIO.serialize(stream, tabulatedFunction);
+                        FunctionsIO.serializeJson(stream, tabulatedFunction);
                         break;
                     case "xml":
-                        FunctionsIO.serialize(stream, tabulatedFunction);
+                        FunctionsIO.serializeXML(stream, tabulatedFunction);
                         break;
                     case "bin":
                     default:
@@ -63,8 +63,8 @@ public class operationsUltimate {
             TabulatedFunction tabulatedFunction;
             try (BufferedInputStream stream = new BufferedInputStream(file.getInputStream())) {
                 tabulatedFunction = switch (Objects.requireNonNull(getFileExtension(file.getOriginalFilename()))) {
-                    case "json" -> FunctionsIO.deserialize(stream);//serializeJson
-                    case "xml" -> FunctionsIO.deserialize(stream);//serializeXMl
+                    case "json" -> FunctionsIO.deserializeJson(stream);
+                    case "xml" -> FunctionsIO.deserializeXML(stream);
                     default -> FunctionsIO.deserialize(stream);
                 };
             }
