@@ -44,7 +44,14 @@
             margin-top: 20px;
         }
 
-        #art_radio_accept, #backToMain {
+        .button-container-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        #art_radio_accept, #backToMain, #create_array, #create_function {
             background-color: #6A1B9A; /* Rich Purple */
             color: #E0BBE4;
             border: none;
@@ -56,7 +63,19 @@
             text-align: center; /* Center align text */
         }
 
-        #art_radio_accept:hover, #backToMain:hover {
+        #backToMainCreate {
+            background-color: #6A1B9A; /* Rich Purple */
+            color: #E0BBE4;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Increase font size */
+            width: 30%; /* Smaller width for back button */
+            text-align: center; /* Center align text */
+        }
+
+        #art_radio_accept:hover, #backToMain:hover, #create_array:hover, #create_function:hover, #backToMainCreate:hover {
             background-color: #9A67EA; /* Lighter shade on hover */
         }
 
@@ -102,14 +121,16 @@
     </span>
 </div>
 <!--Окно выбора того, как именно создавать функцию-->
-<div class="art_mainModal" id="chooseTheWayToCreateTF">
-    <div class="art_ByArrModal">
-        <div class="art_byArrContent">
-            <span class="close art_close" data-modal-id="chooseTheWayToCreateTF">&times;</span>
-            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
-                                                                               data-modal-id="createTableByArrayModal">Создание по массивам</button></span>
-            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
-                                                                               data-modal-id="createByFunctionModal">Создание по функции</button></span>
+<div class="art_mainModal centered-modal" id="chooseTheWayToCreateTF">
+    <div class="centered-modal-content modal-container">
+        <div class="art_radio-group">
+            <div class="button-container">
+                <button id="create_array" class="openModal" data-modal-id="createTableByArrayModal">Создание по массивам</button>
+                <button id="create_function" class="openModal" data-modal-id="createByFunctionModal">Создание по функции</button>
+            </div>
+            <div class="button-container-center">
+                <button id="backToMainCreate" type="button">Назад</button>
+            </div>
         </div>
     </div>
 </div>
@@ -581,25 +602,35 @@
 <script th:src="@{/js/script.js}"></script>
 <script th:src="@{/js/ajaxTable.js}"></script>
 <script>
-    // Получаем элементы DOM
-    const openModalButton = document.querySelector('.openModal[data-modal-id="choose_factory"]');
-    const modal = document.getElementById('choose_factory');
-    const closeModalButton = modal.querySelector('.close[data-modal-id="choose_factory"]');
-    const backToMainButton = document.getElementById('backToMain');
+    // Функция для закрытия модального окна
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
 
     // Открытие модального окна
-    openModalButton.addEventListener('click', () => {
-        modal.style.display = 'flex'; // Отображаем модальное окно
+    const openModalButtons = document.querySelectorAll('.openModal');
+    openModalButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const modalId = button.getAttribute('data-modal-id');
+            document.getElementById(modalId).style.display = 'flex'; // Отображаем модальное окно
+        });
     });
 
-    // Закрытие модального окна
-    closeModalButton.addEventListener('click', () => {
-        modal.style.display = 'none'; // Скрываем модальное окно
+    // Получаем все элементы с классом "close"
+    const closeButtons = document.querySelectorAll('.close');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const modalId = button.getAttribute('data-modal-id');
+            closeModal(modalId);
+        });
     });
 
     // Возврат к главному меню
-    backToMainButton.addEventListener('click', () => {
-        modal.style.display = 'none'; // Скрываем модальное окно
+    document.getElementById('backToMain').addEventListener('click', () => {
+        closeModal('choose_factory');
+    });
+    document.getElementById('backToMainCreate').addEventListener('click', () => {
+        closeModal('chooseTheWayToCreateTF');
     });
 </script>
 </body>
