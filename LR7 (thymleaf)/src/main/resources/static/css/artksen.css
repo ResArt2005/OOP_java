@@ -175,14 +175,14 @@ input[type="number"] {
 }
 
 th, td {
-    border: 1px solid #800080;
+    border: 1px solid #6A1B9A;0;
     padding: 8px;
     text-align: center;
 }
 
 th {
     background-color: #800080;
-    color: white;
+    color: #E0BBE4;
 }
 
 td input {
@@ -193,15 +193,25 @@ td input {
 }
 
 .art_byArr_create-function-btn {
-    width: 100%;
+    background-color: #6A1B9A; /* Цвет фона */
+    color: #E0BBE4; /* Цвет текста */
+    font-family: 'Open Sans', sans-serif; /* Шрифт */
+    padding: 15px 30px; /* Увеличение внутреннего отступа */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Увеличение размера шрифта */
     margin-top: 20px;
-    background-color: #800080;
+    text-align: center;
 }
-
+.art_byArr_create-function-btn:hover {
+    background-color: #9A67EA; /* Цвет фона при наведении */
+}
 .art_byArr_container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Вертикальное расположение элементов */
+    align-items: center; /* Центрирование по горизонтали */
+    margin-top: 20px;
 }
 .art_error {
     color: #FF6B6B;
@@ -538,7 +548,7 @@ td input {
 .art_elementary_table th, .art_elementary_table td {
     padding: 5px;
     text-align: center;
-    border: 1px solid #4b0082;
+    border: 1px solid #6A1B9A;
 }
 
 .art_elementary_table input {
@@ -591,7 +601,7 @@ td input {
 
 .art_elementary_table th, .art_elementary_table td {
     padding: 5px;
-    border: 1px solid #8e4b8e;
+    border: 1px solid #6A1B9A;
 }
 
 .art_table_block h2 {
@@ -699,8 +709,7 @@ td input {
         .button-container-center {
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin-top: 40px;
+            margin-top: 20px; /* Отступ сверху для кнопки "Назад" */
         }
 
         #art_radio_accept, #backToMain, #create_array, #create_function {
@@ -766,28 +775,30 @@ td input {
             color: #E0BBE4; /* Цвет текста */
             font-family: 'Open Sans', sans-serif; /* Шрифт */
             font-weight: bold; /* Жирный шрифт */
-            margin: 5px 0;
+            margin: 5px 0; /* Увеличение отступа */
+            font-size: 18px; /* Увеличение размера шрифта */
             text-align: center;
         }
 
         .art_byArr_container input[type="number"] {
             text-align: center; /* Центрирование текста в поле ввода */
-            width: 100px;
-            padding: 5px;
-            margin: 5px 0;
+            width: 150px; /* Увеличение ширины поля */
+            padding: 10px; /* Увеличение внутреннего отступа */
+            margin: 10px 0; /* Увеличение внешнего отступа */
             border: 2px solid #4B0082;
             border-radius: 5px;
+            font-size: 16px; /* Увеличение размера шрифта */
         }
 
         .art_byArr_container button {
             background-color: #6A1B9A; /* Цвет фона */
             color: #E0BBE4; /* Цвет текста */
             font-family: 'Open Sans', sans-serif; /* Шрифт */
-            padding: 10px 20px;
+            padding: 15px 30px; /* Увеличение внутреннего отступа */
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px; /* Размер шрифта */
+            font-size: 18px; /* Увеличение размера шрифта */
             margin-top: 20px;
             text-align: center;
         }
@@ -796,4 +807,3 @@ td input {
             background-color: #9A67EA; /* Цвет фона при наведении */
         }
     </style>
-
