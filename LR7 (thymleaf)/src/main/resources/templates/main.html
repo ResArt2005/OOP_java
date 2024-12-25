@@ -63,7 +63,7 @@
             text-align: center; /* Center align text */
         }
 
-        #backToMainCreate {
+        #backToMainCreate, #backToArray {
             background-color: #6A1B9A; /* Rich Purple */
             color: #E0BBE4;
             border: none;
@@ -75,7 +75,7 @@
             text-align: center; /* Center align text */
         }
 
-        #art_radio_accept:hover, #backToMain:hover, #create_array:hover, #create_function:hover, #backToMainCreate:hover {
+        #art_radio_accept:hover, #backToMain:hover, #create_array:hover, #create_function:hover, #backToMainCreate:hover, #backToArray:hover {
             background-color: #9A67EA; /* Lighter shade on hover */
         }
 
@@ -101,6 +101,47 @@
             width: 100%;
             color: white;
             overflow: auto;
+        }
+
+        .art_byArr_container {
+            display: flex;
+            flex-direction: column; /* Вертикальное расположение элементов */
+            align-items: center; /* Центрирование по горизонтали */
+            margin-top: 20px;
+        }
+
+        .art_byArr_container label {
+            color: #E0BBE4; /* Цвет текста */
+            font-family: 'Open Sans', sans-serif; /* Шрифт */
+            font-weight: bold; /* Жирный шрифт */
+            margin: 5px 0;
+            text-align: center;
+        }
+
+        .art_byArr_container input[type="number"] {
+            text-align: center; /* Центрирование текста в поле ввода */
+            width: 100px;
+            padding: 5px;
+            margin: 5px 0;
+            border: 2px solid #4B0082;
+            border-radius: 5px;
+        }
+
+        .art_byArr_container button {
+            background-color: #6A1B9A; /* Цвет фона */
+            color: #E0BBE4; /* Цвет текста */
+            font-family: 'Open Sans', sans-serif; /* Шрифт */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Размер шрифта */
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .art_byArr_container button:hover {
+            background-color: #9A67EA; /* Цвет фона при наведении */
         }
     </style>
 </head>
@@ -173,18 +214,17 @@
     </div>
 </div>
 <!--Модальное окно создания функции по массивам-->
-<div id="createTableByArrayModal" class="art_mainModal">
-    <div class="art_ByArrModal">
-        <div class="art_byArrContent">
-            <span class="close art_close" data-modal-id="createTableByArrayModal">&times;</span>
-            <h1>Создание табулированной функции</h1>
-            <div class="art_byArr_container">
-                <label for="art_byArr_pointsCount">Количество точек:</label>
-                <input type="number" id="art_byArr_pointsCount" name="art_byArr_pointsCount" min="1" required/>
-                <button id="art_byArr_createTableBtn">Создать таблицу</button>
-            </div>
-            <div id="art_byArr_tableContainer"></div>
-            <div class="otstup"></div>
+<div id="createTableByArrayModal" class="art_mainModal centered-modal">
+    <div class="centered-modal-content modal-container">
+        <h2 class="art_table_header">Создание табулированной функции</h2>
+        <div class="art_byArr_container">
+            <label for="art_byArr_pointsCount">Количество точек</label>
+            <input type="number" id="art_byArr_pointsCount" name="art_byArr_pointsCount" min="1" required/>
+            <button id="art_byArr_createTableBtn">Создать таблицу</button>
+        </div>
+        <div id="art_byArr_tableContainer"></div>
+        <div class="button-container-center">
+            <button id="backToArray" class="close" data-modal-id="createTableByArrayModal">Назад</button>
         </div>
     </div>
 </div>
@@ -218,8 +258,7 @@
                 <input type="number" id="art_byByFunction_pointsCount"
                        name="art_byByFunction_pointsCount" required/>
                 <br>
-                <button data-modal-id="createByFunctionModal" id="createTableByFunctionTableBtn">Создать функцию
-                </button>
+                <button data-modal-id="createByFunctionModal" id="createTableByFunctionTableBtn">Создать функцию</button>
             </div>
         </div>
     </div>
@@ -648,6 +687,7 @@
         });
     });
 
+  
 </script>
 </body>
 </html>
