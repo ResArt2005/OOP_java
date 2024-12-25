@@ -9,27 +9,27 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 @Controller
 @SessionAttributes("fabricType")
 public class WorkWithDBController {
-    @GetMapping("/workWithDb")
+    @GetMapping("/main/workWithDb")
     public String main() {
         return "workWithDb";
     }
 
-    @PostMapping("/workWithDbLogs")
+    @PostMapping("/main/workWithDbLogs")
     public void workWithDbLogs() {
 
     }
 
-    @PostMapping("/workWithDbMathFunc")
+    @PostMapping("/main/workWithDbMathFunc")
     public void workWithDbMathFunc() {
 
     }
 
-    @PostMapping("/workWithDbTBFunc")
+    @PostMapping("/main/workWithDbTBFunc")
     public void workWithDbTBFunc() {
 
     }
 
-    @PostMapping("/workWithDbUsers")
+    @PostMapping("/main/workWithDbUsers")
     public void workWithDbUsers() {
 
     }

@@ -112,24 +112,45 @@
 <!--Контейнер с кнопками-->
 <div class="art_mainContainer">
     <button class="openModal art_mainButton" data-modal-id="choose_factory">Открыть настройки</button>
-    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями</button>
+    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями
+    </button>
     <button class="openModal art_mainButton" data-modal-id="modalDefOps">Дифференциальные операции</button>
     <button class="openModal art_mainButton" data-modal-id="modalGraph">Редактор функции</button>
     <button class="openModal art_mainButton" data-modal-id="modalIntegral">Нахождение интеграла</button>
-    <span th:if="${isAdmin}" class="art_mainButton" data-modal-id="openModal adminPanel">
-        <button class="art_mainButton">Только для персонала</button>
-    </span>
+    <button class="openModal art_mainButton" data-modal-id="modalIntegral">Нахождение интеграла</button>
+    <button class="openModal art_mainButton" data-modal-id="modalMathFunc">Создание сложной математической функции</button>
+    <span th:if="${isAdmin}"><a th:href="@{/main/workWithDb}"> <button class="art_mainButton">Только для персонала</button></a></span>
+</div>
+<!--Модальное окно создания математической функции-->
+<div class="art_mainModal" id="modalMathFunc">
+    <div class="art_ByArrModal">
+        <div class="art_byArrContent">
+            <span class="close art_close" data-modal-id="modalMathFunc">&times;</span>
+            <h1>Создание Математической функции</h1>
+            <div class="art_byArr_container">
+                <label for="MathFuncPointsCount">Количество точек:</label>
+                <input type="number" id="MathFuncPointsCount" name="MathFuncPointsCount" min="1" required/>
+                <label for="MathFuncName">Название функции:</label>
+                <input type="text" id="MathFuncName" name="MathFuncName" required/>
+                <button id="MathFuncCreateListBtn">Начать создание</button>
+            </div>
+            <div id="MathFuncContainer"></div>
+            <div class="otstup"></div>
+        </div>
+    </div>
 </div>
 <!--Окно выбора того, как именно создавать функцию-->
 <div class="art_mainModal centered-modal" id="chooseTheWayToCreateTF">
     <div class="centered-modal-content modal-container">
         <div class="art_radio-group">
             <div class="button-container">
-                <button id="create_array" class="openModal" data-modal-id="createTableByArrayModal">Создание по массивам</button>
-                <button id="create_function" class="openModal" data-modal-id="createByFunctionModal">Создание по функции</button>
+            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
+                                                                               data-modal-id="createTableByArrayModal">Создание по массивам</button></span>
+            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
+                                                                               data-modal-id="createByFunctionModal">Создание по функции</button></span>
             </div>
             <div class="button-container-center">
-                <button id="backToMainCreate" type="button">Назад</button>
+                <button id="backToMainCreate" class="close" data-modal-id="chooseTheWayToCreateTF" type="button">Назад</button>
             </div>
         </div>
     </div>
@@ -138,13 +159,15 @@
 <div class="art_mainModal centered-modal" id="choose_factory">
     <div class="centered-modal-content modal-container">
         <div class="art_radio-group">
-            <input th:checked="${FactoryRadio == 'arrayFactory'}" type="radio" id="art_arrayTabulatedFunctionFactory" name="factory"/>
+            <input th:checked="${FactoryRadio == 'arrayFactory'}" type="radio" id="art_arrayTabulatedFunctionFactory"
+                   name="factory"/>
             <label for="art_arrayTabulatedFunctionFactory">Фабрика по массивам</label>
-            <input th:checked="${FactoryRadio == 'linkedListFactory'}" type="radio" id="art_linkedListTabulatedFunctionFactory" name="factory"/>
+            <input th:checked="${FactoryRadio == 'linkedListFactory'}" type="radio"
+                   id="art_linkedListTabulatedFunctionFactory" name="factory"/>
             <label for="art_linkedListTabulatedFunctionFactory">Фабрика по связному списку</label><br>
             <div class="button-container">
                 <button id="art_radio_accept" class="close" data-modal-id="choose_factory">Принять изменения</button>
-                <button id="backToMain" type="button">Назад</button>
+                <button id="backToMain" class="close" data-modal-id="choose_factory" type="button">Назад</button>
             </div>
         </div>
     </div>
@@ -625,13 +648,6 @@
         });
     });
 
-    // Возврат к главному меню
-    document.getElementById('backToMain').addEventListener('click', () => {
-        closeModal('choose_factory');
-    });
-    document.getElementById('backToMainCreate').addEventListener('click', () => {
-        closeModal('chooseTheWayToCreateTF');
-    });
 </script>
 </body>
 </html>

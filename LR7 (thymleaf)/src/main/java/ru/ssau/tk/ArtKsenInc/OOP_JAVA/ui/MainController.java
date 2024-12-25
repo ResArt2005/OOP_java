@@ -1,10 +1,12 @@
 package ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.CompositeFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
@@ -13,19 +15,22 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.annotations.MathFunctionScanner;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
 
+import java.sql.SQLDataException;
+import java.util.HashMap;
 import java.util.Map;
 
-@SessionAttributes({"userDTO", "fabricType"})
+@SessionAttributes({"userDTO", "fabricType", "newName", "pointCount"})
 @Controller
 public class MainController {
     @GetMapping("/initSession")
-    public String init(HttpSession session, Model model){
+    public String init(HttpSession session, Model model) {
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
-        if(factory == null){
+        if (factory == null) {
             model.addAttribute("fabricType", new ArrayTabulatedFunctionFactory());
         }
         return "redirect:/main";
     }
+
     @GetMapping("/main")
     public String mainPage(HttpSession session, Model model) {
         // Проверяем, является ли пользователь администратором
@@ -34,10 +39,9 @@ public class MainController {
             return "redirect:/";
         }
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
-        if(factory instanceof ArrayTabulatedFunctionFactory){
+        if (factory instanceof ArrayTabulatedFunctionFactory) {
             model.addAttribute("FactoryRadio", "arrayFactory");
-        }
-        else{
+        } else {
             model.addAttribute("FactoryRadio", "linkedListFactory");
         }
         Map<String, MathFunction> functionMap = MathFunctionScanner.getAnnotatedFunctions(); // Используем динамическое сканирование
@@ -45,5 +49,66 @@ public class MainController {
         model.addAttribute("functions", functionMap.keySet());
         model.addAttribute("isAdmin", "admin".equals(userDTO.getToken()));
         return "main";
+    }
+
+    //{ String funcNames, ... }, int countOfFunctions, String newName
+    @PostMapping("/hardFunction")
+    @ResponseBody
+    public String hardFunction(@RequestParam("newName") String newName, @RequestParam("pointCount") int pointCount, Model model) {
+        if (newName == null || newName.isEmpty()) {
+            return "Введите корректное имя";
+        }
+        try {
+            dbTools.createMathFunction("newName", x -> x);
+        } catch (DataIntegrityViolationException e) {
+            return "Такое имя уже существует, придумайте другое";
+        } catch (IllegalArgumentException e) {
+            return e.toString();
+        }
+        model.addAttribute("newName", newName);
+        model.addAttribute("pointCount", pointCount);
+        return createList(pointCount);
+    }
+
+    @PostMapping("/hardFunctionSubmit")
+    public ResponseEntity<Map<String, String>> hardFunctionSubmit(@RequestBody Map<String, String> funcNames, HttpSession session) {
+        int pointCount = (int) session.getAttribute("pointCount");
+        String newName = (String) session.getAttribute("newName");
+        MathFunction[] selectedFunctions = new MathFunction[pointCount];
+        Map<String, MathFunction> functionMap = MathFunctionScanner.getAnnotatedFunctions();
+        functionMap.putAll(dbTools.getAllMathFunctionsAsNameAndMF());
+        int j = 0;
+        for (String funcName : funcNames.keySet()) {
+            selectedFunctions[j] = functionMap.get(funcName);
+            ++j;
+        }
+        // Создаём сложную функцию
+        MathFunction composite = selectedFunctions[0];
+        for (int i = 1; i < pointCount - 1; i++) {
+            composite = composite.andThen(selectedFunctions[i]);
+        }
+        CompositeFunction compositeFunction = new CompositeFunction(composite, selectedFunctions[pointCount - 1]);
+        dbTools.createMathFunction(newName, compositeFunction);
+        dbTools.createLog("Создана математическая функция " + newName);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "success");
+        return ResponseEntity.ok(response);
+    }
+
+    private String createList(int countOfFunctions) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < countOfFunctions; i++) {
+            sb.append("<div class=\"art_dropdown\">");
+            sb.append("<button class=\"createFunc art_dropdown-button\">Выберите функцию</button>");
+            sb.append("<div class=\"art_dropdown-content\">");
+            sb.append("<ul class=\"art_dropdown-list\">");
+            sb.append("<li th:each=\"functionName : ${functions}\">");
+            sb.append("<a th:href=\"'#'\" th:text=\"${functionName}\" class=\"art_dropdown-item\"></a>");
+            sb.append("</li>");
+            sb.append("</ul>");
+            sb.append("</div>");
+            sb.append("</div>");
+        }
+        return sb.toString();
     }
 }
