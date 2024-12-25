@@ -29,10 +29,10 @@ body {
 }
 /**/
 /*Вспомогательные стили*/
-.art_displayNone{
+.displayNone{
     display: none;
 }
-.art_displayBlock{
+displayBlock{
     display: block;
 }
 /*main*/
@@ -67,25 +67,32 @@ body {
     background-color: #9A67EA;
 }
 /*Модальные окна*/
-.art_mainModal {
+.mainModal {
     display: none;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-    overflow: auto;
+    overflow: hidden;
 }
-.art_modal-content {
+.mainModalParent{
+    background-color: rgba(0, 0, 0, 0);
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal_content {
     background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
     border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
+    width: 50%;
+    height: 65%;
     overflow: auto;
 }
 .art_close {
@@ -136,4 +143,55 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
+}
+/**/
+.BDButton {
+    background-color: #6A1B9A; /* Цвет фона */
+    color: #E0BBE4; /* Цвет текста */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Размер шрифта */
+    text-align: center;
+    margin-top: 20px;
+}
+
+.BDButton:hover {
+    background-color: #9A67EA; /* Цвет фона при наведении */
+}
+/*Работа с пользователями*/
+.usersModalContent{
+    background-color: black;
+    color: #6A1B9A;
+    border: none;
+    border-radius: 5px;
+    padding: 0 20px;
+}
+.userBlock{
+    overflow: auto;
+    background-color: #333333;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    color: #00B300;
+    border-radius: 5px;
+    font-size: 12px;
+    height: 80%;
+    max-height: 80%;
+}
+.userToken{
+
+}
+.copyable-token:hover, .copyable-token:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.userLogin{
+
+}
+.userChangeBtn{
+
+}
+.userDeleteBtn{
+
 }

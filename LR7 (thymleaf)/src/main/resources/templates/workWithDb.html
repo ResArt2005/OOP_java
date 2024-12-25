@@ -12,18 +12,63 @@
 <div class="art_header">
     Добро пожаловать в панель администрирования
 </div>
-    <!--Контейнер с кнопками-->
+<!--Контейнер с кнопками-->
 <div class="art_mainContainer">
-    <button class="openModal art_mainButton" data-modal-id="users">Пользователи</button>
+    <button id="userButton" class="openModal art_mainButton" data-modal-id="users">Пользователи</button>
     <button class="openModal art_mainButton" data-modal-id="mathFunctions">Математические функции</button>
     <button class="openModal art_mainButton" data-modal-id="TBFunctions">Табулированные функции</button>
     <button class="openModal art_mainButton" data-modal-id="logs">Посмотреть логи</button>
-    <button class="openModal art_mainButton" data-modal-id="eraseBD">Стереть все данные в базе</button>
+    <button id="eraseBtn" class="art_mainButton" data-modal-id="eraseBD">Стереть все данные в базе</button>
 </div>
 
-
+<!--Окно настроек пользователей-->
+<div id="users" class="mainModal">
+    <div class="mainModalParent">
+        <div class="modal_content usersModalContent">
+            <h2>Окно настроек пользователей</h2>
+            <div id="userContainer" style="overflow: auto;"></div>
+            <div class="art_backButton-container">
+                <button class="openModal BDButton" data-modal-id="userCreation">Создать</button>
+                <button class="close BDButton" data-modal-id="users">Назад</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="userCreation" class="mainModal">
+    <div class="mainModalParent">
+        <div class="modal_content usersModalContent">
+            <h2>Создание нового пользователя</h2>
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login" placeholder="Введите логин" required><br>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" placeholder="Введите пароль" required><br>
+            <div class="button-container">
+                <button id="registerUser" class="BDButton" type="submit">Зарегистрировать человека</button>
+                <button class="close BDButton" type="button" data-modal-id="userCreation">Назад</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="userChanging" class="mainModal">
+    <div class="mainModalParent">
+        <div class="modal_content usersModalContent">
+            <h2>Изменение данных о пользователе</h2>
+            <label for="login_to_change">Логин:</label>
+            <input type="text" id="login_to_change" name="login" placeholder="Введите логин" required><br>
+            <label for="password_to_change">Пароль:</label>
+            <input type="password" id="password_to_change" name="password" placeholder="Введите пароль" required><br>
+            <div class="button-container">
+                <button id="changeUser" class="BDButton" type="submit">Изменить данные человека</button>
+                <button class="close BDButton" type="button" data-modal-id="userChanging">Назад</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Окно настроек математических функций-->
+<!--Окно настроек табулированных функций-->
+<!--Окно настроек логов-->
 <!--Универсальное модальное окно передачи сообщений-->
-<div id="modalAvengeMessage" class="art_displayNone">
+<div id="modalAvengeMessage" class="displayNone">
     <div class="art_state" style="z-index: 9999; position: absolute; overflow: hidden;">
         <div class="art_state_content">
             <div id="art_modal_status_message"></div>
