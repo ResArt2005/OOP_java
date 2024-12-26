@@ -392,6 +392,7 @@ td input {
     font-size: 14px; /* Размер шрифта */
     text-align: center;
     margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
 }
 
 .art_backButton:hover {
@@ -905,6 +906,7 @@ td input {
            margin-top: 20px; /* Добавляем отступ сверху */
        }
        /* Стили для модального окна построения графиков */
+
        #modalGraph .art_modal_table_content {
            background-color: #4B0082; /* Цвет фона */
            padding: 20px;
@@ -950,6 +952,7 @@ td input {
        #modalGraph .art_closeAbsolute {
            color: #E0BBE4; /* Цвет текста крестика */
        }
+
        /* Стили для модального окна вычисления значения в точке */
        #apply .art_state_content {
            background-color: #4B0082; /* Цвет фона */
@@ -979,16 +982,18 @@ td input {
        #apply input[type="number"] {
            display: block; /* Каждый input занимает всю ширину */
            margin-bottom: 20px; /* Добавляем отступ снизу */
-           width: 100%;
+           width: calc(100% - 20px); /* Уменьшаем ширину на 20px */
            padding: 10px;
            border: 2px solid #4B0082;
            border-radius: 5px;
            font-size: 16px; /* Увеличение размера шрифта */
+           margin-right: auto; /* Сдвигаем вправо */
+           margin-left: auto; /* Центрируем */
        }
 
        #apply .button-group {
            display: flex;
-           justify-content: center;
+           justify-content: space-between; /* Добавляем симметрию между кнопками */
            gap: 10px; /* Расстояние между кнопками */
            margin-top: 20px; /* Добавляем отступ сверху */
        }
@@ -1003,6 +1008,7 @@ td input {
            font-size: 14px; /* Размер шрифта */
            text-align: center; /* Центрирование текста */
            transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
+           width: 48%;
        }
 
        #apply .art_mainButton:hover {
@@ -1010,13 +1016,17 @@ td input {
        }
 
        #apply .art_state_button {
-           background-color: #6A1B9A; /* Цвет фона */
-           color: white;
-           padding: 10px 20px;
+           background-color: #6A1B9A; /* Rich Purple */
+           color: #E0BBE4;
            border: none;
-           border-radius: 5px;
+           padding: 20px 40px; /* Увеличиваем отступы */
+           border-radius: 10px; /* Более закругленные углы */
+           margin: 15px; /* Увеличиваем отступы между кнопками */
            cursor: pointer;
-           font-size: 14px; /* Размер шрифта */
+           font-weight: bold;
+           font-size: 18px; /* Увеличиваем размер шрифта */
+           text-align: center;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень для объемности */
            transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
        }
 
