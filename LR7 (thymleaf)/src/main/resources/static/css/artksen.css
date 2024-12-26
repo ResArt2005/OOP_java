@@ -669,4 +669,232 @@ td input {
     cursor: pointer;
     border-radius: 3px;
 }
-</style>
+.centered-modal {
+            display: none; /* Скрыто по умолчанию */
+            justify-content: center; /* Центрируем по горизонтали */
+            align-items: center; /* Центрируем по вертикали */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .centered-modal-content {
+            background-color: #4B0082; /* Обновляем цвет фона */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+            color: #E0BBE4;
+        }
+
+        .modal-container {
+            background-color: #4B0082; /* Обновляем цвет фона */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .button-container-center {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px; /* Отступ сверху для кнопки "Назад" */
+        }
+
+        #art_radio_accept, #backToMain, #create_array, #create_function {
+            background-color: #6A1B9A; /* Rich Purple */
+            color: #E0BBE4;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Increase font size */
+            width: 48%; /* Ensure buttons have equal width */
+            text-align: center; /* Center align text */
+        }
+
+        #backToMainCreate, #backToArray {
+            background-color: #6A1B9A; /* Rich Purple */
+            color: #E0BBE4;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Increase font size */
+            width: 30%; /* Smaller width for back button */
+            text-align: center; /* Center align text */
+        }
+
+        #art_radio_accept:hover, #backToMain:hover, #create_array:hover, #create_function:hover, #backToMainCreate:hover, #backToArray:hover {
+            background-color: #9A67EA; /* Lighter shade on hover */
+        }
+
+        .art_mainModal {
+            display: none; /* Скрыто по умолчанию */
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .art_mainModal .centered-modal-content {
+            background-color: #4B0082;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            color: white;
+            overflow: auto;
+        }
+
+        .art_byArr_container {
+            display: flex;
+            flex-direction: column; /* Вертикальное расположение элементов */
+            align-items: center; /* Центрирование по горизонтали */
+            margin-top: 20px;
+        }
+
+        .art_byArr_container label {
+            color: #E0BBE4; /* Цвет текста */
+            font-family: 'Open Sans', sans-serif; /* Шрифт */
+            font-weight: bold; /* Жирный шрифт */
+            margin: 5px 0; /* Увеличение отступа */
+            font-size: 18px; /* Увеличение размера шрифта */
+            text-align: center;
+        }
+
+        .art_byArr_container input[type="number"] {
+            text-align: center; /* Центрирование текста в поле ввода */
+            width: 150px; /* Увеличение ширины поля */
+            padding: 10px; /* Увеличение внутреннего отступа */
+            margin: 10px 0; /* Увеличение внешнего отступа */
+            border: 2px solid #4B0082;
+            border-radius: 5px;
+            font-size: 16px; /* Увеличение размера шрифта */
+        }
+
+        .art_byArr_container button {
+            background-color: #6A1B9A; /* Цвет фона */
+            color: #E0BBE4; /* Цвет текста */
+            font-family: 'Open Sans', sans-serif; /* Шрифт */
+            padding: 15px 30px; /* Увеличение внутреннего отступа */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px; /* Увеличение размера шрифта */
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .art_byArr_container button:hover {
+            background-color: #9A67EA; /* Цвет фона при наведении */
+        }
+        .centered-modal {
+            display: none; /* Скрыто по умолчанию */
+            justify-content: center; /* Центрируем по горизонтали */
+            align-items: center; /* Центрируем по вертикали */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .centered-modal-content {
+            background-color: #4B0082; /* Обновляем цвет фона */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+            color: #E0BBE4;
+        }
+
+        .modal-container {
+            background-color: #4B0082; /* Обновляем цвет фона */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+       .centered-modal {
+           display: none; /* Скрыто по умолчанию */
+           justify-content: center; /* Центрируем по горизонтали */
+           align-items: center; /* Центрируем по вертикали */
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-color: rgba(0, 0, 0, 0.5);
+           z-index: 1000;
+       }
+
+       .centered-modal-content {
+           background-color: #4B0082; /* Обновляем цвет фона */
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           width: 400px;
+           text-align: center;
+           color: #E0BBE4;
+       }
+
+       .modal-container {
+           background-color: #4B0082; /* Обновляем цвет фона */
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           width: 400px;
+           text-align: center;
+       }
+
+       .art_mainButton {
+           background-color: #6A1B9A; /* Rich Purple */
+           color: #E0BBE4;
+           border: none;
+           padding: 20px 40px; /* Увеличиваем отступы */
+           border-radius: 10px; /* Более закругленные углы */
+           margin: 15px; /* Увеличиваем отступы между кнопками */
+           cursor: pointer;
+           font-weight: bold;
+           font-size: 18px; /* Увеличиваем размер шрифта */
+           text-align: center;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень для объемности */
+           transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
+       }
+
+       .art_mainButton:hover {
+           background-color: #9A67EA;
+       }
+
+       .button-group {
+           display: flex;
+           justify-content: center;
+           gap: 10px; /* Расстояние между кнопками */
+           margin-top: 20px; /* Добавляем отступ сверху */
+       }
+    </style>
