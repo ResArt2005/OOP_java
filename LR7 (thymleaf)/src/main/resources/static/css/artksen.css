@@ -215,9 +215,14 @@ td input {
 }
 .art_error {
     color: #6A1B9A;
+    font-size: 18px; /* изменения размера шрифта */
+    font-weight: bold; /* изменения толщины шрифта */
 }
 .art_success {
-    color: #6A1B9A;
+    color: #4B0082;
+    font-size: 18px; /* изменения размера шрифта */
+    font-weight: bold; /* изменения толщины шрифта */
+    margin: 5% auto
 }
 /*Модальное окно успеха или ошибки*/
 .art_state {
@@ -232,7 +237,7 @@ td input {
     padding-top: 60px;
 }
 .art_state_content{
-    background-color: #fefefe;
+    background-color: #5D3A9B;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
