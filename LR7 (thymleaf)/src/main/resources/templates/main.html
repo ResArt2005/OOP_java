@@ -495,17 +495,20 @@
         </div>
     </div>
 </div>
-<!--Вычисление значения в точке-->
-<div class="art_state art_displayNone" id="apply">
-    <div class="art_state_content">
-        <div class="art_success">Вычисление значения в точке</div>
-        <label for="xValue">
-            <input placeholder="X" id="xValue" type="number">
-        </label>
-        <div id="resultContainerApplyId" class="resultContainerApply"></div>
-        <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="applyButton">Вычислить</button>
-        <br>
-        <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
+<!-- Вычисление значения в точке -->
+<div class="art_mainModal centered-modal" id="apply">
+    <div class="centered-modal-content modal-container">
+        <div class="art_state_content">
+            <div class="art_success">Вычисление значения в точке</div>
+            <label for="xValue">
+                <input placeholder="X" id="xValue" type="number">
+            </label>
+            <div id="resultContainerApplyId" class="resultContainerApply"></div>
+            <div class="button-group">
+                <button data-url-id="/apply" data-container-id="resultContainerApplyId" id="applyButton" class="art_mainButton">Вычислить</button>
+                <button class="art_state_button close" data-modal-id="apply">Закрыть</button>
+            </div>
+        </div>
     </div>
 </div>
 <!--Костыльное окно-->

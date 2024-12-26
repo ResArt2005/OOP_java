@@ -904,4 +904,123 @@ td input {
            gap: 10px; /* Расстояние между кнопками */
            margin-top: 20px; /* Добавляем отступ сверху */
        }
+       /* Стили для модального окна построения графиков */
+       #modalGraph .art_modal_table_content {
+           background-color: #4B0082; /* Цвет фона */
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           width: 80%;
+           max-width: 800px;
+           margin: 5% auto;
+           color: #E0BBE4; /* Цвет текста */
+       }
+
+       #modalGraph .art_table_header {
+           color: #E0BBE4; /* Цвет текста заголовка */
+       }
+
+       #modalGraph .art_table_wrapper {
+           border: 1px solid #4B0082; /* Цвет рамки */
+           border-radius: 5px;
+           margin-bottom: 20px;
+       }
+
+       #modalGraph .art_elementary_table th {
+           background-color: #800080; /* Цвет фона заголовков таблицы */
+           color: #E0BBE4; /* Цвет текста заголовков таблицы */
+       }
+
+       #modalGraph .art_elementary_buttons .art_elementary_button,
+       #modalGraph .art_operations .art_operation_button {
+           background-color: #6A1B9A; /* Rich Purple */
+           color: #E0BBE4; /* Цвет текста */
+           padding: 10px 20px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           font-size: 14px; /* Размер шрифта */
+       }
+
+       #modalGraph .art_elementary_buttons .art_elementary_button:hover,
+       #modalGraph .art_operations .art_operation_button:hover {
+           background-color: #9A67EA; /* Цвет фона при наведении */
+       }
+
+       #modalGraph .art_closeAbsolute {
+           color: #E0BBE4; /* Цвет текста крестика */
+       }
+       /* Стили для модального окна вычисления значения в точке */
+       #apply .art_state_content {
+           background-color: #4B0082; /* Цвет фона */
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           width: 80%;
+           max-width: 600px;
+           margin: 5% auto;
+           color: #E0BBE4; /* Цвет текста */
+       }
+
+       #apply .art_success {
+           color: #E0BBE4; /* Цвет текста */
+           font-size: 18px; /* изменения размера шрифта */
+           font-weight: bold; /* изменения толщины шрифта */
+           margin-bottom: 20px; /* добавление отступа снизу */
+       }
+
+       #apply label {
+           display: block; /* Каждый label занимает всю ширину */
+           margin-bottom: 10px; /* Добавляем отступ снизу */
+           color: #E0BBE4; /* Цвет текста */
+           font-size: 16px; /* Размер шрифта */
+       }
+
+       #apply input[type="number"] {
+           display: block; /* Каждый input занимает всю ширину */
+           margin-bottom: 20px; /* Добавляем отступ снизу */
+           width: 100%;
+           padding: 10px;
+           border: 2px solid #4B0082;
+           border-radius: 5px;
+           font-size: 16px; /* Увеличение размера шрифта */
+       }
+
+       #apply .button-group {
+           display: flex;
+           justify-content: center;
+           gap: 10px; /* Расстояние между кнопками */
+           margin-top: 20px; /* Добавляем отступ сверху */
+       }
+
+       #apply .art_mainButton {
+           background-color: #6A1B9A; /* Rich Purple */
+           color: #E0BBE4;
+           border: none;
+           padding: 10px 20px;
+           border-radius: 5px;
+           cursor: pointer;
+           font-size: 14px; /* Размер шрифта */
+           text-align: center; /* Центрирование текста */
+           transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
+       }
+
+       #apply .art_mainButton:hover {
+           background-color: #9A67EA; /* Цвет фона при наведении */
+       }
+
+       #apply .art_state_button {
+           background-color: #6A1B9A; /* Цвет фона */
+           color: white;
+           padding: 10px 20px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           font-size: 14px; /* Размер шрифта */
+           transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
+       }
+
+       #apply .art_state_button:hover {
+           background-color: #9A67EA; /* Цвет фона при наведении */
+       }
     </style>
