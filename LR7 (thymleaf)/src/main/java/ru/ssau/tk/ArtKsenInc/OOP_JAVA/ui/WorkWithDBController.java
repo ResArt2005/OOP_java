@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.Log;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.User;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -99,12 +101,32 @@ public class WorkWithDBController {
     }
 
     //Методы для работы с логами
+    //Вывод логов
     @PostMapping("/main/workWithDbLogs")
     @ResponseBody
-    public void workWithDbLogs(HttpSession session) {
-
+    public String workWithDbLogs() {
+        List<Log> logs = dbTools.getAllLogs();
+        if(logs.isEmpty()){
+            return "<div class='userBlock'>Логи отсутствуют</div>";
+        }
+        return logTable(logs);
     }
-
+    //Удаление всех логов
+    @PostMapping("/main/removeLogs")
+    @ResponseBody
+    public String removeLogs() {
+        dbTools.deleteAllLogs();
+        return "<div class='userBlock'>Логи отсутствуют</div>";
+    }
+    private String logTable(List<Log> logs){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class='userBlock'>");
+        for (Log log: logs){
+            sb.append("<div><span class='logClass'>").append(log.getTimestamp()).append(" ").append(log.getMessage()).append("</span></div>");
+        }
+        sb.append("</div>");
+        return sb.toString();
+    }
     //Стирание всех данных из базы
     @PostMapping("/main/workWithDbEraseAll")
     @ResponseBody

@@ -17,7 +17,7 @@
     <button id="userButton" class="openModal art_mainButton" data-modal-id="users">Пользователи</button>
     <button class="openModal art_mainButton" data-modal-id="mathFunctions">Математические функции</button>
     <button class="openModal art_mainButton" data-modal-id="TBFunctions">Табулированные функции</button>
-    <button class="openModal art_mainButton" data-modal-id="logs">Посмотреть логи</button>
+    <button id="watchLogs" class="openModal art_mainButton" data-modal-id="logs">Посмотреть логи</button>
     <button id="eraseBtn" class="art_mainButton" data-modal-id="eraseBD">Стереть все данные в базе</button>
 </div>
 
@@ -67,6 +67,18 @@
 <!--Окно настроек математических функций-->
 <!--Окно настроек табулированных функций-->
 <!--Окно настроек логов-->
+<div id="logs" class="mainModal">
+    <div class="mainModalParent">
+        <div class="modal_content usersModalContent">
+            <h2>Окно просмотра логов</h2>
+            <div id="logContainer" style="overflow: auto;"></div>
+            <div class="art_backButton-container">
+                <button class="openModal BDButton" id="logsErase">Стереть логи</button>
+                <button class="close BDButton" data-modal-id="logs">Назад</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--Универсальное модальное окно передачи сообщений-->
 <div id="modalAvengeMessage" class="displayNone">
     <div class="art_state" style="z-index: 9999; position: absolute; overflow: hidden;">
