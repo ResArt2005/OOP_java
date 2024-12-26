@@ -178,23 +178,50 @@ displayBlock{
     height: 80%;
     max-height: 80%;
 }
-.userToken{
-
+.userToken {
+    color: #00B300; /* Цвет текста токена */
+    font-size: 16px; /* Размер текста */
 }
 .copyable-token:hover, .copyable-token:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
-.userLogin{
-
+.userLogin {
+    color: #6A1B9A; /* Цвет текста логина */
+    font-size: 16px; /* Размер текста */
+    font-weight: bold; /* Жирный текст */
 }
-.userChangeBtn{
-
+.userChangeBtn {
+    background-color: #28a745; /* Зеленый цвет фона */
+    color: white; /* Белый цвет текста */
+    border: none; /* Убираем рамку */
+    padding: 8px 16px; /* Небольшие отступы */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Указатель мыши в виде руки */
+    font-size: 14px; /* Небольшой размер текста */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
 }
-.userDeleteBtn{
 
+.userChangeBtn:hover {
+    background-color: #218838; /* Более темный зеленый цвет при наведении */
 }
+
+.userDeleteBtn {
+    background-color: #dc3545; /* Красный цвет фона */
+    color: white; /* Белый цвет текста */
+    border: none; /* Убираем рамку */
+    padding: 8px 16px; /* Небольшие отступы */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Указатель мыши в виде руки */
+    font-size: 14px; /* Небольшой размер текста */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.userDeleteBtn:hover {
+    background-color: #c82333; /* Более темный красный цвет при наведении */
+}
+
 .art_byArr_container {
     display: flex;
     flex-direction: column; /* Вертикальное расположение элементов */
