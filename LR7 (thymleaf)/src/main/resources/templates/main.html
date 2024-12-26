@@ -26,16 +26,18 @@
 <div class="art_mainModal" id="modalMathFunc">
     <div class="art_ByArrModal">
         <div class="art_byArrContent">
-            <span class="close art_close" data-modal-id="modalMathFunc">&times;</span>
             <h1>Создание Математической функции</h1>
             <div class="art_byArr_container">
-                <label for="MathFuncPointsCount">Количество функций:</label>
+                <label for="MathFuncPointsCount">Количество функций</label>
                 <input type="number" id="MathFuncPointsCount" name="MathFuncPointsCount" min="1" required/>
-                <label for="MathFuncName">Название функции:</label>
+                <label for="MathFuncName">Название функции</label>
                 <input type="text" id="MathFuncName" name="MathFuncName" required/>
                 <button id="MathFuncCreateListBtn">Начать создание</button>
             </div>
             <div id="MathFuncContainer"></div>
+            <div class="button-container-center">
+                <button id="backToMathFunc" class="close art_backButton" data-modal-id="modalMathFunc">Назад</button>
+            </div>
             <div class="otstup"></div>
         </div>
     </div>
@@ -129,10 +131,6 @@
 <div id="modalElementaryOps" class="art_displayNone">
     <div class="art_modal_tables">
         <div class="art_modal_table_content">
-            <!-- Крестик закрытия окна -->
-            <div class="close art_close art_closeAbsolute" style="text-align:center;"
-                 data-modal-id="modalElementaryOps">&times;
-            </div>
             <div class="art_table_container">
                 <div class="art_table_block">
                     <h2 class="art_table_header">Первая функция</h2>
@@ -246,6 +244,9 @@
                 <button name="division" data-url-id="/chooseElementaryOperationAndCalculate"
                         data-modal-id="art_table_body_3" class="resultOpsFunction art_operation_button">Деление
                 </button>
+               </div>
+               <button id="backToMainOps" class="art_backButton close" data-modal-id="modalElementaryOps">Назад</button>
+               </div>
             </div>
         </div>
     </div>
@@ -254,10 +255,6 @@
 <div id="modalDefOps" class="art_displayNone"><!--Важно при создании других таблиц-->
     <div class="art_modal_tables">
         <div class="art_modal_table_content">
-            <!-- Крестик закрытия окна -->
-            <div class="close art_close art_closeAbsolute" style="text-align:center;"
-                 data-modal-id="modalDefOps">&times;<!--Важно при создании других таблиц-->
-            </div>
             <div class="art_table_container">
                 <div class="art_table_block">
                     <h2 class="art_table_header">Функция</h2>
@@ -334,6 +331,9 @@
                         class="resultDefOpsFunction art_operation_button">Дифференцировать
                     <!--Важно при создании других таблиц-->
                 </button>
+            </div>
+            <button id="backToMainDefOps" class="art_backButton close" data-modal-id="modalDefOps">Назад</button>
+        </div>
             </div>
         </div>
     </div>
