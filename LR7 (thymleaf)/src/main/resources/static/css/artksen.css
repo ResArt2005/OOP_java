@@ -685,6 +685,7 @@ td input {
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
+            overflow: auto;
         }
 
         .centered-modal-content {
@@ -704,6 +705,7 @@ td input {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 400px;
             text-align: center;
+            margin:0 auto;
         }
 
         .button-container {

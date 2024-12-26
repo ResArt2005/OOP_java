@@ -222,9 +222,7 @@ public class operationsUltimate {
         }
         catch (IllegalArgumentException e){
             return "error: Полученные данные пустые.";
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

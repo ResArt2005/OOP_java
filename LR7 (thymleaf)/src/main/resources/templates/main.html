@@ -12,12 +12,15 @@
 <!--Контейнер с кнопками-->
 <div class="art_mainContainer">
     <button class="openModal art_mainButton" data-modal-id="choose_factory">Открыть настройки</button>
-    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями</button>
+    <button class="openModal art_mainButton" data-modal-id="modalElementaryOps">Операции над табулированными функциями
+    </button>
     <button class="openModal art_mainButton" data-modal-id="modalDefOps">Дифференциальные операции</button>
     <button class="openModal art_mainButton" data-modal-id="modalGraph">Редактор функции</button>
     <button class="openModal art_mainButton" data-modal-id="modalIntegral">Нахождение интеграла</button>
-    <button class="openModal art_mainButton" data-modal-id="modalMathFunc">Создание сложной математической функции</button>
-    <span th:if="${isAdmin}"><a th:href="@{/main/workWithDb}"><button class="art_mainButton">Только для персонала</button></a></span>
+    <button class="openModal art_mainButton" data-modal-id="modalMathFunc">Создание сложной математической функции
+    </button>
+    <span th:if="${isAdmin}"><a th:href="@{/main/workWithDb}"><button
+            class="art_mainButton">Только для персонала</button></a></span>
 </div>
 <!--Модальное окно создания математической функции-->
 <div class="art_mainModal" id="modalMathFunc">
@@ -44,11 +47,12 @@
             <div class="button-container">
             <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
                                                                                data-modal-id="createTableByArrayModal">Создание по массивам</button></span>
-            <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
-                                                                               data-modal-id="createByFunctionModal">Создание по функции</button></span>
+                <span class="close" data-modal-id="chooseTheWayToCreateTF"><button class="openModal art_mainButton"
+                                                                                   data-modal-id="createByFunctionModal">Создание по функции</button></span>
             </div>
             <div class="button-container-center">
-                <button id="backToMainCreate" class="close" data-modal-id="chooseTheWayToCreateTF" type="button">Назад</button>
+                <button id="backToMainCreate" class="close" data-modal-id="chooseTheWayToCreateTF" type="button">Назад
+                </button>
             </div>
         </div>
     </div>
@@ -76,15 +80,16 @@
         <h2 class="art_table_header">Создание табулированной функции</h2>
         <div class="art_byArr_container">
             <label for="art_byArr_pointsCount">Количество точек</label>
-            <input type="number" id="art_byArr_pointsCount" name="art_byArr_pointsCount" min="1" required />
+            <input type="number" id="art_byArr_pointsCount" name="art_byArr_pointsCount" min="1" required/>
         </div>
-        <div id="art_byArr_tableContainer" class="art_byArr_table"></div>
         <div class="art_byArr_container">
             <button id="art_byArr_createTableBtn" class="art_byArrButton">Создать таблицу</button>
         </div>
+        <div id="art_byArr_tableContainer" class="art_byArr_table"></div>
         <div class="button-container-center">
             <button id="backToArray" class="close art_backButton" data-modal-id="createTableByArrayModal">Назад</button>
         </div>
+        <div class="otstup"></div>
     </div>
 </div>
 <!-- Модальное окно создания функции по другим функциям -->
@@ -104,12 +109,15 @@
                     </div>
                 </div>
                 <label for="art_byTableByFunction_left_bound">Левая граница:</label>
-                <input type="number" id="art_byTableByFunction_left_bound" name="art_byTableByFunction_left_bound" required/>
+                <input type="number" id="art_byTableByFunction_left_bound" name="art_byTableByFunction_left_bound"
+                       required/>
                 <label for="art_byTableByFunction_right_bound">Правая граница:</label>
-                <input type="number" id="art_byTableByFunction_right_bound" name="art_byTableByFunction_right_bound" required/>
+                <input type="number" id="art_byTableByFunction_right_bound" name="art_byTableByFunction_right_bound"
+                       required/>
                 <label for="art_byByFunction_pointsCount">Количество точек:</label>
                 <input type="number" id="art_byByFunction_pointsCount" name="art_byByFunction_pointsCount" required/>
-                <button data-modal-id="createByFunctionModal" id="createTableByFunctionTableBtn">Создать функцию</button>
+                <button data-modal-id="createByFunctionModal" id="createTableByFunctionTableBtn">Создать функцию
+                </button>
             </div>
             <div class="art_backButton-container">
                 <button class="close art_backButton" data-modal-id="createByFunctionModal">Назад</button>
@@ -463,13 +471,13 @@
                 <input placeholder="Y" id="insertY" type="number">
             </label>
             <div class="button-group">
-                <button class="art_close close art_mainButton" data-modal-id="insert" id="insertButton">Добавить</button>
+                <button class="art_close close art_mainButton" data-modal-id="insert" id="insertButton">Добавить
+                </button>
                 <button class="art_close close art_mainButton" data-modal-id="insert">Закрыть</button>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Удаление значения по индексу -->
 <div class="art_mainModal centered-modal" id="remove">
     <div class="centered-modal-content modal-container">
@@ -479,7 +487,9 @@
                 <input placeholder="Индекс" id="index" type="number">
             </label>
             <div class="button-group">
-                <button class="art_close close art_mainButton" data-modal-id="remove" data-container-id="resultContainerApplyId" id="removeButton">Удалить</button>
+                <button class="art_close close art_mainButton" data-modal-id="remove"
+                        data-container-id="resultContainerApplyId" id="removeButton">Удалить
+                </button>
                 <button class="art_close close art_mainButton" data-modal-id="remove">Закрыть</button>
             </div>
         </div>
@@ -521,30 +531,5 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script th:src="@{/js/script.js}"></script>
 <script th:src="@{/js/ajaxTable.js}"></script>
-<script>
-    // Функция для закрытия модального окна
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-    }
-
-    // Открытие модального окна
-    const openModalButtons = document.querySelectorAll('.openModal');
-    openModalButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const modalId = button.getAttribute('data-modal-id');
-            document.getElementById(modalId).style.display = 'flex'; // Отображаем модальное окно
-        });
-    });
-
-    // Получаем все элементы с классом "close"
-    const closeButtons = document.querySelectorAll('.close');
-    closeButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const modalId = button.getAttribute('data-modal-id');
-            closeModal(modalId);
-        });
-    });
-
-</script>
 </body>
 </html>

@@ -4,11 +4,14 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.Log;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathFunc;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.User;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
+import java.lang.management.MemoryUsage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +71,9 @@ public class WorkWithDBController {
         }
         dbTools.deleteUserByToken(token);
         Map<String, User> users = dbTools.getAllUsers();
+        if(users.isEmpty()){
+            return "<div class='userBlock'>Пользователей кроме админа не обнаружено</div>";
+        }
         return userTable(users);
     }
 
@@ -90,8 +96,44 @@ public class WorkWithDBController {
     //Методы для работы с математическими функциями
     @PostMapping("/main/workWithDbMathFunc")
     @ResponseBody
-    public void workWithDbMathFunc(HttpSession session) {
-
+    public String workWithDbMathFunc(HttpSession session) {
+        Map<Integer, MathFunc> mf = dbTools.getAllMathFunctions();
+        if(mf.isEmpty()){
+            return "<div class='userBlock'>Пользовательских математических функций не обнаружено</div>";
+        }
+        return MathFuncTable(mf);
+    }
+        @PostMapping("/main/MathFuncDelete")
+    @ResponseBody
+    public String MathFuncDelete(@RequestParam("MathFuncName") String MathFuncName, Model model){
+        Map<Integer, MathFunc> mf = dbTools.getAllMathFunctions();
+        int id = -1;
+        for (Integer mfs: mf.keySet()){
+            if(mf.get(mfs).getName().equals(MathFuncName)){
+                id = mfs;
+                dbTools.deleteMathFunctionById(id);
+                Map<Integer, MathFunc> mfTb = dbTools.getAllMathFunctions();
+                if(mfTb.isEmpty()){
+                    return "<div class='userBlock'>Пользовательских математических функций не обнаружено</div>";
+                }
+                return MathFuncTable(mfTb);
+            }
+        }
+        Map<Integer, MathFunc> mfTb = dbTools.getAllMathFunctions();
+        return MathFuncTable(mfTb);
+    }
+    private String MathFuncTable(Map<Integer, MathFunc> mf){
+        StringBuilder sb = new StringBuilder();
+        int id = 0;
+        sb.append("<div class='userBlock'>");
+        for (Integer mfs: mf.keySet()){
+            sb.append("<div><span class='mathFuncName' id='mathFuncId").append(id).append("'>")
+                    .append(mf.get(mfs).getName()).append("</span> <button class='MFDeleteBtn' data-name-id='mathFuncId")
+                    .append(id).append("'>Удалить</button></div>");
+            ++id;
+        }
+        sb.append("</div>");
+        return sb.toString();
     }
     //Методы для работы с табулированными функциями
     @PostMapping("/main/workWithDbTBFunc")
