@@ -1,24 +1,6 @@
 // Копирование токена в буфер обмена
 const tokenText = document.getElementById('tokenText');
 const copySuccessMessage = document.getElementById('copySuccessMessage');
-if (tokenText) {
-    tokenText.addEventListener('click', () => {
-        const token = tokenText.textContent; // Получаем текст токена
-
-        // Используем API для записи текста в буфер обмена
-        navigator.clipboard.writeText(token).then(() => {
-            // Показываем сообщение об успешном копировании
-            copySuccessMessage.style.display = 'inline';
-
-            // Скрываем сообщение через 2 секунды
-            setTimeout(() => {
-                copySuccessMessage.style.display = 'none';
-            }, 2000);
-        }).catch(err => {
-            console.error('Ошибка при копировании текста:', err);
-        });
-    });
-}
 //Открытие окна
 function showModal(modalId){document.getElementById(modalId).style.display = "block"; }
 // Закрытие модального окна
@@ -189,6 +171,8 @@ document.getElementById("registerUser").addEventListener("click", function(){
         document.getElementById("password").value = '';
         userContainer = document.getElementById("userContainer");
         userContainer.innerHTML = data;
+        addChangeEventListeners();
+        addDeleteEventListeners()
     }).catch(error => {
         Message("error", "Ошибка сети: " + error.message);
     });

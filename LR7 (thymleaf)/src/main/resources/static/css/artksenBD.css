@@ -170,11 +170,10 @@ displayBlock{
 }
 .userBlock{
     overflow: auto;
-    background-color: #333333;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: black;
     color: #00B300;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 16px;
     height: 80%;
     max-height: 80%;
 }
@@ -217,7 +216,16 @@ displayBlock{
     font-size: 14px; /* Небольшой размер текста */
     transition: background-color 0.3s; /* Плавный переход цвета фона */
 }
-
+.deleteBTN{
+    background-color: #dc3545; /* Красный цвет фона */
+    color: white; /* Белый цвет текста */
+    border: none; /* Убираем рамку */
+    padding: 8px 16px; /* Небольшие отступы */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Указатель мыши в виде руки */
+    font-size: 14px; /* Небольшой размер текста */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
 .userDeleteBtn:hover {
     background-color: #c82333; /* Более темный красный цвет при наведении */
 }

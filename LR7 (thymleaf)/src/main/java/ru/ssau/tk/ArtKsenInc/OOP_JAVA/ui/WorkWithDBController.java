@@ -113,6 +113,7 @@ public class WorkWithDBController {
             if(mf.get(mfs).getName().equals(MathFuncName)){
                 id = mfs;
                 dbTools.deleteMathFunctionById(id);
+                dbTools.createLog("Удаление математической функции " + mf.get(mfs).getName());
                 Map<Integer, MathFunc> mfTb = dbTools.getAllMathFunctions();
                 if(mfTb.isEmpty()){
                     return "<div class='userBlock'>Пользовательских математических функций не обнаружено</div>";
