@@ -214,10 +214,10 @@ td input {
     margin-top: 20px;
 }
 .art_error {
-    color: #FF6B6B;
+    color: #6A1B9A;
 }
 .art_success {
-    color: #81C784;
+    color: #6A1B9A;
 }
 /*Модальное окно успеха или ошибки*/
 .art_state {
@@ -241,20 +241,23 @@ td input {
 }
 .art_state_h1 {
     font-size: 16px;
+    color: #6A1B9A; /* Новый цвет текста */
 }
 
 .art_state_button {
-    background-color: #800080;
+    background-color: #6A1B9A; /* Цвет фона */
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
 }
 
-.art_success_button:hover {
-    background-color: #9932CC;
+.art_state_button:hover {
+    background-color: #9A67EA; /* Цвет фона при наведении */
 }
 /*Выпадающий список*/
 .art_dropdown {
@@ -666,7 +669,6 @@ td input {
     cursor: pointer;
     border-radius: 3px;
 }
-<style>
         .centered-modal {
             display: none; /* Скрыто по умолчанию */
             justify-content: center; /* Центрируем по горизонтали */
@@ -806,4 +808,93 @@ td input {
         .art_byArr_container button:hover {
             background-color: #9A67EA; /* Цвет фона при наведении */
         }
+        .centered-modal {
+            display: none; /* Скрыто по умолчанию */
+            justify-content: center; /* Центрируем по горизонтали */
+            align-items: center; /* Центрируем по вертикали */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .centered-modal-content {
+            background-color: #4B0082; /* Обновляем цвет фона */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+            color: #E0BBE4;
+        }
+
+        .modal-container {
+            background-color: #4B0082; /* Обновляем цвет фона */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+       .centered-modal {
+           display: none; /* Скрыто по умолчанию */
+           justify-content: center; /* Центрируем по горизонтали */
+           align-items: center; /* Центрируем по вертикали */
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-color: rgba(0, 0, 0, 0.5);
+           z-index: 1000;
+       }
+
+       .centered-modal-content {
+           background-color: #4B0082; /* Обновляем цвет фона */
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           width: 400px;
+           text-align: center;
+           color: #E0BBE4;
+       }
+
+       .modal-container {
+           background-color: #4B0082; /* Обновляем цвет фона */
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           width: 400px;
+           text-align: center;
+       }
+
+       .art_mainButton {
+           background-color: #6A1B9A; /* Rich Purple */
+           color: #E0BBE4;
+           border: none;
+           padding: 20px 40px; /* Увеличиваем отступы */
+           border-radius: 10px; /* Более закругленные углы */
+           margin: 15px; /* Увеличиваем отступы между кнопками */
+           cursor: pointer;
+           font-weight: bold;
+           font-size: 18px; /* Увеличиваем размер шрифта */
+           text-align: center;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень для объемности */
+           transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
+       }
+
+       .art_mainButton:hover {
+           background-color: #9A67EA;
+       }
+
+       .button-group {
+           display: flex;
+           justify-content: center;
+           gap: 10px; /* Расстояние между кнопками */
+           margin-top: 20px; /* Добавляем отступ сверху */
+       }
     </style>

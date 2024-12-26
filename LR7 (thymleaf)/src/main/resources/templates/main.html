@@ -451,33 +451,38 @@
         </div>
     </div>
 </div>
-<!--Добавление точки-->
-<div class="art_state art_displayNone" id="insert">
-    <div class="art_state_content">
-        <div class="art_success">Добавление точки</div>
-        <label for="insertX">
-            <input placeholder="X" id="insertX" type="number">
-        </label>
-        <label for="insertY">
-            <input placeholder="Y" id="insertY" type="number">
-        </label>
-        <button class="art_close close" data-modal-id="insert" id="insertButton">Добавить</button>
-        <br>
-        <button class="art_state_button close" data-modal-id="insert">Закрыть</button>
+<!-- Добавление точки -->
+<div class="art_mainModal centered-modal" id="insert">
+    <div class="centered-modal-content modal-container">
+        <div class="art_state_content">
+            <div class="art_success">Добавление точки</div>
+            <label for="insertX">
+                <input placeholder="X" id="insertX" type="number">
+            </label>
+            <label for="insertY">
+                <input placeholder="Y" id="insertY" type="number">
+            </label>
+            <div class="button-group">
+                <button class="art_close close art_mainButton" data-modal-id="insert" id="insertButton">Добавить</button>
+                <button class="art_close close art_mainButton" data-modal-id="insert">Закрыть</button>
+            </div>
+        </div>
     </div>
 </div>
-<!--Удаление значения по индексу-->
-<div class="art_state art_displayNone" id="remove">
-    <div class="art_state_content">
-        <div class="art_success">Удаление точки</div>
-        <label for="index">
-            <input placeholder="Индекс" id="index" type="number">
-        </label>
-        <button class="art_close close" data-modal-id="remove" data-container-id="resultContainerApplyId"
-                id="removeButton">Удалить
-        </button>
-        <br>
-        <button class="art_state_button close" data-modal-id="remove">Закрыть</button>
+
+<!-- Удаление значения по индексу -->
+<div class="art_mainModal centered-modal" id="remove">
+    <div class="centered-modal-content modal-container">
+        <div class="art_state_content">
+            <div class="art_success">Удаление точки</div>
+            <label for="index">
+                <input placeholder="Индекс" id="index" type="number">
+            </label>
+            <div class="button-group">
+                <button class="art_close close art_mainButton" data-modal-id="remove" data-container-id="resultContainerApplyId" id="removeButton">Удалить</button>
+                <button class="art_close close art_mainButton" data-modal-id="remove">Закрыть</button>
+            </div>
+        </div>
     </div>
 </div>
 <!--Вычисление значения в точке-->
@@ -503,12 +508,11 @@
         </div>
     </div>
 </div>
-<!--Универсальное модальное окно передачи сообщений-->
-<div id="modalAvengeMessage" class="art_displayNone">
-    <div class="art_state" style="z-index: 9999; position: absolute; overflow: hidden;">
+<!-- Универсальное модальное окно передачи сообщений -->
+<div id="modalAvengeMessage" class="art_mainModal centered-modal">
+    <div class="centered-modal-content modal-container">
         <div class="art_state_content">
-            <div id="art_modal_status_message"></div>
-            <div class="art_state_h1"></div>
+            <div id="art_modal_status_message" class="art_state_h1"></div>
             <button id="message_ok" class="art_state_button close" data-modal-id="modalAvengeMessage">Ок</button>
         </div>
     </div>
