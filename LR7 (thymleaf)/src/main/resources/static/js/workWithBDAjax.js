@@ -227,6 +227,7 @@ document.getElementById("logsErase").addEventListener("click", function(){
             Message("error", "Ошибка сети: " + error.message);
         });
 })
+//Мат функция
 document.getElementById("mathFuncButton").addEventListener("click", function(){
     fetch("/main/workWithDbMathFunc", {
         method: "POST"
@@ -234,14 +235,11 @@ document.getElementById("mathFuncButton").addEventListener("click", function(){
         if (response.ok) {
             return response.text();
         } else {
-            Message("error", "Что-то пошло не так на стороне сервера!");
         }
     }).then(data => {
         const MFContainer = document.getElementById("MFContainer");
         MFContainer.innerHTML = data;
         addDeleteEventListenersForMF();
-    }).catch(error => {
-        Message("error", "Ошибка сети: " + error.message);
     });
 });
 function addDeleteEventListenersForMF() {
@@ -265,8 +263,6 @@ function addDeleteEventListenersForMF() {
                 const MFContainer = document.getElementById("MFContainer");
                 MFContainer.innerHTML = data;
                 addDeleteEventListenersForMF(); // Перепривязываем обработчики событий для новых элементов
-            }).catch(error => {
-                Message("error", "Ошибка сети: " + error.message);
             });
         });
     });
@@ -292,7 +288,6 @@ document.getElementById("MathFuncCreateListBtn").addEventListener("click", funct
         if (response.ok) {
             return response.text();
         }
-        throw new Error('Network response was not ok.');
     }).then(data => {
         const MathFuncContainer = document.getElementById("MathFuncContainer");
         MathFuncContainer.innerHTML = data;
@@ -345,22 +340,18 @@ document.getElementById("MathFuncCreateListBtn").addEventListener("click", funct
                 if (data.message === "success") {
                     location.reload(); // Перезагрузка страницы
                 }
-            })
-            .catch(error => console.error('Ошибка:', error));
+            });
         });
     });
 });
 const dropdown = document.querySelector('.art_dropdown');
 const dropdownButton = dropdown.querySelector('.art_dropdown-button');
 const dropdownItems = dropdown.querySelectorAll('.art_dropdown-item');
-
 dropdownButton.addEventListener('click', function(event) {
     event.stopPropagation(); // Предотвращаем закрытие при клике вне списка
     dropdown.querySelector('.art_dropdown-content').style.display =
         dropdown.querySelector('.art_dropdown-content').style.display === 'block' ? 'none' : 'block';
 });
-
-
 dropdownItems.forEach(item => {
     item.addEventListener('click', function(event) {
         event.preventDefault();
@@ -368,9 +359,9 @@ dropdownItems.forEach(item => {
         dropdown.querySelector('.art_dropdown-content').style.display = 'none';
     });
 });
-
 document.addEventListener('click', function(event) {
     if (!dropdown.contains(event.target)) {
         dropdown.querySelector('.art_dropdown-content').style.display = 'none';
     }
 });
+//Табулированная функция
