@@ -87,7 +87,7 @@ public class WorkWithDBController {
                     .append(token).append("</span> <span class='userLogin'>")
                     .append(users.get(token).getLogin())
                     .append("</span><button class='userChangeBtn' data-token-id='userToken")
-                    .append(id).append("'>Изменить</button> <button class='userDeleteBtn' data-token-id='userToken")
+                    .append(id).append("'>Изменить</button> <button class='changeBTN userDeleteBtn' data-token-id='userToken")
                     .append(id).append("'>Удалить</button></div>");
             ++id;
         }
@@ -129,7 +129,7 @@ public class WorkWithDBController {
         sb.append("<div class='userBlock'>");
         for (Integer mfs: mf.keySet()){
             sb.append("<div><span class='mathFuncName' id='mathFuncId").append(id).append("'>")
-                    .append(mf.get(mfs).getName()).append("</span> <button class='MFDeleteBtn' data-name-id='mathFuncId")
+                    .append(mf.get(mfs).getName()).append("</span> <button class='deleteBTN MFDeleteBtn' data-name-id='mathFuncId")
                     .append(id).append("'>Удалить</button></div>");
             ++id;
         }
