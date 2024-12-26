@@ -729,7 +729,7 @@ td input {
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px; /* Increase font size */
+            font-size: 16px; /* Increase font size */
             width: 48%; /* Ensure buttons have equal width */
             text-align: center; /* Center align text */
         }
