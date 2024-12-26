@@ -227,6 +227,40 @@ document.getElementById("logsErase").addEventListener("click", function(){
             Message("error", "Ошибка сети: " + error.message);
         });
 })
+//Табулированная функция
+document.getElementById("watchTB").addEventListener("click", function(){
+    fetch("/main/workWithDbTBFunc", {
+    method: "POST"
+        }).then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                Message("error", "Что-то пошло не так на стороне сервера!");
+            }
+        }).then(data => {
+            const logContainer = document.getElementById("TBContainer");
+            logContainer.innerHTML = data;
+        }).catch(error => {
+            Message("error", "Ошибка сети: " + error.message);
+        });
+})
+document.getElementById("TBErase").addEventListener("click", function(){
+    fetch("/main/removeTB", {
+    method: "POST"
+        }).then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                Message("error", "Что-то пошло не так на стороне сервера!");
+            }
+        }).then(data => {
+            Message("success", "Функции стёрты")
+            const logContainer = document.getElementById("TBContainer");
+            logContainer.innerHTML = data;
+        }).catch(error => {
+            Message("error", "Ошибка сети: " + error.message);
+        });
+})
 //Мат функция
 document.getElementById("mathFuncButton").addEventListener("click", function(){
     fetch("/main/workWithDbMathFunc", {
@@ -364,4 +398,3 @@ document.addEventListener('click', function(event) {
         dropdown.querySelector('.art_dropdown-content').style.display = 'none';
     }
 });
-//Табулированная функция

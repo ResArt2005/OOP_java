@@ -16,7 +16,7 @@
 <div class="art_mainContainer">
     <button id="userButton" class="openModal art_mainButton" data-modal-id="users">Пользователи</button>
     <button id="mathFuncButton" class="openModal art_mainButton" data-modal-id="mathFunctions">Математические функции</button>
-    <button class="openModal art_mainButton" data-modal-id="TBFunctions">Табулированные функции</button>
+    <button id="watchTB" class="openModal art_mainButton" data-modal-id="TBFunctions">Табулированные функции</button>
     <button id="watchLogs" class="openModal art_mainButton" data-modal-id="logs">Посмотреть логи</button>
     <a th:href="@{/main}"><button class="art_mainButton">Вернуться на главную</button></a>
     <button id="eraseBtn" class="art_mainButton" data-modal-id="eraseBD">Стереть все данные в базе</button>
@@ -96,7 +96,18 @@
     </div>
 </div>
 <!--Окно настроек табулированных функций-->
-
+<div id="TBFunctions" class="mainModal">
+    <div class="mainModalParent">
+        <div class="modal_content usersModalContent">
+            <h2>Окно просмотра табулированных функций</h2>
+            <div id="TBContainer" style="overflow: auto;"></div>
+            <div class="art_backButton-container">
+                <button class="BDButton" id="TBErase">Стереть все функции</button>
+                <button class="close BDButton" data-modal-id="TBFunctions">Назад</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--Окно настроек логов-->
 <div id="logs" class="mainModal">
     <div class="mainModalParent">
@@ -104,7 +115,7 @@
             <h2>Окно просмотра логов</h2>
             <div id="logContainer" style="overflow: auto;"></div>
             <div class="art_backButton-container">
-                <button class="openModal BDButton" id="logsErase">Стереть логи</button>
+                <button class="BDButton" id="logsErase">Стереть логи</button>
                 <button class="close BDButton" data-modal-id="logs">Назад</button>
             </div>
         </div>

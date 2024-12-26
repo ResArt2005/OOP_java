@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.TabulatedFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.factory.TabulatedFunctionFactory;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
 import java.util.Map;
 
@@ -35,6 +36,7 @@ public class TabulatedFunctionByArraysController {
         double[] yValues = data.get("yValues");
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
         function = factory.create(xValues, yValues);
+        dbTools.createTBFunction(xValues, yValues);
         return createTable(function);
     }
 

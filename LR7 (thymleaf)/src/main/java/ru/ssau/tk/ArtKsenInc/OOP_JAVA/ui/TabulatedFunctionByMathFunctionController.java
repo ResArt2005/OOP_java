@@ -42,6 +42,7 @@ public class TabulatedFunctionByMathFunctionController {
         }
         TabulatedFunctionFactory factory = (TabulatedFunctionFactory) session.getAttribute("fabricType");
         TabulatedFunction function = factory.create(xValues, yValues);
+        dbTools.createTBFunction(xValues, yValues);
         return createTable(function);
     }
     public String createTable(TabulatedFunction function){

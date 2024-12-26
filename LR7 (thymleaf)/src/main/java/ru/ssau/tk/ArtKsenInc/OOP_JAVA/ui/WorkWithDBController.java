@@ -8,6 +8,7 @@ import ru.ssau.tk.ArtKsenInc.OOP_JAVA.functions.MathFunction;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.dto.UserDTO;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.Log;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.MathFunc;
+import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.TBFunc;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.jpa.entities.User;
 import ru.ssau.tk.ArtKsenInc.OOP_JAVA.ui.special_classes.dbTools;
 
@@ -103,7 +104,7 @@ public class WorkWithDBController {
         }
         return MathFuncTable(mf);
     }
-        @PostMapping("/main/MathFuncDelete")
+    @PostMapping("/main/MathFuncDelete")
     @ResponseBody
     public String MathFuncDelete(@RequestParam("MathFuncName") String MathFuncName, Model model){
         Map<Integer, MathFunc> mf = dbTools.getAllMathFunctions();
@@ -138,10 +139,35 @@ public class WorkWithDBController {
     //Методы для работы с табулированными функциями
     @PostMapping("/main/workWithDbTBFunc")
     @ResponseBody
-    public void workWithDbTBFunc(HttpSession session) {
-
+    public String workWithDbTBFunc() {
+        Map<Integer, TBFunc> funcs = dbTools.getAllTBFunctions();
+        if(funcs.isEmpty()){
+             return "<div class='userBlock'>Пользователи не создавали табулированные функции</div>";
+        }
+        return funcsTable(funcs);
     }
-
+    @PostMapping("/main/removeTB")
+    @ResponseBody
+    public String removeTB() {
+        dbTools.deleteAllTBFunctions();
+        return "<div class='userBlock'>Пользователи не создавали табулированные функции</div>";
+    }
+    private String funcsTable(Map<Integer, TBFunc> funcs){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class='userBlock'>");
+        for (int id: funcs.keySet()){
+            sb.append("<div><span class='TBClass'>");
+            for (int i = 0; i < (Math.min(funcs.get(id).getXValues().length, 5)); i++) {
+                sb.append(" (").append(String.format("%.3f", funcs.get(id).getXValues()[i])).append(", ").append(String.format("%.2f",funcs.get(id).getYValues()[i])).append(")");
+            }
+            if (funcs.get(id).getXValues().length >= 5) {
+                sb.append("...");
+            }
+            sb.append("</span></div>");
+        }
+        sb.append("</div>");
+        return sb.toString();
+    }
     //Методы для работы с логами
     //Вывод логов
     @PostMapping("/main/workWithDbLogs")
