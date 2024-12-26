@@ -193,4 +193,36 @@ document.getElementById("registerUser").addEventListener("click", function(){
         Message("error", "Ошибка сети: " + error.message);
     });
 });
-
+document.getElementById("watchLogs").addEventListener("click", function(){
+    fetch("/main/workWithDbLogs", {
+    method: "POST"
+        }).then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                Message("error", "Что-то пошло не так на стороне сервера!");
+            }
+        }).then(data => {
+            const logContainer = document.getElementById("logContainer");
+            logContainer.innerHTML = data;
+        }).catch(error => {
+            Message("error", "Ошибка сети: " + error.message);
+        });
+})
+document.getElementById("logsErase").addEventListener("click", function(){
+    fetch("/main/removeLogs", {
+    method: "POST"
+        }).then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                Message("error", "Что-то пошло не так на стороне сервера!");
+            }
+        }).then(data => {
+            Message("success", "Логи стёрты")
+            const logContainer = document.getElementById("logContainer");
+            logContainer.innerHTML = data;
+        }).catch(error => {
+            Message("error", "Ошибка сети: " + error.message);
+        });
+})
