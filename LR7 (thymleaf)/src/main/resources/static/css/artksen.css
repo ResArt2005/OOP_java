@@ -507,7 +507,7 @@ td input {
 .art_modal_table_content {
     background-color: #4B0082;
     padding: 20px;
-    width: 100vw; /* Увеличение ширины модального окна */
+    width: 100vw!important; /* Увеличение ширины модального окна */
     overflow: auto;
     max-height: 95vh;
     border-radius: 10px;
@@ -1175,4 +1175,3 @@ CSS
     font-size: 16px; /* Размер шрифта */
     font-weight: bold; /* Жирный шрифт */
 }
-</style>

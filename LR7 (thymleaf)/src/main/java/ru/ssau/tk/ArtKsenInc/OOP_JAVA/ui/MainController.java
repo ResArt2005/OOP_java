@@ -101,7 +101,7 @@ public class MainController {
         StringBuilder sb = new StringBuilder();
         sb.append("<button id='submitCreationMethFunction' data-modal-id='modalMathFunc' type='button' class='art_byArr_create-function-btn'>Создать функцию</button>");
         for (int i = 0; i < countOfFunctions; i++) {
-            sb.append("<div class=\"art_dropdown\">");
+            sb.append("<br><div class=\"art_dropdown\" style='margin-top: 10px;'>");
             sb.append("<button class=\"createFunc art_dropdown-button\">Выберите функцию</button>");
             sb.append("<div class=\"art_dropdown-content\">");
             sb.append("<ul class=\"art_dropdown-list\">");
