@@ -505,7 +505,7 @@ td input {
 }
 
 .art_modal_table_content {
-    background-color: #fff;
+    background-color: #4B0082;
     padding: 20px;
     width: 100vw; /* Увеличение ширины модального окна */
     overflow: auto;
@@ -1033,4 +1033,146 @@ td input {
        #apply .art_state_button:hover {
            background-color: #9A67EA; /* Цвет фона при наведении */
        }
+
+CSS
+/* Стили модального окна */
+.art_modal_tables {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.art_modal_table_content {
+    background-color: #4B0082;
+    padding: 20px;
+    width: 80vw; /* Увеличение ширины модального окна */
+    overflow: auto;
+    max-height: 95vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative; /* Для позиционирования крестика */
+}
+
+.art_closeAbsolute {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.art_table_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.art_table_block {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.art_table_header {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.art_table_wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 300px;
+    border: 1px solid #4b0082;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.art_elementary_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.art_elementary_table th, .art_elementary_table td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #6A1B9A;
+}
+
+.art_elementary_table input {
+    width: 90%;
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+
+.art_elementary_buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.art_elementary_button {
+    background-color: #6A1B9A;
+    color: #E0BBE4;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.art_elementary_button:hover {
+    background-color: #6a0dad;
+}
+
+.art_operations {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.art_operations label {
+    color: #4b0082;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.art_operations input {
+    width: 50px;
+    padding: 5px;
+    margin-left: 10px;
+    border: 2px solid #4b0082;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.art_operation_button {
+    background-color: #6A1B9A;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.art_operation_button:hover {
+    background-color: #6a0dad;
+}
+
+#integralContainerResult {
+    font-weight: bold;
+    color: #E0BBE4;
+}
+.integral-result-text {
+    color: #E0BBE4; /* Цвет текста */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+}
     </style>
